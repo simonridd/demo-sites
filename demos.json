@@ -24,6 +24,18 @@
         "Web messaging"
       ],
       "accent": "#173f46"
+    },
+    {
+      "slug": "aleds-cars",
+      "title": "Aled’s Cars",
+      "category": "Automotive",
+      "description": "Service, repairs and a little help planning your visit. Ask the service team about leaving your car for the day.",
+      "tags": [
+        "Car servicing",
+        "Direct to adviser",
+        "Web messaging"
+      ],
+      "accent": "#153b32"
     }
   ]
 }
