@@ -36,6 +36,18 @@
         "Web messaging"
       ],
       "accent": "#153b32"
+    },
+    {
+      "slug": "presenter-experience",
+      "title": "Presenter experience",
+      "category": "Presentation tools",
+      "description": "Try the quiet audience stage, synchronised presenter console and exact return from a backup after reload or reopen.",
+      "tags": [
+        "Quiet stage",
+        "Speaker console",
+        "Backup recovery"
+      ],
+      "accent": "#377b64"
     }
   ]
 }
