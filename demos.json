@@ -38,6 +38,18 @@
       "accent": "#153b32"
     },
     {
+      "slug": "aleds-cars-presentation",
+      "title": "Aled’s Cars · Service & care",
+      "category": "Presentations",
+      "description": "A customer’s question, a conversation with the service team and a clear plan for the visit. An illustrated service story.",
+      "tags": [
+        "Customer journey",
+        "Service & care",
+        "Presentation"
+      ],
+      "accent": "#153b32"
+    },
+    {
       "slug": "presenter-experience",
       "title": "Presenter experience",
       "category": "Presentation tools",
