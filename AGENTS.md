@@ -13,3 +13,5 @@ A cross-application demo coordinator may delegate a requested customer website t
 The complete `skills/build-demo-site` directory, not only SKILL.md, must be available to the installed Codex user skill. Prefer the current Codex user directory `$HOME/.agents/skills` and check for stale duplicates in `$HOME/.codex/skills` and any repo-local `.agents/skills`. Verify source SHA, actual host discovery, and that related file paths resolve. A Git pull does not update a copied skill or grant GitHub Pages publishing rights.
 
 When changing this skill's supported abilities or installation contract, update the corresponding owner entry in the demo-production portfolio catalogue as part of the same release process. Source/version alignment and site/publishing acceptance remain separate: run current local static tests and inspect the deployed Pages revision only when publication is within the user's task scope.
+
+See [Skill maintenance](SKILLS_MAINTENANCE.md) for the owner matrix and PR gate.
