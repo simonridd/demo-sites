@@ -1,0 +1,1657 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plan, build and share a customer journey">
+  <title>What our demo skills can do | Presentation</title>
+  <style>/* Adapted from demo-playbacks/index.html at 7c37c9fc50d99577dcf4421090c70c22016e9378.
+   Preserve the predominantly white IPI presentation canvas and original type scale. */
+:root {
+  --navy: #384d5d; --ink: #384d5d; --muted: #61727a;
+  --green: #377b64; --lime: #a7d8c6; --ipi-mint: #63ab8f;
+  --paper: #fff; --line: #e0e8e5;
+  font-family: Arial, Helvetica, sans-serif; color: var(--ink);
+  background: var(--paper); font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: inherit; }
+button, a { touch-action: manipulation; }
+button { font: inherit; cursor: pointer; }
+button:disabled { cursor: default; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
+[hidden] { display: none !important; }
+.skip { position: absolute; top: -70px; left: 20px; z-index: 10; background: white; padding: 14px; }
+.skip:focus { top: 10px; }
+.header { height: 94px; padding: 19px 4.5vw; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--line); gap: 25px; }
+.brands { display: flex; align-items: center; gap: 28px; text-decoration: none; min-width: 0; }
+.ipi { width: 115px; height: 46px; object-fit: contain; }
+.brand-divider { height: 35px; width: 1px; background: var(--line); flex-shrink: 0; }
+.brand-title { font-size: 17px; letter-spacing: -.3px; }
+.header-right { display: flex; align-items: center; gap: 25px; flex-shrink: 0; }
+.draft-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.text-button { background: none; border: 0; padding: 12px 0; color: var(--ink); font-weight: bold; font-size: 12px; min-height: 44px; }
+.nav { display: flex; gap: 5px; max-width: 1440px; margin: auto; padding: 19px 4.5vw 0; overflow: auto; scrollbar-width: thin; }
+.nav button { white-space: nowrap; background: none; border: 0; border-bottom: 2px solid transparent; color: var(--muted); padding: 12px 16px; min-height: 44px; font-size: 12px; }
+.nav button[aria-current="step"] { border-bottom-color: var(--ipi-mint); color: var(--green); font-weight: bold; }
+.nav button span { font-size: 10px; margin-right: 8px; opacity: 1; }
+.deck { max-width: 1440px; margin: 0 auto; }
+.deck:focus, .slide h1:focus, .slide h2:focus { outline: none; }
+.slide { min-height: calc(100svh - 235px); padding: 48px 5.5vw 42px; display: flex; flex-direction: column; justify-content: center; }
+h1, h2, h3, p { margin-top: 0; }
+h1 { font-size: clamp(40px, 4.65vw, 70px); line-height: 1.04; letter-spacing: -3px; font-weight: 500; margin-bottom: 27px; max-width: 740px; }
+h2 { font-size: clamp(34px, 3.3vw, 49px); line-height: 1.1; letter-spacing: -1.9px; font-weight: 500; margin-bottom: 23px; max-width: 900px; }
+h3 { font-size: 21px; font-weight: 500; line-height: 1.25; letter-spacing: -.5px; margin-bottom: 12px; }
+.eyebrow { color: var(--green); font-size: 11px; font-weight: bold; letter-spacing: 1.8px; text-transform: uppercase; margin: 0 0 21px; }
+.lead { font-size: clamp(16px, 1.35vw, 20px); line-height: 1.65; color: var(--muted); max-width: 790px; margin-bottom: 30px; }
+.hero { display: grid; grid-template-columns: 1.16fr 1fr; gap: 7%; align-items: center; }
+.hero .lead { max-width: 520px; font-size: 18px; }
+.hero-panel { background: var(--navy); border-radius: 6px; padding: 38px 34px; color: white; box-shadow: 15px 15px 0 #f0f5f3; }
+.panel-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: #c9ded9; margin-bottom: 30px; }
+.hero-item { padding: 20px 0; border-top: 1px solid #67807e; }
+.hero-item:first-of-type { padding-top: 0; border-top: 0; }
+.hero-item:last-of-type { padding-bottom: 0; }
+.hero-item h3 { font-size: 21px; margin-bottom: 9px; }
+.hero-item p { font-size: 14px; line-height: 1.6; color: #d3e2e0; margin: 0; }
+.primary { display: inline-flex; align-items: center; justify-content: center; gap: 25px; padding: 15px 22px; min-height: 46px; background: var(--navy); color: white; border: 1px solid var(--navy); border-radius: 5px; text-decoration: none; font-size: 13px; font-weight: bold; }
+.primary:hover { background: var(--green); border-color: var(--green); }
+.section-items { margin-top: 12px; border-top: 1px solid var(--line); }
+.content-row { display: grid; grid-template-columns: 40px 1fr 1.4fr; align-items: start; gap: 25px; padding: 24px 0; border-bottom: 1px solid var(--line); }
+.content-row .number { color: var(--green); font-size: 12px; padding-top: 5px; }
+.content-row h3, .content-row p { margin: 0; }
+.content-row p { font-size: 16px; line-height: 1.6; color: var(--muted); }
+.split-layout { display: grid; grid-template-columns: 1.1fr 1fr; align-items: start; gap: 8%; }
+.split-layout .section-items { margin-top: 0; }
+.split-layout .content-row { grid-template-columns: 32px 1fr; gap: 14px; }
+.split-layout .content-row p { grid-column: 2; }
+.question { font-size: clamp(23px, 2.5vw, 36px); line-height: 1.4; letter-spacing: -.8px; padding: 22px 0 22px 28px; border-left: 3px solid var(--ipi-mint); color: var(--green); margin: 30px 0 0; max-width: 900px; }
+.footnote { font-size: 12px; color: var(--muted); line-height: 1.6; max-width: 900px; margin: 24px 0 0; }
+.demo-links { display: grid; gap: 20px; margin-top: 25px; }
+.demo-link { border-top: 2px solid var(--ipi-mint); padding-top: 22px; }
+.demo-link p { color: var(--muted); line-height: 1.6; }
+.closing .question { background: #f5f8f7; padding: 25px 30px; border-left-width: 5px; color: var(--ink); }
+.bottom { max-width: 1440px; margin: auto; padding: 14px 5.5vw 23px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--line); gap: 20px; }
+.progress { font-size: 11px; color: var(--muted); }
+.progress strong { color: var(--ink); font-weight: 500; margin-right: 7px; }
+.draft-note { margin: 0; font-size: 11px; color: var(--muted); }
+.controls { display: flex; gap: 10px; }
+.controls button { padding: 12px 20px; min-height: 44px; border: 1px solid var(--line); border-radius: 4px; color: var(--ink); background: transparent; font-size: 12px; }
+.controls button:last-child { background: var(--navy); color: white; border-color: var(--navy); }
+.controls button:disabled { opacity: .35; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.no-script { padding: 20px 5.5vw; }
+@media (min-width: 1600px) {
+  .deck, .nav, .bottom { max-width: 1800px; }
+  .slide { padding-left: 80px; padding-right: 80px; }
+  h1 { font-size: clamp(40px, 4.65vw, 84px); }
+  h2 { font-size: clamp(34px, 3.3vw, 60px); }
+}
+@media (max-width: 1000px) {
+  .draft-label { display: none; }
+  .hero { gap: 35px; }
+  .hero-panel { padding: 30px 25px; }
+  .slide { padding-top: 35px; }
+}
+@media (max-width: 760px) {
+  .header { height: 77px; padding: 15px 6vw; gap: 14px; }
+  .brands { gap: 16px; }
+  .ipi { width: 80px; height: 36px; }
+  .brand-title { font-size: 14px; }
+  .header-right { gap: 12px; }
+  .text-button { font-size: 11px; }
+  .nav { padding: 9px 4vw 0; }
+  .nav button { padding: 11px; font-size: 11px; }
+  .nav button span { display: none; }
+  .slide { padding: 35px 6vw; min-height: calc(100svh - 207px); justify-content: flex-start; }
+  .hero, .split-layout { grid-template-columns: 1fr; gap: 32px; }
+  h1 { font-size: 47px; letter-spacing: -2px; }
+  h2 { font-size: 36px; }
+  .hero .lead { font-size: 16px; }
+  .hero-panel { box-shadow: 8px 8px 0 #f0f5f3; }
+  .content-row { grid-template-columns: 25px 1fr; gap: 12px; }
+  .content-row p { grid-column: 2; font-size: 15px; }
+  .question { font-size: 26px; padding-left: 22px; }
+  .bottom { padding: 15px 6vw; flex-wrap: wrap; gap: 15px; }
+  .draft-note { order: 3; flex-basis: 100%; }
+  .controls button { padding: 12px 15px; }
+}
+@media print {
+  .header, .nav, .bottom, .primary, .skip, .no-script { display: none !important; }
+  .slide, .slide[hidden] { display: block !important; min-height: 0; break-after: page; padding: 20mm 12mm; }
+  .hero, .split-layout { display: block; }
+  .hero-panel { margin-top: 30px; box-shadow: none; }
+  .slide::before { content: attr(data-print-title); text-transform:uppercase; display: block; color: #61727a; font-size: 10pt; margin-bottom: 10mm; }
+}
+
+
+/* AXL teaching compositions. Shared IPI source remains the authoring baseline. */
+.slide.hero { display:flex; flex-direction:column; }
+.slide.hero > .hero { width:100%; }
+#bot-vs-ava .section-items,
+#building-blocks .section-items,
+#what-works .section-items { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:17px; border-top:0; }
+#bot-vs-ava .content-row,
+#building-blocks .content-row,
+#what-works .content-row { display:block; padding:25px 22px; border:1px solid var(--line); border-top:3px solid var(--ipi-mint); border-radius:4px; background:#fdfefd; }
+#bot-vs-ava .content-row .number,
+#building-blocks .content-row .number,
+#what-works .content-row .number { display:block; margin:0 0 18px; }
+#bot-vs-ava .content-row h3,
+#building-blocks .content-row h3,
+#what-works .content-row h3 { margin-bottom:13px; }
+#four-hours .section-items,
+#where-to-challenge .section-items,
+#scorecard .section-items { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 24px; border-top:0; }
+#four-hours .content-row,
+#where-to-challenge .content-row,
+#scorecard .content-row { display:block; border:1px solid var(--line); border-top:3px solid var(--ipi-mint); padding:22px 24px; border-radius:4px; }
+#four-hours .content-row .number,
+#where-to-challenge .content-row .number,
+#scorecard .content-row .number { display:block; margin-bottom:12px; }
+#four-hours .content-row h3,
+#where-to-challenge .content-row h3,
+#scorecard .content-row h3 { margin-bottom:11px; }
+#scorecard .content-row { background:#fcfdfc; }
+#scorecard .scorecard-toolbar { display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;margin-top:18px;padding:16px 0;border-top:1px solid var(--line); }
+#scorecard .scorecard-help { color:var(--muted);font-size:12px;line-height:1.5;max-width:600px;margin:0; }
+#scorecard .scorecard-export { font:inherit;border:1px solid var(--navy);border-radius:4px;padding:12px 16px;min-height:44px;background:var(--navy);color:white;font-size:12px;cursor:pointer; }
+#scorecard .scorecard-export:hover { background:var(--green); }
+#scorecard .scorecard-select { display:block;font:inherit;margin-top:14px;border:1px solid var(--line);border-radius:4px;background:white;color:var(--ink);padding:8px;min-height:42px;max-width:200px;width:100%;font-size:12px; }
+#scorecard .content-row[data-verdict="Pass"]{border-top-color:var(--green);}
+#scorecard .content-row[data-verdict="Fail"]{border-top-color:#b35345;}
+#scorecard .content-row[data-verdict="Blocked"]{border-top-color:#bb9546;}
+.nav button[aria-current="step"] { border-bottom-width:3px; }
+.bottom { background:rgba(255,255,255,.97); }
+@media (max-width:1050px){
+  #bot-vs-ava .section-items,#building-blocks .section-items,#what-works .section-items {grid-template-columns:1fr;}
+}
+@media (max-width:760px){
+  #four-hours .section-items,#where-to-challenge .section-items,#scorecard .section-items{grid-template-columns:1fr;}
+  #bot-vs-ava .content-row,#building-blocks .content-row,#what-works .content-row {padding:21px;}
+  #four-hours .content-row,#where-to-challenge .content-row,#scorecard .content-row {padding:19px;}
+}
+
+/* Editable teaching diagrams use storyboard text and durations. */
+.slide-timing { display:block; margin-top:6px; font-size:10px; }
+.comparison-columns { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin:12px 0 0; }
+.comparison-columns article { border-top:3px solid var(--ipi-mint); padding:24px 0 12px; }
+.comparison-columns article:last-child { border-top-color:var(--navy); }
+.comparison-columns .panel-label { color:var(--green); margin-bottom:18px; }
+.comparison-columns h3 { font-size:28px; }
+.comparison-columns p:not(.panel-label) { color:var(--muted); font-size:18px; line-height:1.6; margin:0; }
+.comparison-caveat { padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:14px; line-height:1.6; margin:20px 0 0; }
+.spec-pipeline,.lab-timeline { list-style:none; display:flex; margin:18px 0 0; padding:0; }
+.spec-pipeline li { position:relative; flex:1; padding:24px 20px 0 0; border-top:3px solid var(--ipi-mint); min-width:0; }
+.spec-pipeline li+li { padding-left:20px; }
+.spec-pipeline li+li::before { content:'→'; position:absolute; left:-9px; top:-17px; font-size:25px; background:white; color:var(--green); }
+.step-index { display:block; font-size:12px; color:var(--green); margin-bottom:24px; }
+.spec-pipeline h3 { font-size:24px; }
+.spec-pipeline p,.lab-timeline li>p:last-child { color:var(--muted); line-height:1.6; font-size:16px; }
+.timeline-label { font-size:11px; text-transform:uppercase; color:var(--green); letter-spacing:1px; margin:15px 0 0; }
+.lab-timeline li { flex:var(--duration); padding:22px 22px 0 0; border-top:12px solid var(--ipi-mint); min-width:0; }
+.lab-timeline li:nth-child(even) { border-top-color:var(--navy); }
+.lab-timeline li+li { padding-left:20px; }
+.elapsed { font-size:13px; color:var(--green); margin-bottom:20px; }
+.lab-timeline h3 { font-size:23px; }
+#scorecard .section-items { grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px 20px; }
+#scorecard .content-row { padding:16px 20px; }
+#scorecard .content-row .number { margin:0 0 8px; padding:0; }
+#scorecard .content-row h3 { font-size:20px; }
+#scorecard .content-row p { font-size:14px; line-height:1.5; }
+#scorecard .scorecard-select { min-height:44px; }
+select:focus-visible { outline:3px solid var(--green); outline-offset:3px; }
+@media (min-width:1100px) and (max-height:820px) {
+ .slide { padding-top:26px; padding-bottom:26px; }
+ h2 { font-size:40px; margin-bottom:18px; }
+ .lead { margin-bottom:20px; }
+ .content-row { padding-top:18px; padding-bottom:18px; }
+ .question { font-size:28px; margin-top:20px; padding-top:14px; padding-bottom:14px; }
+}
+@media (max-width:1050px) {
+ .spec-pipeline { flex-wrap:wrap; gap:28px 0; }
+ .spec-pipeline li { flex:1 1 30%; }
+ .spec-pipeline li+li { padding-left:0; }
+ .spec-pipeline li+li::before { content:none; }
+ .lab-timeline { flex-wrap:wrap; gap:26px 0; }
+ .lab-timeline li { flex:1 1 50%; }
+ .lab-timeline li+li { padding-left:0; }
+ #scorecard .section-items { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:760px) {
+ .comparison-columns { grid-template-columns:1fr; gap:18px; }
+ .comparison-columns p:not(.panel-label) { font-size:16px; }
+ .spec-pipeline { display:block; }
+ .spec-pipeline li { padding:20px 0 10px 25px; border-top:0; border-left:3px solid var(--ipi-mint); }
+ .spec-pipeline li+li { padding-left:25px; }
+ .step-index { margin-bottom:12px; }
+ .lab-timeline { display:block; }
+ .lab-timeline li,.lab-timeline li+li { padding:20px 0 10px 25px; border-top:0; border-left:8px solid var(--ipi-mint); }
+ .lab-timeline li:nth-child(even) { border-left-color:var(--navy); }
+ #scorecard .section-items { grid-template-columns:1fr; }
+}
+@media print {
+ @page { size:A4 landscape; margin:10mm; }
+ .slide,.slide[hidden] { padding:8mm 5mm; break-after:page; }
+ .slide:last-child { break-after:auto; }
+ .slide::before { margin-bottom:6mm; font-size:8pt; }
+ .slide h1 { font-size:36pt; }
+ .slide h2 { font-size:26pt; margin-bottom:12px; }
+ .slide h3 { font-size:14pt; }
+ .slide .lead { font-size:12pt; margin-bottom:16px; }
+ .content-row { padding:14px 0; }
+ .content-row p,.spec-pipeline p,.lab-timeline li>p:last-child { font-size:10pt; }
+ .question { font-size:16pt; margin-top:16px; padding:12px 20px; }
+ .footnote { font-size:8pt; margin-top:12px; }
+ .hero-panel { padding:20px 24px; }
+ .hero-item { padding:12px 0; }
+ .hero-item p { font-size:10pt; }
+ #scorecard .scorecard-toolbar { display:none; }
+ #scorecard .content-row { break-inside:avoid; }
+ .spec-pipeline,.lab-timeline { flex-wrap:nowrap; }
+ .spec-pipeline li { flex:1; }
+ .lab-timeline li { flex:var(--duration); }
+}
+
+@media screen and (min-width:1100px) {
+ .slide { min-height:calc(100svh - 245px); padding-top:30px; padding-bottom:30px; }
+ h2 { font-size:42px; max-width:1140px; margin-bottom:20px; }
+ .lead { font-size:18px; line-height:1.55; max-width:1000px; margin-bottom:24px; }
+ .content-row { padding-top:20px; padding-bottom:20px; }
+ .question { font-size:28px; line-height:1.4; padding-top:14px; padding-bottom:14px; margin-top:24px; max-width:1100px; }
+ .footnote { margin-top:18px; }
+ .comparison-columns p:not(.panel-label) { font-size:17px; }
+ #where-to-challenge .content-row { padding:18px 22px; }
+ #where-to-challenge .content-row p { font-size:15px; }
+ #scorecard .content-row { padding:14px 18px; }
+ #scorecard .content-row h3 { margin-bottom:8px; }
+ #scorecard .scorecard-select { margin-top:10px; }
+ #scorecard .scorecard-toolbar { padding:12px 0; margin-top:12px; }
+}
+@media screen and (min-width:900px) and (max-width:1099px) {
+ #building-blocks .section-items,#what-works .section-items { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+
+@media screen and (min-width:1100px) {
+ #scorecard .footnote { margin-top:12px; }
+ #scorecard .scorecard-toolbar { margin-top:8px; padding:8px 0; }
+ #scorecard .section-items { gap:10px 20px; }
+}
+
+@media print {
+ #building-blocks .section-items,#what-works .section-items,#scorecard .section-items { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ #building-blocks .content-row,#what-works .content-row { padding:16px; }
+ #scorecard .content-row { padding:12px; }
+ #scorecard .scorecard-select { min-height:30px; padding:5px; margin-top:8px; }
+}
+
+/* AXL-EDU1: three reusable, editable teaching patterns. No autoplay or external assets. */
+.teaching-diagram { --soft:#f2f7f4; width:100%; }
+.diagram-surface { width:100%; }
+.diagram-nodes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.diagram-node { position:relative; padding:20px; border:1px solid var(--line); border-top:4px solid var(--ipi-mint); border-radius:4px; background:white; color:var(--ink); text-align:left; min-width:0; transition:background-color 200ms, border-color 200ms, box-shadow 200ms; }
+.node-index { display:block; color:var(--green); font-size:12px; margin-bottom:16px; }
+.diagram-node h3,.node-title { display:block; font-size:23px; font-weight:500; line-height:1.2; margin:0 0 12px; }
+.node-body { display:block; font-size:17px; color:var(--muted); line-height:1.5; }
+.diagram-node.is-active { border-color:var(--green); background:#edf6f0; box-shadow:0 0 0 2px var(--green); }
+.diagram-node.is-active::after { content:'Current'; display:block; color:var(--green); font-size:11px; font-weight:bold; margin-top:12px; }
+.diagram-node.is-muted { border-top-color:#b8cac1; }
+.diagram-controls { margin-top:22px; }
+.moment-choices,.moment-navigation { display:flex; flex-wrap:wrap; gap:8px; }
+.moment-choices { margin-bottom:12px; }
+.diagram-controls button { min-height:44px; border:1px solid #bdcbc5; background:white; color:var(--ink); padding:10px 14px; border-radius:4px; font-size:13px; }
+.diagram-controls [aria-pressed="true"] { background:var(--navy); color:white; border-color:var(--navy); }
+.diagram-controls [aria-disabled="true"] { color:var(--muted); border-style:dashed; }
+.moment-status { border-left:3px solid var(--ipi-mint); padding-left:14px; margin:14px 0 0; font-size:15px; line-height:1.5; min-height:46px; color:var(--green); }
+.diagram-boundary { background:var(--soft); border-left:4px solid var(--green); padding:12px 16px; font-size:15px; line-height:1.5; }
+.loop .diagram-nodes,.lifecycle .diagram-nodes { grid-template-columns:repeat(var(--diagram-node-count,5),minmax(0,1fr)); gap:14px; }
+.loop .diagram-node,.lifecycle .diagram-node { padding:16px; }
+.loop .diagram-node h3,.lifecycle .diagram-node h3 { font-size:21px; }
+.loop .node-body,.lifecycle .node-body { font-size:16px; }
+.loop .diagram-node+.diagram-node::before,.lifecycle .diagram-node+.diagram-node::before { content:'→'; position:absolute; left:-15px; top:36px; color:var(--green); background:white; }
+.return-path { border-bottom:2px solid var(--ipi-mint); border-left:2px solid var(--ipi-mint); border-radius:0 0 0 12px; margin:0 12px 12px; padding:9px 14px; font-size:14px; color:var(--green); }
+.return-path span { font-size:24px; vertical-align:middle; }
+.diagram-branch .diagram-node { display:flex; gap:14px; align-items:baseline; border:0; border-left:4px solid #9a713b; padding:10px 16px; background:#faf7f1; }
+.diagram-branch .node-index { display:none; }
+.diagram-branch h3 { flex:0 0 190px; font-size:19px; margin:0; }
+.diagram-branch .node-body { font-size:15px; }
+.journey-grid { display:grid; grid-template-columns:145px repeat(var(--journey-stages,4),minmax(0,1fr)); gap:12px; align-items:stretch; }
+.journey-label { font-size:17px; line-height:1.3; align-self:center; margin:0; }
+.customer-moment { font-size:16px; line-height:1.35; color:var(--green); margin:0; padding:0 8px 7px; }
+.journey .diagram-node { padding:14px; }
+.journey .node-index { margin-bottom:10px; }
+.journey .diagram-node h3 { font-size:20px; }
+.journey .node-body { font-size:15px; }
+.consent-gate { border:2px solid var(--green); border-radius:4px; padding:14px 18px; font-size:17px; line-height:1.4; margin:18px 0 0; color:var(--green); }
+.spec .diagram-nodes { display:grid; grid-template-columns:1fr 1fr; gap:10px 20px; }
+.spec .diagram-node { display:grid; grid-template-columns:150px 1fr; gap:12px; padding:14px 16px; min-height:90px; border-top-width:1px; border-left:4px solid var(--ipi-mint); }
+.spec .node-index { display:none; }
+.spec .node-title { font-size:19px; margin:0; }
+.spec .node-body { font-size:16px; }
+.spec .diagram-node.is-active::after { grid-column:2; margin:0; }
+.spec-output { margin:14px 0 0; padding:12px 16px; background:var(--soft); font-size:17px; }
+.spec-center { padding:18px; border:2px solid var(--green); border-radius:50%; width:250px; text-align:center; margin:0 auto 20px; font-size:21px; }
+.value .diagram-nodes { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.value .diagram-node:last-child { grid-column:1/-1; border-top-color:#9a713b; display:grid; grid-template-columns:1fr 2fr; gap:15px; }
+.value .diagram-node:last-child .node-index { display:none; }
+.value .diagram-node:last-child h3 { margin:0; }
+.value .diagram-node:last-child.is-active::after { grid-column:2; }
+@media screen and (min-width:1100px) {
+ .diagram.slide { padding-top:24px; padding-bottom:24px; }
+ .diagram .eyebrow { margin-bottom:14px; }
+ .diagram h2 { margin-bottom:14px; }
+ .diagram .lead { margin-bottom:20px; }
+ .diagram .question { font-size:23px; margin-top:14px; padding:8px 0 8px 18px; }
+ .diagram .footnote { margin-top:12px; }
+}
+@media (max-width:1099px) {
+ .journey-grid { grid-template-columns:115px repeat(var(--journey-stages,4),minmax(0,1fr)); gap:8px; }
+ .journey .diagram-node { padding:10px; }
+ .journey .diagram-node h3 { font-size:18px; }
+ .journey .node-body { font-size:14px; }
+ .spec .diagram-node { display:block; }
+ .spec .node-title { margin-bottom:10px; }
+ .loop .diagram-nodes,.lifecycle .diagram-nodes { grid-template-columns:repeat(3,minmax(0,1fr)); }
+ .loop .diagram-node::before,.lifecycle .diagram-node::before { display:none; }
+}
+@media (max-width:760px) {
+ .diagram-nodes,.loop .diagram-nodes,.lifecycle .diagram-nodes,.spec .diagram-nodes,.value .diagram-nodes { grid-template-columns:1fr; }
+ .diagram-node { padding:20px; }
+ .diagram-branch .diagram-node { display:block; }
+ .diagram-branch h3 { margin-bottom:10px; }
+ .value .diagram-node:last-child { display:block; }
+ .value .diagram-node:last-child h3 { margin-bottom:12px; }
+ .journey-grid { grid-template-columns:1fr 1fr; gap:14px; }
+ .journey-grid .journey-label { grid-column:1/-1; padding:12px 0; border-top:2px solid var(--ipi-mint); }
+ .journey-grid .customer-moment { padding:8px; background:var(--soft); }
+ .journey .diagram-node { padding:14px; }
+ .journey .diagram-node h3 { font-size:20px; }
+ .journey .node-body { font-size:16px; }
+ .moment-choices button { flex:1 1 45%; }
+ .moment-navigation button { flex:1 1 45%; }
+ .spec .diagram-node { min-height:44px; }
+}
+@media (prefers-reduced-motion:reduce) {
+ *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+}
+@media print {
+ .diagram-controls { display:none !important; }
+ .diagram-node,.diagram-node.is-active,.diagram-node.is-muted { background:white !important; box-shadow:none !important; border-color:#a4bcb0 !important; transition:none !important; }
+ .diagram-node.is-active::after { display:none !important; }
+ .diagram .lead { margin-bottom:12px; }
+ .diagram .diagram-node { padding:12px; break-inside:avoid; }
+ .diagram .node-index { margin-bottom:8px; }
+ .diagram .diagram-node h3,.diagram .node-title { font-size:13pt; }
+ .diagram .node-body { font-size:10pt; line-height:1.4; }
+ .diagram .question { margin-top:12px; }
+ .diagram-boundary,.return-path,.spec-output { font-size:10pt; padding:8px; }
+ .diagram-branch .diagram-node { padding:8px; }
+ .diagram-nodes { gap:12px; }
+ .loop .diagram-nodes,.lifecycle .diagram-nodes { grid-template-columns:repeat(var(--diagram-node-count,5),minmax(0,1fr)); }
+ .journey-grid { grid-template-columns:110px repeat(var(--journey-stages,4),minmax(0,1fr)); gap:8px; }
+ .journey-grid .journey-label { grid-column:auto; font-size:11pt; }
+ .customer-moment { font-size:10pt; }
+ .consent-gate { font-size:11pt; padding:10px; margin-top:12px; }
+ .spec .diagram-nodes { grid-template-columns:1fr 1fr; gap:10px; }
+ .spec .diagram-node { display:block; min-height:0; }
+ .spec .node-title { margin-bottom:8px; }
+ .spec-center { font-size:14pt; padding:12px; margin-bottom:12px; }
+}
+/* Diagram tools stay collapsed until requested; the explanation remains on stage. */
+.diagram-controls { position:relative; display:grid; gap:2px; margin-top:16px; }
+.diagram-tools { position:relative; justify-self:start; max-width:100%; }
+.diagram-tools>summary { display:flex; align-items:center; gap:7px; min-height:44px; padding:6px 0; border:0; border-radius:3px; color:var(--muted); background:transparent; font-size:12px; cursor:pointer; list-style:none; }
+.diagram-tools>summary::-webkit-details-marker { display:none; }
+.diagram-tools>summary::after { content:'⌄'; font-size:14px; }
+.diagram-tools[open]>summary { color:var(--ink); }
+.diagram-tools[open]>summary::after { content:'⌃'; }
+.diagram-tool-panel { position:absolute; bottom:calc(100% + 4px); left:0; z-index:10; width:max-content; max-width:min(520px,calc(100vw - 64px)); padding:12px; border:1px solid var(--line); border-radius:8px; background:var(--paper); box-shadow:0 8px 24px rgb(20 37 48 / .12); }
+.diagram-shortcuts { margin:10px 0 0; color:var(--muted); font-size:11px; line-height:1.5; }
+.diagram-shortcuts kbd { font:inherit; font-weight:bold; }
+.moment-picker { margin-top:8px; }
+.moment-picker summary { cursor:pointer; min-height:44px; display:flex; align-items:center; padding:10px 14px; border:1px solid #bdcbc5; border-radius:4px; font-size:13px; }
+.moment-picker summary::after { content:' +'; margin-left:10px; }
+.moment-picker[open] summary::after { content:' −'; }
+.moment-picker .moment-choices { padding:10px 0 0; margin:0; }
+.moment-picker[open] { flex-basis:100%; }
+.moment-status { margin:0; min-height:40px; }
+.diagram-node.is-active::after { position:absolute; right:9px; top:7px; margin:0; font-size:10px; }
+.journey .node-index { margin:0 0 6px; font-size:10px; }
+summary:focus-visible { outline:3px solid var(--green); outline-offset:3px; }
+@media screen and (min-width:1100px) {
+ .diagram.slide { padding-top:20px; padding-bottom:20px; }
+ .diagram .diagram-node { padding:16px; }
+ .diagram .node-index { margin-bottom:10px; }
+ .diagram .node-body { font-size:16px; line-height:1.4; }
+ .diagram .diagram-node h3 { font-size:21px; margin-bottom:10px; }
+ .journey .diagram-node { padding:12px 14px; }
+ .journey .node-index { position:absolute; right:8px; top:6px; margin:0; }
+ .journey .diagram-node h3 { font-size:19px; margin-top:6px; margin-bottom:8px; }
+ .journey .node-body { font-size:15px; }
+ .journey .customer-moment { font-size:15px; }
+ .diagram .diagram-boundary { padding:9px 14px; margin-bottom:12px; }
+ .diagram .diagram-branch .diagram-node { padding:8px 14px; }
+ .diagram .diagram-branch h3 { margin:0; font-size:18px; }
+ .diagram .diagram-branch .node-body { font-size:14px; }
+ .diagram .consent-gate { padding:10px 14px; margin-top:12px; font-size:16px; }
+ .diagram .diagram-controls { margin-top:14px; }
+ .diagram .question { margin-top:10px; }
+ .diagram .footnote { margin-top:8px; }
+ .diagram .spec-center { margin-bottom:14px; padding:14px; }
+ .spec .diagram-node { min-height:84px; }
+ .spec .node-title { font-size:18px; }
+ .spec .node-body { font-size:15px; }
+ .spec .diagram-node.is-active::after { top:2px; }
+}
+@media (max-width:760px) {
+ .moment-picker { flex-basis:100%; }
+ .moment-navigation { width:100%; }
+}
+@media screen and (min-width:1100px) {
+ .diagram.slide { padding-top:16px; padding-bottom:16px; }
+ .diagram h2 { font-size:38px; margin-bottom:10px; }
+ .diagram .eyebrow { margin-bottom:10px; }
+ .diagram .lead { font-size:17px; margin-bottom:14px; }
+ .diagram .moment-status { min-height:42px; font-size:14px; }
+ .diagram .question { padding-top:6px; padding-bottom:6px; font-size:22px; }
+ .diagram .spec-center { width:310px; font-size:19px; padding:10px; }
+}
+@media screen and (min-width:761px) and (max-width:1099px) {
+ .value .diagram-nodes { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media screen and (min-width:1100px) {
+ .spec .diagram-node { min-height:80px; }
+ .journey .diagram-node.is-active::after { right:28px; top:6px; }
+}
+
+/* Reusable closed process. Geometry comes from the renderer, meaning from JSON.
+   One shared controller highlights stages and connectors without hiding context. */
+.process-ring { position:relative; height:330px; }
+.process-stages { list-style:none; margin:0; padding:0; }
+.process-stage { position:absolute; left:var(--x); top:var(--y); width:24%; transform:translate(-50%,-50%); }
+.process-loop .diagram-node { padding:12px 16px; border-top:0; border-left:3px solid var(--ipi-mint); }
+.process-loop .node-index { float:left; margin:2px 8px 0 0; font-weight:bold; }
+.process-loop .diagram-node h3 { font-size:20px; margin:0 0 7px; }
+.process-loop .node-body { font-size:15px; line-height:1.35; }
+.process-loop .diagram-node.is-active::after { content:'●'; top:5px; right:7px; }
+.process-connectors { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.process-edge { fill:none; stroke:#819c8e; stroke-width:2.5; transition:stroke 200ms,stroke-width 200ms; }
+.process-edge.is-incoming { stroke:var(--green); stroke-width:4; }
+.process-edge.is-outgoing { stroke:var(--green); stroke-width:5; stroke-dasharray:7 3; }
+.process-center { position:absolute; width:29%; left:35.5%; top:33%; text-align:center; }
+.process-center > p:first-child { font-size:19px; color:var(--green); margin:0; line-height:1.3; }
+.process-exit { font-size:13px; line-height:1.4; margin:10px 0 0; padding-top:8px; border-top:1px solid var(--line); }
+.process-link { display:none; }
+.process-loop .return-path { margin:0; padding:5px 0; font-size:13px; border:0; text-align:center; }
+.process-loop .diagram-branch { margin-top:6px; }
+.process-loop .diagram-branch .diagram-node { padding:7px 12px; }
+.process-loop .diagram-branch h3 { font-size:16px; }
+.process-loop .diagram-branch .node-body { font-size:13px; }
+.moment-picker[hidden] { display:none; }
+.demo-jump { font-size:11px; color:var(--green); white-space:nowrap; padding:12px 0; min-height:44px; display:inline-flex; align-items:center; }
+@media screen and (min-width:761px) and (max-width:1099px) {
+ .process-ring { height:390px; }
+ .process-stage { width:24%; }
+ .process-loop .diagram-node { padding:12px; }
+ .process-loop .diagram-node h3 { font-size:19px; }
+ .process-loop .node-body { font-size:15px; }
+ .process-center { width:29%; }
+ .process-center > p:first-child { font-size:18px; }
+}
+@media screen and (max-width:760px) {
+ .process-ring { height:auto; padding:0 0 0 22px; }
+ .process-connectors { display:none; }
+ .process-center { position:static; width:auto; text-align:left; margin:0 0 22px; padding:12px; background:var(--soft); }
+ .process-stages { position:relative; padding-left:18px; border-left:2px solid var(--ipi-mint); }
+ .process-stages::before { content:'↑'; position:absolute; top:-17px; left:-9px; color:var(--green); background:white; font-size:24px; }
+ .process-stage { position:static; width:auto; transform:none; }
+ .process-loop .diagram-node h3 { font-size:22px; }
+ .process-loop .node-body { font-size:17px; }
+ .process-link { display:block; margin:0; padding:12px 3px 16px; color:var(--green); font-size:14px; line-height:1.5; }
+ .process-link.is-incoming,.process-link.is-outgoing { font-weight:bold; text-decoration:underline; text-underline-offset:3px; }
+ .process-stage:last-child .process-link { border-bottom:2px solid var(--ipi-mint); margin-left:-18px; padding-left:18px; }
+ .process-stage:last-child .process-link span { font-size:0; }
+ .process-stage:last-child .process-link span::after { content:'↰ '; font-size:22px; }
+ .process-loop .return-path { text-align:left; padding:14px 0; }
+ .process-loop .diagram-branch .diagram-node { padding:12px; }
+ .process-loop .diagram-branch h3 { font-size:18px; margin-bottom:8px; }
+ .process-loop .diagram-branch .node-body { font-size:15px; }
+ .demo-jump { margin-left:auto; }
+}
+@media print {
+ .demo-jump { display:none; }
+ .process-ring { height:270px; }
+ .process-stage { width:24%; }
+ .process-loop .diagram-node { padding:8px 10px; }
+ .process-loop .diagram-node h3 { font-size:12pt; }
+ .process-loop .node-body { font-size:9pt; line-height:1.3; }
+ .process-center > p:first-child { font-size:13pt; }
+ .process-exit { font-size:9pt; }
+ .process-edge,.process-edge.is-incoming,.process-edge.is-outgoing { stroke:#577967; stroke-width:2.5; stroke-dasharray:none; transition:none; }
+ .process-loop .return-path { font-size:9pt; }
+ .process-loop .diagram-branch .diagram-node { padding:6px 10px; }
+ .process-loop .diagram-branch h3 { font-size:10pt; }
+ .process-loop .diagram-branch .node-body { font-size:9pt; }
+}
+@media screen and (min-width:1100px) {
+ .process-ring { height:250px; margin-top:6px; }
+ .process-loop:has(.diagram-boundary) .process-ring { height:230px; }
+ .process-loop .diagram-node { padding:10px 14px; }
+ .process-loop .diagram-branch .diagram-node { padding:6px 12px; }
+ .process-loop .diagram-branch h3 { flex-basis:260px; }
+ .process-loop .diagram-controls { gap:8px; margin-top:10px; }
+ .process-loop .moment-status { min-height:26px; }
+ .process-loop .diagram-boundary { padding:0; border:0; background:none; font-size:13px; margin-bottom:8px; }
+}
+
+
+/* AXL-EDU4: reusable three-column table with optional row spotlight. */
+.comparison-matrix{width:100%;min-width:0}
+.comparison-matrix-status{font-size:13px;color:var(--green);border-left:3px solid var(--ipi-mint);padding:8px 0 8px 13px;margin:0 0 5px;line-height:1.4}
+.principle-table{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:0 6px}
+.principle-table th,.principle-table td{text-align:left;vertical-align:middle;min-width:0}
+.principle-table thead th{font-size:14px;font-weight:700;letter-spacing:.03em;padding:9px 15px 11px;border-bottom:2px solid var(--ipi-mint)}
+.principle-table thead th:first-child{width:26%}
+.principle-table tbody th,.principle-table tbody td{padding:12px 15px;background:#f9fbfa;border-block:1px solid var(--line);font-size:clamp(13px,1.1vw,16px);line-height:1.4}
+.principle-table tbody th{font-weight:600;border-left:3px solid var(--ipi-mint)}
+.principle-table tbody td:last-child{border-right:1px solid var(--line)}
+.principle-table tbody tr.is-active>*{background:#eaf5ef;box-shadow:inset 0 0 0 1px var(--green)}
+.principle-table tbody tr.is-active th{border-left-color:var(--green)}
+.principle-table tbody tr.is-muted>*{color:#607278}
+.comparison-takeaway{font-size:16px;color:var(--green);border-left:3px solid var(--ipi-mint);padding:10px 15px;margin:14px 0 0;line-height:1.5}
+@media screen and (min-width:1100px){
+ .comparison-table.slide{padding-top:22px;padding-bottom:22px}
+ .comparison-table.slide .eyebrow{margin-bottom:12px}
+ .comparison-table.slide h2{margin-bottom:10px}
+ .comparison-table.slide .lead{margin-bottom:18px}
+ .comparison-table.slide .question{font-size:22px;margin-top:12px;padding:7px 0 7px 18px}
+ .comparison-table.slide .footnote{margin-top:10px}
+}
+@media(max-width:760px){
+ .principle-table{display:block}
+ .principle-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+ .principle-table tbody,.principle-table tr,.principle-table th,.principle-table td{display:block;width:100%}
+ .principle-table tbody tr{border:1px solid var(--line);border-left:4px solid var(--ipi-mint);border-radius:4px;margin:0 0 11px;overflow:hidden}
+ .principle-table tbody th,.principle-table tbody td{border:0;padding:9px 14px;line-height:1.5;font-size:15px}
+ .principle-table tbody th{font-size:17px;font-weight:600}
+ .principle-table tbody td::before{content:attr(data-column-label);display:block;text-transform:uppercase;color:var(--green);font-size:10px;font-weight:700;letter-spacing:1.2px;margin-bottom:4px}
+ .principle-table tbody tr.is-active{border-color:var(--green);box-shadow:0 0 0 1px var(--green)}
+ .principle-table tbody tr.is-active>*{box-shadow:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .principle-table *, .comparison-matrix *{transition:none!important;animation:none!important}
+}
+@media print{
+ .comparison-matrix-status{display:none!important}
+ .principle-table{border-spacing:0 4px;display:table}
+ .principle-table thead{display:table-header-group!important;position:static;clip:auto;overflow:visible;width:auto;height:auto}
+ .principle-table tbody{display:table-row-group}
+ .principle-table tbody tr{display:table-row;border:0;box-shadow:none!important}
+ .principle-table tbody th,.principle-table tbody td{display:table-cell;background:white!important;box-shadow:none!important;border-bottom:1px solid #b8c9c0!important;color:var(--ink)!important;padding:9px!important;font-size:10.5pt!important}
+ .principle-table tbody td::before{display:none!important}
+ .comparison-takeaway{font-size:11pt;margin-top:10px;padding:8px}
+}
+
+
+/* AXL-EDU5: reusable, static technical-mechanics visuals. No extra presenter clicks. */
+.mechanics-map{width:100%;min-width:0}
+.mechanics-top{
+  display:grid;grid-template-columns:190px 235px 1fr;align-items:center;gap:22px;
+  background:var(--navy);color:white;border-radius:5px;padding:19px 22px;
+}
+.mechanics-tag{
+  align-self:center;color:#bde6d2;font-size:11px;font-weight:700;
+  letter-spacing:1.3px;text-transform:uppercase;
+}
+.mechanics-top h3{color:white;font-size:23px;margin:0;font-weight:500}
+.mechanics-top p{color:#e1ebe7;font-size:15px;line-height:1.5;margin:0}
+.mechanics-stages{
+  display:grid;grid-template-columns:repeat(var(--stage-count),minmax(0,1fr));
+  gap:18px;margin:23px 0 15px;padding:0;list-style:none;
+}
+.mechanics-stage{
+  border:1px solid var(--line);border-top:4px solid #a3cbb8;background:#fbfdfb;
+  position:relative;padding:16px 17px 18px;border-radius:4px;min-width:0;min-height:153px;
+}
+.mechanics-stage:not(:last-child)::after{
+  content:"→";position:absolute;right:-17px;top:45px;z-index:1;
+  font-size:21px;color:var(--green);background:var(--paper);line-height:1;
+}
+.mechanics-step-tag{display:block;color:var(--green);font-size:10px;letter-spacing:1.3px;font-weight:700;margin-bottom:10px}
+.mechanics-stage h3{font-size:21px;margin:0 0 10px;line-height:1.2;font-weight:500}
+.mechanics-stage p{font-size:15px;line-height:1.45;margin:0;color:var(--muted)}
+.mechanics-map[data-mechanics-variant="architecture"] .mechanics-stage:nth-child(2),
+.mechanics-map[data-mechanics-variant="action-model"] .mechanics-stage:nth-child(2){
+  border-top-color:var(--green);background:#eaf4ee;
+}
+.mechanics-details{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0;
+}
+.mechanics-detail{border-left:3px solid #8fbea8;background:#f3f8f5;padding:12px 14px}
+.mechanics-detail h3{font-size:16px;line-height:1.25;margin:0 0 6px}
+.mechanics-detail p{font-size:14px;line-height:1.45;margin:0;color:var(--muted)}
+.mechanics-takeaway{margin:15px 0 0;border-left:3px solid var(--green);padding:9px 0 9px 16px;font-size:20px;color:var(--green);line-height:1.4}
+@media screen and (min-width:1100px){
+  .slide.mechanics{padding-top:18px;padding-bottom:18px}
+  .slide.mechanics .eyebrow{margin-bottom:12px}
+  .slide.mechanics h2{margin-bottom:12px}
+  .slide.mechanics .lead{margin-bottom:17px}
+  .slide.mechanics .question{font-size:20px;margin:10px 0 0;padding:6px 0 6px 16px}
+  .slide.mechanics .footnote{margin-top:9px;font-size:11px}
+}
+@media(max-width:1050px){
+  .mechanics-top{grid-template-columns:120px 210px 1fr;gap:14px;padding:16px}
+  .mechanics-stages{gap:14px}
+  .mechanics-stage{padding:12px;min-height:150px}
+  .mechanics-stage:not(:last-child)::after{right:-13px;font-size:18px}
+  .mechanics-stage h3{font-size:19px}
+  .mechanics-stage p{font-size:14px}
+}
+@media(max-width:760px){
+  .mechanics-top{grid-template-columns:1fr;gap:7px;padding:16px}
+  .mechanics-top h3{font-size:22px}
+  .mechanics-top p{font-size:15px}
+  .mechanics-stages{grid-template-columns:1fr;gap:24px;margin-top:20px}
+  .mechanics-stage{min-height:0;padding:15px 16px}
+  .mechanics-stage:not(:last-child)::after{content:"↓";right:auto;left:21px;top:auto;bottom:-26px;font-size:19px;background:var(--paper)}
+  .mechanics-stage h3{font-size:21px}
+  .mechanics-stage p{font-size:16px}
+  .mechanics-details{grid-template-columns:1fr;gap:9px}
+  .mechanics-takeaway{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  .mechanics-map *, .mechanics-map *::before,.mechanics-map *::after{animation:none!important;transition:none!important}
+}
+@media print{
+  .mechanics-top{display:grid;grid-template-columns:130px 185px 1fr;gap:12px;padding:12px;background:#e6ece9!important;color:#384d5d!important}
+  .mechanics-top h3{color:#384d5d!important;font-size:16pt}
+  .mechanics-top p{color:#384d5d!important;font-size:10.5pt}
+  .mechanics-tag{color:#377b64!important;font-size:9pt}
+  .mechanics-stages{gap:12px;margin:15px 0 12px}
+  .mechanics-stage{padding:10px;min-height:0;break-inside:avoid;background:white!important}
+  .mechanics-stage:not(:last-child)::after{right:-12px;font-size:14pt}
+  .mechanics-step-tag{font-size:9pt;margin-bottom:5px}
+  .mechanics-stage h3{font-size:14pt;margin-bottom:6px}
+  .mechanics-stage p{font-size:10pt}
+  .mechanics-detail{padding:8px;background:white!important}
+  .mechanics-detail h3{font-size:12pt}
+  .mechanics-detail p{font-size:9.5pt}
+  .mechanics-takeaway{font-size:13pt;margin-top:10px}
+}
+
+
+/* Compact the optional three-column comparison for 900px desktop projection.
+   This fixes a Linux-font layout spill without hiding data or shrinking table copy. */
+@media screen and (min-width:1100px) and (max-height:950px){
+  .comparison-table.slide{padding-top:8px;padding-bottom:8px}
+  .comparison-table.slide .eyebrow{margin-bottom:6px}
+  .comparison-table.slide h2{margin-bottom:8px}
+  .comparison-table.slide .lead{margin-bottom:8px;line-height:1.45}
+  .comparison-table .comparison-matrix-status{padding:3px 0 3px 10px;margin:0 0 2px}
+  .comparison-table .principle-table{border-spacing:0 2px}
+  .comparison-table .principle-table thead th{padding:5px 12px}
+  .comparison-table .principle-table tbody th,
+  .comparison-table .principle-table tbody td{padding:5px 12px;line-height:1.3}
+  .comparison-table .comparison-takeaway{padding:6px 10px;margin:7px 0 0}
+  .comparison-table.slide .question{margin:6px 0 0;padding:4px 0 4px 14px}
+  .comparison-table.slide .footnote{margin-top:4px}
+}
+
+/* Audience-first routing and concrete, evidence-labelled teaching scenes. */
+.route-tools{max-width:1440px;margin:0 auto;padding:0 5.5vw;display:flex;align-items:center;gap:18px;min-height:44px;position:relative}
+.backup-menu summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:12px;font-size:12px;color:var(--muted)}
+.backup-menu summary span{border:1px solid var(--line);border-radius:20px;padding:2px 8px}
+.backup-links{position:absolute;top:42px;right:5.5vw;left:5.5vw;z-index:20;background:white;border:1px solid var(--line);box-shadow:0 12px 32px #384d5d22;display:grid;grid-template-columns:repeat(3,1fr);padding:15px;gap:5px}
+.backup-links button{text-align:left;padding:12px;border:0;background:#f3f7f5;min-height:44px;color:var(--ink);font-size:13px}.backup-links button span{margin-right:10px;color:var(--green);font-size:11px}
+.print-choice{position:absolute;top:305px;right:5.5vw;left:5.5vw;z-index:21;background:white;padding:12px 15px;border:1px solid var(--line);font-size:13px}
+.print-choice input{min-width:20px;min-height:20px;vertical-align:middle;margin-right:8px}
+.return-main{color:var(--green)}
+.slide{min-height:calc(100svh - 278px)}
+.customer-conversation{display:grid;gap:12px;max-width:1000px}
+.speech{border-left:4px solid var(--ipi-mint);background:#f2f7f4;padding:18px 22px;max-width:90%}.speech:nth-child(2){margin-left:5%}.speech:nth-child(3){margin-left:10%;background:#edf3f6;border-color:var(--navy)}
+.speech span{display:block;text-transform:uppercase;letter-spacing:1.4px;font-size:10px;color:var(--green);margin-bottom:7px}.speech p{font-size:22px;line-height:1.4;margin:0}
+.editorial-takeaway{font-size:22px;line-height:1.4;color:var(--green);margin:24px 0 0;max-width:1000px}
+.artifact-grid,.exercise-questions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.artifact-card{padding:23px 22px;background:#f7faf8;border:1px solid var(--line);border-top:4px solid var(--ipi-mint);border-radius:3px}
+.artifact-card .artifact-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;line-height:1.5;color:var(--green);margin:0 0 17px}
+.artifact-card>p:last-child{font-size:19px;line-height:1.55;margin:0}
+.change-before{font-size:19px;background:var(--navy);color:white;padding:16px 22px;margin-bottom:20px}
+.exercise-prompt{font-size:27px;line-height:1.35;margin:0 0 22px;border-left:4px solid var(--green);padding:5px 0 5px 22px;max-width:1100px}
+.exercise-review{margin-top:22px;border-top:1px solid var(--line);padding-top:6px}
+.exercise-review summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:var(--green);font-weight:600;font-size:16px}
+.exercise-review ol{padding:0 0 0 25px;margin-bottom:10px}.exercise-review li{padding:4px 0;font-size:17px;line-height:1.5}.exercise-review p{font-size:12px;color:var(--muted)}
+@media screen and (min-width:1100px){
+ .slide{padding-top:22px;padding-bottom:22px;justify-content:center}
+ .slide h2{font-size:43px;max-width:1050px;margin-bottom:16px}
+ .slide .eyebrow{margin-bottom:12px}.slide .lead{margin-bottom:20px;line-height:1.5}
+ .slide .footnote{margin-top:12px}
+ .dialogue.slide h2{font-size:42px}
+ .mechanics-stage{min-height:0}.mechanics-top{grid-template-columns:140px 210px 1fr}
+ .mechanics-top p{font-size:14px}.mechanics-stage p{font-size:15px}
+ .mechanics-top h3{font-size:22px}.mechanics-details{margin-top:10px}
+}
+@media(max-width:1000px){.artifact-grid,.exercise-questions{grid-template-columns:1fr}.artifact-card{padding:17px}.artifact-card>p:last-child{font-size:17px}.artifact-card .artifact-label{margin-bottom:9px}}
+@media(max-width:760px){
+ .route-tools{padding:0 6vw}.backup-links{grid-template-columns:1fr;max-height:55svh;overflow:auto}.print-choice{position:static;padding:10px 0}.backup-menu[open] .print-choice{margin-top:56svh}
+ .speech{max-width:100%;padding:14px}.speech p{font-size:20px}.speech:nth-child(n){margin-left:0}
+ .exercise-prompt{font-size:23px}.editorial-takeaway{font-size:21px}
+}
+@media print{
+ .route-tools{display:none!important}
+ .slide[data-route="backup"]{display:none!important}
+ html.print-backup .slide[data-route="backup"]{display:block!important}
+ .slide::before{content:attr(data-print-title);margin-bottom:5mm}
+ .slide{break-after:page!important;min-height:0!important}
+ .speech{padding:10px 16px}.speech p{font-size:17pt}
+ .artifact-grid,.exercise-questions{grid-template-columns:repeat(3,1fr)}
+ .artifact-card{padding:13px}.artifact-card>p:last-child{font-size:13pt}
+ .artifact-card .artifact-label{font-size:9pt;margin-bottom:10px}
+ .exercise-review{display:block}.exercise-review>*{display:block!important}
+ .exercise-review ol{display:block!important}.exercise-review summary{display:none}
+ .exercise-prompt{font-size:18pt}.editorial-takeaway{font-size:15pt}
+}
+@media screen and (min-width:1100px){.slide{min-height:calc(100svh - 283px)}}
+@media print{details::details-content{display:block!important;content-visibility:visible!important}}
+@media screen and (min-width:1100px){.diagram.slide{padding-top:10px;padding-bottom:10px}.diagram.slide .lead{margin-bottom:12px}}
+@media print{
+ #status{display:none!important}
+ .slide:last-of-type{break-after:auto!important}
+ html:not(.print-backup) .slide[data-route="main"]:has(+.slide[data-route="backup"]){break-after:auto!important}
+}
+/* Keep the backup list and print choice in one popover at every viewport. */
+.backup-panel{position:absolute;top:42px;left:5.5vw;right:5.5vw;z-index:20;background:white;border:1px solid var(--line);box-shadow:0 12px 32px #384d5d22}
+.backup-panel .backup-links{position:static;border:0;box-shadow:none}
+.backup-panel .print-choice{position:static;display:block;margin:0;border:0;border-top:1px solid var(--line);padding:12px 15px}
+@media(max-width:760px){.backup-panel{max-height:65svh;overflow:auto}.backup-panel .backup-links{max-height:none;overflow:visible}.backup-menu[open] .print-choice{margin-top:0}}
+
+
+/* EDU9: wider human presentation and six-section rail. */
+.deck,.nav,.route-tools,.bottom{max-width:1600px}
+.slide{padding-left:4.2vw;padding-right:4.2vw}
+h1{max-width:900px}h2{max-width:1120px}.lead{max-width:980px}
+.customer-conversation{max-width:1220px}.speech{max-width:86%}
+.nav{gap:20px;padding-top:14px;border-bottom:1px solid var(--line)}
+.nav button{padding:10px 6px 12px;font-size:12px;letter-spacing:.15px;border-bottom-width:3px}
+.nav button span{margin-right:7px}.nav button[aria-current="step"]{color:var(--green);border-bottom-color:var(--ipi-mint)}
+.section-progress{display:flex;align-items:center;gap:9px;margin:0;font-size:11px;color:var(--muted)}
+.section-progress strong{color:var(--green);font-weight:600}.section-progress span{border-left:1px solid var(--line);padding-left:9px}
+@media(max-width:760px){.nav{gap:14px}.nav button{padding:9px 2px 10px}.section-progress{order:3;flex-basis:100%}.customer-conversation{max-width:none}.speech{max-width:100%;margin-left:0!important}}
+@media print{.section-progress{display:none!important}}
+
+
+/* EDU9: keep the two-design comparative journey readable inside 1440×900. */
+@media screen and (min-width:1100px) and (max-height:950px){
+ #same-request-two-designs.diagram.slide{padding-top:8px;padding-bottom:8px}
+ #same-request-two-designs .eyebrow{margin-bottom:5px}
+ #same-request-two-designs h2{margin-bottom:7px;font-size:36px}
+ #same-request-two-designs .lead{margin-bottom:8px;line-height:1.35}
+ #same-request-two-designs .journey-grid{gap:6px 10px}
+ #same-request-two-designs .customer-moment{font-size:13px;padding-bottom:3px}
+ #same-request-two-designs .journey-label{font-size:15px}
+ #same-request-two-designs .journey .diagram-node{padding:7px 10px;min-height:0}
+ #same-request-two-designs .journey .diagram-node h3{font-size:17px;margin:4px 0 5px}
+ #same-request-two-designs .journey .node-body{font-size:13px;line-height:1.28}
+ #same-request-two-designs .consent-gate{padding:6px 10px;margin-top:6px;font-size:13px}
+ #same-request-two-designs .diagram-controls{margin-top:5px}
+ #same-request-two-designs .moment-status{min-height:28px;font-size:13px;line-height:1.35}
+ #same-request-two-designs .question{margin-top:4px;padding:4px 0 4px 14px;font-size:19px}
+ #same-request-two-designs .footnote{margin-top:3px}
+}
+
+
+/* EDU9: preserve the full LAM explanation inside a 1440×900 projection. */
+@media screen and (min-width:1100px) and (max-height:950px){
+ #ava-architecture.slide.mechanics{padding-top:10px;padding-bottom:10px}
+}
+
+/* Longer authored journeys need readable stage columns on tablets. */
+.extended-journey .diagram-node,.extended-journey .customer-moment{overflow-wrap:anywhere}
+@media screen and (max-width:1099px){
+ .extended-journey{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .extended-journey .journey-label{grid-column:1/-1;padding:10px 0;border-top:2px solid var(--ipi-mint)}
+}
+@media screen and (max-width:760px){.extended-journey{grid-template-columns:1fr 1fr}}
+@media print{
+ .journey .extended-journey{gap:6px;grid-template-columns:90px repeat(var(--journey-stages),minmax(0,1fr))}
+ .journey .extended-journey .diagram-node{padding:8px}
+ .journey .extended-journey .diagram-node h3{font-size:11pt;margin-bottom:7px}
+ .journey .extended-journey .node-body{font-size:9pt;line-height:1.3}
+ .journey .extended-journey .node-index{margin-bottom:5px}
+ .journey .extended-journey .journey-label,.journey .extended-journey .customer-moment{font-size:9pt}
+}
+
+/* Fixed design presets: inherited by slides and independent of source copy. */
+.deck{max-width:none}.slide{max-width:1600px;width:100%;margin-left:auto;margin-right:auto}
+.audience-tools{position:relative;font-size:12px;z-index:30}
+.audience-tools summary{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:6px;padding:9px 12px;cursor:pointer;min-height:44px;list-style:none}
+.audience-tools summary::-webkit-details-marker{display:none}
+.audience-tools[open] summary{background:#f2f7f4}
+.view-panel{position:absolute;right:0;top:calc(100% + 8px);width:260px;padding:16px;background:white;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px #384d5d22;color:var(--ink)}
+.view-panel label{display:block;font-weight:bold;margin-bottom:7px}.view-panel select{width:100%;padding:9px;min-height:44px;background:white;border:1px solid var(--line);border-radius:4px;font:inherit;color:inherit}
+.zoom-tools{display:flex;gap:8px;margin-top:12px}.zoom-tools button{min-height:44px;flex:1;border:1px solid var(--line);border-radius:4px;background:white;color:var(--ink)}
+.view-panel p{font-size:12px;line-height:1.5;margin:10px 0 0;color:var(--muted)}
+@media screen{
+ .slides-canvas{zoom:var(--audience-zoom,1)}
+ html[data-chapters=false] .nav{display:none}
+ html[data-timing=false] :is(#slideTiming,.demo-jump){display:none}
+ html[data-progress=false] :is(.progress,.section-progress){display:none}
+ .slide[data-design-width=wide]{max-width:2400px;padding-left:3vw;padding-right:3vw}
+ .slide[data-design-placement=top]{justify-content:flex-start}
+ .slide[data-design-placement=center]{justify-content:center}
+ .slide[data-design-spacing=compact]{--preset-gap:10px;--preset-pad:9px}
+ .slide[data-design-spacing=spacious]{--preset-gap:26px;--preset-pad:19px}
+ .slide:not([data-design-spacing=balanced]) :is(.diagram-nodes,.journey-grid,.section-items,.artifact-grid){gap:var(--preset-gap)}
+ .slide:not([data-design-spacing=balanced]) .content-row{padding-top:var(--preset-pad);padding-bottom:var(--preset-pad)}
+ .slide:not([data-design-spacing=balanced]) :is(.principle-table tbody th,.principle-table tbody td){padding-top:var(--preset-pad);padding-bottom:var(--preset-pad)}
+ .slide:not([data-design-spacing=balanced]) .lead{margin-bottom:var(--preset-gap)}
+ .slide[data-design-size=large]{--preset-body:20px;--preset-label:16px;--preset-heading:54px;--preset-subhead:25px}
+ .slide[data-design-size=xlarge]{--preset-body:24px;--preset-label:18px;--preset-heading:62px;--preset-subhead:29px}
+ .slide:not([data-design-size=standard]) :is(h1,h2){font-size:var(--preset-heading)!important;max-width:none}
+ .slide:not([data-design-size=standard]) :is(h3,.node-title){font-size:var(--preset-subhead)!important}
+ .slide:not([data-design-size=standard]) :is(.lead,.content-row p,.node-body,.principle-table tbody th,.principle-table tbody td,.artifact-card>p:last-child,.mechanics-stage p,.speech p,.spec-pipeline p,.lab-timeline li>p:last-child,.comparison-columns p:not(.panel-label),.exercise-questions li){font-size:var(--preset-body)!important}
+ .slide:not([data-design-size=standard]) :is(.footnote,.moment-status,.comparison-matrix-status,.comparison-takeaway){font-size:var(--preset-label)!important}
+ .slide[data-design-arrangement=cards] .section-items{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))!important;gap:20px!important;border:0}
+ .slide[data-design-arrangement=cards] .content-row{display:block!important;border:1px solid var(--line);border-top:3px solid var(--ipi-mint);border-radius:6px;padding:22px!important;background:#f9fbfa}
+ .slide[data-design-arrangement=cards] .content-row .number{display:block;margin-bottom:14px}
+ .slide[data-design-arrangement=cards] .content-row h3{margin-bottom:10px}
+ .slide[data-design-arrangement=rows] .section-items{display:block!important;border-top:1px solid var(--line)}
+ .slide[data-design-arrangement=rows] .content-row{display:grid!important;grid-template-columns:40px 1fr 1.4fr!important;border:0;border-bottom:1px solid var(--line);padding:22px 0!important;background:transparent}
+ .slide[data-design-arrangement=cards] .principle-table{display:block}
+ .slide[data-design-arrangement=cards] .principle-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+ .slide[data-design-arrangement=cards] .principle-table tbody{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+ .slide[data-design-arrangement=cards] .principle-table tr{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-top:3px solid var(--ipi-mint);border-radius:6px;overflow:hidden}
+ .slide[data-design-arrangement=cards] .principle-table tbody th{display:block;grid-column:1/-1;width:100%;border:0;background:#edf5f0}
+ .slide[data-design-arrangement=cards] .principle-table tbody td{display:block;width:100%;border:0;border-top:1px solid var(--line)}
+ .slide[data-design-arrangement=cards] .principle-table tbody td::before{content:attr(data-column-label);display:block;font-size:11px;font-weight:bold;text-transform:uppercase;color:var(--green);margin-bottom:7px}
+}
+@media screen and (min-width:1100px){
+ /* Quiet visuals gain a little room when their optional interaction is removed. */
+ .slide[data-reflow=quiet][data-design-spacing=balanced] .principle-table :is(th,td){padding-top:16px;padding-bottom:16px}
+ .slide[data-reflow=quiet][data-design-size=standard] .principle-table tbody :is(th,td){font-size:18px}
+ .slide[data-reflow=quiet][data-design-spacing=balanced] .diagram-nodes{gap:22px}
+ .canvas-mode .deck{height:var(--canvas-height);overflow:auto;width:calc(100% - 32px);margin:12px auto;max-width:none}
+ .canvas-mode .canvas-space{width:var(--canvas-width);height:var(--canvas-space-height);margin:0 auto}
+ .canvas-mode .slides-canvas{width:1440px;zoom:1;transform:scale(var(--canvas-scale));transform-origin:top left}
+ .canvas-mode .slide{width:1440px;max-width:1440px;min-height:810px;height:810px;overflow:auto;padding:32px 64px}
+ .canvas-mode .slide[data-design-width=wide]{padding-left:32px;padding-right:32px}
+ .canvas-mode .slide[data-design-size=standard] h1{font-size:70px}.canvas-mode .slide[data-design-size=standard] h2{font-size:49px}
+}
+@media screen and (max-width:760px){
+ .header-right{gap:10px}.audience-tools summary{padding:8px;font-size:11px}.view-panel{right:-15px;width:min(260px,85vw)}
+ .slide:not([data-design-size=standard]) :is(h1,h2){font-size:clamp(32px,8vw,46px)!important}
+ .slide[data-design-arrangement=cards] .principle-table tbody{grid-template-columns:1fr}
+ .slide[data-design-arrangement=rows] .content-row{grid-template-columns:25px 1fr!important}
+ .slide[data-design-arrangement=rows] .content-row p{grid-column:2}
+ .slide[data-design-placement=center]{justify-content:flex-start}
+}
+@media print{
+ .audience-tools{display:none!important}
+ .slides-canvas{zoom:1!important;transform:none!important;width:auto!important}
+ .canvas-space,.canvas-mode .canvas-space,.canvas-mode .deck{width:auto!important;height:auto!important;overflow:visible!important;margin:0!important}
+ .canvas-mode .slide{height:auto!important;overflow:visible!important;min-height:0!important;width:auto!important}
+}
+
+@media screen{.slide{min-height:var(--available-slide-height,calc(100svh - 278px))}.header{position:sticky;top:0;z-index:40;background:var(--paper)}}
+@media screen and (min-width:1100px){.canvas-mode .slide{min-height:810px}}
+/* Enlarged type needs flow layouts, rather than fixed ring coordinates. */
+@media screen{
+ .slide:not([data-design-size=standard]) .process-ring{height:auto!important;padding:0}
+ .slide:not([data-design-size=standard]) .process-connectors{display:none}
+ .slide:not([data-design-size=standard]) .process-center{position:static;width:auto;text-align:left;margin:0 0 18px;padding:14px;background:var(--soft)}
+ .slide:not([data-design-size=standard]) .process-stages{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;padding:0;border:0}
+ .slide:not([data-design-size=standard]) .process-stages::before{display:none}
+ .slide:not([data-design-size=standard]) .process-stage{position:static;width:auto;transform:none}
+ .slide:not([data-design-size=standard]) .process-link{display:block;font-size:16px;line-height:1.4;margin:0;padding:10px 4px 14px}
+ .slide:not([data-design-size=standard]) .process-link:is(.is-incoming,.is-outgoing){font-weight:bold;text-decoration:underline}
+ .slide:not([data-design-size=standard]) .journey-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .slide:not([data-design-size=standard]) .journey-label{grid-column:1/-1;padding:10px 0;border-top:2px solid var(--ipi-mint)}
+}
+@media screen and (max-width:760px){
+ .slide:not([data-design-size=standard]) :is(.process-stages,.journey-grid){grid-template-columns:1fr}
+}
+@media screen and (max-width:900px){
+ .slide:not([data-design-size=standard]) .mechanics-stages{grid-template-columns:1fr;gap:24px}
+ .slide:not([data-design-size=standard]) .mechanics-stage:not(:last-child)::after{content:'↓';left:21px;right:auto;top:auto;bottom:-26px}
+}
+/* Size presets remain larger than the responsive theme's heading sizes. */
+@media screen{
+ .slide[data-design-size=large]{--preset-heading:clamp(54px,4.2vw,72px);--preset-hero:clamp(78px,6vw,102px)}
+ .slide[data-design-size=xlarge]{--preset-heading:clamp(64px,5vw,84px);--preset-hero:clamp(92px,7vw,120px)}
+ .slide:not([data-design-size=standard]) h1{font-size:var(--preset-hero)!important}
+ .slide:not([data-design-size=standard]) :is(.hero-item p,.mechanics-top p,.mechanics-detail p,.comparison-caveat,.customer-moment){font-size:var(--preset-body)!important}
+}
+@media screen and (max-width:760px){
+ .slide[data-design-size=large] h1{font-size:clamp(48px,12vw,60px)!important}
+ .slide[data-design-size=xlarge] h1{font-size:clamp(56px,14vw,72px)!important}
+ .slide[data-design-size=large] h2{font-size:clamp(40px,10.5vw,52px)!important}
+ .slide[data-design-size=xlarge] h2{font-size:clamp(46px,12vw,60px)!important}
+}
+
+
+/* Hodge discussion: four stages form one row on a presentation screen. */
+@media screen and (min-width:1100px){
+ #genesys-flow .diagram-nodes{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media screen and (min-width:761px) and (max-width:1099px){
+ #genesys-flow .diagram-nodes{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media screen and (min-width:1100px) and (max-height:800px){
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"]{padding-top:14px;padding-bottom:14px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] h2{font-size:38px;margin-bottom:12px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .lead{margin-bottom:16px;line-height:1.4}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .content-row{padding-top:15px;padding-bottom:15px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .question{font-size:25px;margin-top:14px;padding-top:12px;padding-bottom:12px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .speech{padding-top:14px;padding-bottom:14px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .editorial-takeaway{margin-top:18px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .diagram-boundary{padding-top:8px;padding-bottom:8px;margin-bottom:10px}
+ body[data-presentation="hodge-social-listening"] .slide[data-design-size="standard"][data-design-spacing="balanced"] .diagram .moment-status{min-height:26px}
+}
+
+/* Local symbols keep shape and accessible labels as well as semantic colour. */
+.slide-icon{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;flex-shrink:0;width:32px;height:32px;border-radius:50%;background:#edf3f6;color:#234d61}
+.slide-icon svg{display:block;width:22px;height:22px}
+.slide-icon.icon-tick{color:#176b42;background:#e5f3e9}
+.slide-icon.icon-cross{color:#b02f36;background:#fbecee}
+.slide-icon:is(.icon-question,.icon-warning){color:#855400;background:#fff3d6}
+h3>.slide-icon,strong>.slide-icon{margin-right:10px}
+.diagram-node>.slide-icon{margin-bottom:12px}
+.hero-item .slide-icon{background:#fff}
+.convergence .diagram-nodes{grid-template-columns:repeat(var(--diagram-node-count),minmax(0,1fr))}
+.convergence-goal{position:relative;margin:30px auto 0;padding:18px 24px;border:2px solid var(--green);border-radius:6px;background:#edf6f0;max-width:720px;text-align:center}
+.convergence-goal>span{display:block;font-size:28px;line-height:1;color:var(--green);margin-top:-48px;margin-bottom:18px}
+.convergence-goal p{margin:0;font-size:24px;line-height:1.3;color:var(--green)}
+/* Motion never withholds content. Only an opted-in guided focus transitions. */
+.slide:not([data-design-motion=focus]) :is(.diagram-node,.process-edge){transition:none}
+.slide[data-design-motion=focus] .diagram-node{transition:background-color 220ms,border-color 220ms,box-shadow 220ms,transform 220ms}
+.slide[data-design-motion=focus] .diagram-node.is-active{transform:translateY(-3px)}
+@media(max-width:900px){.convergence .diagram-nodes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.convergence .diagram-nodes{grid-template-columns:1fr}.convergence-goal p{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.slide[data-design-motion] .diagram-node{transition:none!important;transform:none!important}}
+@media print{
+ .content-row>.slide-icon{width:24px;height:24px}
+ .content-row>.slide-icon svg{width:18px;height:18px}
+ .slide-icon{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .slide[data-design-motion] .diagram-node{transform:none!important;transition:none!important}
+ .convergence .diagram-nodes{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .convergence-goal{break-inside:avoid}
+}
+
+.convergence-connectors{display:block;width:100%;height:34px;overflow:visible}
+.convergence-edge{fill:none;stroke:#819c8e;stroke-width:2;vector-effect:non-scaling-stroke}
+.convergence-edge.is-outgoing{stroke:var(--green);stroke-width:3}
+.slide[data-design-motion=focus] .convergence-edge{transition:stroke 220ms,stroke-width 220ms}
+.convergence:has(.convergence-connectors) .convergence-goal{margin-top:0}
+.convergence:has(.convergence-connectors) .convergence-goal>span{display:none}
+@media(max-width:900px){.convergence-connectors{display:none}.convergence:has(.convergence-connectors) .convergence-goal{margin-top:30px}.convergence:has(.convergence-connectors) .convergence-goal>span{display:block}}
+@media print{.convergence-connectors{display:none}.convergence:has(.convergence-connectors) .convergence-goal{margin-top:20px}}
+
+/* Purposeful alternatives: a hierarchy, an ordered path and an explicit fork. */
+@media screen{
+ .slide[data-design-arrangement=spotlight] .split-layout{display:block}
+ .slide[data-design-arrangement=spotlight] .section-items{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px;border:0}
+ .slide[data-design-arrangement=spotlight] .content-row{display:block;padding:24px;border:1px solid var(--line);border-radius:6px;background:#f7faf8}
+ .slide[data-design-arrangement=spotlight] .content-row:first-child{grid-column:1;grid-row:1 / span var(--support-count);background:var(--navy);color:white;padding:34px}
+ .slide[data-design-arrangement=spotlight] .content-row:not(:first-child){grid-column:2}
+ .slide[data-design-arrangement=spotlight] .content-row:first-child p{color:#e0eae7;font-size:24px;line-height:1.45}
+ .slide[data-design-arrangement=spotlight] .content-row:first-child h3{font-size:34px;color:white;line-height:1.15}
+ .slide[data-design-arrangement=spotlight] .content-row h3{margin:14px 0 12px}
+ .slide[data-design-arrangement=spotlight] .content-row .number{display:block;margin-bottom:16px;color:var(--ipi-mint)}
+ .slide[data-design-arrangement=spotlight] .content-row p{margin:0}
+}
+.sequence .diagram-nodes,.decision-fork .diagram-nodes{grid-template-columns:repeat(var(--diagram-node-count),minmax(0,1fr));gap:32px}
+.sequence .diagram-node:not(:last-child)::before{content:'→';position:absolute;right:-28px;top:44%;color:var(--green);font-size:26px}
+.decision-question{max-width:720px;margin:0 auto 28px;text-align:center}
+.decision-question p{margin:0;padding:18px 26px;border:2px solid var(--green);background:#edf6f0;border-radius:6px;font-size:25px;line-height:1.3;color:var(--green)}
+.decision-question>span{display:block;margin-bottom:-20px;font-size:27px;line-height:1.1;color:var(--green)}
+.decision-fork .diagram-node{border-top-color:#819c8e}
+@media screen and (max-width:900px){
+ .sequence .diagram-nodes,.decision-fork .diagram-nodes{grid-template-columns:1fr}
+ .sequence .diagram-node:not(:last-child)::before{content:'↓';right:50%;top:auto;bottom:-31px}
+ .slide[data-design-arrangement=spotlight] .section-items{grid-template-columns:1fr}
+ .slide[data-design-arrangement=spotlight] .content-row:first-child{grid-row:auto;padding:24px}
+ .slide[data-design-arrangement=spotlight] .content-row:not(:first-child){grid-column:1}
+ .slide[data-design-arrangement=spotlight] .content-row:first-child h3{font-size:28px}
+ .slide[data-design-arrangement=spotlight] .content-row:first-child p{font-size:21px}
+}
+@media print{
+ .sequence .diagram-nodes{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+ .sequence .diagram-node::before{display:none}
+ .decision-fork .diagram-nodes{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+ .decision-question{margin-bottom:18px;break-inside:avoid}
+ .decision-question p{font-size:20px;padding:12px}
+}
+
+.decision-connectors{display:block;height:30px;width:100%;overflow:visible}
+.decision-edge{fill:none;stroke:#819c8e;stroke-width:2;vector-effect:non-scaling-stroke}
+.decision-edge.is-incoming{stroke:var(--green);stroke-width:3}
+.slide[data-design-motion=focus] .decision-edge{transition:stroke 220ms,stroke-width 220ms}
+.decision-fork .decision-question{margin-bottom:0}
+.decision-fork .decision-question>span{display:none}
+@media(max-width:900px){.decision-connectors{display:none}.decision-fork .decision-question{margin-bottom:28px}.decision-fork .decision-question>span{display:block}}
+@media print{.decision-connectors{display:none}.decision-fork .decision-question{margin-bottom:18px}}
+
+/* Expansion is opt-in, with an explicit keyboard-accessible control. */
+.content-expand{display:block;margin-top:16px;min-height:36px;padding:7px 12px;border:1px solid var(--line);border-radius:4px;background:white;color:var(--green);font-size:12px;cursor:pointer}
+.can-expand{cursor:zoom-in}
+.can-expand .content-expand:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.diagram-node .content-expand{position:absolute;right:7px;top:6px;min-height:24px;margin:0;padding:2px 8px;z-index:1}
+.slide[data-design-expand=true] .diagram-node.is-active::after{right:45px}
+.process-loop .content-expand{min-height:22px;padding:2px 6px;font-size:11px}
+.content-detail{margin-top:16px;padding-top:12px;border-top:1px solid var(--line)}
+.content-detail .detail-body{display:block}
+.content-detail h4{font-size:17px;margin:0 0 9px}
+.content-row>.content-detail{grid-column:2 / -1}
+.content-row>.content-expand{grid-column:2 / -1;justify-self:start}
+.content-modal{padding:0;border:0;border-radius:10px;background:transparent;width:min(940px,calc(100vw - 40px));max-width:calc(100vw - 40px);max-height:calc(100dvh - 40px);overflow:visible;color:var(--ink)}
+.content-modal::backdrop{background:rgb(20 37 48 / .62)}
+.content-modal-panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:30px;max-height:calc(100dvh - 40px);overflow:auto;box-shadow:0 20px 90px #14253055;box-sizing:border-box;transform-origin:center}
+.content-modal-header{position:sticky;top:0;background:white;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:20px}
+.content-modal-header .eyebrow{margin:0}
+.content-modal-header button{background:white;border:1px solid var(--line);border-radius:4px;min-height:42px;padding:10px 15px;color:var(--ink);cursor:pointer;font-size:14px}
+.content-modal h2{font-size:clamp(27px,3vw,42px);line-height:1.15;margin:0 0 24px;letter-spacing:-1px;color:var(--ink)}
+.content-modal-body{font-size:22px;line-height:1.55;overflow-wrap:anywhere}
+.content-modal-body :is(p,.node-body){font-size:22px;line-height:1.55;margin:14px 0;display:block;color:var(--ink)}
+.content-modal-body .number,.content-modal-body .node-index{display:none}
+.content-modal-body .content-detail{padding-top:20px;margin-top:24px}
+.content-modal-body dt{font-size:14px;font-weight:bold;color:var(--green);margin-top:22px}
+.content-modal-body dd{margin:8px 0}
+.content-modal-open{overflow:hidden}
+.content-modal-open .deck{overflow:hidden}
+@media(max-width:600px){.content-modal{width:calc(100vw - 20px);max-width:calc(100vw - 20px);max-height:calc(100dvh - 20px)}.content-modal-panel{padding:20px;max-height:calc(100dvh - 20px)}.content-modal-header{align-items:flex-start;gap:12px}.content-modal-body,.content-modal-body :is(p,.node-body){font-size:20px}}
+@media(prefers-reduced-motion:reduce){.content-modal-panel{animation:none!important;transition:none!important}}
+@media print{
+ .content-expand,.content-modal{display:none!important}
+ .slide .content-detail[hidden]{display:block!important}
+ .content-modal-open,.content-modal-open .deck{overflow:visible!important}
+ .can-expand{cursor:auto}
+}
+
+/* Purposeful evidence layouts. Static by default; print retains attribution. */
+.statement h1,.statement h2{max-width:22ch;font-size:clamp(2.4rem,4.3vw,4.8rem);line-height:1.12}
+.statement .lead{max-width:54ch}
+.impact-quote,.impact-metric,.impact-image,.impact-chart{margin:24px 0;max-width:1100px}
+.impact-quote blockquote{margin:0 0 28px;padding:0 0 0 24px;border-left:5px solid var(--ipi-mint,#63ab8f);font-size:clamp(1.7rem,2.8vw,3.1rem);line-height:1.3;max-width:36ch}
+.evidence-source{font-size:16px;color:var(--muted,#586471);overflow-wrap:anywhere}
+.impact-metric{display:grid;grid-template-columns:minmax(180px,0.8fr) minmax(0,1.2fr);gap:36px;align-items:center}
+.impact-metric .metric-value{font-size:clamp(3.5rem,7vw,7rem);line-height:1.1;font-weight:750;color:var(--ink,#162b3a);margin:0;overflow-wrap:anywhere}
+.impact-metric h3{font-size:28px;margin:0 0 14px}
+.impact-image img{display:block;max-width:100%;width:100%;height:clamp(180px,38vh,460px);object-fit:contain;background:#f2f4f6;border-radius:12px}
+.impact-image figcaption p{margin:10px 0}
+.impact-chart table{width:100%;table-layout:fixed;border-collapse:collapse;margin:20px 0}
+.impact-chart th,.impact-chart td{padding:12px 8px;text-align:left;border-bottom:1px solid #dce2e7;vertical-align:middle}
+.impact-chart th{width:32%;overflow-wrap:anywhere}
+.impact-chart td{position:relative}
+.evidence-bar-track{display:inline-block;width:72%;height:24px;background:#edf1f4;vertical-align:middle;margin-right:12px;border-left:1px solid #aebcb5}
+.evidence-bar-track span{display:block;height:100%;background:var(--green,#377b64)}
+.impact-chart td strong{display:inline-block;font-variant-numeric:tabular-nums}
+@media(max-width:650px){.impact-metric{grid-template-columns:1fr;gap:18px}.impact-quote blockquote{padding-left:16px}.impact-chart th{width:40%}.evidence-bar-track{width:100%;margin:0 0 5px}.impact-image img{height:260px}}
+@media print{.statement h1,.statement h2{font-size:38pt}.impact-quote blockquote{font-size:26pt}.impact-metric .metric-value{font-size:64pt}.impact-image img{height:88mm}.impact-chart tr{break-inside:avoid}.evidence-source{font-size:10pt}}
+
+.expanded-block img{display:block;max-width:100%;height:auto}
+.recording-player{display:block;width:100%;height:min(85vh,1000px);min-height:550px;border:1px solid #ccd6dd;border-radius:12px;margin-top:16px} @media print{.recording-player{display:none}}
+/* Optional presenter tools stay outside the authored slide canvas. */
+
+/* Keep the view controls clear of long presentation names on narrow screens. */
+.header .brands { min-width:0; }
+.header .brand-title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+@media screen and (max-width:480px) { .header .brand-title,.header .brand-divider { display:none; } }
+
+/* Quiet projection reserves one stable control strip. Revealing controls is a modal
+   overlay, so viewport geometry and the current audience state do not jump. */
+.stage-reveal{position:fixed;bottom:12px;left:22px;z-index:60;min-height:40px;padding:8px 16px;border:1px solid var(--line);border-radius:6px;background:#fff;color:var(--ink);font-size:13px}
+.stage-controls{width:min(1100px,calc(100vw - 32px));max-height:calc(100dvh - 32px);padding:20px;border:1px solid var(--line);border-radius:12px;color:var(--ink);overflow:auto}
+.stage-controls::backdrop{background:rgb(20 37 48 / .6)}
+#closeStageControls{min-height:44px;border:1px solid var(--green);border-radius:5px;background:white;color:var(--green);padding:10px 18px}
+.stage-controls .header{position:static;height:auto;min-height:94px;flex-wrap:wrap;padding:20px 0}
+.stage-controls .header-right{flex-wrap:wrap;gap:20px}.stage-controls .nav,.stage-controls .route-tools,.stage-controls .bottom{padding:16px 0;position:static;max-width:none;flex-wrap:wrap}
+.stage-controls .view-panel{z-index:2}.stage-controls .bottom{height:auto;min-height:74px}.stage-controls .progress{display:block!important}
+@media screen and (min-width:1100px){
+ .quiet-stage body>.header,.quiet-stage body>.nav,.quiet-stage body>.route-tools,.quiet-stage body>.bottom{display:none!important}
+ .quiet-stage .deck{padding-bottom:64px}
+ .quiet-stage.canvas-mode .deck{padding-bottom:0;margin:0 auto 64px;width:100%}
+ .quiet-stage .slide{min-height:var(--available-slide-height);padding-top:36px;padding-bottom:36px}
+ .quiet-stage:not(.canvas-mode) .slide.statement h1{font-size:clamp(64px,6vw,96px);max-width:20ch}
+ .quiet-stage.canvas-mode .slide{min-height:810px;height:810px}
+ .quiet-stage .stage-controls .header,.quiet-stage .stage-controls .nav,.quiet-stage .stage-controls .route-tools,.quiet-stage .stage-controls .bottom{display:flex!important}
+}
+@media print{.stage-reveal,.stage-controls{display:none!important}.quiet-stage .deck{padding-bottom:0!important}}
+
+/* Bounded open vector composition; shares native diagram focus and expansion. */
+.connected-illustration{position:relative;margin:30px 0 18px}
+.map-connectors{position:absolute;top:0;left:0;width:100%;height:150px;overflow:visible}
+.map-link,.map-trace{fill:none;stroke:#a4bcae;stroke-width:2.5;vector-effect:non-scaling-stroke}
+.map-trace{vector-effect:none;stroke:var(--green);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1;opacity:0}
+.map-trace.is-incoming{stroke-dashoffset:0;opacity:1}
+.slide[data-design-motion=focus] .map-trace{transition:stroke-dashoffset 560ms cubic-bezier(.2,.6,.2,1)}
+.map-stages{display:grid;grid-template-columns:repeat(var(--map-count),minmax(0,1fr));gap:22px;list-style:none;padding:0;margin:0}
+.connected-map .diagram-node{border:0;background:transparent;box-shadow:none;padding:0 8px;text-align:center;min-height:0}
+.connected-map .slide-icon,.connected-map .node-index{display:flex;float:none;align-items:center;justify-content:center;width:112px;height:112px;margin:19px auto 30px;border:2px solid var(--ipi-mint);border-radius:50%;background:#f2f8f5;color:var(--green);font-size:42px}
+.connected-map .slide-icon svg{width:54px;height:54px}
+.connected-map .diagram-node h3{font-size:24px;line-height:1.15;margin:0 0 12px;color:var(--navy)}
+.connected-map .node-body{font-size:19px;line-height:1.4;max-width:25ch;margin:auto}
+.connected-map .diagram-node.is-active{background:transparent;box-shadow:none}
+.connected-map .diagram-node.is-active .slide-icon,.connected-map .diagram-node.is-active .node-index{background:var(--green);color:white;border-color:var(--green)}
+.connected-map .diagram-node.is-active::after{display:none}
+.connected-map .diagram-node.is-muted{opacity:1}
+.connected-map .diagram-surface{background:transparent;border:0;padding:0}
+@media screen and (min-width:1100px){.quiet-stage .slide:has(.connected-map) h2{font-size:clamp(38px,3.3vw,64px);max-width:24ch}.quiet-stage .slide:has(.connected-map) .lead{font-size:22px;max-width:65ch}.quiet-stage .connected-illustration{margin-top:36px}}
+@media screen and (max-width:1099px){
+ .map-connectors{display:none}.map-stages{grid-template-columns:1fr;gap:30px}
+ .connected-map .diagram-node{text-align:left;display:grid;grid-template-columns:88px 1fr;column-gap:20px}
+ .connected-map .slide-icon,.connected-map .node-index{grid-row:1/4;width:76px;height:76px;margin:0}
+ .connected-map .slide-icon svg{width:38px;height:38px}.connected-map .node-body{margin:0;max-width:none}.connected-map .content-detail{grid-column:2}
+ .map-stages>li:not(:last-child)::after{content:'↓';display:block;margin:12px 0 0 28px;color:var(--green);font-size:26px}
+}
+@media(prefers-reduced-motion:reduce){.slide[data-design-motion] .map-trace{transition:none!important}}
+@media print{
+ .map-connectors{display:none}.map-stages{grid-template-columns:1fr;gap:12px}
+ .connected-map .diagram-node{text-align:left;display:grid;grid-template-columns:68px 1fr;column-gap:16px;opacity:1!important;break-inside:avoid}
+ .connected-map .slide-icon,.connected-map .node-index{grid-row:1/3;width:52px;height:52px;margin:0;background:white!important;color:var(--green)!important}
+ .connected-map .slide-icon svg{width:28px;height:28px}.connected-map .diagram-node h3{font-size:18px;margin:0 0 4px}.connected-map .node-body{font-size:14px;margin:0;max-width:none}
+ .connected-map .content-detail{grid-column:2}.connected-illustration{margin:14px 0}.connected-map .diagram-node.is-active{transform:none!important}
+}
+</style>
+</head>
+<body data-presentation="skills-and-capabilities" data-default-view="responsive">
+  <a class="skip" href="#main">Skip to presentation</a>
+  <button class="stage-reveal" id="stageReveal" type="button" hidden aria-haspopup="dialog">IPI · Controls</button>
+  <dialog id="stageControls" class="stage-controls" aria-label="Presentation controls"><button id="closeStageControls" type="button">Back to stage</button><div id="stageControlBody"></div></dialog>
+  <header class="header">
+    <a class="brands" href="#welcome" aria-label="Presentation home">
+      <img class="ipi" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4gPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxOTUuNzQgNjcuOTUiPjxkZWZzPjxzdHlsZT4uYXtmaWxsOiMzODRkNWQ7fS5ie2ZpbGw6IzYzYWI4Zjt9PC9zdHlsZT48L2RlZnM+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjQ4LjI5IiBjeT0iMzMuMDYiIHI9IjIuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0Mi40NSIgY3k9IjYyLjE1IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMzYuNjUiIGN5PSI1Ni4zNCIgcj0iMi44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjMwLjgzIiBjeT0iMTUuNiIgcj0iMS4yMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjMwLjgzIiBjeT0iMjcuMTkiIHI9IjEuMjIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzMC44MyIgY3k9IjMzLjA2IiByPSIxLjc0Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTIuNjkiIGN5PSI2Mi4xNSIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjEyLjY5IiBjeT0iMzguODgiIHI9IjIuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxMi42OSIgY3k9IjMzLjA2IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0Mi40NSIgY3k9IjIxLjQyIiByPSIxLjIyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNTkuOTIiIGN5PSI5Ljc5IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNjUuNzQiIGN5PSIxNS42IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNjUuNzQiIGN5PSIzMy4wNiIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjU5LjkyIiBjeT0iMzguODgiIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0Mi40MyIgY3k9IjMzLjA2IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMzYuNjUiIGN5PSIzMy4wNiIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjMwLjgzIiBjeT0iNDQuNyIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjMwLjgzIiBjeT0iNTAuNTIiIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzMC44MyIgY3k9IjU2LjM0IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNDIuNDUiIGN5PSIxNS42IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNDguMjkiIGN5PSIyNy4xOSIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjM2LjY1IiBjeT0iOS43OSIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjU5LjkyIiBjeT0iMTUuNiIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNTQuMSIgY3k9IjE1LjYiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjU5LjkyIiBjeT0iMjEuNDIiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjU5LjkyIiBjeT0iMjcuMTkiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjU5LjkyIiBjeT0iMzMuMDYiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjU0LjEiIGN5PSIzMy4wNiIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNDIuNDUiIGN5PSIzOC44OCIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNDIuNDUiIGN5PSI0NC43IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0Mi40NSIgY3k9IjUwLjUyIiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzNi42NSIgY3k9IjQ0LjciIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjM2LjY1IiBjeT0iNTAuNTIiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjQyLjQ1IiBjeT0iNTYuMzQiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjM2LjY1IiBjeT0iNjIuMTUiIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjkuNzkiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjE4LjUxIiBjeT0iMTUuNiIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTIuNjkiIGN5PSIxNS42IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjIxLjQyIiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxMi42OSIgY3k9IjIxLjQyIiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjI3LjE5IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjMzLjA2IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxMi42OSIgY3k9IjI3LjE5IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjM4Ljg4IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0Mi40NSIgY3k9IjI3LjE5IiByPSIyLjAzIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNTQuMSIgY3k9IjM4Ljg4IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0OC4yOSIgY3k9IjM4Ljg4IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI2NS43NCIgY3k9IjIxLjQyIiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI2NS43NCIgY3k9IjI3LjE5IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0OC4yOSIgY3k9IjkuNzkiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjI1LjI1IiBjeT0iOS43OSIgcj0iMC44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjEuOTIiIGN5PSIzLjk2IiByPSIwLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNDIuNDUiIGN5PSI5Ljc5IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI1NC4xIiBjeT0iMjEuNDIiIHI9IjIuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzNi42MyIgY3k9IjM4Ljg4IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNDguMjkiIGN5PSIxNS42IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNTQuMSIgY3k9IjI3LjE5IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNTQuMSIgY3k9IjkuNzkiIHI9IjIuNjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzNi42MyIgY3k9IjE1LjYiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxMi42OSIgY3k9IjMuOTYiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI2Ljg3IiBjeT0iOS43OSIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjM2LjYzIiBjeT0iMjcuMTkiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzMC44MyIgY3k9IjM4Ljg4IiByPSIxLjc0Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMzAuODMiIGN5PSI2Mi4xNSIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjYuODciIGN5PSI1Ni4zNCIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjYuODciIGN5PSI1MC41MiIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjQ4LjI5IiBjeT0iMjEuNDIiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIzMC44MyIgY3k9IjkuNzkiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI2Ljg3IiBjeT0iMzguODgiIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxMi42OSIgY3k9IjQ0LjciIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjYyLjE1IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTIuNjkiIGN5PSI1Ni4zNCIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjYuODciIGN5PSI0NC43IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTguNTEiIGN5PSI0NC43IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNi44NyIgY3k9IjMzLjA2IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNi44NyIgY3k9IjI3LjE5IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNi44NyIgY3k9IjIxLjQyIiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNi44NyIgY3k9IjE1LjYiIHI9IjIuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIxOC41MSIgY3k9IjUwLjUyIiByPSIyLjYxIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTIuNjkiIGN5PSI1MC41MiIgcj0iMi42MSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjE4LjUxIiBjeT0iNTYuMzQiIHI9IjIuNjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI0Mi40NSIgY3k9IjMuOTYiIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI1NC4xIiBjeT0iMy45NiIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjQ4LjI5IiBjeT0iMy45NiIgcj0iMi44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjM2LjYzIiBjeT0iMy45NiIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjMwLjgzIiBjeT0iMy45NiIgcj0iMS4yMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjYuODciIGN5PSI2Mi4xNSIgcj0iMS4xNiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjM2LjY1IiBjeT0iMjEuNDIiIHI9IjAuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSIyNS4yNSIgY3k9IjI3LjE5IiByPSIwLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMjUuMjUiIGN5PSIzOC44OCIgcj0iMC44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjEuOTIiIGN5PSI1MC41MiIgcj0iMS4yMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjYuODciIGN5PSIzLjk2IiByPSIxLjIyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTIuNjkiIGN5PSI5Ljc5IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iMTguNTEiIGN5PSIzLjk2IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODkuMDIiIGN5PSIzLjk2IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODkuMDIiIGN5PSI1Ni4zNCIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODMuMiIgY3k9IjUwLjUyIiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4OS4wMiIgY3k9IjQ0LjciIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjgzLjIiIGN5PSI0NC43IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI3Ny4zOCIgY3k9IjM4Ljg4IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4OS4wMiIgY3k9IjM4Ljg4IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4My4yIiBjeT0iMzguODgiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9Ijg5LjAyIiBjeT0iMzMuMDYiIHI9IjMuMSI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjgzLjIiIGN5PSIzMy4wNiIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODkuMDIiIGN5PSIyNy4xOSIgcj0iMy4xIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODkuMDIiIGN5PSIxNS42IiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4OS4wMiIgY3k9IjIxLjQyIiByPSIzLjEiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4My4yIiBjeT0iOS43OSIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjgzLjIiIGN5PSIxNS42IiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNzcuMzgiIGN5PSIyNy4xOSIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjgzLjIiIGN5PSIyMS40MiIgcj0iMi4zMiI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9Ijg5LjAyIiBjeT0iOS43OSIgcj0iMi44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjgzLjIiIGN5PSIyNy4xOSIgcj0iMi44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9Ijg5LjAyIiBjeT0iNTAuNTIiIHI9IjIuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4OS4wMiIgY3k9IjYyLjE1IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNzcuMzgiIGN5PSI0NC43IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODMuMiIgY3k9IjU2LjM0IiByPSIyLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNzcuMzgiIGN5PSIzMy4wNiIgcj0iMi44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9Ijc3LjM4IiBjeT0iMjEuNDIiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI3Ny4zOCIgY3k9IjE1LjYiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI3MS41NiIgY3k9IjMuOTYiIHI9IjAuODciPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI2NS43NCIgY3k9IjYyLjE1IiByPSIwLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNzcuMzgiIGN5PSI5Ljc5IiByPSIxLjc0Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iODMuMiIgY3k9IjMuOTYiIHI9IjEuNzQiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI3Ny4zOCIgY3k9IjMuOTYiIHI9IjEuMjIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI4My4yIiBjeT0iNjIuMTUiIHI9IjIuMzIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI3MS41NiIgY3k9IjU2LjMzIiByPSIwLjg3Ij48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNzcuMzgiIGN5PSI2Mi4xNSIgcj0iMS43NCI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjEuOTIiIGN5PSI2Mi4xNSIgcj0iMC44NyI+PC9jaXJjbGU+PGNpcmNsZSBjbGFzcz0iYSIgY3g9IjcxLjU2IiBjeT0iNjIuMTUiIHI9IjEuMjIiPjwvY2lyY2xlPjxjaXJjbGUgY2xhc3M9ImEiIGN4PSI3Ny4zOCIgY3k9IjUwLjUyIiByPSIyLjMyIj48L2NpcmNsZT48Y2lyY2xlIGNsYXNzPSJhIiBjeD0iNzcuMzgiIGN5PSI1Ni4zNCIgcj0iMi4zMiI+PC9jaXJjbGU+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xMDEuNiw2Ljc5aDguMjRWOC45MmgtNS43NnYyLjUzaDUuNjR2Mi4xM2gtNS42NHYyLjcxaDUuNzZ2Mi4xNEgxMDEuNloiPjwvcGF0aD48cGF0aCBjbGFzcz0iYiIgZD0iTTExNSwxNS41OWwtMS45NCwyLjg0aC0yLjQ2bDMtNC4zM0wxMTAuOCwxMGgyLjQ4TDExNSwxMi42bDEuNzMtMi42aDIuNDhsLTIuODMsNC4xLDMsNC4zM2gtMi40OFoiPjwvcGF0aD48cGF0aCBjbGFzcz0iYiIgZD0iTTEyNCw5Ljc5YTMuODgsMy44OCwwLDAsMSwzLjMzLDEuNTRsLTEuNDUsMS4zNGEyLjA5LDIuMDksMCwwLDAtMS43OC0uOSwyLjI1LDIuMjUsMCwwLDAtMi4yOSwyLjQ0LDIuMjcsMi4yNywwLDAsMCwyLjI5LDIuNDYsMi4xMiwyLjEyLDAsMCwwLDEuNzgtLjkxbDEuNDUsMS4zNUEzLjksMy45LDAsMCwxLDEyNCwxOC42NGE0LjI3LDQuMjcsMCwwLDEtNC40Ny00LjQzQTQuMjgsNC4yOCwwLDAsMSwxMjQsOS43OVoiPjwvcGF0aD48cGF0aCBjbGFzcz0iYiIgZD0iTTEzMi42Myw5Ljc5YzIuNTEsMCw0LjIyLDEuODksNC4yMiw0LjY1di40OGgtNi4yNmEyLjI3LDIuMjcsMCwwLDAsMi40MiwyLDMuNCwzLjQsMCwwLDAsMi4yNS0uODRsMSwxLjQzYTUuMTUsNS4xNSwwLDAsMS0zLjQ3LDEuMTcsNC4yNyw0LjI3LDAsMCwxLTQuNTEtNC40M0E0LjMsNC4zLDAsMCwxLDEzMi42Myw5Ljc5Wm0tMi4wOCwzLjYzaDQuMTZhMiwyLDAsMCwwLTIuMDgtMS44NkEyLDIsMCwwLDAsMTMwLjU1LDEzLjQyWiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTM4LjQ1LDIxLjY0VjEwaDIuMjJ2MS4wN2EzLjI3LDMuMjcsMCwwLDEsMi42LTEuMjhjMi4xNywwLDMuNzQsMS42MSwzLjc0LDQuNDJzLTEuNTcsNC40My0zLjc0LDQuNDNhMy4yMywzLjIzLDAsMCwxLTIuNi0xLjI5djQuMjlabTQuMTItOS44N2EyLjQ2LDIuNDYsMCwwLDAtMS45LDF2M2EyLjU2LDIuNTYsMCwwLDAsMS45LDEsMi4xOSwyLjE5LDAsMCwwLDIuMTMtMi40NkEyLjE4LDIuMTgsMCwwLDAsMTQyLjU3LDExLjc3WiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJiIiBkPSJNMTQ5LjEsMTYuMzR2LTQuNGgtMS40VjEwaDEuNFY3LjdoMi4yM1YxMEgxNTN2MS45NGgtMS43MXYzLjgxYzAsLjUyLjI4LjkyLjc3LjkyYTEuMjUsMS4yNSwwLDAsMCwuNzctLjI0bC40NywxLjY3YTIuNzMsMi43MywwLDAsMS0xLjg1LjU0QTIuMSwyLjEsMCwwLDEsMTQ5LjEsMTYuMzRaIj48L3BhdGg+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xNTQuMzMsNy40NGExLjM0LDEuMzQsMCwwLDEsMS4zMy0xLjMzLDEuMzMsMS4zMywwLDEsMS0xLjMzLDEuMzNabS4yMywyLjU2aDIuMjF2OC40M2gtMi4yMVoiPjwvcGF0aD48cGF0aCBjbGFzcz0iYiIgZD0iTTE1OC40MywxNC4yMWE0LjQ2LDQuNDYsMCwwLDEsOC45MiwwLDQuNDYsNC40NiwwLDAsMS04LjkyLDBabTYuNjIsMGEyLjE4LDIuMTgsMCwxLDAtNC4zMiwwLDIuMTgsMi4xOCwwLDEsMCw0LjMyLDBaIj48L3BhdGg+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xNzQuNjgsMTMuMzRhMS4zNywxLjM3LDAsMCwwLTEuNTYtMS41NywyLjQsMi40LDAsMCwwLTEuOTIsMXY1LjY3SDE2OVYxMGgyLjIxdjEuMWEzLjg4LDMuODgsMCwwLDEsMy0xLjMxLDIuNDUsMi40NSwwLDAsMSwyLjc0LDIuNjl2NS45NWgtMi4yMVoiPjwvcGF0aD48cGF0aCBjbGFzcz0iYiIgZD0iTTE4NC4xNSwxNy41NmEzLjQ5LDMuNDksMCwwLDEtMi42NywxLjA4LDIuOCwyLjgsMCwwLDEtMi45My0yLjc5LDIuNjcsMi42NywwLDAsMSwyLjkzLTIuNjksMy40MiwzLjQyLDAsMCwxLDIuNjcsMVYxM2MwLS44NS0uNzQtMS40MS0xLjg1LTEuNDFhMy41NCwzLjU0LDAsMCwwLTIuNDYsMUwxNzksMTEuMTJhNS41Myw1LjUzLDAsMCwxLDMuNjgtMS4zM2MxLjkyLDAsMy42OS43NywzLjY5LDMuMnY1LjQ0aC0yLjIyWm0wLTIuMmEyLjIyLDIuMjIsMCwwLDAtMS43OC0uNzNjLS44NywwLTEuNTkuNDctMS41OSwxLjI3cy43MiwxLjI0LDEuNTksMS4yNGEyLjIyLDIuMjIsMCwwLDAsMS43OC0uNzNaIj48L3BhdGg+PHBhdGggY2xhc3M9ImIiIGQ9Ik0xODguNTYsNi43OWgyLjIyVjE4LjQzaC0yLjIyWiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTAxLDMzLjM0YTUuODksNS44OSwwLDAsMSw2LjExLTYsNS4zNiw1LjM2LDAsMCwxLDUsMi44NEwxMTAsMzEuMjFhMy4xOSwzLjE5LDAsMCwwLTIuODMtMS42OSwzLjYxLDMuNjEsMCwwLDAtMy41NiwzLjgyLDMuNjEsMy42MSwwLDAsMCwzLjU2LDMuODJBMy4xNSwzLjE1LDAsMCwwLDExMCwzNS40N2wyLjEzLDFhNS40LDUuNCwwLDAsMS01LDIuODZBNS44OSw1Ljg5LDAsMCwxLDEwMSwzMy4zNFoiPjwvcGF0aD48cGF0aCBjbGFzcz0iYSIgZD0iTTExOS4yMywzOC4wOWE0LDQsMCwwLDEtMywxLjI3LDIuNDEsMi40MSwwLDAsMS0yLjcyLTIuNjV2LTZoMi4yMXY1LjEyYTEuMzYsMS4zNiwwLDAsMCwxLjU2LDEuNTUsMi41LDIuNSwwLDAsMCwxLjkyLTFWMzAuNzJoMi4yMnY4LjQzaC0yLjIyWiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTIzLjg3LDM2LjVhNC44NCw0Ljg0LDAsMCwwLDIuOTEsMS4xNWMxLDAsMS40Mi0uMzMsMS40Mi0uODVzLS43NC0uODEtMS43LTFjLTEuNDUtLjI4LTMuMzEtLjYzLTMuMzEtMi42MywwLTEuNDIsMS4yMy0yLjY2LDMuNDUtMi42NkE1LjMzLDUuMzMsMCwwLDEsMTMwLDMxLjY2bC0uODgsMS41MmEzLjUzLDMuNTMsMCwwLDAtMi40OS0xYy0uOCwwLTEuMzMuMjktMS4zMy43OHMuNjcuNzIsMS42MS45MWMxLjQ1LjI4LDMuMzguNjYsMy4zOCwyLjc2LDAsMS41NS0xLjMsMi43LTMuNjQsMi43YTUuNjcsNS42NywwLDAsMS0zLjc3LTEuMzFaIj48L3BhdGg+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xMzIuNCwzNy4wNnYtNC40SDEzMVYzMC43MmgxLjR2LTIuM2gyLjIzdjIuM2gxLjcxdjEuOTRoLTEuNzF2My44YzAsLjUzLjI4LjkzLjc3LjkzYTEuMTcsMS4xNywwLDAsMCwuNzctLjI1bC40NywxLjY4YTIuNzMsMi43MywwLDAsMS0xLjg1LjU0QTIuMTEsMi4xMSwwLDAsMSwxMzIuNCwzNy4wNloiPjwvcGF0aD48cGF0aCBjbGFzcz0iYSIgZD0iTTEzNy4zMiwzNC45M2E0LjQ2LDQuNDYsMCwxLDEsNC40NSw0LjQzQTQuMjcsNC4yNywwLDAsMSwxMzcuMzIsMzQuOTNabTYuNjEsMGEyLjE3LDIuMTcsMCwxLDAtNC4zMSwwLDIuMTcsMi4xNywwLDEsMCw0LjMxLDBaIj48L3BhdGg+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xNTguMzMsMzMuODNjMC0uNzktLjM1LTEuMzUtMS4yNi0xLjM1YTIuMjQsMi4yNCwwLDAsMC0xLjc0LDF2NS42OWgtMi4yNFYzMy44M2MwLS43OS0uMzUtMS4zNS0xLjI1LTEuMzVhMi4yNywyLjI3LDAsMCwwLTEuNzUsMXY1LjY3aC0yLjIyVjMwLjcyaDIuMjJ2MS4xYTMuNjksMy42OSwwLDAsMSwyLjc2LTEuMzEsMi4yNCwyLjI0LDAsMCwxLDIuMzQsMS41NCwzLjU3LDMuNTcsMCwwLDEsMi44OS0xLjU0LDIuMjUsMi4yNSwwLDAsMSwyLjQ4LDIuNTV2Ni4wOWgtMi4yM1oiPjwvcGF0aD48cGF0aCBjbGFzcz0iYSIgZD0iTTE2Ni41NiwzMC41MWMyLjUxLDAsNC4yMywxLjg5LDQuMjMsNC42NHYuNDloLTYuMjdhMi4yNywyLjI3LDAsMCwwLDIuNDMsMiwzLjQ3LDMuNDcsMCwwLDAsMi4yNS0uODRsMSwxLjQzYTUuMTUsNS4xNSwwLDAsMS0zLjQ3LDEuMTcsNC40Myw0LjQzLDAsMSwxLS4xNC04Ljg1Wm0tMi4wOCwzLjYzaDQuMTZhMiwyLDAsMCwwLTIuMDgtMS44N0EyLDIsMCwwLDAsMTY0LjQ4LDM0LjE0WiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTcyLjM5LDMwLjcyaDIuMjF2MS4xNWEzLjYyLDMuNjIsMCwwLDEsMi42OS0xLjM0djIuMTZhMy40LDMuNCwwLDAsMC0uNjEsMCwyLjgzLDIuODMsMCwwLDAtMi4wOC45NHY1LjU3aC0yLjIxWiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTAxLDU0LjA2YTUuODksNS44OSwwLDAsMSw2LjExLTYsNS4zNiw1LjM2LDAsMCwxLDUsMi44NGwtMi4xMywxYTMuMTksMy4xOSwwLDAsMC0yLjgzLTEuNjksMy44MywzLjgzLDAsMCwwLDAsNy42NEEzLjE1LDMuMTUsMCwwLDAsMTEwLDU2LjE5bDIuMTMsMWE1LjQsNS40LDAsMCwxLTUsMi44NkE1Ljg5LDUuODksMCwwLDEsMTAxLDU0LjA2WiI+PC9wYXRoPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTEzLDU1LjY1YTQuNDYsNC40NiwwLDEsMSw0LjQ1LDQuNDNBNC4yNyw0LjI3LDAsMCwxLDExMyw1NS42NVptNi42MSwwYTIuMTcsMi4xNywwLDEsMC0yLjE2LDIuNDZBMi4yMywyLjIzLDAsMCwwLDExOS42MSw1NS42NVoiPjwvcGF0aD48cGF0aCBjbGFzcz0iYSIgZD0iTTEyOS4yNCw1NC43N2ExLjM3LDEuMzcsMCwwLDAtMS41NS0xLjU3LDIuMzksMi4zOSwwLDAsMC0xLjkyLDF2NS42N2gtMi4yMlY1MS40NGgyLjIydjEuMWEzLjg0LDMuODQsMCwwLDEsMy0xLjMxLDIuNDUsMi40NSwwLDAsMSwyLjc0LDIuNjl2NS45NWgtMi4yMloiPjwvcGF0aD48cGF0aCBjbGFzcz0iYSIgZD0iTTEzNC4wOSw1Ny43OHYtNC40aC0xLjRWNTEuNDRoMS40di0yLjNoMi4yM3YyLjNIMTM4djEuOTRoLTEuNzJ2My44YzAsLjUzLjI4LjkzLjc3LjkzYTEuMTcsMS4xNywwLDAsMCwuNzctLjI1bC40NywxLjY4YTIuNzEsMi43MSwwLDAsMS0xLjg1LjU0QTIuMTEsMi4xMSwwLDAsMSwxMzQuMDksNTcuNzhaIj48L3BhdGg+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xNDQuNjEsNTlhMy40OCwzLjQ4LDAsMCwxLTIuNjcsMS4wOEEyLjgxLDIuODEsMCwwLDEsMTM5LDU3LjI5YTIuNjcsMi42NywwLDAsMSwyLjkzLTIuNjksMy40MSwzLjQxLDAsMCwxLDIuNjcsMVY1NC40NmMwLS44Ni0uNzMtMS40MS0xLjg1LTEuNDFhMy41NiwzLjU2LDAsMCwwLTIuNDYsMWwtLjg0LTEuNDhhNS41Myw1LjUzLDAsMCwxLDMuNjktMS4zM2MxLjkyLDAsMy42OC43NywzLjY4LDMuMTl2NS40NWgtMi4yMlptMC0yLjJhMi4yLDIuMiwwLDAsMC0xLjc4LS43M2MtLjg3LDAtMS41OS40Ny0xLjU5LDEuMjdzLjcyLDEuMjQsMS41OSwxLjI0YTIuMjMsMi4yMywwLDAsMCwxLjc4LS43M1oiPjwvcGF0aD48cGF0aCBjbGFzcz0iYSIgZD0iTTE1Myw1MS4yM2EzLjg5LDMuODksMCwwLDEsMy4zNCwxLjU0bC0xLjQ1LDEuMzRhMi4wOCwyLjA4LDAsMCwwLTEuNzgtLjkxLDIuNDYsMi40NiwwLDAsMCwwLDQuOTEsMi4xMywyLjEzLDAsMCwwLDEuNzgtLjkxbDEuNDUsMS4zNEEzLjg5LDMuODksMCwwLDEsMTUzLDYwLjA4YTQuNDMsNC40MywwLDEsMSwwLTguODVaIj48L3BhdGg+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xNTguMTcsNTcuNzh2LTQuNGgtMS40VjUxLjQ0aDEuNHYtMi4zaDIuMjN2Mi4zaDEuNzF2MS45NEgxNjAuNHYzLjhjMCwuNTMuMjguOTMuNzcuOTNhMS4xNywxLjE3LDAsMCwwLC43Ny0uMjVsLjQ3LDEuNjhhMi43MywyLjczLDAsMCwxLTEuODUuNTRBMi4xMSwyLjExLDAsMCwxLDE1OC4xNyw1Ny43OFoiPjwvcGF0aD48L3N2Zz4K" alt="IPI. Exceptional Customer Contact.">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span class="brand-title">What our demo skills can do</span>
+    </a>
+    <div class="header-right"><button class="text-button" id="quietStage" type="button" aria-pressed="false">Present · quiet stage</button><details class="audience-tools" id="viewTools" hidden><summary aria-label="View and zoom">View <span id="zoomBadge">100%</span></summary><div class="view-panel"><label for="audienceView">Presentation view</label><select id="audienceView"><option value="responsive">Responsive</option><option value="slides">Slides · 16:9</option></select><div class="zoom-tools" role="group" aria-label="Content zoom"><button type="button" id="zoomOut" aria-label="Zoom out">−</button><button type="button" id="zoomReset" aria-label="Reset zoom">100%</button><button type="button" id="zoomIn" aria-label="Zoom in">+</button></div><p id="viewHint">Zoom changes this view only. Browser zoom also remains available.</p></div></details><span class="draft-label"></span><button class="text-button" id="fullscreen" type="button">Fullscreen</button></div>
+  </header>
+  <nav class="nav" aria-label="Presentation sections"><button type="button" data-go="welcome" data-section="The portfolio"><span aria-hidden="true">01</span>The portfolio</button><button type="button" data-go="coordinate" data-section="Planning and production"><span aria-hidden="true">02</span>Planning and production</button><button type="button" data-go="ava" data-section="Genesys setup and testing"><span aria-hidden="true">03</span>Genesys setup and testing</button><button type="button" data-go="capture" data-section="Delivery and reuse"><span aria-hidden="true">04</span>Delivery and reuse</button><button type="button" data-go="example" data-section="Putting it together"><span aria-hidden="true">05</span>Putting it together</button></nav>
+  <div class="route-tools"><details class="backup-menu" id="backupMenu"><summary>Backup slides <span aria-hidden="true">4</span></summary><div class="backup-panel"><div class="backup-links"><button type="button" data-go="studio-index"><span aria-hidden="true">B01</span>Production and delivery</button><button type="button" data-go="ava-index"><span aria-hidden="true">B02</span>Virtual agent</button><button type="button" data-go="eb-index"><span aria-hidden="true">B03</span>Genesys configuration</button><button type="button" data-go="tools-index"><span aria-hidden="true">B04</span>Related apps</button></div><label class="print-choice"><input type="checkbox" id="printBackup"> Include backup slides when printing</label></div></details><button class="text-button return-main" id="returnMain" type="button" hidden>Return to presentation</button></div>
+
+  <main class="deck" id="main" tabindex="-1"><div class="canvas-space"><div class="slides-canvas"><section class="slide hero" id="welcome" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Demo capabilities" data-route="main" data-section="The portfolio" data-time-range="09:00–09:02 GMT" data-print-title="What our demo skills can do" aria-labelledby="welcome-title"><div class="hero"><div><p class="eyebrow">Demo capabilities</p><h1 id="welcome-title" tabindex="-1">What our demo skills can do</h1><p class="lead">From a customer brief to a working Genesys experience and a story you can show again.</p><button class="primary" type="button" data-go="map">Start presentation <span aria-hidden="true">→</span></button></div><aside class="hero-panel" aria-label="Supporting points"><p class="panel-label">Key points</p><div class="hero-item"><h3><span class="slide-icon icon-target" role="img" aria-label="Goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-9-9M17 12a5 5 0 1 1-5-5M12 12l9-9M16 3h5v5"/></svg></span>Plan a customer journey</h3><p>Pick the customer problem and the outcome worth showing.</p></div><div class="hero-item"><h3><span class="slide-icon icon-tick" role="img" aria-label="Included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l4 4L19 6"/></svg></span>Build and check it</h3><p>Prepare Studio and Genesys, then test the important moments.</p></div><div class="hero-item"><h3><span class="slide-icon icon-delivery" role="img" aria-label="Delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6l9-4 9 4v12l-9 4-9-4V6zM3 6l9 4 9-4M12 10v12M7 4l10 4"/></svg></span>Share the story</h3><p>Present it live or give people a guided replay.</p></div></aside></div></section>
+<section class="slide pipeline" id="map" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Production at a glance" data-route="main" data-section="The portfolio" data-time-range="09:00–09:02 GMT" data-print-title="What our demo skills can do" aria-labelledby="map-title"><p class="eyebrow">Production at a glance</p><h2 id="map-title" tabindex="-1">One brief connects the work</h2><p class="lead">The coordinator keeps the client, session and scenarios together. Each specialist works in its own tool.</p><ol class="spec-pipeline" aria-label="Ordered steps"><li><span class="slide-icon icon-target" role="img" aria-label="Goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-9-9M17 12a5 5 0 1 1-5-5M12 12l9-9M16 3h5v5"/></svg></span><h3>Plan</h3><p>Choose the audience, outcome and moments to show.</p></li><li><span class="slide-icon icon-system" role="img" aria-label="System"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3h18v7H3zM3 14h18v7H3zM7 6h.01M7 17h.01M12 6h6M12 17h6"/></svg></span><h3>Build</h3><p>Prepare the customer experience and configure Genesys.</p></li><li><span class="slide-icon icon-tick" role="img" aria-label="Included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l4 4L19 6"/></svg></span><h3>Check</h3><p>Run the journey and keep evidence of what happened.</p></li><li><span class="slide-icon icon-delivery" role="img" aria-label="Delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6l9-4 9 4v12l-9 4-9-4V6zM3 6l9 4 9-4M12 10v12M7 4l10 4"/></svg></span><h3>Present</h3><p>Show the live journey or use a prepared replay.</p></li></ol></section>
+<section class="slide rows" id="coordinate" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Coordination" data-route="main" data-section="Planning and production" data-time-range="09:02–09:07 GMT" data-print-title="What our demo skills can do" aria-labelledby="coordinate-title"><p class="eyebrow">Coordination</p><h2 id="coordinate-title" tabindex="-1">Start with what the audience needs to see</h2><p class="lead">The coordinator finds existing work and gives each specialist the same plan.</p><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-search" role="img" aria-label="Review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0M15 15l6 6"/></svg></span><h3>Reuse what fits</h3><p>Pick up a saved client, session or scenario with its earlier decisions intact.</p></article><article class="content-row"><span class="slide-icon icon-handoff" role="img" aria-label="Handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 7h15M13 3l4 4-4 4M22 17H7M11 13l-4 4 4 4"/></svg></span><h3>Keep the parts aligned</h3><p>Connect each moment to the right script, configuration, recording and slide.</p></article><article class="content-row"><span class="slide-icon icon-target" role="img" aria-label="Goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-9-9M17 12a5 5 0 1 1-5-5M12 12l9-9M16 3h5v5"/></svg></span><h3>Benefit</h3><p>A change to the story can be traced to the pieces that need updating.</p></article></div></section>
+<section class="slide split" id="studio" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="cards" data-reflow="normal" data-label="Demo Audio Studio" data-route="main" data-section="Planning and production" data-time-range="09:02–09:07 GMT" data-print-title="What our demo skills can do" aria-labelledby="studio-title"><div class="split-layout"><div><p class="eyebrow">Demo Audio Studio</p><h2 id="studio-title" tabindex="-1">Show the customer’s side of the story</h2><p class="lead">Demo Audio Studio prepares what the customer says, hears and sees.</p></div><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-person" role="img" aria-label="Person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0M4 21v-2a8 8 0 0 1 16 0v2"/></svg></span><h3>Voice and personas</h3><p>Write dialogue, reuse characters and voices, and prepare audio for a call.</p></article><article class="content-row"><span class="slide-icon icon-channel" role="img" aria-label="Channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8a7 7 0 0 1 14 0M2 8a10 10 0 0 1 20 0M8 8a4 4 0 0 1 8 0M12 8v13M8 21h8"/></svg></span><h3>Customer channels</h3><p>Prepare the phone, texts and one-time codes, email, social posts or web messages.</p></article><article class="content-row"><span class="slide-icon icon-target" role="img" aria-label="Goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-9-9M17 12a5 5 0 1 1-5-5M12 12l9-9M16 3h5v5"/></svg></span><h3>Benefit</h3><p>The audience can follow the same customer across channels and see what the agent receives.</p></article></div></div></section>
+<section class="slide split" id="ava" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="cards" data-reflow="normal" data-label="Genesys virtual agent" data-route="main" data-section="Genesys setup and testing" data-time-range="09:02–09:07 GMT" data-print-title="What our demo skills can do" aria-labelledby="ava-title"><div class="split-layout"><div><p class="eyebrow">Genesys virtual agent</p><h2 id="ava-title" tabindex="-1">Give the virtual agent a clear job</h2><p class="lead">The official Genesys AVA skills cover design, build, tests, evaluation and review.</p></div><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-document" role="img" aria-label="Specification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 12h8M8 16h8"/></svg></span><h3>Design the conversation</h3><p>Define the agent’s role, what it may do, what it should say and when to hand over.</p></article><article class="content-row"><span class="slide-icon icon-tick" role="img" aria-label="Included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l4 4L19 6"/></svg></span><h3>Test real choices</h3><p>Run scenarios that check the conversation, tool calls and agreed outcomes.</p></article><article class="content-row"><span class="slide-icon icon-target" role="img" aria-label="Goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-9-9M17 12a5 5 0 1 1-5-5M12 12l9-9M16 3h5v5"/></svg></span><h3>Benefit</h3><p>Find weak replies, missed steps and bad handoffs before relying on the agent in a session.</p></article></div></div></section>
+<section class="slide rows" id="environment" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Environment Builder" data-route="main" data-section="Genesys setup and testing" data-time-range="09:02–09:07 GMT" data-print-title="What our demo skills can do" aria-labelledby="environment-title"><p class="eyebrow">Environment Builder</p><h2 id="environment-title" tabindex="-1">Build the Genesys setup behind the scenes</h2><p class="lead">Environment Builder prepares the resources that make the journey work.</p><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-handoff" role="img" aria-label="Handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 7h15M13 3l4 4-4 4M22 17H7M11 13l-4 4 4 4"/></svg></span><h3>Route the contact</h3><p>Use Architect flows, queues and Messenger to get voice or digital contacts to the right place.</p></article><article class="content-row"><span class="slide-icon icon-knowledge" role="img" aria-label="Knowledge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5C8 2 5 2 2 3v16c3-1 6-1 10 2 4-3 7-3 10-2V3c-3-1-6-1-10 2v16M5 7l4 1M15 8l4-1"/></svg></span><h3>Give people the right information</h3><p>Use Data Actions for lookups, Knowledge for answers, and Agent Copilot for checklists and summaries.</p></article><article class="content-row"><span class="slide-icon icon-tick" role="img" aria-label="Included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l4 4L19 6"/></svg></span><h3>Benefit</h3><p>Review the planned changes, then read back what was applied so the setup can be checked and reused.</p></article></div></section>
+<section class="slide split" id="capture" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="cards" data-reflow="normal" data-label="Recording and playback" data-route="main" data-section="Delivery and reuse" data-time-range="09:07–09:10 GMT" data-print-title="What our demo skills can do" aria-labelledby="capture-title"><div class="split-layout"><div><p class="eyebrow">Recording and playback</p><h2 id="capture-title" tabindex="-1">Turn a working journey into a guided replay</h2><p class="lead">Recording and playback skills turn captured steps into an experience others can follow.</p></div><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-record" role="img" aria-label="Record"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5c0-4 18-4 18 0v14c0 4-18 4-18 0V5zM3 5c0 4 18 4 18 0M3 12c0 4 18 4 18 0"/></svg></span><h3>Capture the important moment</h3><p>Record the customer and agent views, then add cues where a decision or handoff happens.</p></article><article class="content-row"><span class="slide-icon icon-channel" role="img" aria-label="Channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8a7 7 0 0 1 14 0M2 8a10 10 0 0 1 20 0M8 8a4 4 0 0 1 8 0M12 8v13M8 21h8"/></svg></span><h3>Guide the viewer</h3><p>Use click targets, chapters and synced audio where it helps. Assemble selected journeys for a session.</p></article><article class="content-row"><span class="slide-icon icon-target" role="img" aria-label="Goal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 12a9 9 0 1 1-9-9M17 12a5 5 0 1 1-5-5M12 12l9-9M16 3h5v5"/></svg></span><h3>Benefit</h3><p>A presenter can revisit the same moment, and colleagues can explore it in their own time.</p></article></div></div></section>
+<section class="slide split" id="delivery" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="cards" data-reflow="normal" data-label="Presentations and sites" data-route="main" data-section="Delivery and reuse" data-time-range="09:07–09:10 GMT" data-print-title="What our demo skills can do" aria-labelledby="delivery-title"><div class="split-layout"><div><p class="eyebrow">Presentations and sites</p><h2 id="delivery-title" tabindex="-1">Give each audience a clear way in</h2><p class="lead">The presentation tells the story. The website gives people a place to find and try it.</p></div><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-document" role="img" aria-label="Specification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 12h8M8 16h8"/></svg></span><h3>Presentation authoring</h3><p>Build slides, diagrams and speaker notes. Choose a main route and keep extra detail close at hand.</p></article><article class="content-row"><span class="slide-icon icon-search" role="img" aria-label="Review"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0M15 15l6 6"/></svg></span><h3>Demo sites</h3><p>Give a customer a branded entry page or add a journey to a searchable collection.</p></article><article class="content-row"><span class="slide-icon icon-team" role="img" aria-label="Team"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0M3 21v-2a7 7 0 0 1 14 0v2M18 4a3 3 0 0 1 0 6M21 21v-2a6 6 0 0 0-3-5"/></svg></span><h3>Benefit</h3><p>One session can support a live explanation, a self-guided follow-up and a focused technical discussion.</p></article></div></div></section>
+<section class="slide pipeline" id="example" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="A worked example" data-route="main" data-section="Putting it together" data-time-range="09:07–09:10 GMT" data-print-title="What our demo skills can do" aria-labelledby="example-title"><p class="eyebrow">A worked example</p><h2 id="example-title" tabindex="-1">A footwear exchange, from call to follow-up</h2><p class="lead">A customer needs the same trainers in a different size. Here is how the skills work together.</p><ol class="spec-pipeline" aria-label="Ordered steps"><li><span class="slide-icon icon-person" role="img" aria-label="Person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0M4 21v-2a8 8 0 0 1 16 0v2"/></svg></span><h3>Prepare the call</h3><p>Studio gives the customer a clear reason to call and the presenter a consistent starting point.</p></li><li><span class="slide-icon icon-knowledge" role="img" aria-label="Knowledge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5C8 2 5 2 2 3v16c3-1 6-1 10 2 4-3 7-3 10-2V3c-3-1-6-1-10 2v16M5 7l4 1M15 8l4-1"/></svg></span><h3>Set up agent support</h3><p>Genesys routes the call. Copilot can surface the exchange checklist and relevant guidance.</p></li><li><span class="slide-icon icon-record" role="img" aria-label="Record"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5c0-4 18-4 18 0v14c0 4-18 4-18 0V5zM3 5c0 4 18 4 18 0M3 12c0 4 18 4 18 0"/></svg></span><h3>Show the result</h3><p>Show the agreed next step and check the after-call summary. Capture the key moments for replay.</p></li></ol></section>
+<section class="slide closing" id="start" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Next step" data-route="main" data-section="Putting it together" data-time-range="09:07–09:10 GMT" data-print-title="What our demo skills can do" aria-labelledby="start-title"><p class="eyebrow">Next step</p><h2 id="start-title" tabindex="-1">Start with one customer journey</h2><p class="lead">Give the coordinator the audience, the problem and one moment people should remember.</p><div class="section-items" style="--support-count:1"><article class="content-row"><span class="slide-icon icon-request" role="img" aria-label="Request"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 4h18v12H9l-6 5V4zM7 8h10M7 12h6"/></svg></span><h3>Example brief</h3><p>Show service leaders how an agent handles a size exchange and confirms what the customer should do next.</p></article></div></section>
+<section class="slide rows" id="studio-index" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Production and delivery" data-route="backup" data-section="Skill directory" data-time-range="" data-print-title="What our demo skills can do" aria-labelledby="studio-index-title"><p class="eyebrow">Backup · Production and delivery</p><h2 id="studio-index-title" tabindex="-1">Planning, production and delivery skills</h2><p class="lead">Use the named skill when the task already has a clear owner.</p><div class="section-items" style="--support-count:3"><article class="content-row"><span class="slide-icon icon-handoff" role="img" aria-label="Handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 7h15M13 3l4 4-4 4M22 17H7M11 13l-4 4 4 4"/></svg></span><h3>coordinate-demo-production</h3><p>Find saved work, keep one shared brief and hand the work to the right specialist.</p></article><article class="content-row"><span class="slide-icon icon-person" role="img" aria-label="Person"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0M4 21v-2a8 8 0 0 1 16 0v2"/></svg></span><h3>demo-script</h3><p>Author dialogue, personas, voices and media in Demo Audio Studio.</p></article><article class="content-row"><span class="slide-icon icon-record" role="img" aria-label="Record"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5c0-4 18-4 18 0v14c0 4-18 4-18 0V5zM3 5c0 4 18 4 18 0M3 12c0 4 18 4 18 0"/></svg></span><h3>record-genesys-demo · demo-playback</h3><p>Capture an observed experience, then prepare a guided or audio-synced replay.</p></article><article class="content-row"><span class="slide-icon icon-delivery" role="img" aria-label="Delivery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6l9-4 9 4v12l-9 4-9-4V6zM3 6l9 4 9-4M12 10v12M7 4l10 4"/></svg></span><h3>assemble-demo-presentation · presentation-authoring · build-demo-site</h3><p>Combine recorded experiences, tell the wider story or provide a web entry point.</p></article></div></section>
+<section class="slide rows" id="ava-index" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Virtual agent" data-route="backup" data-section="Skill directory" data-time-range="" data-print-title="What our demo skills can do" aria-labelledby="ava-index-title"><p class="eyebrow">Backup · Virtual agent</p><h2 id="ava-index-title" tabindex="-1">Official Genesys AVA skills</h2><p class="lead">Start with ava-dispatch for a new or existing Genesys virtual agent.</p><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-document" role="img" aria-label="Specification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 12h8M8 16h8"/></svg></span><h3>ava-design · ava-build</h3><p>Design the role, knowledge, actions and guardrails, then validate and publish the version.</p></article><article class="content-row"><span class="slide-icon icon-tick" role="img" aria-label="Included"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12l4 4L19 6"/></svg></span><h3>ava-test · ava-evaluate</h3><p>Write customer scenarios and run them against the published agent.</p></article><article class="content-row"><span class="slide-icon icon-knowledge" role="img" aria-label="Knowledge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5C8 2 5 2 2 3v16c3-1 6-1 10 2 4-3 7-3 10-2V3c-3-1-6-1-10 2v16M5 7l4 1M15 8l4-1"/></svg></span><h3>ava-analysis · ava-critique · ava-knowledge</h3><p>Review quality and coverage, and prepare searchable customer-facing knowledge.</p></article></div></section>
+<section class="slide rows" id="eb-index" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Genesys configuration" data-route="backup" data-section="Skill directory" data-time-range="" data-print-title="What our demo skills can do" aria-labelledby="eb-index-title"><p class="eyebrow">Backup · Genesys configuration</p><h2 id="eb-index-title" tabindex="-1">Environment Builder skills</h2><p class="lead">Start with eb-orchestrate for a request that spans several Genesys resources.</p><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-document" role="img" aria-label="Specification"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 2h9l5 5v15H5zM14 2v6h5M8 12h8M8 16h8"/></svg></span><h3>eb-author-package · eb-prepare-deploy · eb-inspect-recover</h3><p>Prepare a portable package, apply a reviewed plan, and inspect or resume saved work.</p></article><article class="content-row"><span class="slide-icon icon-channel" role="img" aria-label="Channel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 8a7 7 0 0 1 14 0M2 8a10 10 0 0 1 20 0M8 8a4 4 0 0 1 8 0M12 8v13M8 21h8"/></svg></span><h3>eb-sdd-to-voice-e2e · eb-architect · eb-data-actions</h3><p>Connect an AVA to voice, build typed routes and use verified service actions.</p></article><article class="content-row"><span class="slide-icon icon-knowledge" role="img" aria-label="Knowledge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5C8 2 5 2 2 3v16c3-1 6-1 10 2 4-3 7-3 10-2V3c-3-1-6-1-10 2v16M5 7l4 1M15 8l4-1"/></svg></span><h3>eb-knowledge · eb-agent-copilot · eb-digital-messenger · eb-outbound-preview</h3><p>Build searchable answers, agent guidance, messaging entry points and a preview campaign setup.</p></article></div></section>
+<section class="slide rows" id="tools-index" data-design-animations="true" data-design-icons="true" data-design-expand="false" data-design-motion="fade" data-design-size="standard" data-design-width="wide" data-design-placement="auto" data-design-spacing="balanced" data-design-chapters="true" data-design-timing="false" data-design-progress="true" data-design-arrangement="default" data-reflow="normal" data-label="Related apps" data-route="backup" data-section="Skill directory" data-time-range="" data-print-title="What our demo skills can do" aria-labelledby="tools-index-title"><p class="eyebrow">Backup · Related apps</p><h2 id="tools-index-title" tabindex="-1">Related tools for specialist work</h2><p class="lead">Some tasks start in a separate app or a dedicated lab.</p><div class="section-items" style="--support-count:2"><article class="content-row"><span class="slide-icon icon-handoff" role="img" aria-label="Handoff"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 7h15M13 3l4 4-4 4M22 17H7M11 13l-4 4 4 4"/></svg></span><h3>Relay Migration Studio</h3><p>Plan a Genesys configuration move, review the proposed work and recover a saved run.</p></article><article class="content-row"><span class="slide-icon icon-record" role="img" aria-label="Record"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 5c0-4 18-4 18 0v14c0 4-18 4-18 0V5zM3 5c0 4 18 4 18 0M3 12c0 4 18 4 18 0"/></svg></span><h3>DemoMarkup</h3><p>Draw attention to a part of the Mac screen during a walkthrough.</p></article><article class="content-row"><span class="slide-icon icon-system" role="img" aria-label="System"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 3h18v7H3zM3 14h18v7H3zM7 6h.01M7 17h.01M12 6h6M12 17h6"/></svg></span><h3>AVA Lab and Environment Builder V2</h3><p>Use their dedicated workflows for lab experiments or existing V2 projects.</p></article></div></section></div></div></main>
+  <footer class="bottom">
+    <div class="progress" aria-live="polite" aria-atomic="true"><strong id="slidePosition"></strong> <span id="slideName"></span><span id="slideTiming" class="slide-timing"></span></div>
+    <p class="section-progress"><strong id="sectionName"></strong><span id="sectionStep"></span></p>
+
+    <div class="controls"><button id="back" type="button" aria-label="Previous section">Back</button><button id="next" type="button" aria-label="Next section">Next</button></div>
+  </footer>
+  <dialog class="content-modal" id="contentModal" aria-labelledby="contentModalTitle">
+    <div class="content-modal-panel">
+      <div class="content-modal-header"><p class="eyebrow">Expanded view</p><button type="button" id="closeContentModal">Back to slide <span aria-hidden="true">×</span></button></div>
+      <h2 id="contentModalTitle"></h2><div id="contentModalBody" class="content-modal-body"></div>
+    </div>
+  </dialog>
+  <p id="status" class="sr-only" role="status"></p>
+  <noscript><p class="no-script">JavaScript is off. All sections appear below for reading.</p></noscript>
+  <script>// Narrative navigation only. Existing demo players retain ownership of playback.
+(() => {
+  const sections = Array.from(document.querySelectorAll('.slide'));
+  const nav = Array.from(document.querySelectorAll('.nav [data-go]'));
+  const back = document.getElementById('back');
+  const next = document.getElementById('next');
+  const fullscreen = document.getElementById('fullscreen');
+  const status = document.getElementById('status');
+  const sectionName = document.getElementById('sectionName');
+  const sectionStep = document.getElementById('sectionStep');
+  let current = 0;
+  let contentSession=null,contentAnimation=null,contentClosing=false;
+  let motionSlide=null;
+  let entranceAnimations=[];
+  const comparisonShortcuts=new Map();
+  const diagramShortcuts=new Map();
+  // An embedded preview must not steal focus while its parent is being edited.
+  // Once the audience interacts with this frame, normal heading focus resumes.
+  let audienceEngaged=window.self===window.top;
+  document.addEventListener('pointerdown',()=>audienceEngaged=true,{once:true});
+  document.addEventListener('keydown',()=>audienceEngaged=true,{once:true});
+
+  const mainSections = sections.filter(s => s.dataset.route !== 'backup');
+  const backupSections = sections.filter(s => s.dataset.route === 'backup');
+  // Only public navigation identifiers are retained, scoped to this deck/session.
+  const presentationId=document.body.dataset.presentation,sessionToken=new URLSearchParams(location.search).get('speakerSession');
+  const navigationSession=/^[a-f0-9]{32}$/.test(sessionToken??'')?sessionToken:'standalone';
+  const returnKey='ipi-return:v1:'+presentationId+':'+navigationSession;
+  let lastMainDestination={slideId:mainSections[0].id},hasReturnDestination=false,pendingReturn=null;
+  function validateReturn(value){
+    if(!value||typeof value!=='object'||Array.isArray(value)||Object.keys(value).some(k=>!['slideId','viewId','questionId'].includes(k)))return null;
+    const slide=mainSections.find(s=>s.id===value.slideId);if(!slide||value.viewId&&value.questionId)return null;
+    const result={slideId:slide.id};
+    if(Object.hasOwn(value,'viewId')){if(typeof value.viewId!=='string'||![...slide.querySelectorAll('[data-cap-panel]')].some(p=>p.id===value.viewId))return null;result.viewId=value.viewId;}
+    if(Object.hasOwn(value,'questionId')){if(typeof value.questionId!=='string'||!value.questionId||!slide.querySelector('.poll-live-panel')||!slide.querySelector('.poll-live-panel').dataset.pollQuestions.split(/\s+/).includes(value.questionId))return null;result.questionId=value.questionId;}
+    return result;
+  }
+  function retainReturn(value){const valid=validateReturn(value);if(!valid)return false;lastMainDestination=valid;hasReturnDestination=true;try{sessionStorage.setItem(returnKey,JSON.stringify({version:1,presentationId,session:navigationSession,destination:valid}));}catch{}return true;}
+  try{const saved=JSON.parse(sessionStorage.getItem(returnKey));if(saved?.version===1&&saved.presentationId===presentationId&&saved.session===navigationSession)retainReturn(saved.destination);}catch{}
+  function rememberMain(){
+    const slide=sections[current];if(!slide||slide.dataset.route==='backup')return;
+    if(pendingReturn?.slideId===slide.id)return;
+    const panel=slide.querySelector('.cap-module')?.capabilityNavigation,native=slide.querySelector('.poll-live-panel')?.pollNavigation;
+    const value={slideId:slide.id};
+    if(panel)value.viewId=slide.querySelectorAll('[data-cap-panel]')[panel.index].id;
+    if(native)value.questionId=native.describe(native.index).id;
+    retainReturn(value);
+  }
+  function applyReturn(){
+    if(!pendingReturn)return;
+    const slide=sections[current];if(slide.id!==pendingReturn.slideId){pendingReturn=null;return;}
+    const native=slide.querySelector('.poll-live-panel')?.pollNavigation;if(!native)return;
+    const index=Array.from({length:native.total},(_,i)=>i).find(i=>native.describe(i).id===pendingReturn.questionId);
+    if(index===undefined)return;
+    pendingReturn=null;if(index!==native.index)native.advance(index-native.index);
+  }
+  function returnToMain(){const destination=validateReturn(lastMainDestination)??{slideId:mainSections[0].id};pendingReturn=destination.questionId?destination:null;go(destination.viewId??destination.slideId);applyReturn();rememberMain();}
+
+  const returnMain = document.getElementById('returnMain');
+  const backupMenu = document.getElementById('backupMenu');
+  const printBackup = document.getElementById('printBackup');
+  function currentRoute(){return sections[current]?.dataset.route === 'backup' ? backupSections : mainSections;}
+  function capabilityNav(){return sections[current]?.querySelector('.cap-module')?.capabilityNavigation ?? sections[current]?.querySelector('.poll-live-panel')?.pollNavigation;}
+  function move(delta){if(capabilityNav()?.advance(delta,{focusHeading:audienceEngaged}))return;const route=currentRoute(),i=route.indexOf(sections[current]);go(route[Math.max(0,Math.min(route.length-1,i+delta))].id);}
+  function continuation(){const c=capabilityNav(),route=currentRoute(),position=route.indexOf(sections[current]);back.disabled=position===0&&(!c||c.index===0);next.disabled=position===route.length-1&&(!c||c.index===c.total-1);const poll=c?.kind==='poll';next.textContent=c?(c.index<c.total-1?(poll?'Next question':'Next view'):position<route.length-1?(poll?'Next slide':'Next capability'):'Complete'):'Next';back.textContent=c?(c.index>0?(poll?'Previous question':'Previous view'):(poll?'Previous slide':'Previous capability')):'Back';next.setAttribute('aria-label',next.textContent);back.setAttribute('aria-label',back.textContent);}
+  document.addEventListener('capability-state',e=>{if(e.target.closest('.slide')===sections[current]){rememberMain();continuation();}});
+  document.addEventListener('capability-boundary',e=>move(e.detail.delta));
+  document.addEventListener('poll-state',e=>{if(e.target.closest('.slide')===sections[current]){applyReturn();rememberMain();continuation();}});
+  function go(id) {
+    if (location.hash !== '#' + id) {const oldURL=location.href;history.pushState(null,'','#'+id);dispatchEvent(new HashChangeEvent('hashchange',{oldURL,newURL:location.href}));}
+    else render();
+  }
+  function render() {
+    const previous=sections[current];
+    const requested=location.hash.slice(1),target=document.getElementById(requested),match=sections.findIndex(s=>s.id===requested || (target?.hasAttribute('data-cap-panel')&&target.closest('.slide')===s));
+    current=match<0?sections.indexOf(mainSections[0]):match;
+    const shown=sections[current],isBackup=shown.dataset.route==='backup',route=currentRoute(),position=route.indexOf(shown);
+    if(contentSession&&contentSession.slide!==shown)closeContent(true,false);
+    if(!isBackup){applyReturn();rememberMain();if(target?.hasAttribute('data-cap-panel'))retainReturn({slideId:shown.id,viewId:target.id});}
+    sections.forEach((s,i)=>{s.hidden=i!==current;if(s.hidden){s.querySelectorAll('video,audio').forEach(media=>media.pause());s.querySelectorAll('.diagram-tools[open]').forEach(tools=>tools.open=false);}});
+    document.querySelectorAll('[data-go]').forEach(button=>{
+      const isSectionButton = button.closest('.nav');
+      const active = isSectionButton ? button.dataset.section===shown.dataset.section : button.dataset.go===shown.id;
+      if(active)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');
+    });
+    if(backupMenu)backupMenu.open=false;
+    if(returnMain)returnMain.hidden=!isBackup;
+    document.documentElement.dataset.route=isBackup?'backup':'main';
+    const active=nav.find(b=>b.dataset.section===shown.dataset.section);
+    document.getElementById('slidePosition').textContent=(isBackup?'Backup ':'')+String(position+1).padStart(2,'0')+' / '+route.length;
+    document.getElementById('slideName').textContent=shown.dataset.label;
+    document.getElementById('slideTiming').textContent=isBackup?'Optional reference':shown.dataset.timeRange||'';
+    const sectionSlides=isBackup?backupSections:mainSections.filter(s=>s.dataset.section===shown.dataset.section);
+    if(sectionName)sectionName.textContent=isBackup?'Backup':shown.dataset.section;
+    if(sectionStep)sectionStep.textContent=isBackup?'':String(sectionSlides.indexOf(shown)+1)+' of '+String(sectionSlides.length);
+    document.title=document.querySelector('.brand-title').textContent+' | '+shown.dataset.label;
+    continuation();
+    updateView();
+    if(motionSlide!==shown){
+      entranceAnimations.forEach(a=>a.cancel());entranceAnimations=[];motionSlide=shown;
+      const mode=shown.dataset.designMotion;
+      if(!matchMedia('(prefers-reduced-motion: reduce)').matches && ['fade','stagger'].includes(mode)){
+        const blocks=mode==='stagger'?[...shown.querySelectorAll('.content-row,.hero-item,.diagram-node,.spec-pipeline>li,.speech,.mechanics-stage')]:[shown];
+        blocks.forEach((block,i)=>{if(block.animate)entranceAnimations.push(block.animate([{opacity:.55,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,delay:Math.min(i*65,260),easing:'ease-out',fill:'backwards'}));});
+      }
+    }
+    active?.scrollIntoView({block:'nearest',inline:'nearest'});
+    if(previous!==shown || !target?.hasAttribute('data-cap-panel')){if(audienceEngaged)shown.querySelector('h1,h2').focus({preventScroll:true});window.scrollTo(0,0);}
+  }
+  matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change',()=>{entranceAnimations.forEach(a=>a.cancel());entranceAnimations=[];});
+  window.addEventListener('beforeprint',()=>{entranceAnimations.forEach(a=>a.cancel());entranceAnimations=[];});
+  document.querySelectorAll('[data-go]').forEach(button=>button.addEventListener('click',()=>go(button.dataset.go)));
+  if(returnMain)returnMain.addEventListener('click',returnToMain);
+  if(printBackup)printBackup.addEventListener('change',()=>document.documentElement.classList.toggle('print-backup',printBackup.checked));
+  document.querySelector('.skip').addEventListener('click',event=>{event.preventDefault();sections[current].querySelector('h1,h2').focus();});
+  back.addEventListener('click',()=>move(-1));next.addEventListener('click',()=>move(1));
+  window.addEventListener('hashchange',render);
+  // Fragment loading can scroll after the first render. Native slide and
+  // capability-view deep links should retain the presentation origin.
+  function settleNativeOrigin(){const hash=location.hash,target=document.getElementById(hash.slice(1));if(!target?.matches('.slide')&&!(target?.hasAttribute('data-cap-panel')&&target.closest('.slide.capability')))return;setTimeout(()=>requestAnimationFrame(()=>{if(location.hash===hash)window.scrollTo(0,0);}),0);}
+  window.addEventListener('load',settleNativeOrigin);window.addEventListener('hashchange',settleNativeOrigin);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)document.querySelectorAll('video,audio').forEach(media=>media.pause());});
+  window.addEventListener('keydown',event=>{
+    if(contentSession||document.querySelector('dialog[open]'))return;
+    if(event.defaultPrevented||event.altKey||event.ctrlKey||event.metaKey)return;
+    const diagram=sections[current].querySelector('[data-diagram]');
+    if(event.key==='Escape'&&diagramShortcuts.get(diagram)?.(event.key)){event.preventDefault();return;}
+    const key=event.key.toLowerCase()==='a'?'a':event.key;
+    const diagramControl=event.target.closest('button,summary')?.closest('.diagram-tools')?.closest('[data-diagram]')===diagram;
+    if(diagramControl&&['ArrowUp','ArrowDown','a'].includes(key)&&diagramShortcuts.get(diagram)?.(event.key)){
+      event.preventDefault();return;
+    }
+    if(event.target.closest('button,a,input,select,textarea,summary,video,audio,[contenteditable],[role="textbox"]'))return;
+    const comparison=sections[current].querySelector('[data-comparison-matrix]');
+    if(comparisonShortcuts.has(comparison)&&['ArrowUp','ArrowDown','a'].includes(key)){
+      event.preventDefault();comparisonShortcuts.get(comparison)(event.key);return;
+    }
+    if(['ArrowUp','ArrowDown','a'].includes(key)&&diagramShortcuts.get(diagram)?.(event.key)){
+      event.preventDefault();return;
+    }
+    if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+      event.preventDefault();const route=currentRoute();
+      if(event.key==='Home')go(route[0].id);else if(event.key==='End')go(route.at(-1).id);else move(event.key==='ArrowLeft'?-1:1);
+    }
+  });
+
+  if (!document.documentElement.requestFullscreen) fullscreen.hidden = true;
+  fullscreen.addEventListener('click', async () => {
+    try {
+      if (document.fullscreenElement) await document.exitFullscreen();
+      else await document.documentElement.requestFullscreen();
+    } catch {
+      status.textContent = 'Fullscreen is unavailable here. You can use your browser’s fullscreen control.';
+    }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    fullscreen.textContent = document.fullscreenElement ? 'Exit fullscreen' : 'Fullscreen';
+  });
+
+  const canvas=document.querySelector('.slides-canvas'),space=document.querySelector('.canvas-space'),deck=document.getElementById('main'),viewTools=document.getElementById('viewTools'),viewPick=document.getElementById('audienceView');
+  let viewerZoom=1,viewerView=document.body.dataset.defaultView||'responsive';
+  const viewKey='presentation-view:'+document.body.dataset.presentation;
+  try{const saved=JSON.parse(sessionStorage.getItem(viewKey));if(saved&&[1,1.25,1.5,1.75,2].includes(saved.zoom))viewerZoom=saved.zoom;if(['responsive','slides'].includes(saved?.view))viewerView=saved.view;}catch{}
+  function updateView(){
+    const s=sections[current];if(!s)return;
+    for(const key of ['chapters','timing','progress'])document.documentElement.dataset[key]=s.dataset['design'+key[0].toUpperCase()+key.slice(1)]??'true';
+    const chrome=document.documentElement.classList.contains('quiet-stage')?64:[...document.querySelectorAll('.header,.nav,.route-tools,.bottom')].reduce((n,el)=>n+el.getBoundingClientRect().height,0);document.documentElement.style.setProperty('--available-slide-height',Math.max(200,(innerHeight-chrome)/viewerZoom)+'px');
+    const fitted=viewerView==='slides'&&innerWidth>=1100;document.documentElement.classList.toggle('canvas-mode',fitted);
+    document.documentElement.style.setProperty('--audience-zoom',viewerZoom);
+    if(fitted){
+      const height=Math.max(240,innerHeight-chrome-26),width=Math.max(300,deck.clientWidth-4),scale=Math.min(width/1440,height/810)*viewerZoom;
+      deck.style.setProperty('--canvas-height',height+'px');space.style.setProperty('--canvas-width',1440*scale+'px');space.style.setProperty('--canvas-space-height',810*scale+'px');canvas.style.setProperty('--canvas-scale',scale);
+    }
+    viewPick.value=viewerView;document.getElementById('zoomBadge').textContent=Math.round(viewerZoom*100)+'%';document.getElementById('zoomReset').textContent=Math.round(viewerZoom*100)+'%';
+    document.getElementById('zoomOut').disabled=viewerZoom===1;document.getElementById('zoomIn').disabled=viewerZoom===2;
+    document.getElementById('viewHint').textContent=viewerView==='slides'&&innerWidth<1100?'Responsive reading is used on smaller screens. Zoom changes this view only.':viewerZoom>1?'Content enlarged. Scroll to read everything; navigation stays available.':'Zoom changes this view only. Browser zoom also remains available.';
+  }
+  function rememberView(){try{sessionStorage.setItem(viewKey,JSON.stringify({zoom:viewerZoom,view:viewerView}));}catch{}updateView();status.textContent='Content zoom '+Math.round(viewerZoom*100)+' percent. '+(viewerView==='slides'?'Slides view.':'Responsive view.');}
+  document.getElementById('zoomIn').addEventListener('click',()=>{viewerZoom=Math.min(2,viewerZoom+.25);rememberView();});
+  document.getElementById('zoomOut').addEventListener('click',()=>{viewerZoom=Math.max(1,viewerZoom-.25);rememberView();});
+  document.getElementById('zoomReset').addEventListener('click',()=>{viewerZoom=1;rememberView();});
+  viewPick.addEventListener('change',()=>{viewerView=viewPick.value;rememberView();});
+  viewTools.hidden=false;document.addEventListener('pointerdown',e=>{if(!viewTools.contains(e.target))viewTools.open=false;});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&viewTools.open){viewTools.open=false;viewTools.querySelector('summary').focus();}});
+  window.addEventListener('resize',()=>{updateStage();updateView();});document.addEventListener('fullscreenchange',()=>requestAnimationFrame(updateView));
+
+  // Quiet stage is a viewer mode, independent of fullscreen and aspect ratio.
+  const stageButton=document.getElementById('quietStage'),stageReveal=document.getElementById('stageReveal'),stageDialog=document.getElementById('stageControls'),stageBody=document.getElementById('stageControlBody');
+  const furniture=[...document.querySelectorAll('.header,.nav,.route-tools,.bottom')].map(node=>{const anchor=document.createComment('presentation furniture');node.before(anchor);return {node,anchor};});
+  let stageRequested=new URLSearchParams(location.search).get('stage')==='quiet';
+  function closeStage(){if(!stageDialog.open)return;stageDialog.close();for(const {node,anchor} of furniture)anchor.after(node);(stageReveal.hidden?stageButton:stageReveal).focus({preventScroll:true});}
+  function updateStage(){const quiet=stageRequested&&innerWidth>=1100;document.documentElement.classList.toggle('quiet-stage',quiet);stageReveal.hidden=!quiet;stageButton.textContent=stageRequested?'Exit quiet stage':'Present · quiet stage';stageButton.setAttribute('aria-pressed',String(stageRequested));if(!quiet)closeStage();}
+  function setStage(value){stageRequested=value;try{const url=new URL(location.href);if(value)url.searchParams.set('stage','quiet');else url.searchParams.delete('stage');history.replaceState(null,'',url);}catch{}updateStage();updateView();status.textContent=stageRequested?(innerWidth<1100?'Quiet stage selected. Responsive reading is used on smaller screens.':'Quiet stage. Use the visible IPI Controls button for navigation, backup, zoom and exit.'):'Reading view.';}
+  stageButton.addEventListener('click',()=>{closeStage();setStage(!stageRequested);if(stageRequested&&innerWidth>=1100)stageReveal.focus({preventScroll:true});else stageButton.focus({preventScroll:true});});
+  stageReveal.addEventListener('click',()=>{for(const {node} of furniture)stageBody.append(node);stageDialog.showModal();document.getElementById('closeStageControls').focus();});
+  document.getElementById('closeStageControls').addEventListener('click',closeStage);stageDialog.addEventListener('cancel',event=>{event.preventDefault();closeStage();});
+  updateStage();
+
+  // This contract is the single navigation authority for the private console.
+  // Descriptors read existing state; they never render or initialise a next view.
+  function describe(slide,index){
+    const module=slide.querySelector('.cap-module'),poll=slide.querySelector('.poll-live-panel');
+    const panels=module?[...module.querySelectorAll('[data-cap-panel]')]:[];
+    const nav=module?.capabilityNavigation??poll?.pollNavigation;
+    index=index??nav?.index??0;
+    const panel=panels[index];
+    const copy=(panel??slide).cloneNode(true);
+    copy.querySelectorAll('script,style,button,summary,iframe,audio,video,.cap-controls,.cap-view-nav,.poll-results-print,[hidden]').forEach(n=>n.remove());
+    const pollState=poll?.pollNavigation?.describe?.(index);
+    copy.querySelectorAll('svg').forEach(n=>n.replaceWith(document.createTextNode([...n.querySelectorAll('text')].map(t=>t.textContent.trim()).join(' · '))));
+    copy.querySelectorAll('span,strong').forEach(n=>{n.before(document.createTextNode(' '));n.after(document.createTextNode(' '));});
+    copy.querySelectorAll('h1,h2,h3,h4,p,li,dt,dd,th,td,pre,blockquote').forEach(n=>{n.before(document.createTextNode('\n'));n.after(document.createTextNode('\n'));});
+    const body=pollState?.text??copy.textContent.replace(/[ \t]+/g,' ').replace(/ *\n */g,'\n').replace(/\n{3,}/g,'\n\n').trim();
+    return {slideId:slide.id,id:panel?.id??(pollState?slide.id+'::'+pollState.id:slide.id),title:slide.querySelector('h1,h2')?.textContent??slide.dataset.label,label:panel?.querySelector('h3')?.textContent??pollState?.title??slide.dataset.label,body,index,total:nav?.total??1,kind:panels.length?'capability':pollState?'poll':'slide',route:slide.dataset.route,position:currentRouteFor(slide).indexOf(slide)+1,routeTotal:currentRouteFor(slide).length,poll:poll?.querySelector('.poll-results-status,.poll-results-fallback')?.textContent??null,detail:[...slide.querySelectorAll('[data-cap-status],.moment-status,.comparison-matrix-status')].map(n=>n.textContent).join(' · ')};
+  }
+  function currentRouteFor(slide){return slide.dataset.route==='backup'?backupSections:mainSections;}
+  function snapshot(){const slide=sections[current],c=capabilityNav(),route=currentRoute(),i=route.indexOf(slide);const upcoming=c&&c.index<c.total-1?describe(slide,c.index+1):i<route.length-1?describe(route[i+1],route[i+1].querySelector('.cap-module')?0:undefined):null;return {presentationId:document.body.dataset.presentation,current:describe(slide),next:upcoming,backDisabled:back.disabled,nextDisabled:next.disabled,returnId:lastMainDestination.viewId??lastMainDestination.slideId,returnDestination:{...lastMainDestination},quiet:stageRequested,backups:backupSections.map(s=>({id:s.id,title:s.dataset.label})),companion:!!window.PresenterRegistration};}
+  window.presentationNavigation={snapshot,command(command){const engaged=audienceEngaged;audienceEngaged=false;try{if(command.type==='move'&&[-1,1].includes(command.delta))move(command.delta);else if(command.type==='go'&&sections.some(s=>s.id===command.id))go(command.id);else if(command.type==='return')returnToMain();else if(command.type==='restore-return'&&!hasReturnDestination&&sections[current].dataset.route==='backup')retainReturn(command.destination);else if(command.type==='index'&&Number.isInteger(command.index)&&command.index>=0&&command.index<(capabilityNav()?.total??0))capabilityNav().advance(command.index-capabilityNav().index,{focusHeading:false});else if(command.type==='stage'&&typeof command.value==='boolean')setStage(command.value);}finally{audienceEngaged=engaged;}return snapshot();}};
+
+  // Only an embedding parent can request measurements; messages contain geometry,
+  // never private source or notes. Editor checks the exact sending frame.
+  function measureSlide(){
+    const s=sections[current],bounds=s.getBoundingClientRect(),visible=el=>{const r=el.getBoundingClientRect();return r.width>1&&r.height>1&&!el.closest('.sr-only,[hidden]')&&!(el.closest('thead')&&el.closest('thead').clientWidth<2)&&getComputedStyle(el).visibility!=='hidden';};
+    const elements=[...s.querySelectorAll('h1,h2,h3,p,.node-body,.node-title,th,td,.exercise-questions li')].filter(visible),rects=elements.map(el=>el.getBoundingClientRect());
+    const extent=rects.length?Math.max(...rects.map(r=>r.bottom))-Math.min(...rects.map(r=>r.top)):0;
+    const clipped=elements.filter(el=>el.scrollWidth>el.clientWidth+3||el.scrollHeight>el.clientHeight+3).map(el=>el.textContent.trim().slice(0,80));
+    const outside=rects.some(r=>r.left<bounds.left-3||r.right>bounds.right+3);
+    return {id:s.id,width:innerWidth,height:innerHeight,occupancy:extent/Math.max(1,bounds.height),clipped:clipped.slice(0,8),outside,smallestBody:Math.min(...elements.filter(el=>el.matches('.node-body,.lead,.content-row p,tbody td,.mechanics-stage p')).map(el=>parseFloat(getComputedStyle(el).fontSize))),scrolls:s.scrollHeight>s.clientHeight+3||bounds.bottom>innerHeight-document.querySelector('.bottom').getBoundingClientRect().height+3,canvas:document.documentElement.classList.contains('canvas-mode')};
+  }
+  window.addEventListener('message',event=>{
+    if(window.self===window.top||event.source!==window.parent||event.data?.type!=='inspect-slide'||typeof event.data.requestId!=='string'||!sections.some(s=>s.id===event.data.id))return;
+    go(event.data.id);updateView();const requestId=event.data.requestId;
+    setTimeout(()=>window.parent.postMessage({type:'presentation-measurement',requestId,...measureSlide()},'*'),40);
+  });
+
+  // Optional static-content expansion. Captured players retain their own controls.
+  const contentDialog=document.getElementById('contentModal'),contentPanel=contentDialog.querySelector('.content-modal-panel'),contentBody=document.getElementById('contentModalBody'),contentTitle=document.getElementById('contentModalTitle'),contentClose=document.getElementById('closeContentModal');
+  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
+  function contentMotion(session){return session.slide.dataset.designAnimations!=='false'&&!reducedMotion.matches&&typeof contentPanel.animate==='function';}
+  function sourceTransform(session){
+    const from=session.block.getBoundingClientRect(),to=contentPanel.getBoundingClientRect();
+    return 'translate('+(from.x+from.width/2-to.x-to.width/2)+'px,'+(from.y+from.height/2-to.y-to.height/2)+'px) scale('+Math.max(.15,Math.min(1,from.width/to.width))+','+Math.max(.15,Math.min(1,from.height/to.height))+')';
+  }
+  function finishContent(session,restore){
+    if(contentSession!==session)return;
+    contentAnimation?.cancel();contentAnimation=null;contentSession=null;contentClosing=false;
+    contentDialog.close();contentBody.replaceChildren();document.documentElement.classList.remove('content-modal-open');
+    if(restore&&session.trigger.isConnected&&!session.slide.hidden)session.trigger.focus({preventScroll:true});
+  }
+  function closeContent(immediate=false,restore=true){
+    const session=contentSession;if(!session||contentClosing&&!immediate)return;
+    const currentTransform=getComputedStyle(contentPanel).transform;contentAnimation?.cancel();contentAnimation=null;contentClosing=true;
+    if(immediate||!contentMotion(session)||session.slide.hidden||!session.block.isConnected){finishContent(session,restore);return;}
+    const animation=contentPanel.animate([{transform:currentTransform,opacity:1},{transform:sourceTransform(session),opacity:.3}],{duration:200,easing:'ease-in',fill:'both'});contentAnimation=animation;
+    animation.finished.then(()=>finishContent(session,restore)).catch(()=>{});
+  }
+  function openContent(block,trigger,slide){
+    if(contentSession)closeContent(true,false);
+    const title=block.querySelector('h3,.node-title,th,.artifact-label')?.textContent||block.querySelector('.speech>span')?.textContent||slide.querySelector('h1,h2').textContent;
+    const copy=block.cloneNode(true);copy.className='expanded-block';
+    copy.querySelectorAll('button,input,select,textarea,audio,video,iframe').forEach(el=>el.remove());
+    [copy,...copy.querySelectorAll('*')].forEach(el=>{el.removeAttribute('id');el.removeAttribute('hidden');el.removeAttribute('tabindex');for(const a of [...el.attributes])if(a.name.startsWith('data-')||a.name.startsWith('aria-controls')||a.name==='aria-pressed')el.removeAttribute(a.name);});
+    // The heading labels the dialog once. A paired table row keeps its cell labels.
+    copy.querySelector('h3,.node-title')?.remove();
+    if(copy.matches('tr')){
+      const list=document.createElement('dl');[...copy.children].forEach((cell,i)=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=block.closest('table').querySelectorAll('thead th')[i]?.textContent||'Detail';dd.textContent=cell.textContent;list.append(dt,dd);});contentBody.replaceChildren(list);if(block.dataset.cue){const cue=document.createElement('p');cue.className='content-detail';cue.textContent=block.dataset.cue;contentBody.append(cue);}
+    }else contentBody.replaceChildren(copy);
+    contentTitle.textContent=title;contentSession={block,trigger,slide};contentClosing=false;
+    contentDialog.showModal();document.documentElement.classList.add('content-modal-open');contentClose.focus({preventScroll:true});
+    if(contentMotion(contentSession)){const animation=contentPanel.animate([{transform:sourceTransform(contentSession),opacity:.3},{transform:'none',opacity:1}],{duration:240,easing:'ease-out'});contentAnimation=animation;animation.finished.then(()=>{if(contentAnimation===animation)contentAnimation=null;}).catch(()=>{});}
+  }
+  function prepareExpansion(){
+    if(typeof contentDialog.showModal!=='function')return;
+    const selector='.content-row,.hero-item,.diagram-node:not(button),.mechanics-stage,.spec-pipeline>li,.speech,.artifact-card,.comparison-columns>article,.lab-timeline>li,.principle-table tbody tr,.impact-image';
+    sections.filter(slide=>slide.dataset.designExpand==='true').forEach(slide=>{
+      slide.querySelectorAll(selector).forEach(block=>{
+        const title=block.querySelector('h3,.node-title,th,.artifact-label')?.textContent||block.querySelector('.speech>span')?.textContent||'content';
+        const trigger=document.createElement('button');trigger.type='button';trigger.className='content-expand';trigger.textContent='Expand';trigger.setAttribute('aria-label','Expand '+title);trigger.setAttribute('aria-haspopup','dialog');trigger.setAttribute('aria-controls','contentModal');
+        if(block.matches('.diagram-node')){trigger.textContent='↗';trigger.title='Expand '+title;}
+        if(block.matches('tr'))block.lastElementChild.append(trigger);else block.append(trigger);
+        block.querySelectorAll('.content-detail').forEach(detail=>detail.hidden=true);block.classList.add('can-expand');
+        trigger.addEventListener('click',()=>openContent(block,trigger,slide));
+        block.addEventListener('click',event=>{if(event.target.closest('button,a,input,select,textarea,summary,[contenteditable]')||getSelection()?.toString())return;openContent(block,trigger,slide);});
+      });
+    });
+  }
+  contentDialog.addEventListener('keydown',event=>{
+    if(event.key!=='Tab')return;const controls=[...contentDialog.querySelectorAll('button,a[href],input,select,textarea,[tabindex]')].filter(el=>!el.disabled&&el.tabIndex>=0&&el.getClientRects().length),first=controls[0],last=controls.at(-1);
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+  });
+  contentClose.addEventListener('click',()=>closeContent());
+  contentDialog.addEventListener('cancel',event=>{event.preventDefault();closeContent();});
+  contentDialog.addEventListener('click',event=>{if(event.target===contentDialog)closeContent();});
+  contentDialog.addEventListener('close',()=>{if(!contentDialog.open&&contentSession)finishContent(contentSession,true);});
+  window.addEventListener('beforeprint',()=>closeContent(true,false));
+  reducedMotion.addEventListener('change',()=>{if(contentClosing)closeContent(true);else{contentAnimation?.cancel();contentAnimation=null;}});
+
+  // Source-defined guides and optional details share one presenter-controlled state machine.
+  function prepareDiagrams() {
+    document.querySelectorAll('[data-diagram]').forEach(diagram => {
+      if(diagram.dataset.static==='true')return;
+      const controls = diagram.querySelector('.diagram-controls');
+      const moments = Array.from(diagram.querySelectorAll('[data-moment]'));
+      const fields = Array.from(diagram.querySelectorAll('[data-field]'));
+      const regions = Array.from(diagram.querySelectorAll('[data-key]'));
+      const status = diagram.querySelector('.moment-status');
+      const guide = diagram.dataset.guide.trim() ? diagram.dataset.guide.split(' ').map(Number) : [];
+      const cycle = diagram.dataset.cycle === 'true';
+      const nextStage = controls.querySelector('[data-diagram-action="next"]');
+      const previousStage = controls.querySelector('[data-diagram-action="previous"]');
+      const overview = controls.querySelector('[data-diagram-action="all"]');
+      const tools = controls.querySelector('.diagram-tools');
+      const toolsSummary = tools.querySelector('summary');
+      const picker = controls.querySelector('.moment-picker');
+      const guided = guide.length > 0 && !nextStage.hidden;
+      const edges = Array.from(diagram.querySelectorAll('[data-from][data-to]'));
+      let state = -1; // Full overview is meaningful even before the first interaction.
+      function select(index) {
+        state = index;
+        if (state < 0) picker.open = false;
+        diagram.dataset.state = state < 0 ? 'all' : String(state);
+        const targets = state < 0 ? [] : moments[state].dataset.targets.split(' ');
+        regions.forEach(region => {
+          const active = targets.includes(region.dataset.key);
+          region.classList.toggle('is-active', active);
+          region.classList.toggle('is-muted', state >= 0 && !active);
+        });
+        edges.forEach(edge => {
+          const incoming = targets.includes(edge.dataset.to);
+          const outgoing = targets.includes(edge.dataset.from);
+          edge.classList.toggle('is-incoming', incoming);
+          edge.classList.toggle('is-outgoing', outgoing);
+        });
+        moments.forEach((button, i) => button.setAttribute('aria-pressed', String(i === state)));
+        fields.forEach((button, i) => button.setAttribute('aria-pressed', String(i === state)));
+        const position = guide.indexOf(state);
+        status.textContent = state < 0 ? diagram.dataset.overview :
+          `${position < 0 ? 'Optional detail' : `${position + 1} / ${guide.length}`} · ${moments[state].textContent}: ${moments[state].dataset.cue}`;
+        // Keep focus on the presenter's chosen control, including at the endpoints.
+        previousStage.setAttribute('aria-disabled', String(state === guide[0]));
+        nextStage.setAttribute('aria-disabled', String(!cycle && state === guide.at(-1)));
+        nextStage.textContent = cycle && state === guide.at(-1) ? 'Repeat cycle' : 'Next step';
+        overview.hidden = !guide.length && state < 0;
+        tools.hidden = nextStage.hidden && picker.hidden && overview.hidden;
+        if (tools.hidden) tools.open = false;
+        if (overview.hidden && document.activeElement === overview) (tools.hidden ? diagram.closest('.slide').querySelector('h1,h2') : toolsSummary).focus({preventScroll:true});
+      }
+      moments.forEach((button, i) => button.addEventListener('click', () => select(i)));
+      fields.forEach((button, i) => {
+        button.addEventListener('click', () => select(i));
+        button.addEventListener('focus', () => select(i));
+      });
+      function previousMoment() {
+        const position = guide.indexOf(state);
+        if (guide.length) select(guide[position < 0 ? guide.length - 1 : Math.max(0, position - 1)]);
+      }
+      function nextMoment() {
+        const position = guide.indexOf(state);
+        if (guide.length) select(guide[cycle ? (position + 1) % guide.length : Math.min(guide.length - 1, position + 1)]);
+      }
+      previousStage.addEventListener('click', previousMoment);
+      nextStage.addEventListener('click', nextMoment);
+      overview.addEventListener('click', () => select(-1));
+      document.addEventListener('pointerdown',event=>{
+        if(tools.open&&!tools.contains(event.target))tools.open=false;
+      });
+      diagram.setAttribute('aria-keyshortcuts',guided?'ArrowUp ArrowDown A':'A');
+      diagramShortcuts.set(diagram,key=>{
+        if(key==='Escape'){
+          if(!tools.open)return false;
+          tools.open=false;toolsSummary.focus({preventScroll:true});return true;
+        }
+        if(key.toLowerCase()==='a'){select(-1);return true;}
+        if(!guided)return false;
+        if(key==='ArrowDown')nextMoment();else if(key==='ArrowUp')previousMoment();else return false;
+        return true;
+      });
+      controls.hidden = false;
+      select(-1);
+    });
+  }
+
+
+  // Generic semantic comparison: progressive row spotlight without hiding other data.
+  function prepareComparisonMatrices(){
+    document.querySelectorAll('[data-comparison-matrix]').forEach(matrix=>{
+      if(matrix.dataset.static==='true')return;
+      const rows=Array.from(matrix.querySelectorAll('[data-comparison-row]'));
+      const status=matrix.querySelector('.comparison-matrix-status');
+      let currentRow=-1;
+      function selectRow(index){
+        currentRow=Math.max(-1,Math.min(rows.length-1,index));
+        matrix.dataset.state=currentRow<0?'all':String(currentRow);
+        rows.forEach((row,i)=>{
+          row.classList.toggle('is-active',i===currentRow);
+          row.classList.toggle('is-muted',currentRow>=0&&i!==currentRow);
+        });
+        status.textContent=currentRow<0?matrix.dataset.overview:
+          String(currentRow+1)+' / '+String(rows.length)+' · '+rows[currentRow].cells[0].textContent+': '+rows[currentRow].dataset.cue;
+        if(currentRow>=0&&window.innerWidth<=760){
+          rows[currentRow].scrollIntoView({block:'nearest',behavior:'auto'});
+        }
+      }
+      matrix.setAttribute('aria-keyshortcuts','ArrowUp ArrowDown A');
+      comparisonShortcuts.set(matrix,key=>{
+        if(key.toLowerCase()==='a')selectRow(-1);
+        else if(key==='ArrowDown')selectRow(currentRow+1);
+        else selectRow(currentRow<0?rows.length-1:Math.max(0,currentRow-1));
+      });
+      selectRow(-1);
+    });
+  }
+
+  prepareDiagrams();
+  prepareComparisonMatrices();
+  prepareExpansion();
+  render();
+})();
+
+// The existing embedded player owns its clock and media. Only pause commands cross this boundary.
+(()=>{
+ const frames=()=>[...document.querySelectorAll('iframe.recording-player')];
+ const frameOrigin=f=>f.hasAttribute('srcdoc')?window.origin:new URL(f.src).origin;
+ for(const f of frames())if(f.hasAttribute('srcdoc'))f.addEventListener('load',()=>{if(f.dataset.checkpointId)try{f.contentWindow.location.hash='live-'+f.dataset.checkpointId;}catch{}});
+ function pause(){document.querySelectorAll('audio,video').forEach(m=>m.pause());for(const f of frames())try{if(f.hasAttribute('srcdoc'))f.contentDocument?.querySelectorAll('audio,video').forEach(m=>m.pause());const origin=frameOrigin(f);f.contentWindow.postMessage({channel:'genesys-recording-pause-v1'},origin==='null'?'*':origin);}catch{}}
+ addEventListener('message',e=>{const f=frames().find(f=>f.contentWindow===e.source&&frameOrigin(f)===e.origin);if(f&&e.data?.channel==='genesys-presenter-pause-v1'){pause();e.source.postMessage({channel:'genesys-presenter-paused-v1',requestId:e.data.requestId},e.origin==='null'?'*':e.origin);}});
+ addEventListener('hashchange',()=>{pause();for(const f of frames())if(f.closest('.slide')?.hidden){f.dataset.recordingSrc=f.src;f.src='about:blank';}else if(f.dataset.recordingSrc){f.src=f.dataset.recordingSrc;delete f.dataset.recordingSrc;}});
+})();
+
+
+// Audience-only state transport. Private source never enters this document.
+// One console owns this window through its opener and an unpredictable session.
+(()=>{
+ const session=new URLSearchParams(location.search).get('speakerSession');
+ if(!/^[a-f0-9]{32}$/.test(session??'')||!window.opener||!window.presentationNavigation)return;
+ const owner=window.opener,deck=document.body.dataset.presentation,seen=new Set();let consoleOrigin=null;
+ const generation=crypto.randomUUID();
+ let retained=null;try{retained=JSON.parse(sessionStorage.getItem('ipi-audience:'+session));}catch{}
+ const initialIndex=Number(new URLSearchParams(location.search).get('speakerIndex'));let restoreIndex=new URLSearchParams(location.search).has('speakerIndex')&&Number.isInteger(initialIndex)&&initialIndex>=0?initialIndex:null;
+ if(restoreIndex===null&&retained?.kind==='poll'&&location.hash==='#'+retained.slideId)restoreIndex=retained.index;
+ const restoreSlide=location.hash.slice(1);
+ function restore(){if(restoreIndex===null)return;const state=window.presentationNavigation.snapshot();if(state.current.slideId!==restoreSlide){restoreIndex=null;return;}if(state.current.kind==='poll'){window.presentationNavigation.command({type:'index',index:restoreIndex});restoreIndex=null;try{const url=new URL(location.href);url.searchParams.delete('speakerIndex');history.replaceState(null,'',url);}catch{}}}
+ function send(ack=null){try{restore();if(restoreIndex===null)try{sessionStorage.setItem('ipi-audience:'+session,JSON.stringify(window.presentationNavigation.snapshot().current));}catch{}if(!owner.closed&&consoleOrigin!==null)owner.postMessage({channel:'ipi-speaker-v1',session,deck,type:'state',generation,ack,state:window.presentationNavigation.snapshot()},['null','file://'].includes(consoleOrigin)?'*':consoleOrigin);}catch{}}
+ addEventListener('message',event=>{
+  const message=event.data;
+  if(event.source!==owner||message?.channel!=='ipi-speaker-v1'||message.session!==session||message.deck!==deck)return;
+  if(consoleOrigin!==null&&event.origin!==consoleOrigin)return;
+  if(consoleOrigin===null)consoleOrigin=event.origin;
+  if(message.type==='hello'){window.presentationNavigation.command({type:'restore-return',destination:message.returnDestination});send();return;}
+  if(message.type!=='command'||consoleOrigin===null||typeof message.id!=='string'||message.id.length>100||!message.command||seen.has(message.id))return;
+  seen.add(message.id);window.presentationNavigation.command(message.command);send(message.id);
+ });
+ let queued=false;function queueState(){if(queued)return;queued=true;queueMicrotask(()=>{queued=false;send();});}
+ addEventListener('hashchange',queueState);document.addEventListener('capability-state',queueState);document.addEventListener('poll-state',queueState);addEventListener('pagehide',()=>send());
+ // A read-only heartbeat reflects direct audience actions, result recovery and
+ // reloads without mutation observers, duplicate advances or focus changes.
+ setInterval(()=>send(),500);
+})();
+</script>
+</body>
+</html>
