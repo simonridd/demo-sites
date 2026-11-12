@@ -60,6 +60,18 @@
         "Backup recovery"
       ],
       "accent": "#377b64"
+    },
+    {
+      "slug": "n8n-walkthroughs",
+      "title": "n8n walkthroughs",
+      "category": "Workflow tutorials",
+      "description": "Learn the basics with a support ticket workflow, or draft a Genesys Cloud release briefing with OpenAI.",
+      "tags": [
+        "n8n",
+        "Workflow automation",
+        "Genesys Cloud"
+      ],
+      "accent": "#22664f"
     }
   ]
 }
