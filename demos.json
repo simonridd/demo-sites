@@ -84,6 +84,18 @@
         "n8n"
       ],
       "accent": "#22664f"
+    },
+    {
+      "slug": "capability-reference",
+      "title": "Genesys capability library",
+      "category": "Presentations",
+      "description": "Explore 29 feature slides covering routing, virtual agents, adviser tools, digital channels, analytics and workforce management.",
+      "tags": [
+        "Genesys Cloud",
+        "Feature slides",
+        "Capabilities"
+      ],
+      "accent": "#22664f"
     }
   ]
 }
