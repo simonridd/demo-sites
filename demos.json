@@ -72,6 +72,18 @@
         "Genesys Cloud"
       ],
       "accent": "#22664f"
+    },
+    {
+      "slug": "kick-off",
+      "title": "Kick-off demos",
+      "category": "Demo collections",
+      "description": "Open the skills presentation, Priya’s travel quote, the Duo replay or the n8n walkthroughs.",
+      "tags": [
+        "Presentations",
+        "Walkthroughs",
+        "n8n"
+      ],
+      "accent": "#22664f"
     }
   ]
 }
