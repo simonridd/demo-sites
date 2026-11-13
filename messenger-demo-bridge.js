@@ -1,11 +1,12 @@
 /* IPI Demo Phone bridge. Install alongside the website's normal Genesys snippet.
- * Inert unless embedded by a localhost Demo Phone. No OAuth tokens cross this bridge. */
+ * Inert unless embedded by an approved Demo Phone. No OAuth tokens cross this bridge. */
 (() => {
   'use strict';
   if (window.__ipiDemoMessengerBridge) return;
   window.__ipiDemoMessengerBridge = true;
   const protocol = 'ipi-demo-messenger-v1';
   const local = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+  const approved = value => local.test(value) || value === 'https://phone.simonridd.com';
   const uuid = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i;
   let peer, origin, nonce, runId, subscribed = false;
   const attempts = new Map();
@@ -52,7 +53,7 @@
   }
   window.addEventListener('message', event => {
     const value = event.data;
-    if (window.parent === window || event.source !== window.parent || !local.test(event.origin) || !value || value.protocol !== protocol) return;
+    if (window.parent === window || event.source !== window.parent || !approved(event.origin) || !value || value.protocol !== protocol) return;
     if (value.type === 'hello') {
       if (typeof value.nonce !== 'string' || !/^[a-f0-9]{32,128}$/.test(value.nonce) || !uuid.test(value.runId)) return;
       peer = event.source; origin = event.origin; nonce = value.nonce; runId = value.runId;

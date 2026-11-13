@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-test('standalone stays inert; only the linked localhost parent can clear once per request', async () => {
+for (const approved of ['http://localhost:5173', 'https://phone.simonridd.com']) test('bridge accepts the exact approved parent and clears once: ' + approved, async () => {
   const replies = [], calls = [], events = {};
   let listener, reject = false;
   const parent = { postMessage: value => replies.push(value) };
@@ -17,8 +17,8 @@ test('standalone stays inert; only the linked localhost parent can clear once pe
   vm.runInNewContext(fs.readFileSync('messenger-demo-bridge.js', 'utf8'), { window, setTimeout, clearTimeout });
   const hello = { protocol: 'ipi-demo-messenger-v1', type: 'hello', nonce: 'a'.repeat(48), runId: '10000000-0000-4000-8000-000000000001' };
   const clear = { ...hello, type: 'clear', requestId: '10000000-0000-4000-8000-000000000002' };
-  const emit = (data, origin = 'http://localhost:5173', source = parent) => listener({ data, origin, source });
-  emit(clear); emit(hello, 'https://evil.example'); emit(clear); assert.equal(calls.length, 0);
+  const emit = (data, origin = approved, source = parent) => listener({ data, origin, source });
+  emit(clear); emit(hello, 'https://evil.example'); emit(hello, 'https://phone.simonridd.com.evil.example'); emit(hello, 'http://phone.simonridd.com'); emit(clear); assert.equal(calls.length, 0);
   emit(hello); assert.equal(replies.at(-1).canClear, true);
   emit({ ...clear, nonce: 'b'.repeat(48) }); assert.equal(calls.length, 0);
   emit(clear); emit(clear); await new Promise(resolve => setImmediate(resolve));
