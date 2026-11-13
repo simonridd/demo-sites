@@ -96,6 +96,19 @@
         "Capabilities"
       ],
       "accent": "#22664f"
+    },
+    {
+      "slug": "westbridge",
+      "title": "Westbridge Bank",
+      "category": "Banking",
+      "description": "A missing card, a new address and a growing business. Explore connected banking support across channels.",
+      "tags": [
+        "Banking",
+        "Web messaging",
+        "Card services",
+        "Business banking"
+      ],
+      "accent": "#174c42"
     }
   ]
 }
