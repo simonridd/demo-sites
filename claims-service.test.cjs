@@ -18,7 +18,9 @@ test('Claims page without a verified enabled binding creates no provider script 
   const h=harness(config);h.click();assert.equal(h.button.disabled,true);assert.equal(h.scripts.length,0);assert.equal(h.window.Genesys,undefined);
  }
  const shipped={window:{},Object};vm.runInNewContext(fs.readFileSync('claims-service/messenger-config.js','utf8'),shipped);
- assert.equal(shipped.window.ClaimsServiceMessenger.enabled,false);assert.equal(shipped.window.ClaimsServiceMessenger.deploymentId,null);
+ assert.equal(shipped.window.ClaimsServiceMessenger.enabled,false);
+ const disabled=harness(shipped.window.ClaimsServiceMessenger);disabled.click();
+ assert.equal(disabled.scripts.length,0);assert.equal(disabled.window.Genesys,undefined);
 });
 test('Messenger waits for deliberate start and ready; repeated clicks cannot duplicate bootstrap',()=>{
  const h=harness(valid);assert.equal(h.scripts.length,0);assert.equal(h.button.disabled,false);
