@@ -1,3 +1,11 @@
+# Manual Claims test window
+
+Simon requested manual testing on 16 November 2026 and approved the bounded text journey and cleanup. The website launcher is enabled on deliberate click only for the exact verified Claims deployment. The deployment remains independently Inactive until manually activated in Genesys. No automatic message is sent. Native staffing and channel activation must be checked separately; this website change does not perform them.
+
+Use the Claims Service Enquiries Queue and the logged-in Emily test user only, preserving other Queue selections and Off Queue baseline. Activate the exact Claims Service deployment, open the website and answer the bot with CLM-DEMO-2002 and a repair-estimate enquiry. Accept the native interaction, check the adviser Script read and Salesforce Case. The receipt Action still has the previous API-proof fixed intent with null conversation correlation. Do not execute it as an actual correlated receipt: the original chat must first prepare its actual conversation intent and fresh precondition. The manual test can verify the bot, handoff and read controls independently.
+
+End and wrap up the exact interaction. Return the deployment to Inactive and the agent to its original membership, Queue selections and Off Queue state. Tell the original chat when finished so it can independently verify cleanup and restore the website launcher to disabled. The new EBv3 defect-fix chat is source-only during this manual window.
+
 # Claims Service website handoff
 
 Status: Needs acceptance
