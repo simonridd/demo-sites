@@ -109,6 +109,18 @@
         "Business banking"
       ],
       "accent": "#174c42"
+    },
+    {
+      "slug": "claims-service",
+      "title": "Claims Service",
+      "category": "Insurance",
+      "description": "A question about a repair estimate and a clear next step. Speak to Claims Service about an existing claim.",
+      "tags": [
+        "Claims",
+        "Repair estimates",
+        "Web messaging"
+      ],
+      "accent": "#164d44"
     }
   ]
 }
