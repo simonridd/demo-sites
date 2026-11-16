@@ -1,3 +1,7 @@
+# Manual window ended
+
+Simon ended the manual test window on 16 November 2026 and asked to resume the Claims chat himself later. The website launcher is restored to disabled. No test outcome is inferred from the word finished. Native deployment, staffing and receipt cleanup evidence is retained in the original workstream's private operator receipt. The separate EBv3 defect-fix chat can continue source work; no automated reactivation of the original Claims chat is authorized.
+
 # Manual Claims test window
 
 Simon requested manual testing on 16 November 2026 and approved the bounded text journey and cleanup. The website launcher is enabled on deliberate click only for the exact verified Claims deployment. The deployment remains independently Inactive until manually activated in Genesys. No automatic message is sent. Native staffing and channel activation must be checked separately; this website change does not perform them.
