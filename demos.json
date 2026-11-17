@@ -60,6 +60,67 @@
         "Backup recovery"
       ],
       "accent": "#377b64"
+    },
+    {
+      "slug": "n8n-walkthroughs",
+      "title": "n8n walkthroughs",
+      "category": "Workflow tutorials",
+      "description": "Learn the basics with a support ticket workflow, or draft a Genesys Cloud release briefing with OpenAI.",
+      "tags": [
+        "n8n",
+        "Workflow automation",
+        "Genesys Cloud"
+      ],
+      "accent": "#22664f"
+    },
+    {
+      "slug": "kick-off",
+      "title": "Kick-off demos",
+      "category": "Demo collections",
+      "description": "Open the skills presentation, Priya’s travel quote, the Duo replay or the n8n walkthroughs.",
+      "tags": [
+        "Presentations",
+        "Walkthroughs",
+        "n8n"
+      ],
+      "accent": "#22664f"
+    },
+    {
+      "slug": "capability-reference",
+      "title": "Genesys capability library",
+      "category": "Presentations",
+      "description": "Explore 29 feature slides covering routing, virtual agents, adviser tools, digital channels, analytics and workforce management.",
+      "tags": [
+        "Genesys Cloud",
+        "Feature slides",
+        "Capabilities"
+      ],
+      "accent": "#22664f"
+    },
+    {
+      "slug": "westbridge",
+      "title": "Westbridge Bank",
+      "category": "Banking",
+      "description": "A missing card, a new address and a growing business. Explore connected banking support across channels.",
+      "tags": [
+        "Banking",
+        "Web messaging",
+        "Card services",
+        "Business banking"
+      ],
+      "accent": "#174c42"
+    },
+    {
+      "slug": "claims-service",
+      "title": "Claims Service",
+      "category": "Insurance",
+      "description": "A question about a repair estimate and a clear next step. Speak to Claims Service about an existing claim.",
+      "tags": [
+        "Claims",
+        "Repair estimates",
+        "Web messaging"
+      ],
+      "accent": "#164d44"
     }
   ]
 }
