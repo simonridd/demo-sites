@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "skills": {
+    "build-demo-site": "skills/build-demo-site"
+  },
+  "capabilities": [
+    {
+      "id": "site-static-collection",
+      "owner": "build-demo-site",
+      "sources": [
+        "index.html",
+        "demos.json",
+        "site.test.cjs"
+      ],
+      "support": "documented"
+    },
+    {
+      "id": "site-messenger-bridge",
+      "owner": "build-demo-site",
+      "sources": [
+        "messenger-demo-bridge.js",
+        "messenger-demo-bridge.test.cjs"
+      ],
+      "support": "documented"
+    }
+  ]
+}
