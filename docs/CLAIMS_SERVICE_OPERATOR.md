@@ -1,10 +1,14 @@
-# Manual Claims test window
+# Manual window ended
 
-Simon requested manual testing on 16 November 2026 and approved the bounded text journey and cleanup. The website launcher is enabled on deliberate click only for the exact verified Claims deployment. The deployment remains independently Inactive until manually activated in Genesys. No automatic message is sent. Native staffing and channel activation must be checked separately; this website change does not perform them.
+Simon ended the manual test window on 16 November 2026 and asked to resume the Claims chat himself later. The website launcher is restored to disabled. No test outcome is inferred from the word finished. Native deployment, staffing and receipt cleanup evidence is retained in the original workstream's private operator receipt. The separate EBv3 defect-fix chat can continue source work; no automated reactivation of the original Claims chat is authorized.
+
+# Historical manual Claims test window
+
+Simon requested manual testing on 16 November 2026 and approved the bounded text journey and cleanup. For that window the website launcher was prepared to load on deliberate click only for the exact verified Claims deployment. The deployment was independently Inactive at preparation time. No automatic message is sent. Native staffing and channel activation must be checked separately; this website change does not perform them.
 
 Use the Claims Service Enquiries Queue and the logged-in Emily test user only, preserving other Queue selections and Off Queue baseline. Activate the exact Claims Service deployment, open the website and answer the bot with CLM-DEMO-2002 and a repair-estimate enquiry. Accept the native interaction, check the adviser Script read and Salesforce Case. The receipt Action still has the previous API-proof fixed intent with null conversation correlation. Do not execute it as an actual correlated receipt: the original chat must first prepare its actual conversation intent and fresh precondition. The manual test can verify the bot, handoff and read controls independently.
 
-End and wrap up the exact interaction. Return the deployment to Inactive and the agent to its original membership, Queue selections and Off Queue state. Tell the original chat when finished so it can independently verify cleanup and restore the website launcher to disabled. The new EBv3 defect-fix chat is source-only during this manual window.
+End and wrap up the exact interaction. Return the deployment to Inactive and the agent to its original membership, Queue selections and Off Queue state. Tell the original chat when finished so it can independently verify cleanup and restore the website launcher to disabled. These historical steps do not authorize a new test.
 
 # Claims Service website handoff
 
