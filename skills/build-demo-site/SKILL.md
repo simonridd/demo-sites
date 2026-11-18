@@ -23,6 +23,8 @@ This repository is public static hosting, not an API secret store. Publish only 
 
 Reuse explicitly selected existing Messenger or other public integration references. Site authoring does not create or activate native resources, change shared flows/Queues, start campaigns, submit forms, clear sessions or send test messages. Use the available EB specialist and its existing owner/lifecycle when configuration is requested. A rendered widget is separate from verified routing or agent delivery.
 
+For an opt-in digital journey rehearsal, see [Thirdfort](../../thirdfort/README.md). Keep event names and attributes on an allowlist and use a distinct deployment for a distinct audience. Verify the website event, matched segment and actual message interaction separately. Keep scripted outcomes in the rehearsal; use provider flow or interaction evidence for live outcomes.
+
 For OAuth pages, derive and display the exact callback URL and compare it with the registered client configuration when that read is available. A new repository name or page path changes that URL. Record any required registration update; do not claim sign-in works based only on static checks. Preserve PKCE, state validation and in-memory token behavior. Do not forward callback codes to arbitrary destinations or create a client-secret workaround.
 
 If delegated by `coordinate-demo-production`, return the published route, source revision, selected public integration references and actual verification results to that same production. Website work does not regenerate recordings or rewrite presentation content unless requested.
