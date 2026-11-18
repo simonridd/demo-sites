@@ -21,6 +21,8 @@ const fields = {
   tf_funds_guide_opened: ["page"],
   tf_context_offer_shown: ["page", "topic"],
   tf_message_opened: ["page", "topic"],
+  tf_portal_interest: [],
+  tf_integrations_interest: [],
   tf_topic_selected: ["topic"],
   tf_answer_shown: ["topic"],
   tf_help_confirmed: ["topic"],
@@ -33,12 +35,20 @@ export const eventLabels = Object.freeze({
   tf_funds_guide_opened: "Opened mixed-deposit guidance",
   tf_context_offer_shown: "Saw the professional support offer",
   tf_message_opened: "Opened web messaging",
+  tf_portal_interest: "Asked about the professional portal",
+  tf_integrations_interest: "Asked about onboarding or integrations",
   tf_topic_selected: "Selected a topic",
   tf_answer_shown: "Received scripted guidance",
   tf_help_confirmed: "Confirmed guidance was useful",
   tf_adviser_requested: "Requested professional adviser",
   tf_app_support_selected: "Selected app support",
 });
+
+export function topicInterestEvent(topic) {
+  if (topic === "portal") return "tf_portal_interest";
+  if (topic === "integration") return "tf_integrations_interest";
+  return null;
+}
 
 export function webEvent(name, data = {}) {
   if (!Object.hasOwn(fields, name)) throw new Error("Unknown journey event");
@@ -65,17 +75,12 @@ export function summarise(events) {
   const contextualOffer =
     has("tf_page_viewed", (data) => data.page === "conveyancing") &&
     has("tf_funds_guide_opened");
-  if (contextualOffer) segments.push("Conveyancing · source of funds");
-  if (
-    has("tf_message_opened", (data) => data.topic === "portal") ||
-    has("tf_topic_selected", (data) => data.topic === "portal")
-  ) {
+  if (has("tf_context_offer_shown"))
+    segments.push("Conveyancing · source of funds");
+  if (has("tf_portal_interest")) {
     segments.push("Professional portal help");
   }
-  if (
-    has("tf_message_opened", (data) => data.topic === "integration") ||
-    has("tf_topic_selected", (data) => data.topic === "integration")
-  ) {
+  if (has("tf_integrations_interest")) {
     segments.push("Firm onboarding and integrations");
   }
   if (has("tf_app_support_selected")) segments.push("App support signpost");

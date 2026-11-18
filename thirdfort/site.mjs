@@ -1,4 +1,10 @@
-import { eventLabels, sections, summarise, webEvent } from "./journey.mjs";
+import {
+  eventLabels,
+  sections,
+  summarise,
+  topicInterestEvent,
+  webEvent,
+} from "./journey.mjs";
 import { professionalMessenger } from "./messenger.mjs";
 import settings from "./messenger-settings.mjs";
 
@@ -187,7 +193,15 @@ function showResult(topic, result) {
   showChoices([["End rehearsal", () => message.close()]]);
 }
 
+function markTopicInterest(topic) {
+  const eventName = topicInterestEvent(topic);
+  if (eventName && !events.some((event) => event.eventName === eventName)) {
+    emit(eventName);
+  }
+}
+
 function ask(topic) {
+  markTopicInterest(topic);
   emit("tf_topic_selected", { topic });
   const { question, answer, link } = topics[topic];
   addMessage("You", question);
@@ -229,6 +243,7 @@ function openPreview(topic) {
   welcome(topic);
   message.showModal();
   emit("tf_message_opened", { page: section(), topic });
+  markTopicInterest(topic);
 }
 
 let opening = false;
@@ -274,6 +289,7 @@ async function openMessage(topic) {
       thirdfortConveyancingContext: String(report.contextualOffer),
     });
     emit("tf_message_opened", { page: section(), topic });
+    markTopicInterest(topic);
   } catch {
     conversation.replaceChildren();
     addMessage(

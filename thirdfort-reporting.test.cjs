@@ -12,17 +12,20 @@ test("professional journey requires both browsing signals and reports help and h
   assert.equal(summarise(visits.slice(0, 2)).contextualOffer, false);
   assert.equal(summarise([visits[2]]).contextualOffer, false);
   assert.equal(summarise(visits).contextualOffer, true);
-  assert.deepEqual(summarise(visits).segments, [
-    "Conveyancing · source of funds",
-  ]);
+  assert.deepEqual(summarise(visits).segments, []);
   const escalated = summarise([
     ...visits,
+    webEvent("tf_context_offer_shown", {
+      page: "source_of_funds",
+      topic: "mixed_deposit",
+    }),
     webEvent("tf_message_opened", {
       page: "source_of_funds",
       topic: "mixed_deposit",
     }),
     webEvent("tf_adviser_requested", { topic: "mixed_deposit" }),
   ]);
+  assert.deepEqual(escalated.segments, ["Conveyancing · source of funds"]);
   assert.deepEqual(escalated.outcomes, [
     "Web messaging opened",
     "Professional adviser requested",
@@ -30,7 +33,7 @@ test("professional journey requires both browsing signals and reports help and h
 });
 
 test("website events accept only named pages and topics, and never include raw enquiry details", async () => {
-  const { webEvent, summarise } = await journey;
+  const { webEvent, summarise, topicInterestEvent } = await journey;
   const portal = webEvent("tf_message_opened", {
     page: "support",
     topic: "portal",
@@ -42,7 +45,18 @@ test("website events accept only named pages and topics, and never include raw e
     page: "support",
     topic: "portal",
   });
-  assert.deepEqual(summarise([portal]).segments, ["Professional portal help"]);
+  assert.deepEqual(summarise([portal]).segments, []);
+  const portalInterest = webEvent(topicInterestEvent("portal"), {
+    chat: "private enquiry",
+  });
+  const integrationInterest = webEvent(topicInterestEvent("integration"));
+  assert.deepEqual(portalInterest.customAttributes, {
+    surface: "thirdfort_professional_web",
+  });
+  assert.deepEqual(summarise([portalInterest, integrationInterest]).segments, [
+    "Professional portal help",
+    "Firm onboarding and integrations",
+  ]);
   assert.throws(
     () => webEvent("tf_topic_selected", { topic: "arbitrary input" }),
     /Unknown professional enquiry topic/,
