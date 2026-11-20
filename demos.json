@@ -121,6 +121,20 @@
         "Web messaging"
       ],
       "accent": "#164d44"
+    },
+    {
+      "slug": "co-op",
+      "title": "Co-op Group",
+      "category": "Food retail",
+      "description": "A little help with the online shop. Explore delivery enquiries, click and collect, and missing-item support.",
+      "tags": [
+        "Online shopping",
+        "Click and collect",
+        "Agent Copilot",
+        "Web messaging"
+      ],
+      "accent": "#00a1cc",
+      "logo": "co-op/co-op-logo.svg"
     }
   ]
 }
