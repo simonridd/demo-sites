@@ -2,6 +2,10 @@
 
 `main` is the reviewed source of the public GitHub Pages demo collection. Keep existing customer demo routes, reusable shared assets, query/hash navigation, pinned SDK/license files and publication behavior intact. Work in a clean isolated branch; do not accidentally publish personal data, private source files, credentials, browser state or unapproved assets. A local build, commit or push is distinct from successful Pages deployment and from real Genesys interaction.
 
+## Website design rules
+
+For new pages and visual changes, apply [Website design decisions](skills/build-demo-site/references/website-design.md). Check corner geometry, theme-aware borders, icon weight, readable text and mobile sizing on the components being changed. Preserve client branding and use gradients, masks, blending or motion only when they improve the page. Verify keyboard focus, zoom/reflow and reduced motion. Co-op is the first application of these rules; it is a bounded example, not a required template for every client.
+
 ## Portable website authoring skill
 
 The canonical source skill is `skills/build-demo-site/SKILL.md`. On every change to site schema (`demos.json`), shared template, SDK/Messenger integration, static build, accessible UI, preview, OAuth callback, public route or Pages release workflow, review and update the source skill and its references **in the same PR**. Include a small site example or regression test for materially new functionality; do not describe an unsupported native feature as working.

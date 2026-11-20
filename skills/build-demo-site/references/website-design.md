@@ -33,6 +33,12 @@ Use these during new page builds and when revising the affected component.
 
 For the demo collection, prioritise card geometry, separators and search/navigation icons on its next visual revision. For customer sites such as Co-op, Holcim and Thirdfort, preserve client identity and apply the checks to the components being changed. Reuse the same reasoning for authored presenter controls or dashboards when that work is requested. Avoid a portfolio-wide restyle without a separate brief.
 
+## First application: Co-op support page
+
+The Co-op visual revision applies restrained card/panel radii, alpha border tokens and consistent SVG icon strokes. Its order dialog derives the inset help panel's radius from the outer radius, padding and border, and uses a dynamic viewport height limit with a conventional fallback. Supporting text is at least 14px at default settings, ordinary body/action text is 16px or larger, and mobile navigation remains available. A derived soft background uses OKLCH with an sRGB fallback while approved blue and pale brand colours stay intact.
+
+Keep its grocery illustration and flat surfaces. A carousel, dark theme, gradient, blend mode or blurred icon swap would add little to this support task. Reuse its rules in another page only when the component and brand call for them.
+
 ## Technical references
 
 - [CSS Color 4: interpolation](https://www.w3.org/TR/css-color-4/#interpolation): perceptual colour spaces and the tradeoffs between Oklab and OKLCH.
