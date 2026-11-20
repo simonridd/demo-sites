@@ -19,6 +19,8 @@ Create a coherent responsive design with accessible navigation and clear primary
 
 For new pages and visual revisions, read [Website design decisions](references/website-design.md). Apply the everyday checks to the components being authored; choose colour, motion and image treatments to suit the client and page. Revisit existing pages when their components are next changed or a visible defect needs fixing.
 
+The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order dialog with an inset panel. Its flat brand surfaces and original illustration remain appropriate; use the reasoning rather than copying its visual style into another client.
+
 ## Integrations and public hosting
 
 This repository is public static hosting, not an API secret store. Publish only public website assets and fictional or otherwise publishable content. Keep credentials, tokens, private run evidence and customer records out of source, browser bundles, catalogue entries and URLs.
