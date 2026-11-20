@@ -17,6 +17,8 @@ The current Holcim page uses shared root helpers and the existing `/quote/` rout
 
 Create a coherent responsive design with accessible navigation and clear primary actions. Use the client's established visual style for its page. Keep the collection neutral. Place implementation and readiness notes in operator documentation; show configuration details in the page only when they help the presenter make a meaningful choice, such as its exact OAuth redirect URI.
 
+For new pages and visual revisions, read [Website design decisions](references/website-design.md). Apply the everyday checks to the components being authored; choose colour, motion and image treatments to suit the client and page. Revisit existing pages when their components are next changed or a visible defect needs fixing.
+
 ## Integrations and public hosting
 
 This repository is public static hosting, not an API secret store. Publish only public website assets and fictional or otherwise publishable content. Keep credentials, tokens, private run evidence and customer records out of source, browser bundles, catalogue entries and URLs.
