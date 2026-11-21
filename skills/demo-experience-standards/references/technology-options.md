@@ -30,6 +30,13 @@ Sources checked:
 
 ## Current component example
 
+The first GSAP prototype is now `co-op-journey/`: a separate authored explanation
+with user-selected stages and coordinated connector/panel emphasis. The core
+library is pinned and self-hosted, with functional navigation when it is absent.
+It is a website/reuse experiment, not an installed presentation integration or
+evidence of live support behavior. Its operator notes carry the exact dependency
+identity and verification limits.
+
 Co-op's guided help panel is informed by Arc's animated-tabs pattern on
 [21st.dev](https://docs.21st.dev/@kuratlielia/components/tabs). The source and MIT
 licence were inspected. The original uses React/Radix/Motion; Co-op uses a new
