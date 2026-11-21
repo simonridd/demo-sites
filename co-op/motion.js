@@ -2,7 +2,6 @@
   'use strict';
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scene = document.querySelector('.hero-visual');
-  const replay = document.getElementById('replay-scene');
   const van = document.querySelector('.delivery-scene');
   let sceneTimer;
   let vanTimer;
@@ -13,15 +12,11 @@
   function stopScene() {
     window.clearTimeout(sceneTimer);
     scene.classList.remove('scene-playing');
-    replay.disabled = false;
-    replay.querySelector('span').textContent = 'Watch it again';
   }
 
   function playScene() {
     if (preference.matches || scene.classList.contains('scene-playing')) return;
     scene.classList.add('scene-playing');
-    replay.disabled = true;
-    replay.querySelector('span').textContent = 'Packing the good stuff';
     sceneTimer = window.setTimeout(stopScene, 2300);
   }
 
@@ -66,7 +61,6 @@
     });
   }
 
-  replay.addEventListener('click', playScene);
   preference.addEventListener('change', syncPreference);
   document.addEventListener('focusin', () => {
     // Never animate keyboard focus out of view while a section is arriving.
