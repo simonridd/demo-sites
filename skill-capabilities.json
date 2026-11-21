@@ -22,6 +22,17 @@
         "messenger-demo-bridge.test.cjs"
       ],
       "support": "documented"
+    },
+    {
+      "id": "site-coop-motion",
+      "owner": "build-demo-site",
+      "sources": [
+        "co-op/index.html",
+        "co-op/motion.css",
+        "co-op/motion.js",
+        "co-op-motion.test.cjs"
+      ],
+      "support": "documented"
     }
   ]
 }
