@@ -21,7 +21,7 @@ For new pages and visual revisions, read [Website design decisions](references/w
 
 The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order dialog with an inset panel. Its flat brand surfaces and original illustration remain appropriate; use the reasoning rather than copying its visual style into another client.
 
-Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.js`: a short grocery illustration with deliberate replay, a decorative delivery scene, and restrained interface transitions. Follow the [motion guidance](references/website-design.md#motion-as-an-enhancement) when adapting this pattern. Keep the page usable without animation or JavaScript and keep support actions and Messenger authority independent from decorative playback.
+Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.js`: a short grocery illustration that plays once on entry, a decorative delivery scene, and restrained interface transitions. Follow the [motion guidance](references/website-design.md#motion-as-an-enhancement) when adapting this pattern. Keep the page usable without animation or JavaScript and keep support actions and Messenger authority independent from decorative playback.
 
 ## Integrations and public hosting
 
