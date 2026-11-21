@@ -8,7 +8,7 @@ test('Co-op has its own inactive binding and cannot load another demo’s Messen
   vm.runInNewContext(fs.readFileSync('co-op/messenger-config.js','utf8'),context);
   const binding=context.window.CoOpMessenger;
   assert.equal(binding.enabled,false);
-  assert.equal(binding.deploymentId,'');
+  assert.equal(binding.deploymentId,'5553b3be-9c02-4666-b4a8-98c1e53c3884');
   assert.equal(context.window.ClaimsServiceMessenger,undefined);
   for(const config of [undefined,binding,{enabled:true,region:'eu-west-1',deploymentId:'invalid'},{enabled:true,region:'eu-west-2',deploymentId:'00000000-0000-4000-8000-000000000000'}]){
     let scriptCount=0;
