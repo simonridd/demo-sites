@@ -25,4 +25,4 @@
 ## Ideas under evaluation
 
 - Custom Blender artwork: assess the first rendered grocery scene in Co-op before promoting it as a reusable asset-production example. A successful render alone is not proof that a page is clearer, faster or more effective.
-- Curated 21st.dev components: select a component for an actual use case, review its dependencies/licence and adapt it to the existing stack. No particular component has been adopted as a portfolio default.
+- Curated 21st.dev components: the Co-op guided-help prototype now adapts Arc’s reviewed animated-tabs pattern to native HTML/CSS/JavaScript. Its source/licence review, keyboard contract and plain-link fallback are retained with the component. This validates a way to fit an interaction to the existing stack; no particular component or layout is a portfolio default. See [technology candidates](technology-options.md) for the proposed next experiments.

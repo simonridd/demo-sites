@@ -9,6 +9,8 @@ Use these decisions for newly authored visual experiences across customer demo s
 
 Read [accepted decisions and lessons](references/decisions.md) when choosing motion, reusable components or 3D assets, or when a user correction should improve future work.
 
+When selecting the next visual technology, use the dated [technology candidates](references/technology-options.md) as a starting point and verify current source, licence and runtime fit. They are research candidates, not adopted dependencies.
+
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.

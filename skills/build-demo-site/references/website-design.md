@@ -57,3 +57,9 @@ For visual changes, inspect desktop, narrow mobile and enlarged text. Check natu
 ## Blender asset production
 
 The original Co-op recipe lives in `tools/artwork/co-op-groceries.py`, with pinned offline render dependencies and reproduction instructions in `tools/artwork/README.md`. Commit the optimised WebP and source recipe; keep intermediate renders, editable scene outputs and the Python environment out of the public site. A render is a design asset, not a live 3D capability. Verify loading, fallback, responsive composition and reduced motion before adopting it for another customer.
+
+## Guided help and component references
+
+Co-op's support links become a vertical desktop/horizontal mobile tab list with concise next-step panels. This is a native adaptation of an inspected 21st.dev interaction pattern, not a React dependency. Keep one selected tab and labelled panel, roving focus, orientation-appropriate arrows and Home/End. Modifier-click keeps ordinary link behavior. Existing FAQ hashes remain usable, open their answers and synchronize the selected topic. The receipt dialog serves existing and new actions without creating another order model.
+
+Initialize only after the matching panels are present; otherwise retain the original links. Reduce panel transitions with the OS preference and render all panels in print. Keep the reference/source digest, dependency decision, licence notice and verification limits in `tools/components/co-op-help-guide.md`. Promote the interaction approach only after checking the actual customer task; neither a library's popularity nor a passing fixture proves usability improvement.
