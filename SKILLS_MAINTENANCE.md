@@ -1,6 +1,6 @@
 # Skill maintenance
 
-This repository owns `$build-demo-site`.
+This repository owns `$build-demo-site` and `$demo-experience-standards`. The latter carries accepted experience decisions across sites, presentations and Voice Demo Builder while each specialist retains its own runtime and publishing contract.
 
 For changes to a user-facing workflow, API, UI, CLI, schema, package or permission boundary, update the owning instructions, references, examples and capability mapping in the same PR. Review any change outside the tracked source paths for the same effect. Record compatibility for already installed users and keep shared IDs and handoff contracts stable. Update the central catalogue when routing or installation changes.
 

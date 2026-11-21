@@ -17,11 +17,13 @@ The current Holcim page uses shared root helpers and the existing `/quote/` rout
 
 Create a coherent responsive design with accessible navigation and clear primary actions. Use the client's established visual style for its page. Keep the collection neutral. Place implementation and readiness notes in operator documentation; show configuration details in the page only when they help the presenter make a meaningful choice, such as its exact OAuth redirect URI.
 
+Apply the accepted [shared demo experience standards](../demo-experience-standards/SKILL.md) to new visual work and carry relevant user corrections into that maintained decision record. They also cover presentations and Voice Demo Builder interfaces without moving native ownership into site authoring.
+
 For new pages and visual revisions, read [Website design decisions](references/website-design.md). Apply the everyday checks to the components being authored; choose colour, motion and image treatments to suit the client and page. Revisit existing pages when their components are next changed or a visible defect needs fixing.
 
-The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order dialog with an inset panel. Its flat brand surfaces and original illustration remain appropriate; use the reasoning rather than copying its visual style into another client.
+The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order dialog with an inset panel. Its flat brand surfaces, grocery subject and original vector fallback remain appropriate; use the reasoning rather than copying its visual style into another client.
 
-Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.js`: a short grocery illustration that plays once on entry, a decorative delivery scene, and restrained interface transitions. Follow the [motion guidance](references/website-design.md#motion-as-an-enhancement) when adapting this pattern. Keep the page usable without animation or JavaScript and keep support actions and Messenger authority independent from decorative playback.
+Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.js`: a short grocery illustration that plays once on entry, with an optional locally rendered Blender asset and the original vector fallback, a decorative delivery scene, and restrained interface transitions. Follow the [motion guidance](references/website-design.md#motion-as-an-enhancement) when adapting this pattern. Keep the page usable without animation or JavaScript and keep support actions and Messenger authority independent from decorative playback.
 
 ## Integrations and public hosting
 

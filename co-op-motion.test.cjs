@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 
-function harness({ reduced = false, observerSupported = true } = {}) {
+function harness({ reduced = false, observerSupported = true, renderLoaded = false } = {}) {
   const timers = new Map();
   const events = {};
   const classes = () => {
@@ -12,13 +12,16 @@ function harness({ reduced = false, observerSupported = true } = {}) {
   };
   const scene = { classList: classes() };
   const van = { classList: classes() };
+  const imageEvents = {};
+  const render = { complete: true, naturalWidth: renderLoaded ? 960 : 0,
+    addEventListener: (event, handler) => { imageEvents[event] = handler; } };
   const animation = { finished: new Promise(() => {}), cancelled: false, cancel() { this.cancelled = true; } };
   const card = { contains: () => false, animate: () => { card.animated = true; return animation; } };
   const preference = { matches: reduced, addEventListener: (_, handler) => { events.preference = handler; } };
   const root = { classList: classes() };
   const document = {
     activeElement: null, documentElement: root,
-    querySelector: selector => selector === '.hero-visual' ? scene : van,
+    querySelector: selector => selector === '.hero-visual' ? scene : selector === '.hero-render' ? render : van,
     querySelectorAll: () => [card, van],
     addEventListener: (event, handler) => { events[event] = handler; }
   };
@@ -34,7 +37,7 @@ function harness({ reduced = false, observerSupported = true } = {}) {
   };
   if (observerSupported) window.IntersectionObserver = Observer;
   vm.runInNewContext(fs.readFileSync('co-op/motion.js', 'utf8'), { window, document, IntersectionObserver: Observer, WeakSet, Set });
-  return { timers, events, scene, van, card, animation, preference, root,
+  return { timers, events, scene, van, card, animation, preference, root, render, imageEvents,
     intersect: (...targets) => intersection(targets.map(target => ({ target, isIntersecting: true }))) };
 }
 
@@ -43,6 +46,18 @@ test('reduced motion on first load leaves content and controls still, without sc
   assert.equal(h.timers.size, 0);
   assert.equal(h.scene.classList.contains('scene-playing'), false);
   assert.equal(h.root.classList.contains('motion-available'), false);
+});
+
+test('the 3D artwork replaces the vector only after a successful load and preserves fallback on failure', () => {
+  const failed = harness();
+  assert.equal(failed.scene.classList.contains('render-ready'), false);
+  failed.imageEvents.error();
+  assert.equal(failed.scene.classList.contains('render-ready'), false);
+  const loaded = harness({ renderLoaded: true, reduced: true });
+  assert.equal(loaded.scene.classList.contains('render-ready'), true);
+  assert.equal(loaded.scene.classList.contains('scene-playing'), false);
+  loaded.imageEvents.error();
+  assert.equal(loaded.scene.classList.contains('render-ready'), false);
 });
 
 test('changing motion preference cancels in-flight reveals and decorative playback', () => {

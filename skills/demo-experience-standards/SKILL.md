@@ -1,0 +1,27 @@
+---
+name: demo-experience-standards
+description: Apply Simon's learned visual and interaction decisions when creating or refining demo websites, HTML presentations, or the audience and customer interfaces of Voice Demo Builder. Use alongside the existing authoring specialist; preserve its native configuration, evidence and publishing contracts.
+---
+
+# Shared demo experience standards
+
+Use these decisions for newly authored visual experiences across customer demo sites, presentations and Voice Demo Builder. Preserve each customer's identity and the existing authoring/runtime owner. This skill supplies experience guidance, not a renderer, deployment workflow or AVA executor.
+
+Read [accepted decisions and lessons](references/decisions.md) when choosing motion, reusable components or 3D assets, or when a user correction should improve future work.
+
+## Apply the lessons
+
+- Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.
+- Select animation to explain a relationship, guide attention or give interaction feedback. Keep a quiet/static treatment when it serves the task. A new client does not inherit Co-op's grocery artwork or visual style.
+- Prefer CSS/SVG and native browser animation for small static pages. Adapt selected 21st.dev components to the current brand and framework after reviewing their source, dependencies and licence. Do not add a framework solely for a small effect.
+- Use Blender where custom depth, lighting or materials earn the production work. Prefer an optimised render for decoration. Add live 3D when visitor interaction benefits from it and performance has been checked.
+- Respect reduced-motion changes, retain keyboard focus and keep the content complete when animation or JavaScript is unavailable. Presentations also need complete print/static compositions.
+- Keep factual progress and readiness independent from decorative animation. In Voice Demo Builder, a completed visual sequence cannot expose a ready/call action before the existing verified readiness gates pass.
+
+## Keep learning
+
+Record an actual user correction or observed result as a dated decision, including its scope, rationale, example and checks. Separate accepted decisions from ideas awaiting a prototype. Carry the applicable decision into new briefs and specialist handoffs without asking the user to repeat it. Promote a tested pattern, not an entire client's styling.
+
+Keep exact sources and validation limits in operator material. Update this source skill, its installed copy and the portfolio catalogue when its scope or ownership changes. Existing packages and native runtimes require their normal release process; a guidance update is not a runtime upgrade.
+
+“Voice Demo Builder” is the working audience-facing name for the unattended website-to-voice workflow. Keep existing `website-receptionist` APIs, saved identities and Environment Builder/official AVA ownership unchanged. Do not rename existing native resources as a side effect.
