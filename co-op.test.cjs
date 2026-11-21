@@ -7,7 +7,7 @@ test('Co-op retains its own binding and disabled or invalid settings cannot load
   const context={window:{},Object};
   vm.runInNewContext(fs.readFileSync('co-op/messenger-config.js','utf8'),context);
   const binding=context.window.CoOpMessenger;
-  assert.equal(binding.enabled,true);
+  assert.equal(binding.enabled,false);
   assert.equal(binding.deploymentId,'5553b3be-9c02-4666-b4a8-98c1e53c3884');
   assert.equal(context.window.ClaimsServiceMessenger,undefined);
   for(const config of [undefined,{...binding,enabled:false},{enabled:true,region:'eu-west-1',deploymentId:'invalid'},{enabled:true,region:'eu-west-2',deploymentId:'00000000-0000-4000-8000-000000000000'}]){
@@ -31,7 +31,7 @@ test('enabled Co-op binding waits for a deliberate click and loads only its sele
   const button={disabled:true,addEventListener(event,handler){assert.equal(event,'click');click=handler;}};
   const status={textContent:''};
   const document={getElementById:id=>id==='start-chat'?button:status,createElement:()=>({}),head:{appendChild(script){scripts.push(script);}}};
-  const window={CoOpMessenger:context.window.CoOpMessenger};
+  const window={CoOpMessenger:{...context.window.CoOpMessenger,enabled:true}};
   vm.runInNewContext(fs.readFileSync('co-op/messenger.js','utf8'),{window,document,Date,setTimeout:()=>1,clearTimeout(){}});
   assert.equal(button.disabled,false);
   assert.equal(scripts.length,0);
