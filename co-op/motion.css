@@ -1,0 +1,89 @@
+/* Motion is an enhancement: the complete page remains visible without JavaScript. */
+:root {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+.hero-visual { position: relative; display: grid; align-items: center; min-width: 0; }
+.hero-art { width: 100%; height: 100%; }
+.hero-art svg { overflow: visible; }
+.hero-art .scene-sun { fill: #ffdc74; }
+.replay-scene {
+  position: absolute; bottom: 21px; right: 27px; display: none;
+  align-items: center; gap: 8px; min-height: 44px; padding: 8px 12px;
+  background: var(--pale); border: 1px solid var(--line); color: var(--ink);
+  border-radius: var(--radius-button); font-size: .875rem; cursor: pointer;
+}
+.motion-available .replay-scene { display: inline-flex; }
+.replay-scene svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.replay-scene:hover { background: white; }
+.replay-scene:disabled { cursor: default; }
+
+.delivery-scene { width: 160px; flex: 0 0 160px; }
+.delivery-scene svg { display: block; width: 100%; height: auto; }
+.order-strip { gap: 22px; }
+.order-strip > div:not(.delivery-scene) { max-width: 530px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy { animation: copy-arrives 750ms var(--ease-out) both; }
+  .scene-playing .scene-sun { transform-origin: 325px 240px; animation: sun-arrives 1400ms var(--ease-out) both; }
+  .scene-playing .scene-shadow { transform-origin: 320px 446px; animation: shadow-arrives 1400ms var(--ease-out) both; }
+  .scene-playing .scene-shop { transform-origin: 325px 430px; animation: bag-settles 2000ms var(--ease-out) both; }
+  .scene-playing .scene-bread { animation: groceries-arrive 1000ms 150ms var(--ease-out) both; }
+  .scene-playing .scene-greens { animation: groceries-arrive 1100ms 260ms var(--ease-out) both; }
+  .scene-playing .scene-carrot { animation: groceries-arrive 1100ms 390ms var(--ease-out) both; }
+  .scene-playing .scene-milk { animation: groceries-arrive 1100ms 520ms var(--ease-out) both; }
+  .scene-playing .art-tag { animation: tag-arrives 1200ms 650ms var(--ease-out) both; }
+  .scene-playing .replay-scene svg { animation: replay-turn 1800ms var(--ease-out); }
+  .delivery-playing .delivery-van { animation: van-arrives 1600ms var(--ease-out) both; }
+  .delivery-playing .delivery-cloud { animation: clouds-arrive 1600ms var(--ease-out) both; }
+  .button, .card, .icon, .icon svg, summary svg, .order-link svg {
+    transition: transform 240ms var(--ease-out), background-color 180ms ease, border-color 180ms ease, box-shadow 240ms ease;
+  }
+  .button:not(:disabled):hover { transform: translateY(-2px); box-shadow: 0 5px 0 rgb(36 36 36 / .12); }
+  .button:not(:disabled):active { transform: translateY(0); box-shadow: none; }
+  .card:hover, .card:focus-visible { transform: translateY(-5px); box-shadow: 0 12px 28px rgb(0 95 131 / .08); }
+  .card:hover .icon, .card:focus-visible .icon { transform: rotate(-7deg); background: #d1eef5; }
+  .card:hover .icon svg, .card:focus-visible .icon svg { transform: rotate(7deg) scale(1.07); }
+  .order-link:hover svg { transform: translateY(-2px); }
+  dialog[open] { animation: dialog-arrives 260ms var(--ease-out); }
+  dialog[open]::backdrop { animation: backdrop-arrives 220ms ease; }
+  details[open] > div { animation: answer-arrives 240ms var(--ease-out); }
+}
+
+@keyframes copy-arrives { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes sun-arrives { from { opacity: .4; transform: scale(.88); } to { opacity: 1; transform: scale(1); } }
+@keyframes shadow-arrives { from { opacity: .2; transform: scaleX(.6); } to { opacity: 1; transform: scaleX(1); } }
+@keyframes groceries-arrive { from { opacity: 0; transform: translateY(76px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bag-settles { 0% { transform: translateY(28px) rotate(-4deg); } 55% { transform: translateY(-5px) rotate(1.5deg); } 100% { transform: translateY(0) rotate(0); } }
+@keyframes tag-arrives { from { opacity: 0; transform: rotate(-8deg) scale(.7); } to { opacity: 1; transform: rotate(12deg) scale(1); } }
+@keyframes replay-turn { to { transform: rotate(360deg); } }
+@keyframes van-arrives { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes clouds-arrive { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes dialog-arrives { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes backdrop-arrives { from { opacity: 0; } to { opacity: 1; } }
+@keyframes answer-arrives { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 1000px) {
+  .delivery-scene { width: 125px; flex-basis: 125px; }
+  .order-strip { flex-wrap: wrap; }
+  .order-strip > div:not(.delivery-scene) { flex: 1; min-width: 240px; }
+}
+@media (max-width: 760px) {
+  .hero-visual { padding-bottom: 52px; }
+  .hero-art { height: 260px; }
+  .replay-scene { bottom: 12px; right: 22px; }
+  .order-strip { display: grid; grid-template-columns: 1fr 96px; gap: 0 8px; }
+  .order-strip > div:not(.delivery-scene) { min-width: 0; grid-row: 1; }
+  .order-strip .delivery-scene { grid-column: 2; grid-row: 1; width: 96px; align-self: start; margin-top: 15px; }
+  .order-strip > div:not(.delivery-scene), .order-strip .button { grid-column: 1 / -1; }
+  .order-strip .eyebrow, .order-strip h2 { padding-right: 110px; }
+  .order-strip .button { justify-self: start; grid-row: 2; margin-left: 0; }
+}
+@media (max-width: 360px) {
+  .order-strip .delivery-scene { display: none; }
+  .order-strip .eyebrow, .order-strip h2 { padding-right: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-available .replay-scene { display: none; }
+  .hero-visual { padding-bottom: 0; }
+}

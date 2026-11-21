@@ -39,6 +39,14 @@ The Co-op visual revision applies restrained card/panel radii, alpha border toke
 
 Keep its grocery illustration and flat surfaces. A carousel, dark theme, gradient, blend mode or blurred icon swap would add little to this support task. Reuse its rules in another page only when the component and brand call for them.
 
+## Motion as an enhancement
+
+The Co-op motion example adds a short grocery-bag assembly and a decorative delivery van using the existing SVG style. Animations finish within three seconds, with a deliberate replay control for the hero; there is no continuous loop, scroll hijacking or simulated live order status. Card feedback, dialog entry and section reveals support the existing task rather than introducing another customer journey.
+
+Use CSS and SVG for a small static site before adding an animation framework. Content must be visible if scripts fail or IntersectionObserver is unavailable. Respect reduced motion on initial load and when the preference changes: cancel pending reveal animations, remove decorative playback and retain all support actions. Do not animate a focused section out of view. A new Blender asset or interactive 3D scene should justify its production and runtime cost; it is optional, not a default dependency.
+
+For visual changes, inspect desktop, narrow mobile and enlarged text. Check replay, focus, FAQ links and order-dialog open/close, as well as the reduced-motion and no-JavaScript fallbacks. Local animation tests are separate from Messenger delivery evidence. The Co-op launcher remains governed by its existing independently approved binding.
+
 ## Technical references
 
 - [CSS Color 4: interpolation](https://www.w3.org/TR/css-color-4/#interpolation): perceptual colour spaces and the tradeoffs between Oklab and OKLCH.
