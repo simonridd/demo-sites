@@ -54,6 +54,18 @@
         "co-op-help-guide.test.cjs"
       ],
       "support": "documented"
+    },
+    {
+      "id": "site-connected-support-journey",
+      "owner": "build-demo-site",
+      "sources": [
+        "co-op-journey/index.html",
+        "co-op-journey/journey.js",
+        "co-op-journey/journey.css",
+        "assets/vendor/gsap/source.json",
+        "co-op-journey.test.cjs"
+      ],
+      "support": "documented"
     }
   ]
 }

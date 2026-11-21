@@ -27,6 +27,8 @@ Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.
 
 Its guided support panel progressively enhances ordinary help links into responsive tabs. Preserve its existing FAQ hashes, keyboard orientation and shared receipt actions; retain plain-link fallback and all-topic print output. The reviewed 21st.dev reference and native implementation contract are described in [website design decisions](references/website-design.md#guided-help-and-component-references).
 
+The separate `co-op-journey/` companion is an authored connected-support explanation with pinned GSAP motion. Apply the [journey guidance](references/website-design.md#connected-journey-experiments) when adapting it. Keep customer-task pages and optional explanatory dependencies independent; a website recipe is not an installed presentation or Voice Demo Builder feature.
+
 ## Integrations and public hosting
 
 This repository is public static hosting, not an API secret store. Publish only public website assets and fictional or otherwise publishable content. Keep credentials, tokens, private run evidence and customer records out of source, browser bundles, catalogue entries and URLs.

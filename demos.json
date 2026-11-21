@@ -135,6 +135,19 @@
       ],
       "accent": "#00a1cc",
       "logo": "co-op/co-op-logo.svg"
+    },
+    {
+      "slug": "co-op-journey",
+      "title": "Co-op Group · Connected support",
+      "category": "Customer journeys",
+      "description": "Follow a missing-item question from the customer through assistant guidance, knowledge and an adviser handover.",
+      "tags": [
+        "Customer journey",
+        "Knowledge",
+        "Adviser handover"
+      ],
+      "accent": "#00a1cc",
+      "logo": "co-op/co-op-logo.svg"
     }
   ]
 }
