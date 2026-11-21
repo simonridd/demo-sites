@@ -3,6 +3,7 @@
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const scene = document.querySelector('.hero-visual');
   const van = document.querySelector('.delivery-scene');
+  const render = document.querySelector('.hero-render');
   let sceneTimer;
   let vanTimer;
   let observer;
@@ -61,6 +62,15 @@
     });
   }
 
+  if (render) {
+    // Keep the complete vector illustration if the rendered asset fails to load.
+    const showRender = () => {
+      if (render.naturalWidth > 0) scene.classList.add('render-ready');
+    };
+    render.addEventListener('load', showRender, { once: true });
+    render.addEventListener('error', () => scene.classList.remove('render-ready'), { once: true });
+    if (render.complete) showRender();
+  }
   preference.addEventListener('change', syncPreference);
   document.addEventListener('focusin', () => {
     // Never animate keyboard focus out of view while a section is arriving.

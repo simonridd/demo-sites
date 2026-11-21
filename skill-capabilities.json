@@ -1,7 +1,8 @@
 {
   "schemaVersion": 1,
   "skills": {
-    "build-demo-site": "skills/build-demo-site"
+    "build-demo-site": "skills/build-demo-site",
+    "demo-experience-standards": "skills/demo-experience-standards"
   },
   "capabilities": [
     {
@@ -31,6 +32,15 @@
         "co-op/motion.css",
         "co-op/motion.js",
         "co-op-motion.test.cjs"
+      ],
+      "support": "documented"
+    },
+    {
+      "id": "shared-demo-experience-decisions",
+      "owner": "demo-experience-standards",
+      "sources": [
+        "skills/demo-experience-standards/SKILL.md",
+        "skills/demo-experience-standards/references/decisions.md"
       ],
       "support": "documented"
     }

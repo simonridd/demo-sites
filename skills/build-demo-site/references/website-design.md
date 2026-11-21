@@ -37,11 +37,11 @@ For the demo collection, prioritise card geometry, separators and search/navigat
 
 The Co-op visual revision applies restrained card/panel radii, alpha border tokens and consistent SVG icon strokes. Its order dialog derives the inset help panel's radius from the outer radius, padding and border, and uses a dynamic viewport height limit with a conventional fallback. Supporting text is at least 14px at default settings, ordinary body/action text is 16px or larger, and mobile navigation remains available. A derived soft background uses OKLCH with an sRGB fallback while approved blue and pale brand colours stay intact.
 
-Keep its grocery illustration and flat surfaces. A carousel, dark theme, gradient, blend mode or blurred icon swap would add little to this support task. Reuse its rules in another page only when the component and brand call for them.
+Keep its grocery subject and flat brand surfaces. A carousel, dark theme, gradient, blend mode or blurred icon swap would add little to this support task. Reuse its rules in another page only when the component and brand call for them.
 
 ## Motion as an enhancement
 
-The Co-op motion example adds a short grocery-bag assembly and a decorative delivery van using the existing SVG style. Animations finish within three seconds, playing once automatically without replay or watch-again controls; there is no continuous loop, scroll hijacking or simulated live order status. Card feedback, dialog entry and section reveals support the existing task rather than introducing another customer journey.
+The Co-op motion example adds a short grocery-bag entrance and a decorative delivery van. Its optional Blender-rendered grocery scene is a local WebP; the original SVG remains the no-JavaScript/load-failure fallback. Animations finish within three seconds, playing once automatically without replay or watch-again controls; there is no continuous loop, scroll hijacking or simulated live order status. Card feedback, dialog entry and section reveals support the existing task rather than introducing another customer journey.
 
 Use CSS and SVG for a small static site before adding an animation framework. Content must be visible if scripts fail or IntersectionObserver is unavailable. Respect reduced motion on initial load and when the preference changes: cancel pending reveal animations, remove decorative playback and retain all support actions. Do not animate a focused section out of view. A new Blender asset or interactive 3D scene should justify its production and runtime cost; it is optional, not a default dependency.
 
@@ -53,3 +53,7 @@ For visual changes, inspect desktop, narrow mobile and enlarged text. Check natu
 - [MDN: viewport length units](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/length#relative_length_units_based_on_viewport): small, large and dynamic viewport behaviour.
 - [W3C: multiply blending](https://www.w3.org/TR/compositing-1/#blendingmultiply): multiplication blends the entire source with its backdrop.
 - [MDN: reduced motion](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion): honour the user's preference for less nonessential motion.
+
+## Blender asset production
+
+The original Co-op recipe lives in `tools/artwork/co-op-groceries.py`, with pinned offline render dependencies and reproduction instructions in `tools/artwork/README.md`. Commit the optimised WebP and source recipe; keep intermediate renders, editable scene outputs and the Python environment out of the public site. A render is a design asset, not a live 3D capability. Verify loading, fallback, responsive composition and reduced motion before adopting it for another customer.
