@@ -25,6 +25,8 @@ The Co-op page is the first applied example: shared corner and border tokens, ba
 
 Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.js`: a short grocery illustration that plays once on entry, with an optional locally rendered Blender asset and the original vector fallback, a decorative delivery scene, and restrained interface transitions. Follow the [motion guidance](references/website-design.md#motion-as-an-enhancement) when adapting this pattern. Keep the page usable without animation or JavaScript and keep support actions and Messenger authority independent from decorative playback.
 
+Its guided support panel progressively enhances ordinary help links into responsive tabs. Preserve its existing FAQ hashes, keyboard orientation and shared receipt actions; retain plain-link fallback and all-topic print output. The reviewed 21st.dev reference and native implementation contract are described in [website design decisions](references/website-design.md#guided-help-and-component-references).
+
 ## Integrations and public hosting
 
 This repository is public static hosting, not an API secret store. Publish only public website assets and fictional or otherwise publishable content. Keep credentials, tokens, private run evidence and customer records out of source, browser bundles, catalogue entries and URLs.

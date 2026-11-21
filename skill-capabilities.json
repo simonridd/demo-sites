@@ -43,6 +43,17 @@
         "skills/demo-experience-standards/references/decisions.md"
       ],
       "support": "documented"
+    },
+    {
+      "id": "site-coop-guided-help",
+      "owner": "build-demo-site",
+      "sources": [
+        "co-op/help-guide.js",
+        "co-op/help-guide.css",
+        "co-op/page.js",
+        "co-op-help-guide.test.cjs"
+      ],
+      "support": "documented"
     }
   ]
 }
