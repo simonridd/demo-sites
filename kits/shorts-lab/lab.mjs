@@ -38,7 +38,13 @@ function previewFor(e) {
   const simple = (visual, caption = '') => `${visual}${caption ? `<small class="footnote">${caption}</small>` : ''}`;
   switch(e.preview) {
     case 'checkbox': return `<label class="check-line"><input type="checkbox" checked><span>Keep me updated</span></label><small>Native control, intentional accent</small>`;
-    case 'button': case 'button-looks': return simple(`<button type="button" class="demo-button" data-action="replay">See the difference ↗</button>`,'Hover, focus and press');
+    case 'button': return simple(`<button type="button" class="demo-button" data-action="replay">See the difference ↗</button>`,'Hover, focus and press');
+    case 'button-looks': return `<div class="premium-button-study">
+      <button type="button" class="premium-action" data-action="premium-button" aria-pressed="false" aria-label="Toggle the premium button selection">
+        <span class="premium-action-copy">Make an impression</span><span class="premium-action-icon" aria-hidden="true">↗</span>
+      </button>
+      <small class="footnote premium-status" aria-live="polite">Tap the button · watch its layered light and pressed state</small>
+    </div>`;
     case 'highlight': return `<p class="selection-text">Make the <mark>important bit</mark> count.</p>${button('Switch emphasis','highlight')}`;
     case 'layout-shift': case 'layout-shift-2': return `<div class="media-reserve"></div><small>Media space stays reserved</small>${button('Swap illustration','toggle-media')}`;
     case 'hero-candidate': return `<span class="candidate-label">Unverified — exploration</span><div class="visual-hero"><span>Beyond ordinary.</span></div><small>Hover the hero</small>`;
@@ -358,6 +364,8 @@ function doAction(btn,preview){
      }else if(preview.dataset.effect==='input'){
        const field=preview.querySelector('.md-field input');
        field?.blur();field?.focus();
+     }else if(preview.dataset.effect==='button-looks'){
+       preview.querySelector('[data-action="premium-button"]')?.click();
      }else if(preview.dataset.effect==='toggle'){
        preview.querySelector('.squishy-toggle input')?.click();
      }else if(preview.dataset.effect==='blur'){
@@ -390,6 +398,13 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'premium-button':{
+     const selected=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(selected));
+     const status=btn.closest('.premium-button-study')?.querySelector('.premium-status');
+     if(status)status.textContent=selected?'Selected · tap again to clear':'Not selected · ready to explore';
+     break;
+   }
    case 'split-menu':toggleSplitMenu(preview);break;
    case 'split-choice':{
       const selected=btn.textContent.trim();
