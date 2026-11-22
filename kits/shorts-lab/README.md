@@ -1,14 +1,14 @@
-# Motion Atlas — 75 referenced techniques
+# Motion Atlas — 77 referenced techniques
 
 Standalone, public-static, **originally implemented** experimental kit at `/kits/shorts-lab/`. It is not part of `demos.json`, is not a customer journey, has no Genesys/IVA/AVA binding, and does not modify any of the customer demos.
 
 ## Purpose and stage/product distinction
 
-The user explicitly prioritises **one-off presentation impact** as well as product UI quality. An effect can be worth rehearsing for a stage moment while still being a poor default in an everyday tool. Use the **One-off presentation** and **Everyday product** modes to judge the same 75 references with different expectations. The initial verdict remains in both modes so it is not silently rewritten. 'Stage candidate' is a review invitation, **not** approval to use or ship.
+The user explicitly prioritises **one-off presentation impact** as well as product UI quality. An effect can be worth rehearsing for a stage moment while still being a poor default in an everyday tool. Use the **One-off presentation** and **Everyday product** modes to judge the same 77 references with different expectations. The initial verdict remains in both modes so it is not silently rewritten. 'Stage candidate' is a review invitation, **not** approval to use or ship.
 
 The atlas holds:
-- All **75** named rows in the 22 November 2026 assessment, including incomplete titles and the Facebook odometer reel.
-- **62** candidates with original HTML/CSS/JS visual or functional experiments, including speculative examples explicitly marked as hypotheses.
+- The original **75** named research rows plus two later screenshot-led studies (76–77), including incomplete titles and the Facebook odometer reel.
+- **64** candidate studies with original HTML/CSS/JS visual or functional experiments, including speculative examples explicitly marked as hypotheses.
 - **13** non-CSS or out-of-scope research references, retained as explanation cards. They are not claimed as working implementations of translation, commerce, calendar, payment, AI agents or location sharing.
 - Zero third-party animation packages, CDN imports, analytics scripts, credentials, actual audio, video or live account actions.
 
@@ -95,7 +95,7 @@ The capture command starts a temporary **loopback-only server**, opens the actua
 ## Repository files
 
 - `index.html` — gallery layout, scope/attribution notice and filters
-- `effects-data.mjs` — one labelled row for all 75 references
+- `effects-data.mjs` — one labelled row for all 77 references
 - `lab.mjs` — original preview composition, event delegation, accessible state and filtering
 - `lab.css` — responsive gallery and one-shot visual effects with reduced-motion overrides
 - `../../shorts-lab.test.cjs` — smoke and register coverage checks
@@ -141,3 +141,12 @@ After changing the live studies, recreate **only** the seven assets 060.mp4, 061
 | 065 | Pixel squeeze | **Stage-only prototype.** A bounded, stepped squash with a brief pixel grid is interesting for a theatrical reveal. It should not become routine confirmation or navigation. The reference screenshot did not expose all of its original CSS, so the implementation is independently authored and labelled speculative. |
 
 All original video links and case IDs are retained. The Android/Liquid comparison is intentionally about the optical treatment, not a promise of an Apple or Google component implementation. Check both alternatives on a real mobile browser before promotion; the existing CSS fallback must stay readable without backdrop-filter. This batch's successful capture and publication are separate from the source code changes.
+
+
+## Screenshot-supplied filter and image glow (current review)
+
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, and 77**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+
+Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
+
+Study 057 now compares a smooth gradient against the identical gradient with an original SVG `feTurbulence` texture mixed at low opacity. The grain can be toggled without altering the source gradient. Update only changed study recordings (52, 57, 60, 61, 65–69, 76 and 77); preserve the other video assets and all customer routes. Keep the broader product and presentation standards unchanged until visual selection is reviewed.
