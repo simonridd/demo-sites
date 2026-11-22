@@ -72,10 +72,10 @@ Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Busy is not proof of p
 Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Keep native range semantics and show values while upgrading visuals.
 Your toggles look cheap|Adopt|P1|toggle|Controls|yes|Make on/off unmistakeable with an actual checkbox.
 Wavy loading bars are taking over|Adapt|P2|wavy|Status|yes|Fun only for bounded staging; avoid indefinite ambiguous loading.
-Your icons look boring|Adapt|P2|icons|Controls|yes|Animate the selected symbol, not every icon on a page.
-New collapsing header|Adapt|P2|header|Navigation|yes|Recover space without covering content or hiding navigation.
-Your inputs look basic|Adopt|P1|input|Controls|yes|Focus and validation should be clear before decorative flourishes.
-New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Try native scroll-snap and buttons; maintain focus and visible controls.
+Your icons look boring|Adapt|P2|icons|Controls|yes|SVG heart, star and bookmark fill from bottom when selected; the button state persists and reverses. Use motion only to clarify a genuine choice.
+New collapsing header|Adapt|P2|header|Navigation|yes|Sticky mobile header shrinks using CSS scroll-state(stuck: top), with a scoped older-browser fallback. Keep links visible and usable.
+Your inputs look basic|Adopt|P1|input|Controls|yes|Material-style semantic floating label and accent underline wipe on focus; keep typed text, help text and visible focus state.
+New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Centred scroll-snap items enlarge as they enter view using animation-timeline: view(inline), with an accessible button/keyboard fallback.
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
 `.trim();
 const cols=RAW.split("\n");
@@ -83,7 +83,7 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- evidence:verdict==="Hold"?"unverified title": "catalogue/description",
+ evidence:[70,71,72,73].includes(i)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
