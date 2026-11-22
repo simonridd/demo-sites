@@ -33,6 +33,12 @@ A brief presenter-controlled walkthrough can show a capability in use within the
 
 Give repeated scenes different jobs, move optional exploration into backup when it interrupts the story, and close with a concrete request type, team, baseline and measures. Preserve chosen partnership branding through custom scenes, including contrast on dark slides and clear mobile headers.
 
+## Full-demo handoff
+
+When full demonstrations are part of the presentation, establish the people, friction and relevant help before handing over to the selected native players. Return to what the chosen example shows, then attributable results and a focused next decision. Make the entry, choice of another example and return to the story clear. Keep the player's media, audio, timing, native controls and download workflow intact; theme only its surrounding frame. A short illustrated moment can support the story but does not replace the full-demo workflow. Do not infer a completed transaction, transfer or audience viewing from opening a recording.
+
+Use subtle physical depth and press feedback selectively on prominent actions when it fits the brand. Keep navigation quiet, keyboard focus clear, disabled treatment flat and reduced motion still. The Holcim demo launch buttons are a bounded trial, not a portfolio-wide style change.
+
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.
