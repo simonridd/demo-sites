@@ -21,9 +21,9 @@ function fakeNode(){
 }
 async function start(){
  const effects=await getEffects();
- const keys=['#cards','#search','#verdict','#family','#stage-only','#result-count','#context-note','#empty','#reset'];
+ const keys=['#cards','#search','#verdict','#family','#media-filter','#stage-only','#result-count','#context-note','#empty','#reset'];
  const nodes=Object.fromEntries(keys.map(k=>[k,fakeNode()]));
- nodes['#search'].value='';nodes['#stage-only'].checked=false;
+ nodes['#search'].value='';nodes['#media-filter'].value='all';nodes['#stage-only'].checked=false;
  const doc={querySelector:s=>nodes[s],querySelectorAll:()=>[],createElement:()=>fakeNode(),addEventListener(){},documentElement:fakeNode()};
  const win={matchMedia:()=>({matches:false})};
  const script=read('kits/shorts-lab/lab.mjs').replace(/^import [^\n]+\n/gm,'');
@@ -129,4 +129,14 @@ test('capture workflow supplies concrete browser previews and a strict manifest'
  assert.match(links,/CHANNEL_ID = "UC5DNytAJ6_FISueUfzZCVsw"/);
  assert.match(links,/is_right_creator/);
  assert.match(data,/import \{resolvedVideos\}/);
+});
+
+test('media evidence filters distinguish exact source matches from title-only searches',async()=>{
+ const {nodes}=await start();
+ nodes['#media-filter'].value='exact';nodes['#media-filter'].handlers.change();
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,3);
+ nodes['#media-filter'].value='unverified';nodes['#media-filter'].handlers.change();
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,72);
+ nodes['#media-filter'].value='ready';nodes['#media-filter'].handlers.change();
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,0);
 });
