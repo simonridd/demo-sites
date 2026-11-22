@@ -7,6 +7,7 @@ const search = document.querySelector('#search');
 const verdictFilter = document.querySelector('#verdict');
 const familyFilter = document.querySelector('#family');
 const stageOnly = document.querySelector('#stage-only');
+const screenshotsOnly = document.querySelector('#screenshots-only');
 const mediaFilter = document.querySelector('#media-filter');
 const resultCount = document.querySelector('#result-count');
 const contextNote = document.querySelector('#context-note');
@@ -211,6 +212,27 @@ function previewFor(e) {
   <small class="footnote">Scroll or use arrows. Centred item enlarges.</small>
 </div>`;
     case 'odometer': return `${rollHTML('12,840')}${button('Roll to 24,715','odometer')}`;
+    case 'chips': return `<div class="chips-study">
+  <div class="chips-strip" role="group" aria-label="Filter example showcases">
+    ${['All','Retail','Finance','Travel','Support'].map((v,i)=>`<button type="button" data-action="filter-chip" data-chip="${v.toLowerCase()}" aria-pressed="${i===0}" class="filter-chip">${v}</button>`).join('')}
+  </div>
+  <div class="chips-results" aria-live="polite" aria-atomic="true">
+    <div data-sample="retail"><b>01</b><strong>Retail journeys</strong></div>
+    <div data-sample="finance"><b>02</b><strong>Financial services</strong></div>
+    <div data-sample="travel"><b>03</b><strong>Travel experiences</strong></div>
+    <div data-sample="support"><b>04</b><strong>Customer support</strong></div>
+  </div>
+  <small class="chips-caption">All categories · 4 results</small>
+</div>`;
+    case 'image-glow': return `<div class="image-glow-study">
+   <div class="image-glow-stage is-glowing" data-glow="true">
+     <img class="image-glow-halo" src="./assets/077-glow-bloom.svg" alt="" aria-hidden="true" decoding="async">
+     <img class="image-glow-image" src="./assets/077-glow-bloom.svg" alt="Original iridescent geometric bloom" decoding="async">
+   </div>
+   <button type="button" class="small-action" data-action="image-glow" aria-pressed="true">Glow on · compare</button>
+   <small class="footnote">A blurred copy of the same transparent artwork creates the coloured halo.</small>
+</div>`;
+
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
 }
@@ -219,6 +241,7 @@ function cardHTML(e) {
  const speculative=e.verdict==='Hold';
  const tagClass='verdict-'+e.verdict.replaceAll(' ','-');
  const stageTag=audience==='stage' && e.stage ? '<span class="tag stage-candidate">Stage candidate</span>' : '';
+ const suppliedTag=e.screenshotProvided?'<span class="tag screenshot-supplied">Screenshot supplied</span>':'';
  const source=originalVideoLink(e);
  const sourceHTML=source.status==='verified'
    ? `<a class="source-link source-verified" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer" title="Verified individual video: ${esc(source.evidence)}">↗ Watch original ${esc(source.platform)} video</a>`
@@ -231,9 +254,9 @@ function cardHTML(e) {
       : '<div class="clip-unavailable"><span aria-hidden="true">▻</span><strong>Recording pending</strong><small>Local capture not yet published</small></div>';
  return `<article class="card" data-id="${e.id}" data-stage="${audience==='stage'&&e.stage}" data-clip="${Boolean(clip)}" data-source="${source.status}">
   <div class="card-inner">
-    <span class="card-index">STUDY ${String(e.id).padStart(3,'0')} / 075 · ${esc(e.family)}</span>
+    <span class="card-index">STUDY ${String(e.id).padStart(3,'0')} / ${String(effects.length).padStart(3,'0')} · ${esc(e.family)}</span>
     <h3 class="card-title">${esc(e.title)}</h3>
-    <div class="tags"><span class="tag ${tagClass}">${esc(e.verdict)}</span><span class="tag">${esc(e.priority)}</span>${stageTag}${speculative?'<span class="tag prototype-flag">Hypothesis</span>':''}</div>
+    <div class="tags"><span class="tag ${tagClass}">${esc(e.verdict)}</span><span class="tag">${esc(e.priority)}</span>${stageTag}${suppliedTag}${speculative?'<span class="tag prototype-flag">Hypothesis</span>':''}</div>
   </div>
   <div class="comparison-row">
     <section class="comparison-pane" aria-label="Interactive version of ${esc(e.title)}">
@@ -259,6 +282,7 @@ function render(){
  const filtered=effects.filter(e=>
    (v==='all'||e.verdict===v) && (f==='all'||e.family===f) &&
    (!stageOnly.checked||e.stage) &&
+   (!screenshotsOnly.checked||e.screenshotProvided) &&
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  cards.innerHTML=filtered.map(cardHTML).join('');
@@ -359,7 +383,11 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='icons'){
+     if(preview.dataset.effect==='image-glow'){
+       preview.querySelector('[data-action="image-glow"]')?.click();
+     }else if(preview.dataset.effect==='chips'){
+       preview.querySelector('.filter-chip[data-chip="retail"]')?.click();
+     }else if(preview.dataset.effect==='icons'){
        preview.querySelector('button[data-action="icon"]')?.click();
      }else if(preview.dataset.effect==='input'){
        const field=preview.querySelector('.md-field input');
@@ -403,6 +431,28 @@ function doAction(btn,preview){
      btn.setAttribute('aria-pressed',String(selected));
      const status=btn.closest('.premium-button-study')?.querySelector('.premium-status');
      if(status)status.textContent=selected?'Selected · tap again to clear':'Not selected · ready to explore';
+     break;
+   }
+   case 'filter-chip':{
+     const study=btn.closest('.chips-study');
+     const value=btn.dataset.chip||'all';
+     for(const chip of study.querySelectorAll('[data-action="filter-chip"]'))chip.setAttribute('aria-pressed',String(chip===btn));
+     let count=0;
+     for(const item of study.querySelectorAll('[data-sample]')){
+       item.hidden=value!=='all'&&item.dataset.sample!==value;
+       if(!item.hidden)count++;
+     }
+     const caption=study.querySelector('.chips-caption');
+     if(caption)caption.textContent=(value==='all'?'All categories':btn.textContent)+' · '+count+' '+(count===1?'result':'results');
+     break;
+   }
+   case 'image-glow':{
+     const study=btn.closest('.image-glow-study');
+     const stage=study?.querySelector('.image-glow-stage');
+     const enabled=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(enabled));
+     if(stage){stage.classList.toggle('is-glowing',enabled);stage.dataset.glow=String(enabled);}
+     btn.textContent=enabled?'Glow on · compare':'Glow off · compare';
      break;
    }
    case 'split-menu':toggleSplitMenu(preview);break;
@@ -517,6 +567,18 @@ cards.addEventListener('click',event=>{
  if(preview)doAction(btn,preview);
 });
 cards.addEventListener('keydown',event=>{
+ const chip=event.target.closest?.('.chips-strip .filter-chip');
+ if(chip&&['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
+   event.preventDefault();
+   const strip=chip.closest('.chips-strip');
+   const tabs=[...strip.querySelectorAll('.filter-chip')];
+   const index=tabs.indexOf(chip);
+   const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:
+     (index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+   tabs[next].focus();
+   tabs[next].click();
+   tabs[next].scrollIntoView?.({block:'nearest',inline:'nearest'});
+ }
  const carousel=event.target.closest?.('.carousel-scroller');
  if(carousel && ['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
    event.preventDefault();
@@ -586,7 +648,7 @@ cards.addEventListener('input',event=>{
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
 document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
-for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly])
+for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly,screenshotsOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){
  radio.addEventListener('change',()=>{
@@ -599,6 +661,6 @@ for(const radio of document.querySelectorAll('[name="audience"]')){
  });
 }
 document.querySelector('#reset').addEventListener('click',()=>{
- search.value='';verdictFilter.value='all';familyFilter.value='all';mediaFilter.value='all';stageOnly.checked=false;render();search.focus();
+ search.value='';verdictFilter.value='all';familyFilter.value='all';mediaFilter.value='all';stageOnly.checked=false;screenshotsOnly.checked=false;render();search.focus();
 });
 render();
