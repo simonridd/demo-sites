@@ -42,6 +42,56 @@ Avoid copying a client's branding, a TV programme, media-player visuals or copyr
 - Review baseline: 22 November 2026, 75-row local research register (verdicts migrated to `effects-data.mjs` with the evidence caveats). Titles truncated in the source remain deliberately truncated. Do not invent full names or video URLs.
 - Existing design decisions: `skills/build-demo-site/references/website-design.md` and `skills/demo-experience-standards/references/implementation-playbook.md`. These are **not modified** by this experimental page.
 
+
+## Side-by-side video comparison — second iteration
+
+The interface now has three distinct objects for each study:
+
+1. **Original video link.** A direct individual link is shown **only** when title and source are verified. As of the initial commit, three links were independently resolved: the YouTube modern slider tutorial, the YouTube toggle tutorial and the original Facebook odometer reel. The other cards say **Find this video (unverified)** and link to a title-scoped YouTube search, not the creator home page. `source-videos.mjs` holds the verified originals; `resolved-videos.mjs` is the machine-audited extension.
+2. **Recorded implementation.** Once a real browser capture has been created, `clip-manifest.mjs` points to a committed local MP4 asset and displays an ordinary accessible `<video>` player. Until then the card explicitly reads **Recording pending**. Never silently substitute GIFs, stock video or the creator's copyrighted recording.
+3. **Live implementation.** The authored preview remains in a separate panel with interactive controls; once a real clip exists, **Compare both** starts its playback alongside the preview's original animation.
+
+A video only enters the manifest after `ffprobe` confirms dimensions and a playable video stream. There is no browser-side uploading, tracking or external playback runtime. This is a review aid, not a media redistribution catalogue.
+
+### Running the video-link resolver on the Mac
+
+Requires public metadata access via `yt-dlp`, installed separately (for example `brew install yt-dlp`). It **does not download video content**.
+
+```sh
+python3 tools/resolve-motion-videos.py --limit 8
+python3 tools/resolve-motion-videos.py
+```
+
+The resolver accepts a YouTube URL only when both the originating channel and the video title match strongly. It writes `kits/shorts-lab/resolved-videos.mjs` and an auditable `video-link-resolution.json`. Truncated titles and low-confidence matches stay unresolved and retain their exact-title search fallback. Review new links in a browser before committing; do not override the three manually verified ones.
+
+### Capturing *our actual site*, not a separate mock-up
+
+Requires `python3` with `playwright` and a Chromium browser, plus `ffmpeg` and `ffprobe`. This remains a local authoring task, not a dependency of visitors to GitHub Pages.
+
+```sh
+python3 -m pip install playwright
+python3 -m playwright install chromium
+brew install ffmpeg
+python3 tools/capture-motion-atlas.py --list
+python3 tools/capture-motion-atlas.py --ids 40 41 68 69 75
+# After reviewing that batch, capture every remaining visual study:
+python3 tools/capture-motion-atlas.py
+node --test shorts-lab.test.cjs
+node --test *.test.cjs quote/*.test.cjs
+```
+
+The capture command starts a temporary **loopback-only server**, opens the actual `kits/shorts-lab/` application in headless Chromium, triggers its existing effect controls, captures the real rendered `.preview` frames, encodes a ~2.5-second, 512×320 H.264 MP4 for each visual study and validates each file. It deliberately skips the 13 non-CSS research references. Existing clips can be regenerated using `--force`. Videos are generated under `kits/shorts-lab/assets/`; the manifest is rewritten to include only validated files. Commit source, recorded assets and manifest together as a reviewed change.
+
+**Status when this second-iteration branch was prepared:** the comparison UI, the exact-link registry and capture scripts exist; the MP4 collection and automatic discovery run have **not** executed in ChatGPT's GitHub connector session. A merged PR alone is not proof that clips exist. Do not merge a gallery that mainly displays "Recording pending"; run the capture workflow and inspect real footage first.
+
+### Acceptance before main
+
+- At least the first five high-value clips (IDs 40, 41, 68, 69, 75) play next to functioning live previews; their exact source links are checked individually.
+- Complete the 62 applicable clips or explicitly document and fix individual capture failures before claiming full video coverage.
+- Search/video-evidence filters distinguish verified source URLs from title searches; no channel-level source substitutes.
+- Inspect mobile stacking, Chrome and Safari MP4 playback, keyboard controls, reduced motion, repeated playback and the original Co-op/Github Pages routes.
+- Record the complete test output and final published Pages URL after merge. Shared product standards remain unchanged until the visual review is accepted.
+
 ## Repository files
 
 - `index.html` — gallery layout, scope/attribution notice and filters
