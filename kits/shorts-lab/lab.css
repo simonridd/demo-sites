@@ -421,3 +421,19 @@
 .split-popover-study .split-menu-items button span{font-size:17px;color:#147a5d}
 .split-popover-study [data-feedback]{font-size:11px;color:#3d675b;max-width:260px;line-height:1.45}
 @media(prefers-reduced-motion:reduce){.split-popover-study .split-wrap>button{transition:none!important}}
+
+
+/* Study 052 — Premium tactile button, original design trial. No infinite glow,
+   no added runtime, and never a hidden or inaccessible focus state. */
+.demo-button-looks .premium-button-study{width:100%;max-width:330px;display:grid;justify-items:center;gap:14px}
+.demo-button-looks .premium-action{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:13px;min-height:62px;width:min(100%,290px);padding:11px 15px 11px 21px;color:#f5fcf2;border:1px solid #a9d3d8;border-radius:18px;overflow:hidden;background:linear-gradient(130deg,#0a333b 5%,#185f5b 58%,#377e78 100%);font-size:16px;font-weight:800;letter-spacing:-.03em;box-shadow:inset 0 1px 1px #d1fff96a,inset 0 -3px 1px #001b2033,0 9px 0 #173f3a,0 15px 24px #083a4740;transform:translateY(0);transition:transform 170ms cubic-bezier(.22,1,.36,1),box-shadow 170ms,border-color 170ms,background-color 170ms;touch-action:manipulation}
+.demo-button-looks .premium-action::before{content:"";position:absolute;inset:-50% -20%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 15% 25%,#ffffff95,transparent 30%),linear-gradient(105deg,transparent 20%,#a5eeff65 42%,transparent 61%);transform:translateX(-75%) rotate(-12deg);opacity:.24}
+.demo-button-looks .premium-action-copy{white-space:nowrap;position:relative}
+.demo-button-looks .premium-action-icon{position:relative;display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border:1px solid #ffffff6c;border-radius:11px;background:linear-gradient(145deg,#d6fff4b0,#7ad3c544);color:#fff;font-size:24px;font-weight:500;transition:transform 170ms}
+@media(hover:hover) and (pointer:fine){.demo-button-looks .premium-action:hover::before{transform:translateX(65%) rotate(-12deg);opacity:.65;transition:transform 620ms cubic-bezier(.2,.75,.2,1),opacity 280ms}.demo-button-looks .premium-action:hover .premium-action-icon{transform:translate(2px,-2px)}}
+.demo-button-looks .premium-action:active{transform:translateY(6px) scale(.985);box-shadow:inset 0 1px 1px #d1fff96a,0 3px 0 #173f3a,0 8px 13px #083a4730}
+.demo-button-looks .premium-action:focus-visible{outline:3px solid #0a736d;outline-offset:5px}
+.demo-button-looks .premium-action[aria-pressed="true"]{border-color:#e7ffc3;background:linear-gradient(130deg,#14563d,#287a5e,#339f7b)}
+.demo-button-looks .premium-action[aria-pressed="true"] .premium-action-icon{background:#d8ffc0;color:#0d4d3d}
+.demo-button-looks .premium-status{font-size:11px;color:#3e6557;text-align:center;max-width:265px;line-height:1.45}
+@media(prefers-reduced-motion:reduce){.demo-button-looks .premium-action,.demo-button-looks .premium-action-icon,.demo-button-looks .premium-action::before{transition:none!important}.demo-button-looks .premium-action:active{transform:none}}
