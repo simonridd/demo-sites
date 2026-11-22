@@ -278,3 +278,55 @@ test('one-shot soft-focus background rotates once then settles; static/reduced-m
  assert.doesNotMatch(css,/atlas-gemini-reveal [^;}]*infinite/);
  assert.match(css,/\.gemini-aura,\.gemini-reveal-content\{animation:none!important/);
 });
+
+
+test('Android frosted blur and Liquid Glass-inspired surface remain explicit alternatives',async()=>{
+ const {nodes,effects}=await start();
+ const record=effects.find(e=>e.id===60);
+ assert.equal(record.preview,'blur');
+ assert.match(record.evidence,/user-supplied screenshot/);
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="blur-comparison-study" data-material="android"/);
+ assert.match(html,/data-action="blur-mode" data-mode="android" aria-pressed="true"/);
+ assert.match(html,/data-action="blur-mode" data-mode="liquid" aria-pressed="false"/);
+ assert.match(html,/Liquid Glass-inspired/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/backdrop-filter:blur\(17px\) saturate\(1\.3\)/);
+ assert.match(css,/backdrop-filter:blur\(9px\) saturate\(1\.9\) contrast\(1\.12\)/);
+ assert.match(css,/@supports not \(\(backdrop-filter:blur\(1px\)\)/);
+ assert.match(js,/case 'blur-mode'/);
+ assert.match(js,/choice\.setAttribute\('aria-pressed',String\(choice===btn\)\)/);
+});
+test('split button uses accessible popover or fallback and exposes distinct actions',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===61).preview,'split');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="split-popover-study"/);
+ assert.match(html,/aria-controls="split-options-61"/);
+ assert.match(html,/popover="auto" role="menu" hidden/);
+ assert.match(html,/role="menuitem"/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(js,/function closeSplitMenu/);
+ assert.match(js,/function toggleSplitMenu/);
+ assert.match(js,/showPopover/);
+ assert.match(js,/ArrowDown.*ArrowUp.*Home.*End/);
+ assert.match(js,/event\.key==='Escape'/);
+ assert.match(css,/\.split-menu-items:popover-open/);
+});
+test('pixel squeeze only animates a stage study on explicit replay',async()=>{
+ const {nodes,effects}=await start();
+ const record=effects.find(e=>e.id===65);
+ assert.equal(record.verdict,'Prototype');
+ assert.equal(record.preview,'squeeze');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="pixel-squeeze-study"/);
+ assert.match(html,/class="pixel-grid"/);
+ assert.match(html,/data-action="replay" type="button">▶ Squeeze once/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/@keyframes atlas-pixel-squeeze/);
+ assert.match(css,/\.preview\.is-playing \.pixel-squeeze-label/);
+ assert.doesNotMatch(css,/atlas-pixel-squeeze [^;\n}]*infinite/);
+ assert.match(css,/\.pixel-squeeze-label,\.pixel-glitch\{animation:none!important/);
+});
