@@ -99,3 +99,20 @@ The capture command starts a temporary **loopback-only server**, opens the actua
 - `lab.mjs` — original preview composition, event delegation, accessible state and filtering
 - `lab.css` — responsive gallery and one-shot visual effects with reduced-motion overrides
 - `../../shorts-lab.test.cjs` — smoke and register coverage checks
+
+## Screenshot-led refinements · 22 November 2026
+
+The following studies were refined from reference screenshots supplied during the review. This improves specificity of the initial catalogue, **not** authorship of or access to the creator's full source code. Their CSS and interactions were independently authored.
+
+| Study | Reference interpretation | Working kit implementation | When it earns its place |
+| --- | --- | --- | --- |
+| 74 · Modern carousel | The frame shows width 60%, aspect ratio 3/4, centre scroll snapping and animation-timeline view(inline). | Portrait cards scale up as they cross the centre, stay keyboard/arrow navigable and use a class-based fallback for unsupported scroll-driven CSS. | A project gallery or one-off presentation; avoid replacing an ordinary comparison grid without reason. |
+| 73 · Material-style input | Focus reveals an accent bar beneath the field; the label floats instead of colliding with text. | Native labelled input, focus-within underline wipe and persistent filled-state label. No new framework. | Forms and controls when focus clarity improves. |
+| 72 · Mobile collapsing nav | Navigation compresses once scrolling makes it sticky. | Sticky header with a scroll-state(stuck: top) container query and a scoped scroll-listener fallback. Links remain visible. | Mobile browsing with enough vertical content. |
+| 71 · Icons that fill | Outlined symbols fill when activated. | Original heart, star and bookmark SVGs; clipped colour rises on toggle; keyboard and aria-pressed reflect the saved state. | Selection feedback or a deliberate stage reveal. |
+
+The carousel screenshot included a **partial on-screen CSS snippet**, not its complete keyframes or source. Browser support for view(inline) and scroll-state queries is feature-dependent; fallback and reduced-motion presentation are required.
+
+### Recording consistency
+
+A code change invalidates the older video for that study. Regenerate **only IDs 71, 72, 73 and 74** using the existing capture pipeline with --force; check all four MP4 files, inspect their visible transitions and commit the regenerated assets. Leave the other 58 recordings and source links unchanged. Product-wide instructions and the Co-op demo should remain untouched until review.
