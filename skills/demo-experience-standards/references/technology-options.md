@@ -30,7 +30,7 @@ Sources checked:
 
 ## Current component example
 
-The first GSAP prototype is now `co-op-journey/`: a separate authored explanation
+The first GSAP prototype is now `kits/connected-support/`: a reserved authored explanation
 with user-selected stages and coordinated connector/panel emphasis. The core
 library is pinned and self-hosted, with functional navigation when it is absent.
 It is a website/reuse experiment, not an installed presentation integration or
@@ -44,3 +44,5 @@ native implementation to fit its existing buildless site. Its source review and
 keyboard/fallback contract are retained in `tools/components/co-op-help-guide.md`
 in the demo-sites repository. This validates an integration approach, not an
 engagement or conversion improvement.
+
+On 22 November, Simon approved the component but rejected this particular explanation for customer-facing website use. It is now reserved in the kit bag and removed from customer-demo discovery. Reuse the motion pattern for the audience’s task; the architecture narrative belongs with presenter material.

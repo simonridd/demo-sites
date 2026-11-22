@@ -6,6 +6,6 @@ The unmodified library retains its own copyright and licence notice.
 
 Licence: https://gsap.com/standard-license/
 
-Used only by the Co-op connected-support companion page. This is not an MIT
+Used only by the reserved connected-support kit. This is not an MIT
 distribution. Review the current licence and the intended product use before
 adopting it for a different authoring tool or visual animation builder.

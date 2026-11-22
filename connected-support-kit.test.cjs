@@ -32,7 +32,7 @@ function setup({ engine = false, reduced = false, hash = '' } = {}) {
     const timeline = { killed: false, fromTo(element) { element.setAttribute('style', 'owned-animation'); return this; }, kill() { this.killed = true; } };
     timelines.push(timeline); return timeline;
   } };
-  vm.runInNewContext(fs.readFileSync('co-op-journey/journey.js', 'utf8'), { document, window });
+  vm.runInNewContext(fs.readFileSync('kits/connected-support/journey.js', 'utf8'), { document, window });
   const click = index => { let prevented = false; tabs[index].events.click({ preventDefault() { prevented = true; } }); return prevented; };
   return { root, tabs, panels, edges, next, previous, controls, document, window, events, preference, timelines, click };
 }
@@ -88,7 +88,7 @@ test('the pinned GSAP asset retains integrity and runs the sequencing API used b
   const source = JSON.parse(fs.readFileSync('assets/vendor/gsap/source.json', 'utf8'));
   assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'), source.files['gsap.min.js']);
   const sri = 'sha384-' + crypto.createHash('sha384').update(bytes).digest('base64');
-  assert.ok(fs.readFileSync('co-op-journey/index.html', 'utf8').includes(sri));
+  assert.ok(fs.readFileSync('kits/connected-support/index.html', 'utf8').includes(sri));
   const { gsap } = require('./assets/vendor/gsap/gsap.min.js');
   assert.equal(gsap.version, source.version);
   const state = { progress: 0 };

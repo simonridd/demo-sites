@@ -5,6 +5,7 @@ Shared public GitHub Pages hosting for customer demonstration websites. Each dem
 - Collection: https://simonridd.github.io/demo-sites/
 - Presenter experience (generic feature sample): https://simonridd.github.io/demo-sites/presenter-experience/
 - Co-op Group: https://simonridd.github.io/demo-sites/co-op/
+- Kit bag (reserved components): https://simonridd.github.io/demo-sites/kits/
 - Holcim: https://simonridd.github.io/demo-sites/holcim/
 - Harbourview Hotels: https://simonridd.github.io/demo-sites/harbourview/
 - Aled’s Cars: https://simonridd.github.io/demo-sites/aleds-cars/
