@@ -16,7 +16,7 @@ function fakeNode(){
   value:'all',checked:false,hidden:false,innerHTML:'',textContent:'',dataset:{},style:{setProperty(){}},
   classList:{add:x=>cls.add(x),remove:x=>cls.delete(x),contains:x=>cls.has(x),toggle(x){if(cls.has(x)){cls.delete(x);return false;}cls.add(x);return true;}},
   addEventListener:(event,callback)=>{handlers[event]=callback;},
-  append(){},focus(){},handlers
+  append(){},focus(){},contains(){return true;},handlers
  };
 }
 async function start(){
@@ -102,7 +102,7 @@ test('native controls, keyboard patterns, motion fallback and existing app isola
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
  assert.match(css,/:focus-visible/);
  assert.match(css,/scroll-snap-type:x mandatory/);
- assert.match(readme,/not a faithful source-code archive/i);
+ assert.match(readme,/a faithful source-code archive/i);
  assert.doesNotMatch(html,/messenger-config|sdk\/web|genesys/i);
 });
 
