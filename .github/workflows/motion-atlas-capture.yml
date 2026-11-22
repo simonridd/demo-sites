@@ -5,6 +5,10 @@ on:
       - codex/motion-atlas-side-by-side-20261122
     paths:
       - .github/workflows/motion-atlas-capture.yml
+      - shorts-lab.test.cjs
+      - tools/capture-motion-atlas.py
+      - tools/resolve-motion-videos.py
+      - kits/shorts-lab/lab.mjs
   workflow_dispatch:
 
 permissions:
