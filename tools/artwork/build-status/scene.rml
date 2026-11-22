@@ -1,0 +1,69 @@
+<Rive version="1" kind="fragment">
+  <Artboard name="BuildSignal" id="0:2" width="320" height="320" styleId="0:5" defaultStateMachineId="0:7" viewModelId="0:40" viewModelInstanceId="0:41">
+    <LayoutComponentStyle name="Artboard Style" id="0:5"/>
+    <Shape name="Ground" x="160" y="294"><Ellipse width="146" height="12"/><Fill><SolidColor colorValue="0D233A61"/></Fill></Shape>
+    <Shape name="Outer orbit" x="160" y="154"><Ellipse width="258" height="258"/><Stroke thickness="1.5"><SolidColor colorValue="FFDCE4EF"/></Stroke></Shape>
+    <Shape name="Inner orbit" x="160" y="154"><Ellipse width="230" height="230"/><Stroke thickness="1"><SolidColor colorValue="FFE7EDF4"/></Stroke></Shape>
+    <Node name="Preparing mark" id="0:23" x="160" y="154">
+      <Shape name="Left signal" id="0:24" x="-30"><Rectangle width="12" height="38" cornerRadiusTL="6"/><Fill><SolidColor colorValue="FF446FD1"/></Fill></Shape>
+      <Shape name="Middle signal" id="0:25"><Rectangle width="12" height="70" cornerRadiusTL="6"/><Fill><SolidColor colorValue="FF446FD1"/></Fill></Shape>
+      <Shape name="Right signal" id="0:26" x="30"><Rectangle width="12" height="48" cornerRadiusTL="6"/><Fill><SolidColor colorValue="FF446FD1"/></Fill></Shape>
+    </Node>
+    <Node name="Attention mark" id="0:27" x="160" y="154" opacity="0">
+      <Shape name="Attention stem" y="-9"><Rectangle width="12" height="52" cornerRadiusTL="6"/><Fill><SolidColor colorValue="FF91611D"/></Fill></Shape>
+      <Shape name="Attention dot" y="35"><Ellipse width="13" height="13"/><Fill><SolidColor colorValue="FF91611D"/></Fill></Shape>
+    </Node>
+    <Node name="Ready mark" id="0:28" x="160" y="154" opacity="0">
+      <Shape name="Check"><PointsPath><StraightVertex x="-35" y="0"/><StraightVertex x="-10" y="25" radius="3"/><StraightVertex x="38" y="-26"/></PointsPath><Stroke thickness="12" cap="round" join="round"><SolidColor colorValue="FF2D765B"/></Stroke></Shape>
+    </Node>
+    <Node name="Working orbit" id="0:29" x="160" y="154">
+      <Shape name="Orbit dot" y="-129"><Ellipse width="14" height="14"/><Fill><SolidColor colorValue="FF446FD1"/></Fill><Stroke thickness="5"><SolidColor colorValue="FFF8FAFD"/></Stroke></Shape>
+    </Node>
+    <Shape name="Signal surface" id="0:20" x="160" y="154"><Ellipse width="198" height="198"/><Fill><SolidColor name="Surface color" id="0:21" colorValue="FFEDF2FF"/></Fill><Stroke thickness="1.5"><SolidColor name="Edge color" id="0:22" colorValue="FFCBD8FA"/></Stroke></Shape>
+    <StateMachine name="BuildStatus" id="0:7">
+      <StateMachineLayer name="Status" id="0:8">
+        <AnyState x="200" y="-200">
+          <StateTransition stateToId="0:12" duration="180" enableEarlyExit="true"><TransitionViewModelCondition><TransitionPropertyViewModelComparator><BindablePropertyNumber><DataBindContext sourcePathIds="0:40-0:42" propertyKey="636"/></BindablePropertyNumber></TransitionPropertyViewModelComparator><TransitionValueNumberComparator value="0"/></TransitionViewModelCondition></StateTransition>
+          <StateTransition stateToId="0:13" duration="180" enableEarlyExit="true"><TransitionViewModelCondition><TransitionPropertyViewModelComparator><BindablePropertyNumber><DataBindContext sourcePathIds="0:40-0:42" propertyKey="636"/></BindablePropertyNumber></TransitionPropertyViewModelComparator><TransitionValueNumberComparator value="1"/></TransitionViewModelCondition></StateTransition>
+          <StateTransition stateToId="0:14" duration="180" enableEarlyExit="true"><TransitionViewModelCondition><TransitionPropertyViewModelComparator><BindablePropertyNumber><DataBindContext sourcePathIds="0:40-0:42" propertyKey="636"/></BindablePropertyNumber></TransitionPropertyViewModelComparator><TransitionValueNumberComparator value="2"/></TransitionViewModelCondition></StateTransition>
+        </AnyState>
+        <ExitState x="650" y="-200"/>
+        <EntryState x="0" y="0"><StateTransition stateToId="0:12"/></EntryState>
+        <AnimationState x="200" y="0" animationId="0:50" reset="true" id="0:12"/>
+        <AnimationState x="400" y="0" animationId="0:51" reset="true" id="0:13"/>
+        <AnimationState x="600" y="0" animationId="0:52" reset="true" id="0:14"/>
+      </StateMachineLayer>
+    </StateMachine>
+    <LinearAnimation name="Preparing" id="0:50" duration="150" loopValue="loop">
+      <KeyedObject objectId="0:23"><KeyedProperty property="opacity"><KeyFrameDouble value="1"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:27"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:28"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:29"><KeyedProperty property="opacity"><KeyFrameDouble value="1"/></KeyedProperty><KeyedProperty property="rotation"><KeyFrameDouble value="0" interpolationType="linear"/><KeyFrameDouble frame="150" value="6.2831853" interpolationType="linear"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:24"><KeyedProperty property="scaleY"><KeyFrameDouble value="1" interpolationType="linear"/><KeyFrameDouble frame="38" value="1.55" interpolationType="linear"/><KeyFrameDouble frame="75" value="1" interpolationType="linear"/><KeyFrameDouble frame="112" value=".75" interpolationType="linear"/><KeyFrameDouble frame="150" value="1" interpolationType="linear"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:25"><KeyedProperty property="scaleY"><KeyFrameDouble value="1" interpolationType="linear"/><KeyFrameDouble frame="38" value=".72" interpolationType="linear"/><KeyFrameDouble frame="75" value="1" interpolationType="linear"/><KeyFrameDouble frame="112" value="1.12" interpolationType="linear"/><KeyFrameDouble frame="150" value="1" interpolationType="linear"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:26"><KeyedProperty property="scaleY"><KeyFrameDouble value="1" interpolationType="linear"/><KeyFrameDouble frame="38" value=".72" interpolationType="linear"/><KeyFrameDouble frame="75" value="1.3" interpolationType="linear"/><KeyFrameDouble frame="112" value="1" interpolationType="linear"/><KeyFrameDouble frame="150" value="1" interpolationType="linear"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:21"><KeyedProperty property="colorValue"><KeyFrameColor value="FFEDF2FF"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty property="colorValue"><KeyFrameColor value="FFCBD8FA"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation name="NeedsAttention" id="0:51" duration="24">
+      <KeyedObject objectId="0:23"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:27"><KeyedProperty property="opacity"><KeyFrameDouble value="1"/></KeyedProperty><KeyedProperty property="scaleY"><KeyFrameDouble value=".9" interpolationType="linear"/><KeyFrameDouble frame="24" value="1" interpolationType="linear"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:28"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:29"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:21"><KeyedProperty property="colorValue"><KeyFrameColor value="FFFFF3D9"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty property="colorValue"><KeyFrameColor value="FFEACD92"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+    <LinearAnimation name="Ready" id="0:52" duration="24">
+      <KeyedObject objectId="0:23"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:27"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:28"><KeyedProperty property="opacity"><KeyFrameDouble value="1"/></KeyedProperty><KeyedProperty property="scaleX"><KeyFrameDouble value=".85" interpolationType="linear"/><KeyFrameDouble frame="24" value="1" interpolationType="linear"/></KeyedProperty><KeyedProperty property="scaleY"><KeyFrameDouble value=".85" interpolationType="linear"/><KeyFrameDouble frame="24" value="1" interpolationType="linear"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:29"><KeyedProperty property="opacity"><KeyFrameDouble value="0"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:21"><KeyedProperty property="colorValue"><KeyFrameColor value="FFE6F3EA"/></KeyedProperty></KeyedObject>
+      <KeyedObject objectId="0:22"><KeyedProperty property="colorValue"><KeyFrameColor value="FFBADCCB"/></KeyedProperty></KeyedObject>
+    </LinearAnimation>
+  </Artboard>
+  <ViewModel name="BuildSignal" id="0:40" defaultInstanceId="0:41">
+    <ViewModelPropertyNumber name="mode" id="0:42"/>
+    <ViewModelInstance name="Default" id="0:41" exports="true"><ViewModelInstanceNumber viewModelPropertyId="0:42" propertyValue="0"/></ViewModelInstance>
+  </ViewModel>
+</Rive>

@@ -46,3 +46,10 @@ in the demo-sites repository. This validates an integration approach, not an
 engagement or conversion improvement.
 
 On 22 November, Simon approved the component but rejected this particular explanation for customer-facing website use. It is now reserved in the kit bag and removed from customer-demo discovery. Reuse the motion pattern for the audience’s task; the architecture narrative belongs with presenter material.
+
+
+## Rive source checkpoint, 22 November 2026
+
+The original `tools/artwork/build-status/scene.rml` compiles with official Rive CLI 1.10.0 and renders the three intended symbols. It uses current view-model conditions, not deprecated state-machine inputs. Rive's first-sibling draw order is opposite to SVG; compiler success did not reveal an initially hidden glyph, which visual captures caught and corrected.
+
+The playable export requires Rive account sign-in. The kit at `kits/build-status/` therefore labels its HTML/SVG state preview as static while export is pending. No `.riv` or runtime adoption is claimed. The candidate Canvas Lite 2.54.0 package has roughly 571 kB of JavaScript and 905 kB of primary WASM before compression, independently of the 1.7 kB compiled source reported locally. Measure actual browser delivery and rendering before using that cost for simple status symbols. Source and runtime licences/export terms are separate checks. A fallback or a successful local render is not a deployed Voice Demo Builder upgrade.
