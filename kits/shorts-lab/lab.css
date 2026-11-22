@@ -467,3 +467,19 @@
 .image-glow-study>.small-action:focus-visible{outline:3px solid #147f67;outline-offset:3px}
 .image-glow-study .footnote{font-size:10px;line-height:1.45;text-align:center;max-width:260px;color:#3a6258}
 @media(prefers-reduced-motion:reduce){.image-glow-stage .image-glow-halo{transition:none!important}}
+
+
+/* Screenshot-led #057: identical gradients, second with SVG feTurbulence grain.
+   Effect is an overlay, not a distorted customer image or full-screen filter. */
+.gradient-grain-study{display:grid;justify-items:center;gap:12px;width:100%;max-width:335px}
+.gradient-grain-samples{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:100%}
+.gradient-grain-samples .grain-swatch{position:relative;isolation:isolate;overflow:hidden;min-height:128px;padding:13px 10px;display:flex;flex-direction:column;justify-content:end;gap:5px;color:#effff9;border-radius:15px;background:linear-gradient(145deg,#136f95 0%,#32bec0 35%,#4b4ba9 72%,#bd84d2);text-align:left;text-shadow:0 1px 8px #041b3e88}
+.gradient-grain-samples .grain-swatch strong,.gradient-grain-samples .grain-swatch small{z-index:2;position:relative}
+.gradient-grain-samples .grain-swatch strong{font-size:17px;letter-spacing:-.06em}
+.gradient-grain-samples .grain-swatch small{color:#eafff5;font-size:10px}
+.gradient-grain-samples .with-grain::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("./assets/057-grain.svg");background-size:140px 140px;mix-blend-mode:overlay;opacity:0;transition:opacity 220ms ease}
+.gradient-grain-samples .with-grain.is-textured::after{opacity:.15}
+.gradient-grain-study>.small-action{background:#1b6356;color:white;border-radius:7px;padding:9px 14px;font-size:12px}
+.gradient-grain-study>.small-action:focus-visible{outline:3px solid #0c7461;outline-offset:4px}
+.gradient-grain-study .footnote{text-align:center;font-size:10px;max-width:250px;line-height:1.45;color:#3e6659}
+@media(prefers-reduced-motion:reduce){.gradient-grain-samples .with-grain::after{transition:none!important}}
