@@ -16,6 +16,7 @@ When selecting the next visual technology, use the dated [technology candidates]
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.
+- For a blank-canvas presentation brief, establish a new narrative and art direction before selecting layouts or effects. Give typography, imagery, scale and pacing a reason in the story; retain the existing source, navigation and private-output contracts.
 - Select animation to explain a relationship, guide attention or give interaction feedback. Keep a quiet/static treatment when it serves the task. A new client does not inherit Co-op's grocery artwork or visual style.
 - Match the explanation to the audience. A simulated customer website should help customers complete their task. Keep customer/AVA/knowledge/adviser architecture explanations in the kit bag or presenter-led material unless the customer brief explicitly needs them. The same component may be adapted to a useful customer process with appropriate content and truthful state.
 - Prefer CSS/SVG and native browser animation for small static pages. Adapt selected 21st.dev components to the current brand and framework after reviewing their source, dependencies and licence. Do not add a framework solely for a small effect.
