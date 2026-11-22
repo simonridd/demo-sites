@@ -1,6 +1,8 @@
 // Only individual source links independently resolved from cited pages are permitted here.
 // Never substitute the channel home page and call it the original video.
+import {resolvedVideos} from './resolved-videos.mjs';
 export const verifiedVideos = Object.freeze({
+  ...resolvedVideos,
   68: {url:'https://www.youtube.com/watch?v=rtaqbWsttLI',platform:'YouTube',evidence:'Jaluri summary: Copy Google’s Modern Sliders with this CSS'},
   69: {url:'https://www.youtube.com/watch?v=aaoYm6wkjTU',platform:'YouTube',evidence:'Jaluri summary: Your Toggles Look Cheap (Toggle Tutorial)'},
   75: {url:'https://www.facebook.com/reel/2025089661358011',platform:'Facebook',evidence:'Original reel opened in Chrome: odometer'}
