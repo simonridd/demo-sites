@@ -78,6 +78,7 @@ Your inputs look basic|Adopt|P1|input|Controls|yes|Material-style semantic float
 New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Centred scroll-snap items enlarge as they enter view using animation-timeline: view(inline), with an accessible button/keyboard fallback.
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
 YouTube-style filter chips|Adopt|P1|chips|Navigation|yes|Compact horizontally scrollable filter chips with single-selection state, overflow navigation and keyboard controls. Better for filtering collections than for replacing multi-step navigation.
+Glowing images|Prototype|P2|glowing-images|Creative|yes|Original landscape image gains a soft matching glow and subtle SVG-grain treatment, with a true off comparison. Consider for one-off hero imagery and project showcases; measure load and avoid excess haze around text.
 Glowing images|Adapt|P2|image-glow|Creative|yes|Create a coloured halo from an original transparent image without replacing its edges or distorting a client's asset. Best for a hero or rare presentation spotlight, not every image.
 `.trim();
 const cols=RAW.split("\n");
@@ -85,6 +86,7 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
+ screenshotProvided:[51,59,60,64,65,66,67,68,70,71,72,73,75,76].includes(i),
  screenshotProvided:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1),
  evidence:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
