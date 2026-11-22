@@ -122,3 +122,11 @@
 **Application:** Co-op's two performance figures count once in 850 ms on first stage entry, retaining the range, units, “up to”, named customer scope and coaching context. Final-width reservation prevents shifting type. Final accessible text stays stable; reading, print, no-JavaScript and reduced-motion views stay still. Exit, overview, page hiding, printing and motion-preference changes settle immediately. No replay or new library is introduced.
 
 **Scope:** This refines the default of still evidence. It does not require every number to animate, imply live measurement, change any result or add a new technology dependency. The original five Co-op trials stay intact; this later requested native enhancement is recorded separately.
+
+## 22 November 2026: short themed demonstration and a focused pilot
+
+**Decision:** A short demonstration can complement full-length recordings when it serves the story and fits the presentation theme. Simon authorised the Copilot sequence, tighter middle and concrete pilot proposal, and invited a shorter example that does not compete visually with the deck.
+
+**Application:** Co-op uses native presenter fragments for guidance/checks and reviewed summary/code, with Maya's refund between. The existing late-delivery recording was inspected but its different story and retained capture/acceptance limitations did not fit this sequence. It is unchanged and unselected. The authored illustrated walkthrough uses the deck's cream/cyan typography, no separate player or automatic progression. The full-length capture/assembly owner remains unchanged.
+
+**Story and checks:** Fourteen main scenes preserve the character arc; Three.js remains in optional exploration with native return to the same notes step. The pilot selects missing-item calls, a team and a baseline for after-call work, summary corrections and repeat contact, with resolution quality. No dates, team size, measured gains or configured customer codes are invented. Retain chosen partnership marks across custom scenes, with light/dark contrast and narrow-header checks. Native arrows/Space, reverse steps, optional return, reading, print and reduced-motion/static paths retain their contracts.

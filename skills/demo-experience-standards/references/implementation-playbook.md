@@ -103,3 +103,9 @@ For a performance slide, first check an available primary customer/vendor case. 
 ## Optional metric count-up
 
 When a headline figure benefits from emphasis, keep a short count-up within the existing presentation scene owner. Retain the exact final value and stable accessible alternative in markup, hide changing digits from assistive technology and reserve the final width. Preserve range endpoints, units and qualifications. Play once on first stage visibility, settle on every interruption, and keep reading, print, reduced motion and no-JavaScript static. Use the presentation owner's native helper rather than introducing a library or independent player. Co-op's 850 ms two-metric treatment is the first requested example; a static number remains the default.
+
+## A short moment inside the narrative
+
+Use one bounded presenter-controlled sequence when the audience needs to see a capability used. Native presentation steps own progress; themed panels, relevant guidance, confirmed checks and reviewed notes show the change. Keep the human's decisions clear and make the fuller static/read explanation complete. A short recording belongs when an accepted capture demonstrates the right moment legibly; preserve actual pixels, timing and media controls, and theme the frame around it. Do not disguise a different scenario or repair a recorded product result through illustration.
+
+Optional spatial/detail exploration should return to the same story step. Give repeated scenes distinct jobs and close with a practical pilot decision and baseline measures. Check the partnership lockup as custom compositions change; light/dark and narrow headers must retain the chosen identity. A reviewable illustrated walkthrough is not proof of native product configuration or observed customer results.
