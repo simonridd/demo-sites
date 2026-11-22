@@ -72,3 +72,68 @@
 .md-field:has(input:user-invalid){box-shadow:inset 0 -2px 0 #b54848}
 .md-field:has(input:user-invalid)::after{background:#b54848}
 @media(prefers-reduced-motion:reduce){.md-field::after,.md-field label{transition:none!important}}
+
+/* 72: sticky mobile nav with CSS scroll-state query and JS fallback. */
+.collapse-study{width:100%;display:flex;flex-direction:column;align-items:center;gap:8px}
+.collapse-viewport{width:min(100%,340px);height:205px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;background:#f7f8eb;border:2px solid #426658;border-radius:15px;text-align:left;position:relative}
+.collapse-lead{height:25px;background:linear-gradient(#b6d1c0,#f7f8eb)}
+.collapse-header-frame{position:sticky;top:0;z-index:5;container-type:scroll-state;container-name:atlas-sticky-nav}
+.collapse-nav{display:flex;align-items:center;gap:10px;justify-content:space-between;min-height:74px;padding:9px 12px;background:rgb(253 255 244 / .97);color:#184b3c;border-bottom:1px solid #b2d1b6;transition:min-height 250ms var(--ease),padding 250ms var(--ease),background-color 250ms ease,box-shadow 250ms ease}
+.collapse-brand{font-size:20px;font-weight:880;letter-spacing:-.07em;text-decoration:none;color:#174a3d;white-space:nowrap;transition:font-size 250ms var(--ease)}
+.collapse-brand span{color:#dd8b58}
+.collapse-navlinks{display:flex;gap:7px;align-items:center;white-space:nowrap}
+.collapse-navlinks a{text-decoration:none;font-weight:700;font-size:10px;color:#346458;padding:7px 3px;border-radius:5px}
+.collapse-navlinks a:hover{text-decoration:underline;text-underline-offset:3px}
+.collapse-avatar{display:grid;place-items:center;width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:#2f8068;color:#fff;font-size:13px;font-weight:800;transition:width 250ms,height 250ms,flex-basis 250ms,font-size 250ms}
+.collapse-nav.is-condensed{min-height:45px;padding:5px 10px;background:#e2f1e3;box-shadow:0 6px 14px #073a2929}
+.collapse-nav.is-condensed .collapse-brand{font-size:16px}
+.collapse-nav.is-condensed .collapse-avatar{width:26px;height:26px;flex-basis:26px;font-size:11px}
+@container atlas-sticky-nav scroll-state(stuck: top){
+ .collapse-nav{min-height:45px;padding:5px 10px;background:#e2f1e3;box-shadow:0 6px 14px #073a2929}
+ .collapse-brand{font-size:16px}
+ .collapse-avatar{width:26px;height:26px;flex-basis:26px;font-size:11px}
+}
+.collapse-page{padding:14px 14px 28px;display:grid;gap:14px}
+.collapse-page>strong{font-size:19px;letter-spacing:-.05em;color:#174a3d}
+.collapse-page p{font-size:12px;line-height:1.55;color:#3f6158;margin:0}
+.collapse-feature{min-height:120px;display:flex;justify-content:space-between;align-items:end;gap:12px;background:#1f6356;color:#fff;padding:15px;border-radius:11px}
+.collapse-feature.alt{background:#aed6c0;color:#205648}
+.collapse-feature span{font-size:13px;opacity:.8}
+.collapse-feature b{font-size:22px;line-height:1.05;letter-spacing:-.055em}
+.collapse-study>.small-action{color:white;background:#205b4e;border-radius:7px;padding:8px 14px;font-size:11px}
+
+/* 74: centre-focused horizontal carousel with view(inline) timeline. */
+.carousel-focus-study{width:100%;max-width:335px;display:grid;gap:8px;justify-items:stretch}
+.carousel-focus-study .carousel-scroller{display:flex;gap:10px;width:100%;align-items:center;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:20%;padding:10px 0 13px;scrollbar-width:thin;overscroll-behavior-inline:contain}
+.carousel-focus-study .carousel-scroller::before,.carousel-focus-study .carousel-scroller::after{content:"";display:block;flex:0 0 calc(20% - 10px);align-self:stretch}
+.carousel-focus-study .carousel-item{flex:0 0 60%;aspect-ratio:3 / 4;border-radius:28px;background:linear-gradient(140deg,#1c4f47,#4cad83);color:#fff;box-shadow:0 7px 19px #20452e30;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:8px;text-align:left;padding:16px 13px;scroll-snap-align:center;transform:scale(.75);opacity:.67;transition:transform 260ms var(--ease),opacity 260ms ease;min-height:0}
+.carousel-focus-study .carousel-item:nth-of-type(2){background:linear-gradient(140deg,#3e5a96,#95aee0)}
+.carousel-focus-study .carousel-item:nth-of-type(3){background:linear-gradient(140deg,#b27549,#f5cc9f);color:#372715}
+.carousel-focus-study .carousel-item.is-centered{transform:scale(1);opacity:1}
+.carousel-focus-study .carousel-number{font-size:12px;opacity:.8}
+.carousel-focus-study .carousel-item strong{font-size:clamp(15px,2vw,22px);letter-spacing:-.045em;line-height:1.05}
+.carousel-focus-study .carousel-detail{font-size:10px;line-height:1.25;opacity:.9}
+.carousel-focus-study .carousel-actions{align-items:center}
+.carousel-focus-study .carousel-position{min-width:45px;font-size:11px;font-weight:800;color:#235748}
+@keyframes atlas-carousel-focus{
+ 0%,100%{transform:scale(.75);opacity:.67}
+ 50%{transform:scale(1);opacity:1}
+}
+@media(prefers-reduced-motion:no-preference){
+ @supports(animation-timeline:view(inline)){
+  .carousel-focus-study .carousel-item{
+   animation:atlas-carousel-focus linear both;
+   animation-timeline:view(inline);
+   transition:none;
+  }
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .carousel-focus-study .carousel-item{transition:none!important;animation:none!important;transform:scale(1);opacity:1}
+ .collapse-nav,.collapse-brand,.collapse-avatar{transition:none!important}
+}
+@media(max-width:560px){
+ .carousel-focus-study{max-width:min(100%,370px)}
+ .carousel-focus-study .carousel-item{padding:18px}
+ .collapse-viewport{height:240px}
+}
