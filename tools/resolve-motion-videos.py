@@ -55,6 +55,24 @@ def search(title, limit=6):
     return data.get("entries", [])
 
 
+
+def channel_shorts():
+    """Resolve a full creator-owned Shorts inventory in one metadata request."""
+    proc = subprocess.run(
+        ["yt-dlp", "--no-warnings", "--skip-download", "--flat-playlist",
+         "--dump-single-json", "--playlist-end", "300",
+         "https://www.youtube.com/@aniakubow/shorts"],
+        check=False, capture_output=True, text=True, timeout=100,
+    )
+    if proc.returncode:
+        raise RuntimeError((proc.stderr or proc.stdout)[-400:].strip())
+    payload = json.loads(proc.stdout)
+    root_id = payload.get("channel_id") or payload.get("id") or ""
+    if root_id and root_id != CHANNEL_ID and "aniakubow" not in str(root_id).lower():
+        raise RuntimeError("Shorts inventory did not identify the expected creator")
+    return [entry for entry in payload.get("entries", []) if entry and
+            re.fullmatch(r"[a-zA-Z0-9_-]{11}", entry.get("id") or "")]
+
 def is_right_creator(entry):
     channel_id = entry.get("channel_id") or ""
     if channel_id == CHANNEL_ID:
@@ -95,7 +113,8 @@ def load_previous():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--limit", type=int, default=75, help="Max new searches")
+    parser.add_argument("--limit", type=int, default=75, help="Maximum new title resolutions")
+    parser.add_argument("--skip-channel", action="store_true", help="Use individual searches only")
     parser.add_argument("--min-score", type=float, default=.72)
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
@@ -103,6 +122,13 @@ def main():
     found = 0
     unresolved = []
     attempted = 0
+    inventory = []
+    if not args.skip_channel:
+        try:
+            inventory = channel_shorts()
+            print(f"Indexed {len(inventory)} videos directly from the creator Shorts tab")
+        except Exception as exc:
+            print(f"Channel inventory unavailable; falling back to title searches: {exc}", file=sys.stderr)
     for video_id, title in rows():
         if video_id in MANUALLY_VERIFIED:
             continue
@@ -113,12 +139,22 @@ def main():
             break
         attempted += 1
         try:
-            options = search(title)
+            # Entries under the verified channel's own Shorts tab inherit creator
+            # provenance; external search results must still prove channel identity.
+            options = inventory
+            from_channel = bool(inventory)
             matches = sorted(
                 ((score(title, x), x) for x in options
-                 if is_right_creator(x) and re.fullmatch(r"[a-zA-Z0-9_-]{11}", x.get("id") or "")),
+                 if re.fullmatch(r"[a-zA-Z0-9_-]{11}", x.get("id") or "")),
                 key=lambda item: item[0], reverse=True,
             )
+            if not matches or matches[0][0] < args.min_score:
+                from_channel = False
+                matches = sorted(
+                    ((score(title, x), x) for x in search(title)
+                     if is_right_creator(x) and re.fullmatch(r"[a-zA-Z0-9_-]{11}", x.get("id") or "")),
+                    key=lambda item: item[0], reverse=True,
+                )
             if not matches:
                 unresolved.append((video_id, title, "no channel-validated result"))
                 continue
@@ -130,7 +166,8 @@ def main():
             current[key] = {
                 "url": "https://www.youtube.com/watch?v=" + best["id"],
                 "platform": "YouTube",
-                "evidence": "yt-dlp public search; verified creator and title "
+                "evidence": ("creator Shorts inventory" if from_channel else
+                             "yt-dlp public search") + "; verified creator and title "
                             + best["title"][:120],
             }
             found += 1
@@ -150,6 +187,7 @@ def main():
         "channel_id": CHANNEL_ID,
         "searched_this_run": attempted, "new_verified_this_run": found,
         "all_machine_verified": len(stable),
+        "creator_shorts_enumerated": len(inventory),
         "manually_verified": sorted(MANUALLY_VERIFIED),
         "unresolved_this_run": [
             {"id": id_, "title": title_, "reason": reason}
