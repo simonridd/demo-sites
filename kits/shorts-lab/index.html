@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#11181d">
+  <meta name="description" content="An interactive, evidence-labelled laboratory of 75 visual-design references from Ania Kubów's Shorts and related tutorials.">
+  <title>Motion Atlas · The kit bag</title>
+  <link rel="stylesheet" href="./lab.css">
+  <script type="module" src="./lab.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#library">Skip to the effects</a>
+  <header class="masthead">
+    <a class="brand" href="../" aria-label="Return to the kit bag"><span class="brand-glyph" aria-hidden="true">k<span>↗</span></span><span>the kit bag</span><span class="header-divider" aria-hidden="true">/</span><strong>motion atlas</strong></a>
+    <span class="edition">RESEARCH LAB <b>01</b></span>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="signal" aria-hidden="true"></span> AN EXPERIMENT, NOT A DESIGN SYSTEM</p>
+        <h1 id="hero-title">Make an<br><em>impression.</em><span class="headline-stop">/</span></h1>
+        <p class="lede">Seventy-five ideas. Working studies, speculative experiments and honest exclusions. Decide what earns its place <strong>on stage</strong> and what survives <strong>everyday use.</strong></p>
+        <div class="hero-actions"><a class="primary-link" href="#library">Explore the experiments <span aria-hidden="true">↗</span></a><a class="text-link" href="./README.md">How to judge them <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="ring ring-outer"></div><div class="ring ring-mid"></div><div class="ring ring-inner"></div>
+        <div class="hero-number">75</div><div class="art-label top">IDEA / ITERATE</div><div class="art-label bottom">STUDY Nº <strong>001 — 075</strong></div>
+        <div class="art-orbit orbit-a"></div><div class="art-orbit orbit-b"></div>
+      </div>
+    </section>
+    <section class="context" aria-labelledby="context-title">
+      <div>
+        <p class="eyebrow subdued">THE IMPORTANT DISTINCTION</p>
+        <h2 id="context-title">The same effect.<br><span>Two different audiences.</span></h2>
+      </div>
+      <div class="context-controls">
+        <fieldset class="context-switch">
+          <legend>Evaluate for</legend>
+          <label><input type="radio" name="audience" value="stage" checked><span>One-off presentation</span></label>
+          <label><input type="radio" name="audience" value="product"><span>Everyday product</span></label>
+        </fieldset>
+        <p id="context-note" class="context-note">For a presentation seen once or twice, a striking 2-second moment can help an idea stick. Theatre is welcome when it serves the story.</p>
+      </div>
+    </section>
+    <section id="library" class="library" aria-labelledby="library-title">
+      <div class="section-top">
+        <div><p class="eyebrow subdued">THE EXPERIMENTS</p><h2 id="library-title">Open the drawer.</h2></div>
+        <div class="tally"><strong id="all-count">75</strong><span>references<br>assessed</span></div>
+      </div>
+      <div class="filter-bar">
+        <label class="searchbox"><span class="sr-only">Search techniques</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="Search by technique, use case, or note…" autocomplete="off"></label>
+        <label class="filter-select">Decision <select id="verdict"><option value="all">All decisions</option><option value="Adopt">Adopt</option><option value="Adapt">Adapt</option><option value="Prototype">Prototype</option><option value="Hold">Unverified</option><option value="Skip">Skip</option><option value="Out of scope">Outside scope</option></select></label>
+        <label class="filter-select">Collection <select id="family"><option value="all">Every collection</option></select></label>
+        <label class="toggle-check"><input id="stage-only" type="checkbox"><span>Show stage candidates</span></label>
+      </div>
+      <div class="results-head"><p id="result-count" role="status" aria-live="polite">Loading studies…</p><button type="button" id="reset" class="reset-button">Reset filters</button></div>
+      <div id="cards" class="cards" aria-label="Visual experiments"><div class="loading-card">Loading the atlas…</div></div>
+      <p id="empty" class="empty" hidden>No studies match. Try another filter or reset the search.</p>
+      <noscript><p class="noscript">The interactive previews need JavaScript. The full 75-item research register is documented in the source files and README; no product demo or customer support journey depends on this lab.</p></noscript>
+    </section>
+    <section class="ethics" aria-label="How to reuse">
+      <div class="ethics-star" aria-hidden="true">✳</div>
+      <div><p class="eyebrow">DESIGN PRINCIPLE</p><h2>Borrow the technique.<br>Keep the judgement.</h2><p>These are independent implementations and illustrative hypotheses, not Ania's extracted CSS. Unverified titles remain marked. Real workflows, accurate state and client identity always take precedence.</p></div>
+      <a href="https://www.youtube.com/@aniakubow/shorts" target="_blank" rel="noopener noreferrer">Creator's Shorts <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+  <footer><span>Motion Atlas / experimental kit</span><span>2026 · Prototype first. Promote deliberately.</span><a href="../">Back to all kits ↗</a></footer>
+</body>
+</html>
