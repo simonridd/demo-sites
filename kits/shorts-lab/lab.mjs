@@ -87,7 +87,15 @@ function previewFor(e) {
     case 'css-logo': return `<div class="css-logo" aria-label="Experimental letter C logo">C</div><small>Own artwork, not a client mark</small>`;
     case 'nudge': return `<div class="nudge-message">One new insight for you.</div>${button('Nudge once','replay')}`;
     case 'squeeze': return `<button type="button" class="demo-button" data-action="replay">Press to respond</button><small>Press and release</small>`;
-    case 'moving-bg': return `<div class="moving-bg">A new perspective.</div><small>Only when explicitly replayed</small>`;
+    case 'moving-bg': return `<div class="gemini-reveal-study">
+ <div class="gemini-reveal" role="img" aria-label="Illustrative once-only blurred gradient reveal with soft rotation; original CSS study">
+   <span class="gemini-aura gemini-aura-one" aria-hidden="true"></span>
+   <span class="gemini-aura gemini-aura-two" aria-hidden="true"></span>
+   <span class="gemini-aura gemini-aura-three" aria-hidden="true"></span>
+   <span class="gemini-reveal-content"><span class="gemini-kicker">A NEW MOMENT</span><strong>Something extraordinary.</strong><span class="gemini-accent">✳</span></span>
+ </div>
+ <small class="footnote">Play once to reveal. The background settles; it never loops.</small>
+</div>`;
     case 'thinking': return `<div class="thinking-study">
   <div class="thinking-stage" role="img" aria-label="Illustrative thinking animation; no real system is processing">
     <div class="thinking-mark" aria-hidden="true"><span>✳</span><strong>Thinking</strong></div>
