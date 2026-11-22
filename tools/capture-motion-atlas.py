@@ -29,7 +29,7 @@ def catalogue():
     text = (LAB / "effects-data.mjs").read_text(encoding="utf-8")
     match = re.search(r"const RAW = String\.raw\`(.*?)\`\.trim\(\)", text, re.S)
     if not match:
-        raise RuntimeError("The 75-reference catalogue was not found")
+        raise RuntimeError("The visual effects catalogue was not found")
     rows = []
     for index, line in enumerate(match.group(1).strip().splitlines(), 1):
         fields = line.split("|")
@@ -37,8 +37,8 @@ def catalogue():
             raise ValueError(f"Broken source row {index}")
         title, verdict, priority, preview, family, stage, note = fields
         rows.append(dict(id=index, title=title, preview=preview, family=family))
-    if len(rows) != 75:
-        raise RuntimeError(f"Expected 75 catalogue rows, got {len(rows)}")
+    if len(rows) != 77:
+        raise RuntimeError(f"Expected 77 catalogue rows, got {len(rows)}")
     return rows
 
 
