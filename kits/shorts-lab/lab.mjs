@@ -81,12 +81,39 @@ function previewFor(e) {
     case 'video-controls': return `<span class="candidate-label">Unverified — controller trial</span><div class="video-box">▶</div><small>Real playback needs a real media element</small>`;
     case 'gradient': return `<div class="gradient-board"><strong>Intentional colour.</strong></div>`;
     case 'fab': return `<div class="fab-wrap"><div class="fab-options" hidden><button type="button" aria-label="Note" data-action="fab-choice">✎</button><button type="button" aria-label="Share" data-action="fab-choice">↗</button></div><button class="fab-main" type="button" data-action="fab" aria-expanded="false" aria-label="Open optional tools">＋</button></div><small>Secondary actions only</small>`;
-    case 'blur': return `<div class="blur-scene"><div class="blur-pane">A clear overlay.</div></div>`;
-    case 'split': return `<div class="split-wrap"><button type="button" data-action="split-primary">Present</button><button type="button" aria-haspopup="menu" aria-expanded="false" data-action="split-menu" aria-label="Presentation options">⌄</button><div class="split-menu-items" role="menu" hidden><button type="button" role="menuitem" data-action="split-choice">Open notes</button><button type="button" role="menuitem" data-action="split-choice">Preview slides</button></div></div><small aria-live="polite" data-feedback>Primary action remains obvious</small>`;
+    case 'blur': return `<div class="blur-comparison-study" data-material="android">
+   <div class="blur-choice" role="group" aria-label="Compare translucent surface treatments">
+     <button type="button" data-action="blur-mode" data-mode="android" aria-pressed="true">Android blur</button>
+     <button type="button" data-action="blur-mode" data-mode="liquid" aria-pressed="false">Liquid Glass-inspired</button>
+   </div>
+   <div class="blur-example">
+      <div class="blur-art" aria-hidden="true"><span class="blur-sphere"></span><span class="blur-stripe"></span><span class="blur-spot"></span></div>
+      <div class="blur-pane material-glass" aria-hidden="true"><span class="material-glyph">✦</span><span class="material-title">A little clarity.</span><span class="material-description">One clear moment.</span></div>
+   </div>
+   <small class="footnote" data-blur-caption>Android-style soft backdrop. Contrast is preserved.</small>
+ </div>`;
+    case 'split': return `<div class="split-popover-study">
+   <div class="split-wrap">
+     <button class="split-primary" type="button" data-action="split-primary">Present <span aria-hidden="true">↗</span></button>
+     <button class="split-chevron" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="split-options-${e.id}" data-action="split-menu" aria-label="More presentation actions">⌄</button>
+     <div id="split-options-${e.id}" class="split-menu-items" popover="auto" role="menu" hidden aria-label="Presentation alternatives">
+       <button type="button" role="menuitem" data-action="split-choice"><span aria-hidden="true">✎</span> Open notes</button>
+       <button type="button" role="menuitem" data-action="split-choice"><span aria-hidden="true">◫</span> Preview slides</button>
+       <button type="button" role="menuitem" data-action="split-choice"><span aria-hidden="true">▣</span> Export summary</button>
+     </div>
+   </div>
+   <small aria-live="polite" data-feedback>One primary action. Options stay secondary.</small>
+ </div>`;
     case 'sparkles': return `<div class="sparkles">One big idea.</div><small>Short theatrical emphasis</small>`;
     case 'css-logo': return `<div class="css-logo" aria-label="Experimental letter C logo">C</div><small>Own artwork, not a client mark</small>`;
     case 'nudge': return `<div class="nudge-message">One new insight for you.</div>${button('Nudge once','replay')}`;
-    case 'squeeze': return `<button type="button" class="demo-button" data-action="replay">Press to respond</button><small>Press and release</small>`;
+    case 'squeeze': return `<div class="pixel-squeeze-study">
+   <div class="pixel-squeeze-canvas" aria-label="Original experimental pixel-style squeeze, no application action" role="img">
+     <span class="pixel-grid" aria-hidden="true"></span><span class="pixel-squeeze-label">MAKE IT<br>MOVE.</span><span class="pixel-glitch" aria-hidden="true"></span>
+   </div>
+   <button class="demo-button" data-action="replay" type="button">▶ Squeeze once</button>
+   <small class="footnote">Experimental stage transition · original CSS, not recovered creator source.</small>
+ </div>`;
     case 'moving-bg': return `<div class="gemini-reveal-study">
  <div class="gemini-reveal" role="img" aria-label="Illustrative once-only blurred gradient reveal with soft rotation; original CSS study">
    <span class="gemini-aura gemini-aura-one" aria-hidden="true"></span>
@@ -288,6 +315,37 @@ function changeRoll(preview,target) {
    ? `Compare £${next==='129.00'?'249.00':'129.00'}`
    : `Roll to ${next==='12,840'?'24,715':'12,840'}`;
 }
+function closeSplitMenu(preview,focus=false){
+ const menu=preview?.querySelector('.split-menu-items');
+ const trigger=preview?.querySelector('[data-action="split-menu"]');
+ if(!menu||!trigger)return;
+ if(typeof menu.hidePopover==='function'){
+   try{if(menu.matches(':popover-open'))menu.hidePopover();}catch{ /* older CSS selector fallback */ }
+ }
+ menu.hidden=true;menu.dataset.open='false';
+ trigger.setAttribute('aria-expanded','false');
+ if(focus)trigger.focus();
+}
+function toggleSplitMenu(preview){
+ const menu=preview.querySelector('.split-menu-items');
+ const trigger=preview.querySelector('[data-action="split-menu"]');
+ if(!menu||!trigger)return;
+ if(menu.dataset.open==='true'){closeSplitMenu(preview,true);return;}
+ const rect=trigger.getBoundingClientRect();
+ menu.hidden=false;
+ if(typeof menu.showPopover==='function'){
+   try{
+     menu.showPopover();
+     // Top-layer popovers are positioned near their own trigger, even when
+     // the gallery is clipped or scrolled.
+     menu.style.position='fixed';
+     menu.style.top=Math.min(window.innerHeight-160,rect.bottom+7)+'px';
+     menu.style.left=Math.max(8,Math.min(window.innerWidth-188,rect.right-182))+'px';
+   }catch{menu.removeAttribute('popover');menu.hidden=false;}
+ }
+ menu.dataset.open='true';trigger.setAttribute('aria-expanded','true');
+ menu.querySelector('[role="menuitem"]')?.focus();
+}
 function doAction(btn,preview){
  const action=btn.dataset.action;
  switch(action){
@@ -328,9 +386,28 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
-   case 'split-menu':{const menu=preview.querySelector('.split-menu-items');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));if(!menu.hidden) menu.querySelector('button')?.focus();break;}
-   case 'split-choice':{const menu=preview.querySelector('.split-menu-items');menu.hidden=true;const opener=preview.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();preview.querySelector('[data-feedback]').textContent=btn.textContent+' · example only';break;}
-   case 'split-primary':preview.querySelector('[data-feedback]').textContent='Present · example only';break;
+   case 'split-menu':toggleSplitMenu(preview);break;
+   case 'split-choice':{
+      const selected=btn.textContent.trim();
+      closeSplitMenu(preview,true);
+      preview.querySelector('[data-feedback]').textContent=selected+' · example only';
+      break;
+   }
+   case 'split-primary':{
+      closeSplitMenu(preview);
+      preview.querySelector('[data-feedback]').textContent='Present · example only';
+      break;
+   }
+   case 'blur-mode':{
+      const example=preview.querySelector('.blur-comparison-study');
+      if(!example)break;
+      const mode=btn.dataset.mode==='liquid'?'liquid':'android';
+      example.dataset.material=mode;
+      for(const choice of example.querySelectorAll('[data-action="blur-mode"]'))choice.setAttribute('aria-pressed',String(choice===btn));
+      const caption=example.querySelector('[data-blur-caption]');
+      if(caption)caption.textContent=mode==='liquid'?'Liquid Glass-inspired: brighter highlights and a soft refractive illusion.':'Android-style soft backdrop. Contrast is preserved.';
+      break;
+   }
    case 'icon':{
      const selected=btn.getAttribute('aria-pressed')!=='true';
      const kind=btn.dataset.kind||'heart';
@@ -398,6 +475,22 @@ function selectPill(btn) {
  const output=tablist.parentElement.querySelector('[data-pill-status]');
  if(output){output.textContent=btn.textContent+' section';output.setAttribute('aria-labelledby',btn.id);}
 }
+cards.addEventListener('toggle',event=>{
+ const menu=event.target;
+ if(!menu.matches?.('.split-menu-items'))return;
+ const trigger=menu.closest('.preview')?.querySelector('[data-action="split-menu"]');
+ const open=event.newState==='open';
+ menu.dataset.open=String(open);
+ if(!open)menu.hidden=true;
+ trigger?.setAttribute('aria-expanded',String(open));
+},{capture:true});
+document.addEventListener('pointerdown',event=>{
+ for(const menu of cards.querySelectorAll('.split-menu-items[data-open="true"]')){
+   if(typeof menu.showPopover==='function')continue; // native light-dismiss
+   const wrapper=menu.closest('.split-wrap');
+   if(wrapper && !wrapper.contains(event.target))closeSplitMenu(wrapper.closest('.preview'));
+ }
+});
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
  if(!btn || !cards.contains(btn)) return;
@@ -422,9 +515,17 @@ cards.addEventListener('keydown',event=>{
      (tabs.indexOf(tab)+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
    tabs[next].focus();selectPill(tabs[next]);
  }
- if(event.key==='Escape'){
-   const menu=event.target.closest('.split-menu-items');
-   if(menu){menu.hidden=true;const p=menu.closest('.preview');const opener=p.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();}
+ const menu=event.target.closest?.('.split-menu-items');
+ if(menu&&['Escape','ArrowDown','ArrowUp','Home','End'].includes(event.key)){
+   event.preventDefault();
+   const preview=menu.closest('.preview');
+   if(event.key==='Escape'){closeSplitMenu(preview,true);}
+   else{
+     const items=[...menu.querySelectorAll('[role="menuitem"]')];
+     const index=items.indexOf(document.activeElement);
+     const next=event.key==='Home'?0:event.key==='End'?items.length-1:(index+(event.key==='ArrowDown'?1:-1)+items.length)%items.length;
+     items[next]?.focus();
+   }
  }
 });
 function updateFallbackNav(viewport){
