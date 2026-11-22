@@ -52,7 +52,7 @@ test('full gallery renders exactly 75 labelled cards with real previews or truth
  assert.equal((html.match(/<article class="card"/g)||[]).length,75);
  assert.equal((html.match(/class="preview"/g)||[]).length,75);
  assert.equal((html.match(/No CSS trial/g)||[]).length,13);
- assert.equal((html.match(/data-action="replay"/g)||[]).length,62);
+ assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,62);
  for(const e of effects)assert.ok(html.includes('data-id="'+e.id+'"'),e.title);
  assert.ok(!html.includes('undefined'));
 });
