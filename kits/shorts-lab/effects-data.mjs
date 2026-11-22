@@ -77,15 +77,16 @@ New collapsing header|Adapt|P2|header|Navigation|yes|Sticky mobile header shrink
 Your inputs look basic|Adopt|P1|input|Controls|yes|Material-style semantic floating label and accent underline wipe on focus; keep typed text, help text and visible focus state.
 New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Centred scroll-snap items enlarge as they enter view using animation-timeline: view(inline), with an accessible button/keyboard fallback.
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
+YouTube-style filter chips|Adopt|P1|chips|Navigation|yes|Compact horizontally scrollable filter chips with single-selection state, overflow navigation and keyboard controls. Better for filtering collections than for replacing multi-step navigation.
 `.trim();
 const cols=RAW.split("\n");
 export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- evidence:[59,60,64,65,66,67,68,70,71,72,73].includes(i)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ evidence:[59,60,64,65,66,67,68,70,71,72,73,75].includes(i)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
-if(effects.length!==75) throw new Error("Expected all 75 studies");
+if(effects.length!==76) throw new Error("Expected 76 studies including the screenshot-led filter chips");
 export const researchCount=effects.filter(e=>e.family==="Research-only").length;
