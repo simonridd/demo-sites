@@ -9,6 +9,8 @@ Use these decisions for newly authored visual experiences across customer demo s
 
 Read [accepted decisions and lessons](references/decisions.md) when choosing motion, reusable components or 3D assets, or when a user correction should improve future work.
 
+For the core CSS/21st.dev/GSAP/Blender/Three.js stack, use the [implementation playbook](references/implementation-playbook.md). Start from the audience task and select only the layers the output needs.
+
 When selecting the next visual technology, use the dated [technology candidates](references/technology-options.md) as a starting point and verify current source, licence and runtime fit. They are research candidates, not adopted dependencies.
 
 ## Apply the lessons
@@ -18,6 +20,7 @@ When selecting the next visual technology, use the dated [technology candidates]
 - Match the explanation to the audience. A simulated customer website should help customers complete their task. Keep customer/AVA/knowledge/adviser architecture explanations in the kit bag or presenter-led material unless the customer brief explicitly needs them. The same component may be adapted to a useful customer process with appropriate content and truthful state.
 - Prefer CSS/SVG and native browser animation for small static pages. Adapt selected 21st.dev components to the current brand and framework after reviewing their source, dependencies and licence. Do not add a framework solely for a small effect.
 - Treat 21st.dev as an optional reference when a new component or improvement would help. Discover suitable examples without requiring Simon to name one. If nothing fits or its source cannot be reviewed, continue with an appropriate custom/native solution; a library search must not hold up delivery.
+- Keep paid or substantial-runtime tools as bounded trials until their benefit justifies licensing, asset production and maintenance. Preserve useful sources in the kit bag when a trial is reserved; do not turn an experiment into a portfolio default.
 - Use Blender where custom depth, lighting or materials earn the production work. Prefer an optimised render for decoration. Add live 3D when visitor interaction benefits from it and performance has been checked.
 - Respect reduced-motion changes, retain keyboard focus and keep the content complete when animation or JavaScript is unavailable. Presentations also need complete print/static compositions.
 - Keep factual progress and readiness independent from decorative animation. In Voice Demo Builder, a completed visual sequence cannot expose a ready/call action before the existing verified readiness gates pass.

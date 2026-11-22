@@ -38,6 +38,22 @@
 
 **Application:** The Co-op support page remains the customer experience. The explainer is reserved under `kits/connected-support/`, with neutral kit framing and an entry at `kits/`. The previous route redirects to the kit so existing links keep working. Customer discovery does not list it. Future customer process visuals still need appropriate content and truthful state; no blanket ban on process components is implied.
 
+## 22 November 2026: proportionate technology trials
+
+**Decision:** Keep Rive as a limited trial because of cost and move on to the next candidate. Retain its editable source and static preview in the kit bag; do not expand it into an account, asset-production or portfolio runtime dependency without a use case that justifies that work.
+
+**Reason:** Simon said it was worth trialling but that we might not want to go too deep because of cost.
+
+**Application:** Compare licence costs, runtime weight, local production work and ongoing maintenance when choosing technologies. Remotion is evaluated privately under its published evaluation allowance; customer/production use needs the relevant company licence. No subscription or paid service was purchased by these trials. Native CSS/SVG remains suitable for simple website feedback.
+
+## 22 November 2026: deepen the original core stack
+
+**Decision:** Return the implementation focus to selected 21st.dev patterns, native CSS motion, GSAP, Blender and Three.js. Build on the approved Co-op results and turn them into reusable authoring recipes across new websites, presentations and Voice Demo Builder.
+
+**Reason:** Simon was pleased with the initial results and asked to work out the best implementation approaches for those technologies rather than continue expanding into additional animation products.
+
+**Application:** Follow the maintained implementation playbook. Native task interactions and optimised Blender artwork are the first reuse candidates; GSAP supplies coordinated explanation when useful; Three.js needs a defined spatial/product interaction and a complete on-demand/fallback lifecycle. Rive remains reserved and the unfinished Remotion evaluation stays local. This guidance does not install new runtimes into every output.
+
 ## Prototype observations
 
 - Custom Blender artwork: assess the first rendered grocery scene in Co-op before promoting it as a reusable asset-production example. A successful render alone is not proof that a page is clearer, faster or more effective.

@@ -11,14 +11,18 @@ It still displays Netlify's usage-limit pause notice. Its design, animation,
 implementation stack and performance could not be inspected. Do not attribute
 effects or technologies to it from this unavailable page.
 
-## Recommended order
+## Current implementation focus
 
-| Priority | Candidate | Useful experiment | Adoption considerations |
-| --- | --- | --- | --- |
-| 1 | GSAP | A customer-message to assistant, knowledge and adviser explanation, with short connection traces and guided emphasis | Keep existing presentation navigation and static/print explanations; compare against native SVG/browser animation before adding a dependency. Never tie readiness to an animation finishing. |
-| 2 | Rive | A reusable illustration responding to actual preparing, ready, blocked and idle application states | Requires an authored Rive asset and a JS/WASM runtime. Keep semantic HTML status and actions authoritative, provide a static fallback and stop unnecessary rendering. |
-| 3 | Remotion | Branded opening/closing sequences, animated captions and short explainers rendered to video | Use as an asset/export layer for the existing presentation/capture owners. Review company/automation licensing and render infrastructure before commercial rollout. It does not make an authored clip evidence of a live result. |
-| Selectively | Spline | A product or service object visitors can meaningfully explore | Evaluate touch/keyboard alternatives, runtime cost and export plan. Fully self-contained project export has a distinct plan requirement. Use a Blender render when interaction adds little. |
+Simon refocused the work on 22 November on CSS motion, curated 21st.dev patterns, GSAP, Blender and Three.js, following the approved Co-op results. Use the [implementation playbook](implementation-playbook.md) for the active approach. Rive and Remotion remain reserved research, not the next required integrations.
+
+| Tool | Current role |
+| --- | --- |
+| Native CSS/SVG and JavaScript | Default for task feedback, small entrances and accessible components. |
+| 21st.dev | Optional source of reviewed patterns, adapted to the existing brand and stack. |
+| GSAP | Selective coordinated motion for a clear explanation or interaction. |
+| Blender | Original optimised image assets and, when useful, model authoring. |
+| Three.js | A bounded on-demand 3D interaction when the task benefits from manipulating an object. |
+| Rive / Remotion | Reserved trials; no production runtime or paid pipeline adopted. |
 
 Sources checked:
 
@@ -52,4 +56,11 @@ On 22 November, Simon approved the component but rejected this particular explan
 
 The original `tools/artwork/build-status/scene.rml` compiles with official Rive CLI 1.10.0 and renders the three intended symbols. It uses current view-model conditions, not deprecated state-machine inputs. Rive's first-sibling draw order is opposite to SVG; compiler success did not reveal an initially hidden glyph, which visual captures caught and corrected.
 
-The playable export requires Rive account sign-in. The kit at `kits/build-status/` therefore labels its HTML/SVG state preview as static while export is pending. No `.riv` or runtime adoption is claimed. The candidate Canvas Lite 2.54.0 package has roughly 571 kB of JavaScript and 905 kB of primary WASM before compression, independently of the 1.7 kB compiled source reported locally. Measure actual browser delivery and rendering before using that cost for simple status symbols. Source and runtime licences/export terms are separate checks. A fallback or a successful local render is not a deployed Voice Demo Builder upgrade.
+The playable export requires Rive account sign-in. Simon subsequently asked to reserve this bounded trial because of cost and move on. The kit at `kits/build-status/` labels its HTML/SVG state preview as static; no export or production integration is queued. No `.riv` or runtime adoption is claimed. The candidate Canvas Lite 2.54.0 package has roughly 571 kB of JavaScript and 905 kB of primary WASM before compression, independently of the 1.7 kB compiled source reported locally. Measure actual browser delivery and rendering before using that cost for simple status symbols. Source and runtime licences/export terms are separate checks. A fallback or a successful local render is not a deployed Voice Demo Builder upgrade.
+
+
+## Remotion evaluation checkpoint, 22 November 2026
+
+An unfinished private title-sequence study remains in the local `remotion-trial/` workspace, outside public customer sites. Its Studio composition opened, but CLI still/video rendering timed out while resolving the root composition. No successful MP4, rendering pipeline or production integration is claimed. The user redirected the work to the core stack; the Studio process was stopped and the unfinished source was retained.
+
+The [published licence](https://github.com/remotion-dev/remotion/blob/main/LICENSE.md) includes evaluation before commercial use in free eligibility. [Company pricing](https://www.remotion.dev/docs/license/pricing) distinguishes creator seats and automation, and needs a fresh intended-use review before any adoption. No subscription or paid render service was purchased. This research is reserved rather than an active implementation prerequisite.

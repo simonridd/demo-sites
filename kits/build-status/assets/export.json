@@ -1,6 +1,6 @@
 {
   "ready": false,
-  "reason": "Rive CLI account sign-in is required to export the playable asset.",
+  "reason": "Bounded Rive source trial reserved; no playable asset or production runtime adopted.",
   "authoring": "../../../tools/artwork/build-status/scene.rml",
   "cliVersion": "1.10.0",
   "artboard": "BuildSignal",
@@ -8,5 +8,7 @@
   "property": "mode",
   "runtime": null,
   "wasm": null,
-  "asset": null
+  "asset": null,
+  "status": "reserved",
+  "previewLabel": "Static preview \u00b7 Rive trial reserved"
 }

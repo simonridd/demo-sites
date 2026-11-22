@@ -4,7 +4,7 @@ This kit is an original three-state Rive source plus a semantic HTML/static SVG 
 
 ## Current delivery state
 
-The original RML compiles and renders through official Rive CLI 1.10.0. The CLI requires account sign-in to export the playable `.riv`; that sign-in is pending. `assets/export.json` records `ready: false`, so this preview uses its static SVG and does not load a runtime or request a missing asset. Do not describe it as a shipped Rive animation or a deployed builder integration before export and runtime acceptance.
+The original RML compiles and renders through official Rive CLI 1.10.0. On 22 November Simon asked to keep Rive as a bounded trial because of cost, then move to the next candidate. The trial is now reserved at the source/static-preview stage. No playable `.riv` was exported and no production runtime was adopted. `assets/export.json` records `ready: false`, so this preview uses its static SVG and loads no runtime. A future resumption needs the normal account/export workflow and runtime acceptance; this is not a shipped Rive animation or a deployed builder integration.
 
 The runtime loader and readiness adapter are prepared for the exported asset. The preview controls select explicit example receipts; there is no automatic transition to ready, native build request, receipt token, phone action, provider API or browser storage. The example number in the source is fictional and is never rendered as a call link.
 
