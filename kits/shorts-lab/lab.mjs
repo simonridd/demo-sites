@@ -163,7 +163,7 @@ function doAction(btn,preview){
    case 'replay': replay(preview);break;
    case 'toggle-media':preview.querySelector('.media-reserve')?.classList.toggle('is-alt');break;
    case 'highlight':{const mark=preview.querySelector('mark');mark?.classList.toggle('is-dim');break;}
-   case 'toggle-calm':{const calm=preview.classList.toggle('is-calm');btn.setAttribute('aria-pressed',String(calm));break;}
+   case 'toggle-calm':{const calm=preview.classList.toggle('is-calm');btn.setAttribute('aria-pressed',String(calm));btn.textContent=calm?'Restore motion':'Calm scene';break;}
    case 'zoom':{const el=preview.querySelector('.zoom-target');el.style.setProperty('--zoom',Number(el.dataset.zoom||1)>=1.3?1:1.3);el.dataset.zoom=el.dataset.zoom==='1.3'?'1':'1.3';break;}
    case 'palette':preview.querySelector('.palette-row')?.classList.toggle('palette-alt');break;
    case 'progress':{const el=preview.querySelector('.progress-fill'),label=preview.querySelector('[data-progress-value]');const next=label.textContent==='45%'?'80%':'45%';label.textContent=next;el.style.setProperty('--p',next);break;}
@@ -196,7 +196,7 @@ function selectPill(btn) {
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
  if(!btn || !cards.contains(btn)) return;
- const preview=btn.closest('.preview');
+ const preview=btn.closest('.preview') || btn.closest('.card')?.querySelector('.preview');
  if(preview)doAction(btn,preview);
 });
 cards.addEventListener('keydown',event=>{
