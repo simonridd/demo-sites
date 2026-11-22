@@ -231,3 +231,27 @@
 .material-slider-study .slider-extremes{display:flex;justify-content:space-between;font-size:11px;line-height:1.2;color:#4d6a5d;font-weight:750;padding:0 10px}
 .material-slider-study .footnote{font-size:10px;line-height:1.4;max-width:270px;text-align:left}
 @media(prefers-reduced-motion:reduce){.material-slider-study .material-range-thumb{transition:none!important}}
+
+
+/* Study 067 · Gemini-inspired activity sweep. Original self-contained CSS.
+   This is visual theatre for an example pending state, never actual progress. */
+.demo-thinking .thinking-study{width:100%;max-width:332px;display:grid;justify-items:center;gap:12px}
+.demo-thinking .thinking-stage{position:relative;display:grid;align-content:center;gap:18px;padding:18px 16px 26px;width:100%;min-height:132px;border-radius:17px;overflow:hidden;color:#f3fcff;background:linear-gradient(130deg,#141d36,#26305b 52%,#162536);border:1px solid #a2c4d57c;box-shadow:0 12px 26px #122e3c30}
+.demo-thinking .thinking-mark{display:flex;align-items:center;justify-content:center;gap:11px;z-index:1}
+.demo-thinking .thinking-mark>span{font-size:24px;color:#d5cdff;text-shadow:0 0 15px #b2a4ff99}
+.demo-thinking .thinking-mark>strong{font-size:17px;font-weight:770;letter-spacing:-.02em}
+.demo-thinking .thinking-rail{height:13px;position:relative;border-radius:100px;overflow:hidden;background:#b5bfcf28;border:1px solid #ffffff3c;isolation:isolate}
+.demo-thinking .thinking-light{position:absolute;inset:-5px 0;display:block;border-radius:100px;opacity:.94;background:linear-gradient(90deg,#438cff 0%,#8d7bf7 24%,#e49dce 52%,#f0d6a3 75%,#6ebedb 100%);background-size:220% 100%;filter:blur(3px);transform:translateX(-10%) scaleX(.65);transform-origin:center;will-change:transform,background-position;opacity:.48}
+.demo-thinking .thinking-grain{position:absolute;inset:1px;display:block;border-radius:100px;background:linear-gradient(90deg,transparent 5%,#ffffff4d 49%,transparent 90%);opacity:.17}
+.preview.is-playing .demo-thinking .thinking-light{animation:atlas-thinking-sweep 1.2s ease-in-out 2 alternate both}
+.preview.is-playing .demo-thinking .thinking-mark>span{animation:atlas-thinking-mark 1.2s ease-in-out 2}
+@keyframes atlas-thinking-sweep{
+ 0%{transform:translateX(-30%) scaleX(.6);background-position:0% 50%;opacity:.4}
+ 48%{transform:translateX(0) scaleX(1);background-position:50% 50%;opacity:1}
+ 100%{transform:translateX(30%) scaleX(.6);background-position:100% 50%;opacity:.4}
+}
+@keyframes atlas-thinking-mark{50%{transform:scale(1.12) rotate(12deg);filter:hue-rotate(25deg)}}
+.demo-thinking .footnote{font-size:10px;max-width:245px;line-height:1.4;color:#376155;text-align:center}
+@media(prefers-reduced-motion:reduce){
+ .demo-thinking .thinking-light,.demo-thinking .thinking-mark>span{animation:none!important;transform:none!important;will-change:auto;opacity:.8}
+}
