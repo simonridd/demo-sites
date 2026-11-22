@@ -90,7 +90,13 @@ function previewFor(e) {
     case 'moving-bg': return `<div class="moving-bg">A new perspective.</div><small>Only when explicitly replayed</small>`;
     case 'thinking': return `<div class="thinking-bar" aria-label="Illustrative pending indicator"><i></i></div><small>Simulated busy · no progress claim</small>`;
     case 'slider': return `<div class="slider-wrap"><output class="slider-value" for="range-${e.id}">50</output><input id="range-${e.id}" type="range" min="0" max="100" value="50" data-range><small>Native slider with live value</small></div>`;
-    case 'toggle': return `<label class="switch-line"><input type="checkbox" checked><span>Enabled</span></label><small>Real checkbox state</small>`;
+    case 'toggle': return `<label class="switch-line squishy-toggle">
+  <span class="switch">
+    <input type="checkbox" role="switch" aria-label="Live updates" aria-describedby="toggle-hint-${e.id}" aria-checked="false">
+    <span class="switch-track" aria-hidden="true"></span>
+  </span>
+  <span class="switch-copy"><strong>Live updates</strong><span class="switch-status" aria-live="polite">Off</span></span>
+</label><small id="toggle-hint-${e.id}" class="footnote">Tap and hold: the thumb squishes, then settles on release.</small>`;
     case 'wavy': return `<div class="wavy-bars" aria-label="Decorative equalizer sample">${[0,1,2,3,4,5].map(i=>`<i style="--i:${i}"></i>`).join('')}</div><small>One short sample, not a fake process</small>`;
     case 'icons': return `<div class="fill-icons" role="group" aria-label="Choose filled icon states">
   ${[
@@ -265,6 +271,8 @@ function doAction(btn,preview){
      }else if(preview.dataset.effect==='input'){
        const field=preview.querySelector('.md-field input');
        field?.blur();field?.focus();
+     }else if(preview.dataset.effect==='toggle'){
+       preview.querySelector('.squishy-toggle input')?.click();
      }else if(preview.dataset.effect==='header'){
        preview.querySelector('[data-action="header"]')?.click();
      }else if(preview.dataset.effect==='carousel'){
@@ -409,6 +417,13 @@ cards.addEventListener('scroll',event=>{
    updateCarouselPosition(strip);
  });
 },{capture:true,passive:true});
+cards.addEventListener('change',event=>{
+ const input=event.target;
+ if(!input.matches?.('.squishy-toggle input[type="checkbox"]'))return;
+ input.setAttribute('aria-checked',String(input.checked));
+ const text=input.closest('.squishy-toggle')?.querySelector('.switch-status');
+ if(text)text.textContent=input.checked?'On':'Off';
+});
 cards.addEventListener('input',event=>{
  if(event.target.matches('[data-range]')){
   const output=event.target.closest('.slider-wrap').querySelector('output');
