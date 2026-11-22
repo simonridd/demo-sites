@@ -9,6 +9,7 @@ const resultCount = document.querySelector('#result-count');
 const contextNote = document.querySelector('#context-note');
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const activeTimers = new WeakMap();
+const activeFrames = new WeakMap();
 let audience = 'stage';
 
 const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
@@ -49,7 +50,7 @@ function previewFor(e) {
     case 'typewriter': return `<div class="type-text">A moment of impact.</div><small>Short stage-only title</small>`;
     case 'border': return `<div class="rotate-border">One thing matters.</div><small>Rare spotlight, not default UI</small>`;
     case 'metaball': return `<div class="metaball-wrap" aria-hidden="true"><i></i><i></i></div><small>Creative shape experiment</small>`;
-    case 'count-up': return `<strong class="big-number" data-counter data-final="24800">24,800</strong><small>A measured result · example</small>`;
+    case 'count-up': return `<strong class="big-number" data-counter data-final="24800" role="img" aria-label="24,800, illustrative result">24,800</strong><small>Illustrative value · not real measurement</small>`;
     case 'tv-intro': return `<div class="tv-intro">Next<br>chapter.</div><small>Original typography; no TV branding</small>`;
     case 'stagger': return `<div class="stagger-grid">${['01','02','03','04'].map((n,i)=>`<b style="--i:${i}">${n}</b>`).join('')}</div><small>Content always in the DOM</small>`;
     case 'pixel': return `<div class="pixel-letters">HELLO</div><small>Retro only with a story reason</small>`;
@@ -64,7 +65,7 @@ function previewFor(e) {
     case 'pattern': return `<div class="pattern-board"><b>Just enough.</b></div>`;
     case 'superellipse': return `<div class="superellipse">SOFT</div><small>Progressive enhancement</small>`;
     case 'video-ratio': return `<span class="candidate-label">Unverified — media trial</span><div class="video-box">16:9</div>${button('Toggle aspect ratio','ratio')}`;
-    case 'pill': return `<div class="glide-pills" role="tablist" aria-label="Example sections" style="--selected:0"><button type="button" role="tab" aria-selected="true" tabindex="0" data-action="pill" data-index="0">Discover</button><button type="button" role="tab" aria-selected="false" tabindex="-1" data-action="pill" data-index="1">Show</button><button type="button" role="tab" aria-selected="false" tabindex="-1" data-action="pill" data-index="2">Decide</button></div><small aria-live="polite" data-pill-status>Discover section</small>`;
+    case 'pill': return `<div class="glide-pills" role="tablist" aria-label="Example sections" style="--selected:0"><button id="pill-${e.id}-0" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="true" tabindex="0" data-action="pill" data-index="0">Discover</button><button id="pill-${e.id}-1" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="false" tabindex="-1" data-action="pill" data-index="1">Show</button><button id="pill-${e.id}-2" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="false" tabindex="-1" data-action="pill" data-index="2">Decide</button></div><small id="pill-panel-${e.id}" role="tabpanel" aria-labelledby="pill-${e.id}-0" aria-live="polite" data-pill-status>Discover section</small>`;
     case 'price-roll': return `${rollHTML('129.00','£')}${button('Compare £249.00','price')}`;
     case 'transform-candidate': return `<span class="candidate-label">Unverified — transformation</span><div class="visual-hero"><span>Shape shift</span></div>`;
     case 'holo': return `<div class="holo-tick" role="img" aria-label="Decorative check, no task success implied">✓</div><small>Decorative only · not verification</small>`;
@@ -130,12 +131,38 @@ function render(){
 for(const name of [...new Set(effects.map(e=>e.family))].sort()){
  const opt=document.createElement('option');opt.value=name;opt.textContent=name;familyFilter.append(opt);
 }
+function settleCount(preview){
+ const node=preview?.querySelector('[data-counter]');
+ if(!node) return;
+ const frame=activeFrames.get(preview);
+ if(frame && typeof cancelAnimationFrame==='function') cancelAnimationFrame(frame);
+ activeFrames.delete(preview);
+ node.textContent=Number(node.dataset.final).toLocaleString('en-GB');
+}
+function animateCount(preview){
+ const node=preview.querySelector('[data-counter]');
+ if(!node) return;
+ settleCount(preview);
+ if(typeof requestAnimationFrame!=='function') return;
+ const final=Number(node.dataset.final),duration=850;
+ node.textContent='0';
+ let start;
+ const tick=now=>{
+  if(motionPreference.matches || document.hidden || !preview.isConnected){settleCount(preview);return;}
+  start??=now;
+  const t=Math.min((now-start)/duration,1),ease=1-Math.pow(1-t,3);
+  node.textContent=Math.round(final*ease).toLocaleString('en-GB');
+  if(t<1)activeFrames.set(preview,requestAnimationFrame(tick));else settleCount(preview);
+ };
+ activeFrames.set(preview,requestAnimationFrame(tick));
+}
 function replay(preview) {
  if (!preview || motionPreference.matches || document.documentElement.classList.contains('motion-off')) return;
  preview.classList.remove('is-playing');
  // Restart this scoped one-shot only; do not autostart dozens of cards.
  void preview.offsetWidth;
  preview.classList.add('is-playing');
+ if(preview.dataset.effect==='count-up')animateCount(preview);
  const previous=activeTimers.get(preview);
  if(previous) clearTimeout(previous);
  activeTimers.set(preview,setTimeout(()=>preview.classList.remove('is-playing'),2700));
@@ -178,7 +205,7 @@ function doAction(btn,preview){
    case 'split-primary':preview.querySelector('[data-feedback]').textContent='Present · example only';break;
    case 'icon':{const isSaved=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(isSaved));btn.setAttribute('aria-label',isSaved?'Remove favourite':'Save favourite');btn.querySelector('span').textContent=isSaved?'♥':'♡';replay(preview);break;}
    case 'header':preview.querySelector('.mini-header')?.classList.toggle('is-condensed');break;
-   case 'next':case 'previous':{const strip=preview.querySelector('.carousel-scroller');if(strip)strip.scrollBy({left:(action==='next'?1:-1)*strip.clientWidth*.65,behavior:motionPreference.matches?'instant':'smooth'});break;}
+   case 'next':case 'previous':{const strip=preview.querySelector('.carousel-scroller');if(strip)strip.scrollBy({left:(action==='next'?1:-1)*strip.clientWidth*.65,behavior:(motionPreference.matches||document.documentElement.classList.contains('motion-off'))?'auto':'smooth'});break;}
  }
 }
 function selectPill(btn) {
@@ -191,7 +218,7 @@ function selectPill(btn) {
  }
  tablist.style.setProperty('--selected',btn.dataset.index);
  const output=tablist.parentElement.querySelector('[data-pill-status]');
- if(output)output.textContent=btn.textContent+' section';
+ if(output){output.textContent=btn.textContent+' section';output.setAttribute('aria-labelledby',btn.id);}
 }
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
@@ -220,6 +247,8 @@ cards.addEventListener('input',event=>{
   output.textContent=event.target.value;
  }
 });
+motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
+document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
 for(const control of [search,verdictFilter,familyFilter,stageOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){
