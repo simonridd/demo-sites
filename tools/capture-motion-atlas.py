@@ -92,7 +92,7 @@ def act(preview, entry):
         preview.locator(f'[data-action="{actions[key]}"]').first.click(timeout=1200)
     else:
         # The motion replay is intentionally below the preview, on its card.
-        card = preview.locator("xpath=..").locator("xpath=..")
+        card = preview.locator("xpath=ancestor::article[contains(@class, 'card')]")
         replay = card.locator('button[data-action="replay"], button[data-action="pair"]').first
         if replay.count():
             replay.click(timeout=1200)
