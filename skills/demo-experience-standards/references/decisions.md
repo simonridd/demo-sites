@@ -114,3 +114,11 @@
 **Application:** Co-op adds a static knowledge/checklist/summary-and-wrap-up map after Sam's frustrations and a two-case results slide after his notes. Eir reports up to 60 seconds saved per voice call; Probe CX reports 25–30% less after-call work for an automotive finance client with Copilot summaries and coaching. Names, qualifiers, units, contributing coaching and primary links stay visible. Exact sources and excluded wider-platform measures remain private. These are published cases, not Co-op measurements, forecasts, additive savings or guarantees.
 
 **Scope and checks:** This is a reusable narrative and evidence practice, not a requirement for a feature table or metrics on every deck. Preserve the client's art direction, native runtime and private source contracts. Stage and mobile reading checks qualify the two new static scenes; no extra motion dependency or Genesys configuration is introduced. Presentation-authoring owns versioned release/adoption receipts.
+
+## 22 November 2026: quick emphasis on headline figures
+
+**Decision:** A brief count-up can emphasise selected presentation figures when requested. Simon asked for the 60-second figure to rise quickly from zero after approving the clearer Copilot section.
+
+**Application:** Co-op's two performance figures count once in 850 ms on first stage entry, retaining the range, units, “up to”, named customer scope and coaching context. Final-width reservation prevents shifting type. Final accessible text stays stable; reading, print, no-JavaScript and reduced-motion views stay still. Exit, overview, page hiding, printing and motion-preference changes settle immediately. No replay or new library is introduced.
+
+**Scope:** This refines the default of still evidence. It does not require every number to animate, imply live measurement, change any result or add a new technology dependency. The original five Co-op trials stay intact; this later requested native enhancement is recorded separately.
