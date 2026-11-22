@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="280" viewBox="0 0 280 280" role="img" aria-labelledby="title desc">
+<title id="title">Iridescent geometric bloom</title><desc id="desc">An original cyan and violet crystalline flower with a mint centre, on transparency.</desc>
+<defs>
+<linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b4fcef"/><stop offset=".47" stop-color="#4288da"/><stop offset="1" stop-color="#9d5ce8"/></linearGradient>
+<linearGradient id="b" x1=".85" y1="0" x2=".08" y2="1"><stop stop-color="#fc9fda"/><stop offset=".46" stop-color="#8a79eb"/><stop offset="1" stop-color="#39d2b8"/></linearGradient>
+<radialGradient id="c"><stop stop-color="#ffffff"/><stop offset=".31" stop-color="#e0fff8"/><stop offset=".66" stop-color="#73efdf"/><stop offset="1" stop-color="#24a4c0"/></radialGradient>
+</defs>
+<g transform="translate(140 140)">
+ <path d="M0-116 52-56 115-23 67 29 40 113-11 62-93 80-70 12-103-68-30-71Z" fill="url(#a)" opacity=".88" stroke="#d5f9fe" stroke-width="2" stroke-linejoin="round"/>
+ <path d="M-14-101 20-43 98-39 50 15 75 89 9 53-48 115-41 36-114-8-55-32Z" fill="url(#b)" opacity=".75" stroke="#aefaf2" stroke-width="2" stroke-linejoin="round"/>
+ <path d="M0-95 26-30 90 0 26 30 0 96-26 30-91 0-26-30Z" fill="url(#a)" opacity=".83" stroke="#e5ffff" stroke-width="2"/>
+ <circle r="32" fill="url(#c)" stroke="#ebffff" stroke-width="4"/>
+ <circle cx="-10" cy="-10" r="10" fill="white" opacity=".65"/>
+ <circle cx="0" cy="0" r="5" fill="#ffffff"/>
+</g></svg>

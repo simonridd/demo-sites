@@ -29,7 +29,7 @@ def catalogue():
     text = (LAB / "effects-data.mjs").read_text(encoding="utf-8")
     match = re.search(r"const RAW = String\.raw\`(.*?)\`\.trim\(\)", text, re.S)
     if not match:
-        raise RuntimeError("The 75-reference catalogue was not found")
+        raise RuntimeError("The visual effects catalogue was not found")
     rows = []
     for index, line in enumerate(match.group(1).strip().splitlines(), 1):
         fields = line.split("|")
@@ -37,8 +37,8 @@ def catalogue():
             raise ValueError(f"Broken source row {index}")
         title, verdict, priority, preview, family, stage, note = fields
         rows.append(dict(id=index, title=title, preview=preview, family=family))
-    if len(rows) != 75:
-        raise RuntimeError(f"Expected 75 catalogue rows, got {len(rows)}")
+    if len(rows) != 77:
+        raise RuntimeError(f"Expected 77 catalogue rows, got {len(rows)}")
     return rows
 
 
@@ -84,8 +84,10 @@ def act(preview, entry):
         preview.locator('input[type="checkbox"]').first.uncheck(timeout=1200, force=True)
     elif key == "shine":
         preview.locator(".shine-card").hover(timeout=1200)
-    elif key in ("button", "button-looks"):
+    elif key == "button":
         preview.locator("button.demo-button").hover(timeout=1200)
+    elif key == "button-looks":
+        preview.locator("button.premium-action").click(timeout=1200)
     elif key == "glass":
         preview.locator(".glass-card").hover(timeout=1200)
     elif key == "icons":
@@ -94,6 +96,16 @@ def act(preview, entry):
         field = preview.locator(".md-field input")
         field.focus(timeout=1200)
         field.fill("Where is my order?", timeout=1200)
+    elif key == "blur":
+        preview.locator('[data-action="blur-mode"][data-mode="liquid"]').click(timeout=1200)
+    elif key == "split":
+        preview.locator('[data-action="split-menu"]').click(timeout=1200)
+    elif key == "chips":
+        preview.locator('[data-action="filter-chip"][data-chip="retail"]').click(timeout=1200)
+    elif key == "image-glow":
+        preview.locator('[data-action="image-glow"]').click(timeout=1200)
+    elif key == "gradient":
+        preview.locator('[data-action="grain"]').click(timeout=1200)
     elif key in actions:
         preview.locator(f'[data-action="{actions[key]}"]').first.click(timeout=1200)
     else:
@@ -126,14 +138,36 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
     try:
         total_frames = max(15, round(seconds * fps))
         for frame in range(total_frames):
-            if frame == 2:
+            # Study 068: move the native range across several browser frames.
+            # Study 069: hold the pointer down to capture thumb compression,
+            # then release for each genuine checkbox state change.
+            if entry["preview"] == "slider":
+                if 2 <= frame <= 20:
+                    value = round(10 + 78 * (frame - 2) / 18) if frame <= 11 else round(88 - 62 * (frame - 11) / 9)
+                    preview.locator('[data-range]').evaluate(
+                        """(el, value) => {
+                          el.value = String(value);
+                          el.dispatchEvent(new Event('input', {bubbles: true}));
+                        }""", value
+                    )
+            elif entry["preview"] == "toggle":
+                if frame in (2, 14):
+                    toggle = preview.locator('.squishy-toggle input')
+                    bbox = toggle.bounding_box()
+                    if not bbox:
+                        raise RuntimeError('Cannot locate native switch for press capture')
+                    page.mouse.move(bbox['x'] + bbox['width']/2, bbox['y'] + bbox['height']/2)
+                    page.mouse.down()
+                if frame in (5, 18):
+                    page.mouse.up()
+            elif frame == 2:
                 try:
                     act(preview, entry)
                 except PlaywrightTimeout:
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel", "icons", "input", "header"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
@@ -146,6 +180,18 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             icons.nth(1).click(timeout=800)
                         elif entry["preview"] == "input":
                             preview.locator(".md-field input").evaluate("(el) => el.blur()")
+                        elif entry["preview"] == "blur":
+                            preview.locator('[data-action="blur-mode"][data-mode="android"]').click(timeout=800)
+                        elif entry["preview"] == "split":
+                            preview.locator('.split-menu-items [data-action="split-choice"]').first.click(timeout=800)
+                        elif entry["preview"] == "chips":
+                            preview.locator('[data-action="filter-chip"][data-chip="travel"]').click(timeout=800)
+                        elif entry["preview"] == "image-glow":
+                            preview.locator('[data-action="image-glow"]').click(timeout=800)
+                        elif entry["preview"] == "button-looks":
+                            preview.locator('button.premium-action').click(timeout=800)
+                        elif entry["preview"] == "gradient":
+                            preview.locator('[data-action="grain"]').click(timeout=800)
                         else:
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:

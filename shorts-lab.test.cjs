@@ -21,9 +21,9 @@ function fakeNode(){
 }
 async function start(){
  const effects=await getEffects();
- const keys=['#cards','#search','#verdict','#family','#media-filter','#stage-only','#result-count','#context-note','#empty','#reset'];
+ const keys=['#cards','#search','#verdict','#family','#media-filter','#stage-only','#screenshots-only','#result-count','#context-note','#empty','#reset'];
  const nodes=Object.fromEntries(keys.map(k=>[k,fakeNode()]));
- nodes['#search'].value='';nodes['#media-filter'].value='all';nodes['#stage-only'].checked=false;
+ nodes['#search'].value='';nodes['#media-filter'].value='all';nodes['#stage-only'].checked=false;nodes['#screenshots-only'].checked=false;
  const doc={querySelector:s=>nodes[s],querySelectorAll:()=>[],createElement:()=>fakeNode(),addEventListener(){},documentElement:fakeNode()};
  const win={matchMedia:()=>({matches:false})};
  const script=read('kits/shorts-lab/lab.mjs').replace(/^import [^\n]+\n/gm,'');
@@ -36,11 +36,11 @@ async function start(){
  return {nodes,effects,context};
 }
 
-test('all 75 source references remain distinct and their review decisions are explicit',async()=>{
+test('all 77 source references remain distinct and their review decisions are explicit',async()=>{
  const effects=await getEffects();
- assert.equal(effects.length,75);
- assert.equal(new Set(effects.map(e=>e.id)).size,75);
- assert.equal(new Set(effects.map(e=>e.preview)).size,75);
+ assert.equal(effects.length,77);
+ assert.equal(new Set(effects.map(e=>e.id)).size,77);
+ assert.equal(new Set(effects.map(e=>e.preview)).size,77);
  assert.equal(effects.filter(e=>e.family==='Research-only').length,13);
  assert.equal(effects.filter(e=>e.verdict==='Hold').length,7);
  assert.equal(effects.filter(e=>e.stage).length>35,true);
@@ -49,13 +49,13 @@ test('all 75 source references remain distinct and their review decisions are ex
   assert.match(e.source,/^https:\/\/(?:www\.youtube\.com|www\.facebook\.com)\//);
  }
 });
-test('full gallery renders exactly 75 labelled cards with real previews or truthful research markers',async()=>{
+test('full gallery renders exactly 77 labelled cards with real previews or truthful research markers',async()=>{
  const {nodes,effects}=await start();
  const html=nodes['#cards'].innerHTML;
- assert.equal((html.match(/<article class="card"/g)||[]).length,75);
- assert.equal((html.match(/class="preview"/g)||[]).length,75);
+ assert.equal((html.match(/<article class="card"/g)||[]).length,77);
+ assert.equal((html.match(/class="preview"/g)||[]).length,77);
  assert.equal((html.match(/No CSS trial/g)||[]).length,13);
- assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,62);
+ assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,64);
  for(const e of effects)assert.ok(html.includes('data-id="'+e.id+'"'),e.title);
  assert.ok(!html.includes('undefined'));
 });
@@ -73,7 +73,7 @@ test('search, verdict and stage filters are functional and independent',async()=
  nodes['#stage-only'].handlers.change();
  assert.ok((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length>35);
  nodes['#reset'].handlers.click();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,75);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,77);
 });
 test('replay in card footer reaches the actual corresponding preview',async()=>{
  const {nodes}=await start();
@@ -110,9 +110,9 @@ test('source links do not masquerade as exact video URLs and clips require real 
  const {nodes}=await start();
  const html=nodes['#cards'].innerHTML;
  assert.equal((html.match(/data-source="verified"/g)||[]).length,3);
- assert.equal((html.match(/data-source="unverified"/g)||[]).length,72);
+ assert.equal((html.match(/data-source="unverified"/g)||[]).length,74);
  assert.equal((html.match(/class="source-link source-verified"/g)||[]).length,3);
- assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,75);
+ assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,77);
  assert.ok(!html.includes('Creator channel ↗'));
  assert.ok(!html.includes('class="clip-player"'));
  assert.match(html,/Watch original Facebook video/);
@@ -136,7 +136,7 @@ test('media evidence filters distinguish exact source matches from title-only se
  nodes['#media-filter'].value='exact';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,3);
  nodes['#media-filter'].value='unverified';nodes['#media-filter'].handlers.change();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,72);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,74);
  nodes['#media-filter'].value='ready';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,0);
 });
@@ -145,7 +145,7 @@ test('screenshot-led carousel focuses the centred slide with a safe CSS/JS fallb
  const {nodes,effects}=await start();
  const item=effects.find(x=>x.id===74);
  assert.equal(item.preview,'carousel');
- assert.match(item.evidence,/screenshot/);
+ assert.match(item.evidence,/user-supplied (?:screenshot|reference)/);
  const html=nodes['#cards'].innerHTML;
  assert.match(html,/class="carousel-shell carousel-focus-study"/);
  assert.match(html,/aria-roledescription="carousel"/);
@@ -209,4 +209,173 @@ test('unpressed icon fill is always empty even while hovering or focused',()=>{
  assert.match(css,/\.fill-icons \.fill-icon\[aria-pressed="true"\] \.icon-fill\{[^}]*clip-path:inset\(0 0 0 0\);transition:clip-path/);
  assert.doesNotMatch(css,/\.fill-icon:(?:hover|focus-visible):not\(\[aria-pressed="true"\]\) \.icon-fill/);
  assert.match(css,/@media\(hover:hover\) and \(pointer:fine\)/);
+});
+
+test('Google-inspired range control keeps native semantics while decorating the rail',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===68).preview,'slider');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="slider-wrap material-slider-study"/);
+ assert.match(html,/type="range" min="0" max="100" step="1" value="50"/);
+ assert.match(html,/aria-describedby="range-hint-68"/);
+ assert.match(html,/class="material-range-rail"/);
+ assert.match(html,/class="material-range-thumb"/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/\.material-range:active \.material-range-thumb/);
+ assert.match(css,/\.material-range:focus-within/);
+ assert.match(js,/--position/);
+ assert.match(js,/output.textContent=input.value\+'%'/);
+});
+test('squishy switch is a real labelled checkbox whose visual position follows checked state',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===69).preview,'toggle');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="switch-line squishy-toggle"/);
+ assert.match(html,/type="checkbox" role="switch"/);
+ assert.match(html,/aria-label="Live updates"/);
+ assert.match(html,/aria-checked="false"/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/\.switch:has\(input:checked\) \.switch-track::after/);
+ assert.match(css,/\.switch:active \.switch-track::after/);
+ assert.match(css,/\.switch:focus-within \.switch-track/);
+ assert.match(js,/setAttribute\('aria-checked',String\(input.checked\)\)/);
+});
+test('thinking bar is one-shot visual example, not simulated completion',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===67).preview,'thinking');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="thinking-stage" role="img"/);
+ assert.match(html,/no real system is processing/);
+ assert.match(html,/Illustrative activity only/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.preview.is-playing \.demo-thinking \.thinking-light/);
+ assert.match(css,/@keyframes atlas-thinking-sweep/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ const capture=read('tools/capture-motion-atlas.py');
+ assert.match(capture,/page\.mouse\.down\(\)/);
+ assert.match(capture,/page\.mouse\.up\(\)/);
+ assert.match(capture,/el\.dispatchEvent\(new Event\('input'/);
+});
+
+test('one-shot soft-focus background rotates once then settles; static/reduced-motion survives',async()=>{
+ const {nodes,effects}=await start();
+ const bg=effects.find(e=>e.id===66);
+ assert.equal(bg.preview,'moving-bg');
+ assert.equal(bg.verdict,'Adapt');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="gemini-reveal-study"/);
+ assert.match(html,/class="gemini-aura gemini-aura-one"/);
+ assert.match(html,/class="gemini-aura gemini-aura-two"/);
+ assert.match(html,/background settles; it never loops/);
+ assert.match(html,/aria-label="Illustrative once-only blurred gradient reveal/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.gemini-reveal\{/);
+ assert.match(css,/contain:paint/);
+ assert.match(css,/@keyframes atlas-gemini-reveal/);
+ assert.match(css,/\.preview\.is-playing \.gemini-aura-one\{animation:atlas-gemini-reveal [^}]* 1 both/);
+ assert.doesNotMatch(css,/atlas-gemini-reveal [^;}]*infinite/);
+ assert.match(css,/\.gemini-aura,\.gemini-reveal-content\{animation:none!important/);
+});
+
+
+test('Android frosted blur and Liquid Glass-inspired surface remain explicit alternatives',async()=>{
+ const {nodes,effects}=await start();
+ const record=effects.find(e=>e.id===60);
+ assert.equal(record.preview,'blur');
+ assert.match(record.evidence,/user-supplied screenshot/);
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="blur-comparison-study" data-material="android"/);
+ assert.match(html,/data-action="blur-mode" data-mode="android" aria-pressed="true"/);
+ assert.match(html,/data-action="blur-mode" data-mode="liquid" aria-pressed="false"/);
+ assert.match(html,/Liquid Glass-inspired/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/backdrop-filter:blur\(17px\) saturate\(1\.3\)/);
+ assert.match(css,/backdrop-filter:blur\(9px\) saturate\(1\.9\) contrast\(1\.12\)/);
+ assert.match(css,/@supports not \(\(backdrop-filter:blur\(1px\)\)/);
+ assert.match(js,/case 'blur-mode'/);
+ assert.match(js,/choice\.setAttribute\('aria-pressed',String\(choice===btn\)\)/);
+});
+test('split button uses accessible popover or fallback and exposes distinct actions',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===61).preview,'split');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="split-popover-study"/);
+ assert.match(html,/aria-controls="split-options-61"/);
+ assert.match(html,/popover="auto" role="menu" hidden/);
+ assert.match(html,/role="menuitem"/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(js,/function closeSplitMenu/);
+ assert.match(js,/function toggleSplitMenu/);
+ assert.match(js,/showPopover/);
+ assert.match(js,/ArrowDown.*ArrowUp.*Home.*End/);
+ assert.match(js,/event\.key==='Escape'/);
+ assert.match(css,/\.split-menu-items:popover-open/);
+});
+test('pixel squeeze only animates a stage study on explicit replay',async()=>{
+ const {nodes,effects}=await start();
+ const record=effects.find(e=>e.id===65);
+ assert.equal(record.verdict,'Prototype');
+ assert.equal(record.preview,'squeeze');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="pixel-squeeze-study"/);
+ assert.match(html,/class="pixel-grid"/);
+ assert.match(html,/data-action="replay" type="button">▶ Squeeze once/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/@keyframes atlas-pixel-squeeze/);
+ assert.match(css,/\.preview\.is-playing \.pixel-squeeze-label/);
+ assert.doesNotMatch(css,/atlas-pixel-squeeze [^;\n}]*infinite/);
+ assert.match(css,/\.pixel-squeeze-label,\.pixel-glitch\{animation:none!important/);
+});
+
+test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.length,77);
+ const screenshotIds=[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77];
+ assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
+ nodes['#screenshots-only'].checked=true;
+ nodes['#screenshots-only'].handlers.change();
+ const gallery=nodes['#cards'].innerHTML;
+ assert.equal((gallery.match(/<article class="card"/g)||[]).length,screenshotIds.length);
+ for(const id of screenshotIds) assert.ok(gallery.includes('data-id="'+id+'"'),'Screenshot '+id);
+ assert.ok(!gallery.includes('data-id="75"'),'Facebook reel without screenshot should not be tagged');
+ nodes['#search'].value='glowing';
+ nodes['#search'].handlers.input();
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,1);
+ assert.match(nodes['#cards'].innerHTML,/data-id="77"/);
+ nodes['#reset'].handlers.click();
+ assert.equal(nodes['#screenshots-only'].checked,false);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,77);
+});
+test('filter chips are real, single-selection content filters, not decorative pills',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===76).preview,'chips');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="chips-strip" role="group"/);
+ assert.match(html,/data-action="filter-chip"/);
+ assert.match(html,/data-sample="travel"/);
+ assert.match(html,/aria-pressed="true" class="filter-chip"/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/case 'filter-chip'/);
+ assert.match(js,/item.hidden=value!=='all'/);
+ assert.match(js,/ArrowRight.*ArrowLeft.*Home.*End/);
+});
+test('image glow duplicates original transparent image without affecting the sharp source',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===77).preview,'image-glow');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="image-glow-stage is-glowing"/);
+ assert.match(html,/class="image-glow-halo"/);
+ assert.match(html,/class="image-glow-image"/);
+ assert.match(html,/data-action="image-glow" aria-pressed="true"/);
+ assert.match(html,/077-glow-bloom.svg/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/filter:blur\(22px\) saturate\(1\.7\)/);
+ assert.match(css,/\.image-glow-stage\.is-glowing \.image-glow-halo/);
+ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+ const art=read('kits/shorts-lab/assets/077-glow-bloom.svg');
+ assert.match(art,/<svg/);
 });

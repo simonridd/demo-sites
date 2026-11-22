@@ -1,14 +1,14 @@
-# Motion Atlas — 75 referenced techniques
+# Motion Atlas — 77 referenced techniques
 
 Standalone, public-static, **originally implemented** experimental kit at `/kits/shorts-lab/`. It is not part of `demos.json`, is not a customer journey, has no Genesys/IVA/AVA binding, and does not modify any of the customer demos.
 
 ## Purpose and stage/product distinction
 
-The user explicitly prioritises **one-off presentation impact** as well as product UI quality. An effect can be worth rehearsing for a stage moment while still being a poor default in an everyday tool. Use the **One-off presentation** and **Everyday product** modes to judge the same 75 references with different expectations. The initial verdict remains in both modes so it is not silently rewritten. 'Stage candidate' is a review invitation, **not** approval to use or ship.
+The user explicitly prioritises **one-off presentation impact** as well as product UI quality. An effect can be worth rehearsing for a stage moment while still being a poor default in an everyday tool. Use the **One-off presentation** and **Everyday product** modes to judge the same 77 references with different expectations. The initial verdict remains in both modes so it is not silently rewritten. 'Stage candidate' is a review invitation, **not** approval to use or ship.
 
 The atlas holds:
-- All **75** named rows in the 22 November 2026 assessment, including incomplete titles and the Facebook odometer reel.
-- **62** candidates with original HTML/CSS/JS visual or functional experiments, including speculative examples explicitly marked as hypotheses.
+- The original **75** named research rows plus two later screenshot-led studies (76–77), including incomplete titles and the Facebook odometer reel.
+- **64** candidate studies with original HTML/CSS/JS visual or functional experiments, including speculative examples explicitly marked as hypotheses.
 - **13** non-CSS or out-of-scope research references, retained as explanation cards. They are not claimed as working implementations of translation, commerce, calendar, payment, AI agents or location sharing.
 - Zero third-party animation packages, CDN imports, analytics scripts, credentials, actual audio, video or live account actions.
 
@@ -95,7 +95,7 @@ The capture command starts a temporary **loopback-only server**, opens the actua
 ## Repository files
 
 - `index.html` — gallery layout, scope/attribution notice and filters
-- `effects-data.mjs` — one labelled row for all 75 references
+- `effects-data.mjs` — one labelled row for all 77 references
 - `lab.mjs` — original preview composition, event delegation, accessible state and filtering
 - `lab.css` — responsive gallery and one-shot visual effects with reduced-motion overrides
 - `../../shorts-lab.test.cjs` — smoke and register coverage checks
@@ -116,3 +116,43 @@ The carousel screenshot included a **partial on-screen CSS snippet**, not its co
 ### Recording consistency
 
 A code change invalidates the older video for that study. Regenerate **only IDs 71, 72, 73 and 74** using the existing capture pipeline with --force; check all four MP4 files, inspect their visible transitions and commit the regenerated assets. Leave the other 58 recordings and source links unchanged. Product-wide instructions and the Co-op demo should remain untouched until review.
+
+
+## Screenshot-led refinements — second batch (22 November 2026)
+
+These are independent implementations prompted by user-supplied video screenshots, not recovered creator source. Stage-first presentation choices can be more theatrical because most audiences will see the scene once or twice. All decorative animation is short and controlled, and all product actions retain semantic HTML.
+
+| ID | Study | Treatment and reuse decision |
+| --- | --- | --- |
+| 066 | Gemini-inspired moving/blurred background | **Adapt for stage**: bounded, blurred colour fields rotate and settle over 2.1 seconds. The scene stays attractive afterward and does not loop. Use for a reveal/section break; do not use as a permanently moving backdrop under working controls. Actual Gemini source/branding is not copied. |
+| 067 | Thinking-bar colour sweep | **Adapt**: multicolour bar animates for two short cycles only when explicitly played, with a truthful illustrative label. Never treat the animation as proof of background processing or completion. |
+| 068 | Expressive sliders | **Adopt selectively**: a native range input owns its value, keyboard controls and accessible label. The custom segmented track, narrow thumb, press feedback and live output are visual enhancements, with a static fallback. |
+| 069 | Squishy toggle | **Adopt selectively**: a real checkbox/role switch determines on/off; CSS :has and the sibling checked selector control thumb position, while :active briefly compresses its shape. Its off state must always be unambiguous. |
+
+After changing the live studies, recreate **only** the seven assets 060.mp4, 061.mp4 and 065.mp4 through 069.mp4; leave the other 55 clips, original video links and unrelated routes unchanged. Verify each new MP4 shows several visually distinct frames, inspect behaviour in Chromium and WebKit mobile emulation, check keyboard and reduced-motion scenarios, then merge and verify GitHub Pages for the exact commit. The shared product-authoring skills remain unchanged until this kit has been reviewed.
+
+
+### Three further screenshot-led comparisons in this batch
+
+| ID | Technique | Decision and implementation |
+| --- | --- | --- |
+| 060 | Android frosted blur vs Liquid Glass-inspired treatment | **Prototype both.** Keep one underlying composition and switch between soft translucent blur and a brighter optical lens with specular edge highlights. Both are original CSS illustrations, not official platform widgets or true physical refraction. Contrast, mobile Safari performance and readable fallback take priority. |
+| 061 | Split button with popover | **Adopt selectively.** Primary action always works directly. A separate chevron reveals alternative actions through the native Popover API when supported, with fallback, keyboard arrows, Escape and explicit accessible state. The kit only displays simulated actions. |
+| 065 | Pixel squeeze | **Stage-only prototype.** A bounded, stepped squash with a brief pixel grid is interesting for a theatrical reveal. It should not become routine confirmation or navigation. The reference screenshot did not expose all of its original CSS, so the implementation is independently authored and labelled speculative. |
+
+All original video links and case IDs are retained. The Android/Liquid comparison is intentionally about the optical treatment, not a promise of an Apple or Google component implementation. Check both alternatives on a real mobile browser before promotion; the existing CSS fallback must stay readable without backdrop-filter. This batch's successful capture and publication are separate from the source code changes.
+
+
+## Screenshot-supplied filter and image glow (current review)
+
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, and 77**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+
+Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
+
+Study 057 now compares a smooth gradient against the identical gradient with an original SVG `feTurbulence` texture mixed at low opacity. The grain can be toggled without altering the source gradient. Update only changed study recordings (52, 57, 60, 61, 65–69, 76 and 77); preserve the other video assets and all customer routes. Keep the broader product and presentation standards unchanged until visual selection is reviewed.
+
+### Validated reference-batch acceptance
+
+The screenshot-backed review branch holds **77 studies**, including **15 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
+
+See the review pull request for the exact source revision and the final GitHub Pages deployment receipt. The original creator's full CSS was not recovered. Screenshots are evidence references, not proof that her exact implementation has been reproduced.

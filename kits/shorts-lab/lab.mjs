@@ -7,6 +7,7 @@ const search = document.querySelector('#search');
 const verdictFilter = document.querySelector('#verdict');
 const familyFilter = document.querySelector('#family');
 const stageOnly = document.querySelector('#stage-only');
+const screenshotsOnly = document.querySelector('#screenshots-only');
 const mediaFilter = document.querySelector('#media-filter');
 const resultCount = document.querySelector('#result-count');
 const contextNote = document.querySelector('#context-note');
@@ -38,7 +39,13 @@ function previewFor(e) {
   const simple = (visual, caption = '') => `${visual}${caption ? `<small class="footnote">${caption}</small>` : ''}`;
   switch(e.preview) {
     case 'checkbox': return `<label class="check-line"><input type="checkbox" checked><span>Keep me updated</span></label><small>Native control, intentional accent</small>`;
-    case 'button': case 'button-looks': return simple(`<button type="button" class="demo-button" data-action="replay">See the difference ↗</button>`,'Hover, focus and press');
+    case 'button': return simple(`<button type="button" class="demo-button" data-action="replay">See the difference ↗</button>`,'Hover, focus and press');
+    case 'button-looks': return `<div class="premium-button-study">
+      <button type="button" class="premium-action" data-action="premium-button" aria-pressed="false" aria-label="Toggle the premium button selection">
+        <span class="premium-action-copy">Make an impression</span><span class="premium-action-icon" aria-hidden="true">↗</span>
+      </button>
+      <small class="footnote premium-status" aria-live="polite">Tap the button · watch its layered light and pressed state</small>
+    </div>`;
     case 'highlight': return `<p class="selection-text">Make the <mark>important bit</mark> count.</p>${button('Switch emphasis','highlight')}`;
     case 'layout-shift': case 'layout-shift-2': return `<div class="media-reserve"></div><small>Media space stays reserved</small>${button('Swap illustration','toggle-media')}`;
     case 'hero-candidate': return `<span class="candidate-label">Unverified — exploration</span><div class="visual-hero"><span>Beyond ordinary.</span></div><small>Hover the hero</small>`;
@@ -79,18 +86,87 @@ function previewFor(e) {
     case 'shine': return `<div class="shine-card">Premium, not loud.</div><small>Hover the card</small>`;
     case 'music-glow': return `<div class="music-glow" aria-hidden="true">♪</div><small>Abstract colour study, not an app clone</small>`;
     case 'video-controls': return `<span class="candidate-label">Unverified — controller trial</span><div class="video-box">▶</div><small>Real playback needs a real media element</small>`;
-    case 'gradient': return `<div class="gradient-board"><strong>Intentional colour.</strong></div>`;
+    case 'gradient': return `<div class="gradient-grain-study">
+  <div class="gradient-grain-samples">
+    <div class="grain-swatch"><strong>Flat</strong><small>smooth interpolation</small></div>
+    <div class="grain-swatch with-grain is-textured" data-grain="true"><strong>Textured</strong><small>same gradient + grain</small></div>
+  </div>
+  <button type="button" class="small-action" data-action="grain" aria-pressed="true">Grain on · compare</button>
+  <small class="footnote">The subtle noise layer uses SVG feTurbulence, mixed at 15% opacity.</small>
+</div>`;
     case 'fab': return `<div class="fab-wrap"><div class="fab-options" hidden><button type="button" aria-label="Note" data-action="fab-choice">✎</button><button type="button" aria-label="Share" data-action="fab-choice">↗</button></div><button class="fab-main" type="button" data-action="fab" aria-expanded="false" aria-label="Open optional tools">＋</button></div><small>Secondary actions only</small>`;
-    case 'blur': return `<div class="blur-scene"><div class="blur-pane">A clear overlay.</div></div>`;
-    case 'split': return `<div class="split-wrap"><button type="button" data-action="split-primary">Present</button><button type="button" aria-haspopup="menu" aria-expanded="false" data-action="split-menu" aria-label="Presentation options">⌄</button><div class="split-menu-items" role="menu" hidden><button type="button" role="menuitem" data-action="split-choice">Open notes</button><button type="button" role="menuitem" data-action="split-choice">Preview slides</button></div></div><small aria-live="polite" data-feedback>Primary action remains obvious</small>`;
+    case 'blur': return `<div class="blur-comparison-study" data-material="android">
+   <div class="blur-choice" role="group" aria-label="Compare translucent surface treatments">
+     <button type="button" data-action="blur-mode" data-mode="android" aria-pressed="true">Android blur</button>
+     <button type="button" data-action="blur-mode" data-mode="liquid" aria-pressed="false">Liquid Glass-inspired</button>
+   </div>
+   <div class="blur-example">
+      <div class="blur-art" aria-hidden="true"><span class="blur-sphere"></span><span class="blur-stripe"></span><span class="blur-spot"></span></div>
+      <div class="blur-pane material-glass" aria-hidden="true"><span class="material-glyph">✦</span><span class="material-title">A little clarity.</span><span class="material-description">One clear moment.</span></div>
+   </div>
+   <small class="footnote" data-blur-caption>Android-style soft backdrop. Contrast is preserved.</small>
+ </div>`;
+    case 'split': return `<div class="split-popover-study">
+   <div class="split-wrap">
+     <button class="split-primary" type="button" data-action="split-primary">Present <span aria-hidden="true">↗</span></button>
+     <button class="split-chevron" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="split-options-${e.id}" data-action="split-menu" aria-label="More presentation actions">⌄</button>
+     <div id="split-options-${e.id}" class="split-menu-items" popover="auto" role="menu" hidden aria-label="Presentation alternatives">
+       <button type="button" role="menuitem" data-action="split-choice"><span aria-hidden="true">✎</span> Open notes</button>
+       <button type="button" role="menuitem" data-action="split-choice"><span aria-hidden="true">◫</span> Preview slides</button>
+       <button type="button" role="menuitem" data-action="split-choice"><span aria-hidden="true">▣</span> Export summary</button>
+     </div>
+   </div>
+   <small aria-live="polite" data-feedback>One primary action. Options stay secondary.</small>
+ </div>`;
     case 'sparkles': return `<div class="sparkles">One big idea.</div><small>Short theatrical emphasis</small>`;
     case 'css-logo': return `<div class="css-logo" aria-label="Experimental letter C logo">C</div><small>Own artwork, not a client mark</small>`;
     case 'nudge': return `<div class="nudge-message">One new insight for you.</div>${button('Nudge once','replay')}`;
-    case 'squeeze': return `<button type="button" class="demo-button" data-action="replay">Press to respond</button><small>Press and release</small>`;
-    case 'moving-bg': return `<div class="moving-bg">A new perspective.</div><small>Only when explicitly replayed</small>`;
-    case 'thinking': return `<div class="thinking-bar" aria-label="Illustrative pending indicator"><i></i></div><small>Simulated busy · no progress claim</small>`;
-    case 'slider': return `<div class="slider-wrap"><output class="slider-value" for="range-${e.id}">50</output><input id="range-${e.id}" type="range" min="0" max="100" value="50" data-range><small>Native slider with live value</small></div>`;
-    case 'toggle': return `<label class="switch-line"><input type="checkbox" checked><span>Enabled</span></label><small>Real checkbox state</small>`;
+    case 'squeeze': return `<div class="pixel-squeeze-study">
+   <div class="pixel-squeeze-canvas" aria-label="Original experimental pixel-style squeeze, no application action" role="img">
+     <span class="pixel-grid" aria-hidden="true"></span><span class="pixel-squeeze-label">MAKE IT<br>MOVE.</span><span class="pixel-glitch" aria-hidden="true"></span>
+   </div>
+   <button class="demo-button" data-action="replay" type="button">▶ Squeeze once</button>
+   <small class="footnote">Experimental stage transition · original CSS, not recovered creator source.</small>
+ </div>`;
+    case 'moving-bg': return `<div class="gemini-reveal-study">
+ <div class="gemini-reveal" role="img" aria-label="Illustrative once-only blurred gradient reveal with soft rotation; original CSS study">
+   <span class="gemini-aura gemini-aura-one" aria-hidden="true"></span>
+   <span class="gemini-aura gemini-aura-two" aria-hidden="true"></span>
+   <span class="gemini-aura gemini-aura-three" aria-hidden="true"></span>
+   <span class="gemini-reveal-content"><span class="gemini-kicker">A NEW MOMENT</span><strong>Something extraordinary.</strong><span class="gemini-accent">✳</span></span>
+ </div>
+ <small class="footnote">Play once to reveal. The background settles; it never loops.</small>
+</div>`;
+    case 'thinking': return `<div class="thinking-study">
+  <div class="thinking-stage" role="img" aria-label="Illustrative thinking animation; no real system is processing">
+    <div class="thinking-mark" aria-hidden="true"><span>✳</span><strong>Thinking</strong></div>
+    <div class="thinking-rail" aria-hidden="true"><span class="thinking-light"></span><span class="thinking-grain"></span></div>
+  </div>
+  <small class="footnote">Illustrative activity only · Play to see the short colour sweep</small>
+</div>`;
+    case 'slider': return `<div class="slider-wrap material-slider-study">
+  <div class="slider-heading">
+    <label for="range-${e.id}">Interaction intensity</label>
+    <output class="slider-value" for="range-${e.id}">50%</output>
+  </div>
+  <div class="material-range" style="--position:50%">
+    <div class="material-range-rail" aria-hidden="true">
+      <span class="material-range-filled"></span>
+      <span class="material-range-rest"></span>
+      <span class="material-range-thumb"></span>
+    </div>
+    <input id="range-${e.id}" type="range" min="0" max="100" step="1" value="50" data-range aria-describedby="range-hint-${e.id}">
+  </div>
+  <div class="slider-extremes" aria-hidden="true"><span>Quiet</span><span>Bold</span></div>
+  <small id="range-hint-${e.id}" class="footnote">Drag, tap, or use the arrow keys. The thumb compresses as you press.</small>
+</div>`;
+    case 'toggle': return `<label class="switch-line squishy-toggle">
+  <span class="switch">
+    <input type="checkbox" role="switch" aria-label="Live updates" aria-describedby="toggle-hint-${e.id}" aria-checked="false">
+    <span class="switch-track" aria-hidden="true"></span>
+  </span>
+  <span class="switch-copy"><strong>Live updates</strong><span class="switch-status" aria-live="polite">Off</span></span>
+</label><small id="toggle-hint-${e.id}" class="footnote">Tap and hold: the thumb squishes, then settles on release.</small>`;
     case 'wavy': return `<div class="wavy-bars" aria-label="Decorative equalizer sample">${[0,1,2,3,4,5].map(i=>`<i style="--i:${i}"></i>`).join('')}</div><small>One short sample, not a fake process</small>`;
     case 'icons': return `<div class="fill-icons" role="group" aria-label="Choose filled icon states">
   ${[
@@ -143,6 +219,27 @@ function previewFor(e) {
   <small class="footnote">Scroll or use arrows. Centred item enlarges.</small>
 </div>`;
     case 'odometer': return `${rollHTML('12,840')}${button('Roll to 24,715','odometer')}`;
+    case 'chips': return `<div class="chips-study">
+  <div class="chips-strip" role="group" aria-label="Filter example showcases">
+    ${['All','Retail','Finance','Travel','Support'].map((v,i)=>`<button type="button" data-action="filter-chip" data-chip="${v.toLowerCase()}" aria-pressed="${i===0}" class="filter-chip">${v}</button>`).join('')}
+  </div>
+  <div class="chips-results" aria-live="polite" aria-atomic="true">
+    <div data-sample="retail"><b>01</b><strong>Retail journeys</strong></div>
+    <div data-sample="finance"><b>02</b><strong>Financial services</strong></div>
+    <div data-sample="travel"><b>03</b><strong>Travel experiences</strong></div>
+    <div data-sample="support"><b>04</b><strong>Customer support</strong></div>
+  </div>
+  <small class="chips-caption">All categories · 4 results</small>
+</div>`;
+    case 'image-glow': return `<div class="image-glow-study">
+   <div class="image-glow-stage is-glowing" data-glow="true">
+     <img class="image-glow-halo" src="./assets/077-glow-bloom.svg" alt="" aria-hidden="true" decoding="async">
+     <img class="image-glow-image" src="./assets/077-glow-bloom.svg" alt="Original iridescent geometric bloom" decoding="async">
+   </div>
+   <button type="button" class="small-action" data-action="image-glow" aria-pressed="true">Glow on · compare</button>
+   <small class="footnote">A blurred copy of the same transparent artwork creates the coloured halo.</small>
+</div>`;
+
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
 }
@@ -151,6 +248,7 @@ function cardHTML(e) {
  const speculative=e.verdict==='Hold';
  const tagClass='verdict-'+e.verdict.replaceAll(' ','-');
  const stageTag=audience==='stage' && e.stage ? '<span class="tag stage-candidate">Stage candidate</span>' : '';
+ const suppliedTag=e.screenshotProvided?'<span class="tag screenshot-supplied">Screenshot supplied</span>':'';
  const source=originalVideoLink(e);
  const sourceHTML=source.status==='verified'
    ? `<a class="source-link source-verified" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer" title="Verified individual video: ${esc(source.evidence)}">↗ Watch original ${esc(source.platform)} video</a>`
@@ -163,9 +261,9 @@ function cardHTML(e) {
       : '<div class="clip-unavailable"><span aria-hidden="true">▻</span><strong>Recording pending</strong><small>Local capture not yet published</small></div>';
  return `<article class="card" data-id="${e.id}" data-stage="${audience==='stage'&&e.stage}" data-clip="${Boolean(clip)}" data-source="${source.status}">
   <div class="card-inner">
-    <span class="card-index">STUDY ${String(e.id).padStart(3,'0')} / 075 · ${esc(e.family)}</span>
+    <span class="card-index">STUDY ${String(e.id).padStart(3,'0')} / ${String(effects.length).padStart(3,'0')} · ${esc(e.family)}</span>
     <h3 class="card-title">${esc(e.title)}</h3>
-    <div class="tags"><span class="tag ${tagClass}">${esc(e.verdict)}</span><span class="tag">${esc(e.priority)}</span>${stageTag}${speculative?'<span class="tag prototype-flag">Hypothesis</span>':''}</div>
+    <div class="tags"><span class="tag ${tagClass}">${esc(e.verdict)}</span><span class="tag">${esc(e.priority)}</span>${stageTag}${suppliedTag}${speculative?'<span class="tag prototype-flag">Hypothesis</span>':''}</div>
   </div>
   <div class="comparison-row">
     <section class="comparison-pane" aria-label="Interactive version of ${esc(e.title)}">
@@ -191,6 +289,7 @@ function render(){
  const filtered=effects.filter(e=>
    (v==='all'||e.verdict===v) && (f==='all'||e.family===f) &&
    (!stageOnly.checked||e.stage) &&
+   (!screenshotsOnly.checked||e.screenshotProvided) &&
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  cards.innerHTML=filtered.map(cardHTML).join('');
@@ -253,6 +352,37 @@ function changeRoll(preview,target) {
    ? `Compare £${next==='129.00'?'249.00':'129.00'}`
    : `Roll to ${next==='12,840'?'24,715':'12,840'}`;
 }
+function closeSplitMenu(preview,focus=false){
+ const menu=preview?.querySelector('.split-menu-items');
+ const trigger=preview?.querySelector('[data-action="split-menu"]');
+ if(!menu||!trigger)return;
+ if(typeof menu.hidePopover==='function'){
+   try{if(menu.matches(':popover-open'))menu.hidePopover();}catch{ /* older CSS selector fallback */ }
+ }
+ menu.hidden=true;menu.dataset.open='false';
+ trigger.setAttribute('aria-expanded','false');
+ if(focus)trigger.focus();
+}
+function toggleSplitMenu(preview){
+ const menu=preview.querySelector('.split-menu-items');
+ const trigger=preview.querySelector('[data-action="split-menu"]');
+ if(!menu||!trigger)return;
+ if(menu.dataset.open==='true'){closeSplitMenu(preview,true);return;}
+ const rect=trigger.getBoundingClientRect();
+ menu.hidden=false;
+ if(typeof menu.showPopover==='function'){
+   try{
+     menu.showPopover();
+     // Top-layer popovers are positioned near their own trigger, even when
+     // the gallery is clipped or scrolled.
+     menu.style.position='fixed';
+     menu.style.top=Math.min(window.innerHeight-160,rect.bottom+7)+'px';
+     menu.style.left=Math.max(8,Math.min(window.innerWidth-188,rect.right-182))+'px';
+   }catch{menu.removeAttribute('popover');menu.hidden=false;}
+ }
+ menu.dataset.open='true';trigger.setAttribute('aria-expanded','true');
+ menu.querySelector('[role="menuitem"]')?.focus();
+}
 function doAction(btn,preview){
  const action=btn.dataset.action;
  switch(action){
@@ -260,11 +390,25 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='icons'){
+     if(preview.dataset.effect==='gradient'){
+       preview.querySelector('[data-action="grain"]')?.click();
+     }else if(preview.dataset.effect==='image-glow'){
+       preview.querySelector('[data-action="image-glow"]')?.click();
+     }else if(preview.dataset.effect==='chips'){
+       preview.querySelector('.filter-chip[data-chip="retail"]')?.click();
+     }else if(preview.dataset.effect==='icons'){
        preview.querySelector('button[data-action="icon"]')?.click();
      }else if(preview.dataset.effect==='input'){
        const field=preview.querySelector('.md-field input');
        field?.blur();field?.focus();
+     }else if(preview.dataset.effect==='button-looks'){
+       preview.querySelector('[data-action="premium-button"]')?.click();
+     }else if(preview.dataset.effect==='toggle'){
+       preview.querySelector('.squishy-toggle input')?.click();
+     }else if(preview.dataset.effect==='blur'){
+       preview.querySelector('[data-action="blur-mode"][data-mode="liquid"]')?.click();
+     }else if(preview.dataset.effect==='split'){
+       toggleSplitMenu(preview);
      }else if(preview.dataset.effect==='header'){
        preview.querySelector('[data-action="header"]')?.click();
      }else if(preview.dataset.effect==='carousel'){
@@ -291,9 +435,65 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
-   case 'split-menu':{const menu=preview.querySelector('.split-menu-items');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));if(!menu.hidden) menu.querySelector('button')?.focus();break;}
-   case 'split-choice':{const menu=preview.querySelector('.split-menu-items');menu.hidden=true;const opener=preview.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();preview.querySelector('[data-feedback]').textContent=btn.textContent+' · example only';break;}
-   case 'split-primary':preview.querySelector('[data-feedback]').textContent='Present · example only';break;
+   case 'premium-button':{
+     const selected=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(selected));
+     const status=btn.closest('.premium-button-study')?.querySelector('.premium-status');
+     if(status)status.textContent=selected?'Selected · tap again to clear':'Not selected · ready to explore';
+     break;
+   }
+   case 'grain':{
+     const textured=btn.closest('.gradient-grain-study')?.querySelector('.with-grain');
+     const enabled=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(enabled));
+     if(textured){textured.classList.toggle('is-textured',enabled);textured.dataset.grain=String(enabled);}
+     btn.textContent=enabled?'Grain on · compare':'Grain off · compare';
+     break;
+   }
+   case 'filter-chip':{
+     const study=btn.closest('.chips-study');
+     const value=btn.dataset.chip||'all';
+     for(const chip of study.querySelectorAll('[data-action="filter-chip"]'))chip.setAttribute('aria-pressed',String(chip===btn));
+     let count=0;
+     for(const item of study.querySelectorAll('[data-sample]')){
+       item.hidden=value!=='all'&&item.dataset.sample!==value;
+       if(!item.hidden)count++;
+     }
+     const caption=study.querySelector('.chips-caption');
+     if(caption)caption.textContent=(value==='all'?'All categories':btn.textContent)+' · '+count+' '+(count===1?'result':'results');
+     break;
+   }
+   case 'image-glow':{
+     const study=btn.closest('.image-glow-study');
+     const stage=study?.querySelector('.image-glow-stage');
+     const enabled=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(enabled));
+     if(stage){stage.classList.toggle('is-glowing',enabled);stage.dataset.glow=String(enabled);}
+     btn.textContent=enabled?'Glow on · compare':'Glow off · compare';
+     break;
+   }
+   case 'split-menu':toggleSplitMenu(preview);break;
+   case 'split-choice':{
+      const selected=btn.textContent.trim();
+      closeSplitMenu(preview,true);
+      preview.querySelector('[data-feedback]').textContent=selected+' · example only';
+      break;
+   }
+   case 'split-primary':{
+      closeSplitMenu(preview);
+      preview.querySelector('[data-feedback]').textContent='Present · example only';
+      break;
+   }
+   case 'blur-mode':{
+      const example=preview.querySelector('.blur-comparison-study');
+      if(!example)break;
+      const mode=btn.dataset.mode==='liquid'?'liquid':'android';
+      example.dataset.material=mode;
+      for(const choice of example.querySelectorAll('[data-action="blur-mode"]'))choice.setAttribute('aria-pressed',String(choice===btn));
+      const caption=example.querySelector('[data-blur-caption]');
+      if(caption)caption.textContent=mode==='liquid'?'Liquid Glass-inspired: brighter highlights and a soft refractive illusion.':'Android-style soft backdrop. Contrast is preserved.';
+      break;
+   }
    case 'icon':{
      const selected=btn.getAttribute('aria-pressed')!=='true';
      const kind=btn.dataset.kind||'heart';
@@ -361,6 +561,22 @@ function selectPill(btn) {
  const output=tablist.parentElement.querySelector('[data-pill-status]');
  if(output){output.textContent=btn.textContent+' section';output.setAttribute('aria-labelledby',btn.id);}
 }
+cards.addEventListener('toggle',event=>{
+ const menu=event.target;
+ if(!menu.matches?.('.split-menu-items'))return;
+ const trigger=menu.closest('.preview')?.querySelector('[data-action="split-menu"]');
+ const open=event.newState==='open';
+ menu.dataset.open=String(open);
+ if(!open)menu.hidden=true;
+ trigger?.setAttribute('aria-expanded',String(open));
+},{capture:true});
+document.addEventListener('pointerdown',event=>{
+ for(const menu of cards.querySelectorAll('.split-menu-items[data-open="true"]')){
+   if(typeof menu.showPopover==='function')continue; // native light-dismiss
+   const wrapper=menu.closest('.split-wrap');
+   if(wrapper && !wrapper.contains(event.target))closeSplitMenu(wrapper.closest('.preview'));
+ }
+});
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
  if(!btn || !cards.contains(btn)) return;
@@ -368,6 +584,18 @@ cards.addEventListener('click',event=>{
  if(preview)doAction(btn,preview);
 });
 cards.addEventListener('keydown',event=>{
+ const chip=event.target.closest?.('.chips-strip .filter-chip');
+ if(chip&&['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
+   event.preventDefault();
+   const strip=chip.closest('.chips-strip');
+   const tabs=[...strip.querySelectorAll('.filter-chip')];
+   const index=tabs.indexOf(chip);
+   const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:
+     (index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+   tabs[next].focus();
+   tabs[next].click();
+   tabs[next].scrollIntoView?.({block:'nearest',inline:'nearest'});
+ }
  const carousel=event.target.closest?.('.carousel-scroller');
  if(carousel && ['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
    event.preventDefault();
@@ -385,9 +613,17 @@ cards.addEventListener('keydown',event=>{
      (tabs.indexOf(tab)+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
    tabs[next].focus();selectPill(tabs[next]);
  }
- if(event.key==='Escape'){
-   const menu=event.target.closest('.split-menu-items');
-   if(menu){menu.hidden=true;const p=menu.closest('.preview');const opener=p.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();}
+ const menu=event.target.closest?.('.split-menu-items');
+ if(menu&&['Escape','ArrowDown','ArrowUp','Home','End'].includes(event.key)){
+   event.preventDefault();
+   const preview=menu.closest('.preview');
+   if(event.key==='Escape'){closeSplitMenu(preview,true);}
+   else{
+     const items=[...menu.querySelectorAll('[role="menuitem"]')];
+     const index=items.indexOf(document.activeElement);
+     const next=event.key==='Home'?0:event.key==='End'?items.length-1:(index+(event.key==='ArrowDown'?1:-1)+items.length)%items.length;
+     items[next]?.focus();
+   }
  }
 });
 function updateFallbackNav(viewport){
@@ -409,16 +645,27 @@ cards.addEventListener('scroll',event=>{
    updateCarouselPosition(strip);
  });
 },{capture:true,passive:true});
+cards.addEventListener('change',event=>{
+ const input=event.target;
+ if(!input.matches?.('.squishy-toggle input[type="checkbox"]'))return;
+ input.setAttribute('aria-checked',String(input.checked));
+ const text=input.closest('.squishy-toggle')?.querySelector('.switch-status');
+ if(text)text.textContent=input.checked?'On':'Off';
+});
 cards.addEventListener('input',event=>{
  if(event.target.matches('[data-range]')){
-  const output=event.target.closest('.slider-wrap').querySelector('output');
-  output.value=event.target.value;
-  output.textContent=event.target.value;
+  const slider=event.target.closest('.slider-wrap');
+  const output=slider?.querySelector('output');
+  const input=event.target;
+  const min=Number(input.min), max=Number(input.max);
+  const progress=max>min?Math.max(0,Math.min(100,(Number(input.value)-min)/(max-min)*100)):0;
+  slider?.querySelector('.material-range')?.style.setProperty('--position',progress+'%');
+  if(output){output.value=input.value+'%';output.textContent=input.value+'%';}
  }
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
 document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
-for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly])
+for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly,screenshotsOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){
  radio.addEventListener('change',()=>{
@@ -431,6 +678,6 @@ for(const radio of document.querySelectorAll('[name="audience"]')){
  });
 }
 document.querySelector('#reset').addEventListener('click',()=>{
- search.value='';verdictFilter.value='all';familyFilter.value='all';mediaFilter.value='all';stageOnly.checked=false;render();search.focus();
+ search.value='';verdictFilter.value='all';familyFilter.value='all';mediaFilter.value='all';stageOnly.checked=false;screenshotsOnly.checked=false;render();search.focus();
 });
 render();

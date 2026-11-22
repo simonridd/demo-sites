@@ -142,3 +142,344 @@
  .carousel-focus-study .carousel-item{padding:18px}
  .collapse-viewport{height:240px}
 }
+
+
+/* Study 069 — Screenshot-led squishy switch: exact ON/OFF semantics, playful press.
+   Adapted independently from user-supplied CSS fragments, not copied source. */
+.demo-toggle .squishy-toggle{
+ display:flex;align-items:center;justify-content:center;gap:14px;
+ color:#18483b;text-align:left;cursor:pointer;width:100%;max-width:300px;
+ touch-action:manipulation;
+}
+.squishy-toggle .switch{position:relative;display:block;flex:0 0 62px;width:62px;height:36px}
+.squishy-toggle .switch input{
+ position:absolute;inset:0;margin:0;padding:0;
+ opacity:0;width:100%;height:100%;z-index:2;cursor:pointer;
+ appearance:none;-webkit-appearance:none;
+}
+.squishy-toggle .switch-track{
+ position:absolute;inset:0;display:block;pointer-events:none;
+ border-radius:22px;border:2px solid #809c90;background:#cadad0;
+ transition:background-color 220ms ease,border-color 220ms ease;
+}
+.squishy-toggle .switch-track::after{
+ content:"";position:absolute;left:3px;top:4px;
+ width:24px;height:24px;border-radius:50%;
+ background:#fff;box-shadow:0 2px 5px #163e3526;
+ transition:left 240ms cubic-bezier(.2,1,.28,1),
+            width 140ms ease,height 140ms ease,top 140ms ease,
+            background-color 180ms ease;
+}
+/* Use :has() to style the parent where supported; sibling selectors below
+   keep the same state working in browsers without :has(). */
+.squishy-toggle .switch:has(input:checked) .switch-track,
+.squishy-toggle .switch input:checked + .switch-track{
+ background:#a7eaca;border-color:#168367;
+}
+.squishy-toggle .switch:has(input:checked) .switch-track::after,
+.squishy-toggle .switch input:checked + .switch-track::after{
+ left:30px;background:#075c55;
+}
+.squishy-toggle .switch:active .switch-track::after{
+ left:2px;width:30px;height:28px;top:2px;
+}
+.squishy-toggle .switch:has(input:checked):active .switch-track::after,
+.squishy-toggle .switch input:checked + .switch-track:active::after{
+ left:26px;width:30px;height:28px;top:2px;
+}
+.squishy-toggle .switch:focus-within .switch-track{
+ outline:3px solid #0d7867;outline-offset:4px;
+}
+.squishy-toggle .switch-copy{display:grid;gap:2px;min-width:0}
+.squishy-toggle .switch-copy strong{font-size:15px;white-space:nowrap}
+.squishy-toggle .switch-status{font-size:12px;color:#3b685b;font-weight:800}
+.demo-toggle .footnote{max-width:245px;line-height:1.5}
+@media (hover:hover) and (pointer:fine){
+ .squishy-toggle .switch:hover .switch-track{border-color:#158368}
+}
+@media (prefers-reduced-motion:reduce){
+ .squishy-toggle .switch-track,.squishy-toggle .switch-track::after{transition:none!important}
+}
+
+
+/* Study 068 — expressive native range slider from the user-supplied reference.
+   A native, keyboard- and touch-operable input owns the value; the CSS rail
+   and slim compressible thumb only show that value visually. */
+.material-slider-study{width:100%;max-width:315px;gap:9px!important;text-align:left!important;align-items:stretch!important}
+.material-slider-study .slider-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:0 3px}
+.material-slider-study .slider-heading label{font-size:12px;font-weight:790;color:#245c4c}
+.material-slider-study .slider-value{font-size:34px;line-height:1.05;letter-spacing:-.07em;color:#145a4c;font-variant-numeric:tabular-nums;font-weight:850}
+.material-slider-study .material-range{width:100%;height:52px;position:relative;isolation:isolate;touch-action:pan-y;--position:50%}
+.material-slider-study .material-range-rail{position:absolute;top:0;bottom:0;left:12px;right:12px;pointer-events:none}
+.material-slider-study .material-range-filled,
+.material-slider-study .material-range-rest{position:absolute;top:50%;height:18px;transform:translateY(-50%);border-radius:12px}
+.material-slider-study .material-range-filled{left:0;width:max(0px,calc(var(--position) - 10px));background:#187d67;box-shadow:inset 0 1px 1px #083a2918}
+.material-slider-study .material-range-rest{left:min(100%,calc(var(--position) + 10px));right:0;background:#c9d8cc;box-shadow:inset 0 1px 2px #274f3220}
+.material-slider-study .material-range-thumb{position:absolute;top:50%;left:var(--position);width:7px;height:41px;background:#12624f;border-radius:7px;transform:translate(-50%,-50%);transition:left 70ms ease,width 145ms cubic-bezier(.2,1.3,.3,1),height 145ms cubic-bezier(.2,1.3,.3,1),background-color 160ms}
+.material-slider-study .material-range input[type=range]{
+ position:absolute;inset:0;margin:0;padding:0;width:100%;height:100%;
+ appearance:none;-webkit-appearance:none;background:transparent!important;
+ border:0!important;box-shadow:none!important;opacity:0;z-index:2;
+ cursor:ew-resize;touch-action:pan-y
+}
+.material-slider-study .material-range input::-webkit-slider-runnable-track{height:52px;background:transparent;border:0}
+.material-slider-study .material-range input::-moz-range-track{height:52px;background:transparent;border:0}
+.material-slider-study .material-range input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:24px;height:52px;border:0;background:transparent;cursor:ew-resize}
+.material-slider-study .material-range input::-moz-range-thumb{width:24px;height:52px;border:0;background:transparent;cursor:ew-resize}
+.material-slider-study .material-range:focus-within{outline:3px solid #167e6e;outline-offset:2px;border-radius:10px}
+.material-slider-study .material-range:active .material-range-thumb{width:14px;height:36px;background:#0a5445}
+.material-slider-study .slider-extremes{display:flex;justify-content:space-between;font-size:11px;line-height:1.2;color:#4d6a5d;font-weight:750;padding:0 10px}
+.material-slider-study .footnote{font-size:10px;line-height:1.4;max-width:270px;text-align:left}
+@media(prefers-reduced-motion:reduce){.material-slider-study .material-range-thumb{transition:none!important}}
+
+
+/* Study 067 · Gemini-inspired activity sweep. Original self-contained CSS.
+   This is visual theatre for an example pending state, never actual progress. */
+.demo-thinking .thinking-study{width:100%;max-width:332px;display:grid;justify-items:center;gap:12px}
+.demo-thinking .thinking-stage{position:relative;display:grid;align-content:center;gap:18px;padding:18px 16px 26px;width:100%;min-height:132px;border-radius:17px;overflow:hidden;color:#f3fcff;background:linear-gradient(130deg,#141d36,#26305b 52%,#162536);border:1px solid #a2c4d57c;box-shadow:0 12px 26px #122e3c30}
+.demo-thinking .thinking-mark{display:flex;align-items:center;justify-content:center;gap:11px;z-index:1}
+.demo-thinking .thinking-mark>span{font-size:24px;color:#d5cdff;text-shadow:0 0 15px #b2a4ff99}
+.demo-thinking .thinking-mark>strong{font-size:17px;font-weight:770;letter-spacing:-.02em}
+.demo-thinking .thinking-rail{height:13px;position:relative;border-radius:100px;overflow:hidden;background:#b5bfcf28;border:1px solid #ffffff3c;isolation:isolate}
+.demo-thinking .thinking-light{position:absolute;inset:-5px 0;display:block;border-radius:100px;opacity:.94;background:linear-gradient(90deg,#438cff 0%,#8d7bf7 24%,#e49dce 52%,#f0d6a3 75%,#6ebedb 100%);background-size:220% 100%;filter:blur(3px);transform:translateX(-10%) scaleX(.65);transform-origin:center;will-change:transform,background-position;opacity:.48}
+.demo-thinking .thinking-grain{position:absolute;inset:1px;display:block;border-radius:100px;background:linear-gradient(90deg,transparent 5%,#ffffff4d 49%,transparent 90%);opacity:.17}
+.preview.is-playing .demo-thinking .thinking-light{animation:atlas-thinking-sweep 1.2s ease-in-out 2 alternate both}
+.preview.is-playing .demo-thinking .thinking-mark>span{animation:atlas-thinking-mark 1.2s ease-in-out 2}
+@keyframes atlas-thinking-sweep{
+ 0%{transform:translateX(-30%) scaleX(.6);background-position:0% 50%;opacity:.4}
+ 48%{transform:translateX(0) scaleX(1);background-position:50% 50%;opacity:1}
+ 100%{transform:translateX(30%) scaleX(.6);background-position:100% 50%;opacity:.4}
+}
+@keyframes atlas-thinking-mark{50%{transform:scale(1.12) rotate(12deg);filter:hue-rotate(25deg)}}
+.demo-thinking .footnote{font-size:10px;max-width:245px;line-height:1.4;color:#376155;text-align:center}
+@media(prefers-reduced-motion:reduce){
+ .demo-thinking .thinking-light,.demo-thinking .thinking-mark>span{animation:none!important;transform:none!important;will-change:auto;opacity:.8}
+}
+
+
+/* Study 066 — bounded one-shot blurred-and-rotating colour reveal.
+   Screenshot-inspired independent CSS. Localised paint: never a full-page blur.
+   Final (no-JS, no-motion) state matches the settled end frame. */
+.gemini-reveal-study{width:100%;max-width:335px;display:grid;justify-items:center;gap:9px}
+.gemini-reveal{
+ position:relative;overflow:hidden;isolation:isolate;contain:paint;display:grid;
+ width:100%;min-height:162px;border-radius:19px;padding:20px 19px;
+ background:#192345;color:white;text-align:left;align-items:end;
+ box-shadow:0 18px 30px #14213828;border:1px solid #f1e2fc45;
+}
+.gemini-reveal::before{content:"";position:absolute;inset:0;z-index:-2;
+ background:linear-gradient(112deg,#171f45,#392b61 45%,#152f58);
+}
+.gemini-aura{display:block;position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(17px);transform:rotate(110deg) scale(1);opacity:.92}
+.gemini-aura-one{width:200px;height:145px;top:-73px;right:-54px;
+ background:conic-gradient(from 160deg,#f3a6d8,#7b80e8,#b68bed,#f3a6d8)}
+.gemini-aura-two{width:190px;height:115px;bottom:-55px;left:-55px;
+ background:radial-gradient(ellipse at 35% 65%,#8be4e8,#4b8cdc 62%,transparent 73%);opacity:.7}
+.gemini-aura-three{width:120px;height:120px;top:25px;left:35%;
+ background:radial-gradient(circle,#f6afc0,#ab6fb6 55%,transparent 70%);opacity:.44}
+.gemini-reveal-content{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;z-index:1;max-width:260px;text-shadow:0 2px 13px #14193490}
+.gemini-kicker{font-size:9px;letter-spacing:.16em;font-weight:800;color:#e7cefb}
+.gemini-reveal-content strong{font-size:clamp(18px,2.2vw,24px);line-height:1.06;letter-spacing:-.065em;font-weight:800}
+.gemini-accent{position:absolute;right:-18px;top:-34px;font-size:28px;color:#d8c8ff}
+.gemini-reveal-study .footnote{font-size:10px;color:#426357;text-align:center;line-height:1.35;max-width:255px}
+@keyframes atlas-gemini-reveal{
+ 0%{transform:translate3d(-30%,22%,0) rotate(-100deg) scale(.76);filter:blur(31px);opacity:.35}
+ 56%{transform:translate3d(3%,-3%,0) rotate(28deg) scale(1.22);filter:blur(22px);opacity:1}
+ 100%{transform:translate3d(0,0,0) rotate(110deg) scale(1);filter:blur(17px);opacity:.92}
+}
+@keyframes atlas-gemini-secondary{
+ 0%{transform:translate3d(24%,-15%,0) rotate(270deg) scale(.75);filter:blur(27px);opacity:.25}
+ 100%{transform:translate3d(0,0,0) rotate(110deg) scale(1);filter:blur(17px);opacity:.7}
+}
+@keyframes atlas-gemini-copy{
+ 0%{opacity:.45;transform:translateY(8px)}
+ 100%{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .preview.is-playing .gemini-aura-one{animation:atlas-gemini-reveal 2.1s cubic-bezier(.22,1,.36,1) 1 both}
+ .preview.is-playing .gemini-aura-two{animation:atlas-gemini-secondary 2.1s cubic-bezier(.22,1,.36,1) 1 both}
+ .preview.is-playing .gemini-reveal-content{animation:atlas-gemini-copy 600ms 600ms ease-out both}
+}
+@media(prefers-reduced-motion:reduce){
+ .gemini-aura,.gemini-reveal-content{animation:none!important;transition:none!important}
+}
+
+
+/* Studies 060/061/065 — source screenshots are inspiration; original CSS.
+   Android blur and Liquid Glass-style are compared without impersonating OS UI. */
+.blur-comparison-study{width:100%;max-width:336px;display:grid;gap:11px;justify-items:stretch}
+.blur-choice{display:grid;grid-template-columns:1fr 1.3fr;gap:5px;background:#cdddcf;padding:5px;border-radius:12px}
+.blur-choice button{background:transparent;color:#30584b;font-size:11px;line-height:1.2;min-height:37px;padding:8px 5px;border-radius:8px;font-weight:800;box-shadow:none}
+.blur-choice button[aria-pressed=true]{background:#fff;color:#184b3e;box-shadow:0 3px 8px #113c2f1c}
+.blur-example{min-height:153px;width:100%;position:relative;isolation:isolate;overflow:hidden;border-radius:15px;background:#a7bedb;display:grid;place-items:center}
+.blur-art{position:absolute;inset:0;background:linear-gradient(135deg,#c0e8dc 5%,#80a4dc 48%,#e7adc5 95%);overflow:hidden}
+.blur-art .blur-sphere{position:absolute;width:135px;height:135px;top:-45px;right:-22px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff3ad,#f0a0a7 65%,#b95d91 100%);box-shadow:0 14px 30px #6d4d7970}
+.blur-art .blur-stripe{position:absolute;width:155px;height:260px;left:-20px;top:-80px;transform:rotate(32deg);background:linear-gradient(90deg,#257eaa,#96d6c4 40%,#ffffff70 44%,#f2cfa7 78%);border-radius:55px}
+.blur-art .blur-spot{position:absolute;width:110px;height:110px;right:28px;bottom:-58px;border-radius:50%;background:#3e67c0;box-shadow:0 0 30px #9cedd4}
+.blur-example .material-glass{
+ z-index:2;width:min(84%,250px);min-height:100px;padding:17px 20px;position:relative;
+ display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:5px;
+ color:#143d41;text-align:left;background:rgb(255 255 255 / .46);
+ border:1px solid rgb(255 255 255 / .76);
+ border-radius:16px;box-shadow:0 12px 25px #1f4a5b33;
+ -webkit-backdrop-filter:blur(17px) saturate(1.3);
+ backdrop-filter:blur(17px) saturate(1.3);
+ transition:background-color 250ms,border-radius 250ms,box-shadow 250ms,transform 250ms;
+}
+.blur-example .material-glyph{font-size:23px;line-height:1}
+.blur-example .material-title{font-size:19px;font-weight:850;letter-spacing:-.05em}
+.blur-example .material-description{font-size:11px;font-weight:700;opacity:.72}
+.blur-comparison-study[data-material=liquid] .material-glass{
+ background:linear-gradient(140deg,rgb(255 255 255 / .57),rgb(255 255 255 / .16) 54%,rgb(203 243 255 / .26));
+ border:1px solid rgb(255 255 255 / .91);border-radius:25px;
+ -webkit-backdrop-filter:blur(9px) saturate(1.9) contrast(1.12);
+ backdrop-filter:blur(9px) saturate(1.9) contrast(1.12);
+ box-shadow:inset 1px 2px 0 #ffffffc2,inset -2px -3px 5px #8ca4c641,
+   0 16px 26px #233f553a,0 0 0 1px #e9fdff5c;
+ transform:translateY(-2px);
+}
+.blur-comparison-study[data-material=liquid] .material-glass::before{
+ content:"";position:absolute;inset:2px;border-radius:inherit;pointer-events:none;
+ background:linear-gradient(138deg,#ffffffa0,transparent 33%,transparent 70%,#c8e7ff4d);
+ mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+ mask-composite:exclude;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+ -webkit-mask-composite:xor;padding:2px;
+}
+.blur-comparison-study .footnote{font-size:10px;line-height:1.4;color:#33584d}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+ .blur-example .material-glass{background:#eaf2ecef!important}
+}
+@media(prefers-reduced-motion:reduce){.blur-example .material-glass{transition:none!important}}
+
+/* The pixel squeeze is a one-shot stage study, not a status indicator. */
+.pixel-squeeze-study{width:100%;display:grid;gap:11px;justify-items:center}
+.pixel-squeeze-canvas{
+ isolation:isolate;position:relative;overflow:hidden;contain:paint;min-height:145px;width:100%;
+ display:grid;place-items:center;border-radius:17px;
+ background:linear-gradient(128deg,#171e43 7%,#453769 51%,#1b5678 94%);
+ box-shadow:0 10px 25px #27325030;
+}
+.pixel-grid{position:absolute;inset:0;opacity:.25;background-image:
+ repeating-linear-gradient(0deg,transparent 0 10px,#9be6ff5e 10px 11px),
+ repeating-linear-gradient(90deg,transparent 0 10px,#e3a7ff59 10px 11px);
+ pointer-events:none}
+.pixel-squeeze-label{
+ position:relative;z-index:2;font-weight:900;letter-spacing:-.075em;line-height:.93;
+ font-size:clamp(29px,3.2vw,45px);color:#f6eaff;
+ text-shadow:4px 5px 0 #d56cd6,0 0 16px #e2bafe60;
+ transform:scale(1);filter:none;
+}
+.pixel-glitch{position:absolute;inset:22px;pointer-events:none;opacity:.5;
+ background:repeating-linear-gradient(0deg,#ebd6ff99 0 2px,transparent 2px 9px);
+ clip-path:polygon(0 15%,85% 15%,85% 31%,100% 31%,100% 45%,75% 45%,75% 67%,90% 67%,90% 85%,0 85%);
+ mix-blend-mode:screen;transform:scaleX(.72);filter:blur(1px)}
+.pixel-squeeze-study .demo-button{font-size:11px;padding:10px 17px;border-radius:9px;box-shadow:none}
+.pixel-squeeze-study .footnote{font-size:10px;line-height:1.45;max-width:280px}
+@keyframes atlas-pixel-squeeze{
+ 0%,100%{transform:scale(1);filter:none}
+ 22%{transform:scaleX(.76) scaleY(1.17) skewX(-3deg);filter:blur(1px)}
+ 42%{transform:scaleX(1.18) scaleY(.82) skewX(2deg);filter:contrast(1.4)}
+ 62%{transform:scaleX(.88) scaleY(1.08);filter:blur(.7px)}
+ 82%{transform:scaleX(1.04) scaleY(.97);filter:none}
+}
+@keyframes atlas-pixel-glitch{
+ 0%,100%{opacity:.3;transform:translateX(0) scaleX(.72)}
+ 25%{opacity:1;transform:translateX(-17px) scaleX(1.24)}
+ 52%{opacity:.8;transform:translateX(14px) scaleX(.58)}
+ 74%{opacity:.4;transform:translateX(-5px) scaleX(1.08)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .preview.is-playing .pixel-squeeze-label{animation:atlas-pixel-squeeze 900ms steps(8,end) 1 both}
+ .preview.is-playing .pixel-glitch{animation:atlas-pixel-glitch 900ms steps(10,end) 1 both}
+}
+@media(prefers-reduced-motion:reduce){
+ .pixel-squeeze-label,.pixel-glitch{animation:none!important;filter:none!important;transform:none!important}
+}
+
+/* Native popover remains in the top layer; JS positions the menu near the
+   trigger, with a normal absolute dropdown in browsers without Popover API. */
+.split-popover-study{display:grid;justify-items:center;gap:12px}
+.split-popover-study .split-wrap{display:inline-flex;position:relative;align-items:stretch;gap:0;box-shadow:0 8px 15px #16433428;border-radius:11px}
+.split-popover-study .split-wrap>button{background:#164a42;min-height:49px;display:grid;place-items:center;box-shadow:none;color:white;font-size:13px;font-weight:750;border:0}
+.split-popover-study .split-primary{padding:12px 18px!important;border-radius:10px 0 0 10px;display:flex!important;gap:17px;align-items:center;white-space:nowrap}
+.split-popover-study .split-primary span{font-size:16px;color:#c4f8cf}
+.split-popover-study .split-chevron{padding:12px 14px!important;border-radius:0 10px 10px 0;min-width:46px;border-left:1px solid #c3e4cb48!important;font-size:19px!important}
+.split-popover-study .split-wrap>button:hover{background:#267562}
+.split-popover-study .split-chevron[aria-expanded=true]{background:#2b8069}
+.split-popover-study .split-menu-items{
+ position:absolute;top:calc(100% + 6px);right:0;left:auto;z-index:20;
+ min-width:182px;max-width:calc(100vw - 18px);
+ margin:0;padding:7px;border-radius:12px;background:#f9fdf7;color:#163d34;
+ border:1px solid #a8c8b3;box-shadow:0 12px 28px #103b3470;
+}
+.split-popover-study .split-menu-items[hidden],
+.split-popover-study .split-menu-items[popover]:not(:popover-open){display:none!important}
+.split-popover-study .split-menu-items:popover-open{display:grid;gap:2px}
+.split-popover-study .split-menu-items button{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:8px;font-size:12px;color:#1c4d3c;background:transparent;border:0;white-space:nowrap;text-align:left}
+.split-popover-study .split-menu-items button:hover,
+.split-popover-study .split-menu-items button:focus-visible{background:#e2f1e6}
+.split-popover-study .split-menu-items button span{font-size:17px;color:#147a5d}
+.split-popover-study [data-feedback]{font-size:11px;color:#3d675b;max-width:260px;line-height:1.45}
+@media(prefers-reduced-motion:reduce){.split-popover-study .split-wrap>button{transition:none!important}}
+
+
+/* Study 052 — Premium tactile button, original design trial. No infinite glow,
+   no added runtime, and never a hidden or inaccessible focus state. */
+.demo-button-looks .premium-button-study{width:100%;max-width:330px;display:grid;justify-items:center;gap:14px}
+.demo-button-looks .premium-action{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:13px;min-height:62px;width:min(100%,290px);padding:11px 15px 11px 21px;color:#f5fcf2;border:1px solid #a9d3d8;border-radius:18px;overflow:hidden;background:linear-gradient(130deg,#0a333b 5%,#185f5b 58%,#377e78 100%);font-size:16px;font-weight:800;letter-spacing:-.03em;box-shadow:inset 0 1px 1px #d1fff96a,inset 0 -3px 1px #001b2033,0 9px 0 #173f3a,0 15px 24px #083a4740;transform:translateY(0);transition:transform 170ms cubic-bezier(.22,1,.36,1),box-shadow 170ms,border-color 170ms,background-color 170ms;touch-action:manipulation}
+.demo-button-looks .premium-action::before{content:"";position:absolute;inset:-50% -20%;z-index:-1;pointer-events:none;background:radial-gradient(circle at 15% 25%,#ffffff95,transparent 30%),linear-gradient(105deg,transparent 20%,#a5eeff65 42%,transparent 61%);transform:translateX(-75%) rotate(-12deg);opacity:.24}
+.demo-button-looks .premium-action-copy{white-space:nowrap;position:relative}
+.demo-button-looks .premium-action-icon{position:relative;display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;border:1px solid #ffffff6c;border-radius:11px;background:linear-gradient(145deg,#d6fff4b0,#7ad3c544);color:#fff;font-size:24px;font-weight:500;transition:transform 170ms}
+@media(hover:hover) and (pointer:fine){.demo-button-looks .premium-action:hover::before{transform:translateX(65%) rotate(-12deg);opacity:.65;transition:transform 620ms cubic-bezier(.2,.75,.2,1),opacity 280ms}.demo-button-looks .premium-action:hover .premium-action-icon{transform:translate(2px,-2px)}}
+.demo-button-looks .premium-action:active{transform:translateY(6px) scale(.985);box-shadow:inset 0 1px 1px #d1fff96a,0 3px 0 #173f3a,0 8px 13px #083a4730}
+.demo-button-looks .premium-action:focus-visible{outline:3px solid #0a736d;outline-offset:5px}
+.demo-button-looks .premium-action[aria-pressed="true"]{border-color:#e7ffc3;background:linear-gradient(130deg,#14563d,#287a5e,#339f7b)}
+.demo-button-looks .premium-action[aria-pressed="true"] .premium-action-icon{background:#d8ffc0;color:#0d4d3d}
+.demo-button-looks .premium-status{font-size:11px;color:#3e6557;text-align:center;max-width:265px;line-height:1.45}
+@media(prefers-reduced-motion:reduce){.demo-button-looks .premium-action,.demo-button-looks .premium-action-icon,.demo-button-looks .premium-action::before{transition:none!important}.demo-button-looks .premium-action:active{transform:none}}
+
+
+/* Screenshot-led study 076 — single-select, horizontally scrollable filter chips.
+   Navigation is content filtering, not a second page route or fake backend. */
+.chips-study{width:100%;max-width:338px;display:grid;justify-items:stretch;gap:11px;text-align:left}
+.chips-strip{display:flex;gap:7px;align-items:center;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x proximity;scrollbar-width:thin;padding:5px 4px 10px;width:100%;-webkit-overflow-scrolling:touch}
+.chips-strip .filter-chip{flex:0 0 auto;padding:9px 13px;background:#dbe6db;color:#284f42;border:1px solid #b4c8b7;border-radius:10px;font-size:12px;font-weight:780;white-space:nowrap;scroll-snap-align:start;transition:background-color 160ms,color 160ms,border-color 160ms,transform 160ms;touch-action:manipulation}
+.chips-strip .filter-chip[aria-pressed="true"]{background:#1b493e;color:#fff;border-color:#1b493e}
+.chips-strip .filter-chip:active{transform:scale(.965)}
+.chips-strip .filter-chip:focus-visible{outline:3px solid #1e816b;outline-offset:2px}
+.chips-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;min-height:108px;align-content:start}
+.chips-results>div{display:flex;flex-direction:column;justify-content:space-between;gap:7px;background:#f9fdf6;border:1px solid #c9d7c6;border-radius:10px;padding:10px;min-height:49px;color:#21473c}
+.chips-results>div[hidden]{display:none!important}
+.chips-results b{font-size:10px;opacity:.7}
+.chips-results strong{font-size:11px;line-height:1.2;letter-spacing:-.02em}
+.chips-caption{font-size:11px;color:#356458;text-align:left;font-weight:720}
+@media(prefers-reduced-motion:reduce){.chips-strip .filter-chip{transition:none!important;transform:none!important}}
+
+/* Screenshot-led study 077 — glow derived from a duplicate of the SAME image.
+   The accessible, sharp image always remains legible and unchanged. */
+.image-glow-study{width:100%;max-width:335px;display:grid;justify-items:center;gap:10px}
+.image-glow-stage{position:relative;isolation:isolate;display:grid;place-items:center;width:100%;height:168px;border-radius:17px;overflow:hidden;background:radial-gradient(ellipse at 55% 30%,#234c5d,#121f31 75%);contain:paint}
+.image-glow-stage .image-glow-image,.image-glow-stage .image-glow-halo{position:absolute;width:150px;height:150px;max-width:70%;max-height:94%;object-fit:contain;pointer-events:none}
+.image-glow-stage .image-glow-image{z-index:2;filter:drop-shadow(0 7px 8px #001e2c44)}
+.image-glow-stage .image-glow-halo{z-index:1;opacity:0;transform:scale(1.18);filter:blur(22px) saturate(1.7) brightness(1.25);transition:opacity 350ms ease}
+.image-glow-stage.is-glowing .image-glow-halo{opacity:.94}
+.image-glow-study>.small-action{background:#1b6457;color:#fff;border:1px solid #367f69;border-radius:8px;padding:9px 15px;font-size:12px;font-weight:750}
+.image-glow-study>.small-action:focus-visible{outline:3px solid #147f67;outline-offset:3px}
+.image-glow-study .footnote{font-size:10px;line-height:1.45;text-align:center;max-width:260px;color:#3a6258}
+@media(prefers-reduced-motion:reduce){.image-glow-stage .image-glow-halo{transition:none!important}}
+
+
+/* Screenshot-led #057: identical gradients, second with SVG feTurbulence grain.
+   Effect is an overlay, not a distorted customer image or full-screen filter. */
+.gradient-grain-study{display:grid;justify-items:center;gap:12px;width:100%;max-width:335px}
+.gradient-grain-samples{display:grid;grid-template-columns:1fr 1fr;gap:9px;width:100%}
+.gradient-grain-samples .grain-swatch{position:relative;isolation:isolate;overflow:hidden;min-height:128px;padding:13px 10px;display:flex;flex-direction:column;justify-content:end;gap:5px;color:#effff9;border-radius:15px;background:linear-gradient(145deg,#136f95 0%,#32bec0 35%,#4b4ba9 72%,#bd84d2);text-align:left;text-shadow:0 1px 8px #041b3e88}
+.gradient-grain-samples .grain-swatch strong,.gradient-grain-samples .grain-swatch small{z-index:2;position:relative}
+.gradient-grain-samples .grain-swatch strong{font-size:17px;letter-spacing:-.06em}
+.gradient-grain-samples .grain-swatch small{color:#eafff5;font-size:10px}
+.gradient-grain-samples .with-grain::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background-image:url("./assets/057-grain.svg");background-size:140px 140px;mix-blend-mode:overlay;opacity:0;transition:opacity 220ms ease}
+.gradient-grain-samples .with-grain.is-textured::after{opacity:.15}
+.gradient-grain-study>.small-action{background:#1b6356;color:white;border-radius:7px;padding:9px 14px;font-size:12px}
+.gradient-grain-study>.small-action:focus-visible{outline:3px solid #0c7461;outline-offset:4px}
+.gradient-grain-study .footnote{text-align:center;font-size:10px;max-width:250px;line-height:1.45;color:#3e6659}
+@media(prefers-reduced-motion:reduce){.gradient-grain-samples .with-grain::after{transition:none!important}}

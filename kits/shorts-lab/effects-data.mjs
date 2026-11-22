@@ -61,31 +61,34 @@ Adding payment APIs is easy…|Out of scope|—|payments-tutorial|Research-only|
 Your gradients look cheap|Adopt|P1|gradient|Colour|yes|Intentional interpolation, restraint and readability outperform more gradients.
 THIS is how AI should be taught|Out of scope|—|education|Research-only|no|Education methodology is outside this visual-components trial.
 Recreate Google’s new FAB menu|Adapt|P2|fab|Navigation|yes|Useful for optional presenter actions, not primary task controls.
-Steal Android’s new blur|Prototype|P3|blur|Experimental CSS|yes|Try a bounded blur treatment; avoid expensive full-screen backdrops.
-Create Google’s split buttons in CSS|Adopt|P1|split|Controls|yes|Separate primary action from secondary options with real menu semantics.
+Steal Android’s new blur|Prototype|P3|blur|Experimental CSS|yes|Compare native Android-style frosted blur with a brighter Liquid Glass-inspired lens. Inspect accessibility and Safari performance before promotion.
+Create Google’s split buttons in CSS|Adopt|P1|split|Controls|yes|Native split action with a separate accessible popover menu of alternatives, Escape and keyboard controls; never hide the primary task behind the menu.
 Your sparkles are wrong|Skip|—|sparkles|Stage-only|yes|A moment of theatrical emphasis can work; looping sparkles do not.
 That logo is not an image|Adapt|P2|css-logo|Brand|yes|Original CSS mark can be a study, but never forge an approved logo.
 New nudging notifications|Adapt|P2|nudge|Status|yes|New information can nudge once; never create false urgency.
-New squeeze effect|Adapt|P2|squeeze|Controls|yes|Pressed feedback should be fast and not shift surrounding layout.
-Copy Gemini’s moving background|Skip|—|moving-bg|Stage-only|yes|Stage backdrop only, never a perpetual moving surface behind product copy.
-Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Busy is not proof of progress; link any animation to real pending work.
-Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Keep native range semantics and show values while upgrading visuals.
-Your toggles look cheap|Adopt|P1|toggle|Controls|yes|Make on/off unmistakeable with an actual checkbox.
+New squeeze effect|Prototype|P3|squeeze|Stage-only|yes|A short original pixel-like squash and jagged-grid reveal. Stage candidate only; source mechanism unverified and not suitable for routine app buttons.
+Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|One-shot rotating soft-focus colour reveal: excellent stage backdrop where it builds anticipation, but never a perpetual blur behind app controls.
+Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Bounded illustrated colour sweep for a thinking state; the static label explicitly denies real progress. Use only while the owning system reports pending work.
+Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Material-inspired active/inactive rails, slim thumb and compressible pressed state; retains native range semantics and visible value.
+Your toggles look cheap|Adopt|P1|toggle|Controls|yes|Native checkbox role switch with CSS :has() thumb that compresses on press, moves and changes colour, and settles to unambiguous on/off.
 Wavy loading bars are taking over|Adapt|P2|wavy|Status|yes|Fun only for bounded staging; avoid indefinite ambiguous loading.
 Your icons look boring|Adapt|P2|icons|Controls|yes|SVG heart, star and bookmark fill from bottom when selected; the button state persists and reverses. Use motion only to clarify a genuine choice.
 New collapsing header|Adapt|P2|header|Navigation|yes|Sticky mobile header shrinks using CSS scroll-state(stuck: top), with a scoped older-browser fallback. Keep links visible and usable.
 Your inputs look basic|Adopt|P1|input|Controls|yes|Material-style semantic floating label and accent underline wipe on focus; keep typed text, help text and visible focus state.
 New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Centred scroll-snap items enlarge as they enter view using animation-timeline: view(inline), with an accessible button/keyboard fallback.
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
+YouTube-style filter chips|Adopt|P1|chips|Navigation|yes|Compact horizontally scrollable filter chips with single-selection state, overflow navigation and keyboard controls. Better for filtering collections than for replacing multi-step navigation.
+Glowing images|Adapt|P2|image-glow|Creative|yes|Create a coloured halo from an original transparent image without replacing its edges or distorting a client's asset. Best for a hero or rare presentation spotlight, not every image.
 `.trim();
 const cols=RAW.split("\n");
 export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- evidence:[70,71,72,73].includes(i)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1),
+ evidence:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
-if(effects.length!==75) throw new Error("Expected all 75 studies");
+if(effects.length!==77) throw new Error("Expected 77 studies including screenshot-led filter chips and image glow");
 export const researchCount=effects.filter(e=>e.family==="Research-only").length;
