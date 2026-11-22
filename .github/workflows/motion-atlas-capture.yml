@@ -13,10 +13,11 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 concurrency:
   group: motion-atlas-capture
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   capture:
@@ -46,17 +47,27 @@ jobs:
         run: |
           node --test shorts-lab.test.cjs
           node --test *.test.cjs quote/*.test.cjs
-      - name: Find original Shorts without guessing
-        continue-on-error: true
-        timeout-minutes: 20
+      - name: Recover prior verified 61 captures and video metadata
+        uses: actions/download-artifact@v4
+        with:
+          name: motion-atlas-capture-diagnostics
+          run-id: 45053261253
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path: kits/shorts-lab
+      - name: Confirm recovered captures
         run: |
-          python tools/resolve-motion-videos.py
-      - name: Record high-value comparison first
-        timeout-minutes: 12
+          python - <<'PY'
+          from pathlib import Path
+          files=list(Path('kits/shorts-lab/assets').glob('[0-9][0-9][0-9].mp4'))
+          print('Recovered',len(files),'MP4s')
+          assert len(files)==61
+          PY
+      - name: Capture corrected study 002 in real Chromium
+        timeout-minutes: 5
         run: |
-          python tools/capture-motion-atlas.py --ids 40 41 68 69 75
-      - name: Record all remaining visual studies
-        timeout-minutes: 35
+          python tools/capture-motion-atlas.py --ids 2
+      - name: Validate and index all verified clips
+        timeout-minutes: 8
         run: |
           python tools/capture-motion-atlas.py
       - name: Verify all 62 local MP4s and manifest integrity
