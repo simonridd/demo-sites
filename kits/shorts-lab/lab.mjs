@@ -89,7 +89,22 @@ function previewFor(e) {
     case 'squeeze': return `<button type="button" class="demo-button" data-action="replay">Press to respond</button><small>Press and release</small>`;
     case 'moving-bg': return `<div class="moving-bg">A new perspective.</div><small>Only when explicitly replayed</small>`;
     case 'thinking': return `<div class="thinking-bar" aria-label="Illustrative pending indicator"><i></i></div><small>Simulated busy · no progress claim</small>`;
-    case 'slider': return `<div class="slider-wrap"><output class="slider-value" for="range-${e.id}">50</output><input id="range-${e.id}" type="range" min="0" max="100" value="50" data-range><small>Native slider with live value</small></div>`;
+    case 'slider': return `<div class="slider-wrap material-slider-study">
+  <div class="slider-heading">
+    <label for="range-${e.id}">Interaction intensity</label>
+    <output class="slider-value" for="range-${e.id}">50%</output>
+  </div>
+  <div class="material-range" style="--position:50%">
+    <div class="material-range-rail" aria-hidden="true">
+      <span class="material-range-filled"></span>
+      <span class="material-range-rest"></span>
+      <span class="material-range-thumb"></span>
+    </div>
+    <input id="range-${e.id}" type="range" min="0" max="100" step="1" value="50" data-range aria-describedby="range-hint-${e.id}">
+  </div>
+  <div class="slider-extremes" aria-hidden="true"><span>Quiet</span><span>Bold</span></div>
+  <small id="range-hint-${e.id}" class="footnote">Drag, tap, or use the arrow keys. The thumb compresses as you press.</small>
+</div>`;
     case 'toggle': return `<label class="switch-line squishy-toggle">
   <span class="switch">
     <input type="checkbox" role="switch" aria-label="Live updates" aria-describedby="toggle-hint-${e.id}" aria-checked="false">
@@ -426,9 +441,13 @@ cards.addEventListener('change',event=>{
 });
 cards.addEventListener('input',event=>{
  if(event.target.matches('[data-range]')){
-  const output=event.target.closest('.slider-wrap').querySelector('output');
-  output.value=event.target.value;
-  output.textContent=event.target.value;
+  const slider=event.target.closest('.slider-wrap');
+  const output=slider?.querySelector('output');
+  const input=event.target;
+  const min=Number(input.min), max=Number(input.max);
+  const progress=max>min?Math.max(0,Math.min(100,(Number(input.value)-min)/(max-min)*100)):0;
+  slider?.querySelector('.material-range')?.style.setProperty('--position',progress+'%');
+  if(output){output.value=input.value+'%';output.textContent=input.value+'%';}
  }
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
