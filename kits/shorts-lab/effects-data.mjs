@@ -61,12 +61,12 @@ Adding payment APIs is easy…|Out of scope|—|payments-tutorial|Research-only|
 Your gradients look cheap|Adopt|P1|gradient|Colour|yes|Intentional interpolation, restraint and readability outperform more gradients.
 THIS is how AI should be taught|Out of scope|—|education|Research-only|no|Education methodology is outside this visual-components trial.
 Recreate Google’s new FAB menu|Adapt|P2|fab|Navigation|yes|Useful for optional presenter actions, not primary task controls.
-Steal Android’s new blur|Prototype|P3|blur|Experimental CSS|yes|Try a bounded blur treatment; avoid expensive full-screen backdrops.
-Create Google’s split buttons in CSS|Adopt|P1|split|Controls|yes|Separate primary action from secondary options with real menu semantics.
+Steal Android’s new blur|Prototype|P3|blur|Experimental CSS|yes|Compare native Android-style frosted blur with a brighter Liquid Glass-inspired lens. Inspect accessibility and Safari performance before promotion.
+Create Google’s split buttons in CSS|Adopt|P1|split|Controls|yes|Native split action with a separate accessible popover menu of alternatives, Escape and keyboard controls; never hide the primary task behind the menu.
 Your sparkles are wrong|Skip|—|sparkles|Stage-only|yes|A moment of theatrical emphasis can work; looping sparkles do not.
 That logo is not an image|Adapt|P2|css-logo|Brand|yes|Original CSS mark can be a study, but never forge an approved logo.
 New nudging notifications|Adapt|P2|nudge|Status|yes|New information can nudge once; never create false urgency.
-New squeeze effect|Adapt|P2|squeeze|Controls|yes|Pressed feedback should be fast and not shift surrounding layout.
+New squeeze effect|Prototype|P3|squeeze|Stage-only|yes|A short original pixel-like squash and jagged-grid reveal. Stage candidate only; source mechanism unverified and not suitable for routine app buttons.
 Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|One-shot rotating soft-focus colour reveal: excellent stage backdrop where it builds anticipation, but never a perpetual blur behind app controls.
 Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Bounded illustrated colour sweep for a thinking state; the static label explicitly denies real progress. Use only while the owning system reports pending work.
 Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Material-inspired active/inactive rails, slim thumb and compressible pressed state; retains native range semantics and visible value.
@@ -83,7 +83,7 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- evidence:[65,66,67,68,70,71,72,73].includes(i)?"user-supplied reference; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ evidence:[59,60,64,65,66,67,68,70,71,72,73].includes(i)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
