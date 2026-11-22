@@ -49,14 +49,14 @@ def state(button):
 def assert_off(button, kind, browser, moment):
     result = state(button)
     assert result["pressed"] == "false", (browser, kind, moment, result)
-    assert re.match(r"^inset\(100%\b", result["fill"]), (browser, kind, moment, result)
+    assert result["fill"].startswith("inset(100%"), (browser, kind, moment, result)
     assert result["label"].endswith("off"), (browser, kind, moment, result)
 
 
 def assert_on(button, kind, browser):
     result = state(button)
     assert result["pressed"] == "true", (browser, kind, result)
-    assert re.match(r"^inset\(0(?:px|%)?\b", result["fill"]), (browser, kind, result)
+    assert result["fill"].startswith(("inset(0px", "inset(0%")) or result["fill"] == "inset(0)", (browser, kind, result)
     assert result["label"].endswith("on"), (browser, kind, result)
 
 
