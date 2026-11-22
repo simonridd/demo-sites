@@ -94,6 +94,10 @@ def act(preview, entry):
         field = preview.locator(".md-field input")
         field.focus(timeout=1200)
         field.fill("Where is my order?", timeout=1200)
+    elif key == "blur":
+        preview.locator('[data-action="blur-mode"][data-mode="liquid"]').click(timeout=1200)
+    elif key == "split":
+        preview.locator('[data-action="split-menu"]').click(timeout=1200)
     elif key in actions:
         preview.locator(f'[data-action="{actions[key]}"]').first.click(timeout=1200)
     else:
@@ -155,7 +159,7 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel", "icons", "input", "header"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
@@ -168,6 +172,10 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             icons.nth(1).click(timeout=800)
                         elif entry["preview"] == "input":
                             preview.locator(".md-field input").evaluate("(el) => el.blur()")
+                        elif entry["preview"] == "blur":
+                            preview.locator('[data-action="blur-mode"][data-mode="android"]').click(timeout=800)
+                        elif entry["preview"] == "split":
+                            preview.locator('.split-menu-items [data-action="split-choice"]').first.click(timeout=800)
                         else:
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:
