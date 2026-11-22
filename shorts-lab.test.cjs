@@ -145,7 +145,7 @@ test('screenshot-led carousel focuses the centred slide with a safe CSS/JS fallb
  const {nodes,effects}=await start();
  const item=effects.find(x=>x.id===74);
  assert.equal(item.preview,'carousel');
- assert.match(item.evidence,/screenshot/);
+ assert.match(item.evidence,/user-supplied (?:screenshot|reference)/);
  const html=nodes['#cards'].innerHTML;
  assert.match(html,/class="carousel-shell carousel-focus-study"/);
  assert.match(html,/aria-roledescription="carousel"/);
