@@ -84,8 +84,10 @@ def act(preview, entry):
         preview.locator('input[type="checkbox"]').first.uncheck(timeout=1200, force=True)
     elif key == "shine":
         preview.locator(".shine-card").hover(timeout=1200)
-    elif key in ("button", "button-looks"):
+    elif key == "button":
         preview.locator("button.demo-button").hover(timeout=1200)
+    elif key == "button-looks":
+        preview.locator("button.premium-action").click(timeout=1200)
     elif key == "glass":
         preview.locator(".glass-card").hover(timeout=1200)
     elif key == "icons":
@@ -98,6 +100,12 @@ def act(preview, entry):
         preview.locator('[data-action="blur-mode"][data-mode="liquid"]').click(timeout=1200)
     elif key == "split":
         preview.locator('[data-action="split-menu"]').click(timeout=1200)
+    elif key == "chips":
+        preview.locator('[data-action="filter-chip"][data-chip="retail"]').click(timeout=1200)
+    elif key == "image-glow":
+        preview.locator('[data-action="image-glow"]').click(timeout=1200)
+    elif key == "gradient":
+        preview.locator('[data-action="grain"]').click(timeout=1200)
     elif key in actions:
         preview.locator(f'[data-action="{actions[key]}"]').first.click(timeout=1200)
     else:
@@ -159,7 +167,7 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
@@ -176,6 +184,14 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             preview.locator('[data-action="blur-mode"][data-mode="android"]').click(timeout=800)
                         elif entry["preview"] == "split":
                             preview.locator('.split-menu-items [data-action="split-choice"]').first.click(timeout=800)
+                        elif entry["preview"] == "chips":
+                            preview.locator('[data-action="filter-chip"][data-chip="travel"]').click(timeout=800)
+                        elif entry["preview"] == "image-glow":
+                            preview.locator('[data-action="image-glow"]').click(timeout=800)
+                        elif entry["preview"] == "button-looks":
+                            preview.locator('button.premium-action').click(timeout=800)
+                        elif entry["preview"] == "gradient":
+                            preview.locator('[data-action="grain"]').click(timeout=800)
                         else:
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:
