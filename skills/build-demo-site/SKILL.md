@@ -19,6 +19,8 @@ Create a coherent responsive design with accessible navigation and clear primary
 
 Apply the accepted [shared demo experience standards](../demo-experience-standards/SKILL.md) to new visual work and carry relevant user corrections into that maintained decision record. They also cover presentations and Voice Demo Builder interfaces without moving native ownership into site authoring.
 
+Use the shared [core-stack implementation playbook](../demo-experience-standards/references/implementation-playbook.md) when selecting CSS motion, a 21st.dev pattern, GSAP, Blender artwork or on-demand Three.js. Reuse the proven Co-op behaviors while preserving each new client’s task and identity.
+
 For new pages and visual revisions, read [Website design decisions](references/website-design.md). Apply the everyday checks to the components being authored; choose colour, motion and image treatments to suit the client and page. Revisit existing pages when their components are next changed or a visible defect needs fixing.
 
 The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order-support drawer. Its flat brand surfaces, grocery subject and original vector fallback remain appropriate; use the reasoning rather than copying its visual style into another client.
@@ -31,7 +33,7 @@ Its guided support panel progressively enhances ordinary help links into respons
 
 The reserved `kits/connected-support/` example is an authored journey explanation with pinned GSAP motion. It belongs in the kit bag for presentations or presenter-led demonstrations, outside `demos.json` and customer-facing navigation. The old `co-op-journey/` route redirects to the kit. Apply the [journey guidance](references/website-design.md#connected-journey-experiments) when adapting the component to a relevant audience and task; a kit is not an installed presentation or Voice Demo Builder feature.
 
-The `kits/build-status/` study supplies an original editable Rive source, a static HTML/SVG state preview and a visual adapter for the existing builder status contract. Its [status-study guidance](references/website-design.md#state-driven-status-studies) distinguishes pending export from a verified runtime. Keep it outside customer discovery and leave native readiness and dial actions with the existing owner.
+The `kits/build-status/` study supplies an original editable Rive source, a static HTML/SVG state preview and a visual adapter for the existing builder status contract. Its [status-study guidance](references/website-design.md#state-driven-status-studies) distinguishes a reserved source trial from a verified runtime. Keep it outside customer discovery and leave native readiness and dial actions with the existing owner.
 
 ## Integrations and public hosting
 

@@ -36,8 +36,8 @@ function staticGraphic() {
 function rendererLabel() {
   motion.disabled = !manifest?.ready || failed || reduced.matches;
   motion.setAttribute('aria-pressed', String(userPaused));
-  motion.textContent = reduced.matches ? 'Reduced motion' : !manifest?.ready ? 'Animation pending' : userPaused ? 'Resume motion' : 'Pause motion';
-  rendererStatus.textContent = failed ? 'Static preview · animation unavailable' : !manifest?.ready ? 'Static preview · Rive export pending sign-in' : reduced.matches ? 'Static preview · reduced motion' : userPaused ? 'Static preview · motion paused' : player && canAnimate() ? 'Rive animation · data driven' : loading ? 'Static preview · loading animation' : 'Static preview';
+  motion.textContent = reduced.matches ? 'Reduced motion' : !manifest?.ready ? 'Animation not enabled' : userPaused ? 'Resume motion' : 'Pause motion';
+  rendererStatus.textContent = failed ? 'Static preview · animation unavailable' : !manifest?.ready ? (manifest?.previewLabel || 'Static preview · animation not enabled') : reduced.matches ? 'Static preview · reduced motion' : userPaused ? 'Static preview · motion paused' : player && canAnimate() ? 'Rive animation · data driven' : loading ? 'Static preview · loading animation' : 'Static preview';
 }
 async function syncRenderer() {
   if (disposed) return;

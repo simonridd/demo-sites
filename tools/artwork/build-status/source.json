@@ -6,6 +6,6 @@
   "artboard": "BuildSignal",
   "stateMachine": "BuildStatus",
   "viewModelProperty": "mode",
-  "playableExport": "pending-account-sign-in",
+  "playableExport": "not-exported-trial-reserved",
   "browserRuntimeAcceptance": "not-run"
 }
