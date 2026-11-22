@@ -67,7 +67,7 @@ Your sparkles are wrong|Skip|—|sparkles|Stage-only|yes|A moment of theatrical 
 That logo is not an image|Adapt|P2|css-logo|Brand|yes|Original CSS mark can be a study, but never forge an approved logo.
 New nudging notifications|Adapt|P2|nudge|Status|yes|New information can nudge once; never create false urgency.
 New squeeze effect|Adapt|P2|squeeze|Controls|yes|Pressed feedback should be fast and not shift surrounding layout.
-Copy Gemini’s moving background|Skip|—|moving-bg|Stage-only|yes|Stage backdrop only, never a perpetual moving surface behind product copy.
+Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|One-shot rotating soft-focus colour reveal: excellent stage backdrop where it builds anticipation, but never a perpetual blur behind app controls.
 Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Bounded illustrated colour sweep for a thinking state; the static label explicitly denies real progress. Use only while the owning system reports pending work.
 Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Material-inspired active/inactive rails, slim thumb and compressible pressed state; retains native range semantics and visible value.
 Your toggles look cheap|Adopt|P1|toggle|Controls|yes|Native checkbox role switch with CSS :has() thumb that compresses on press, moves and changes colour, and settles to unambiguous on/off.
@@ -83,7 +83,7 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- evidence:[66,67,68,70,71,72,73].includes(i)?"user-supplied reference; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ evidence:[65,66,67,68,70,71,72,73].includes(i)?"user-supplied reference; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
