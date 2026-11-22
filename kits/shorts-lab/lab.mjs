@@ -94,8 +94,22 @@ function previewFor(e) {
     case 'wavy': return `<div class="wavy-bars" aria-label="Decorative equalizer sample">${[0,1,2,3,4,5].map(i=>`<i style="--i:${i}"></i>`).join('')}</div><small>One short sample, not a fake process</small>`;
     case 'icons': return `<button type="button" class="icon-button" data-action="icon" aria-pressed="false" aria-label="Save favourite"><span>♡</span></button><small>Icon state changes with the action</small>`;
     case 'header': return `<div class="mini-header"><div>Shorter navigation ↗</div><div>Content remains fully visible.</div></div>${button('Collapse / expand','header')}`;
-    case 'input': return `<div class="input-demo"><label for="input-${e.id}">What can we help with?</label><input id="input-${e.id}" type="text" placeholder="Start typing…"></div>`;
-    case 'carousel': return `<div class="carousel-shell"><div class="carousel-scroller" aria-label="Example gallery"><div tabindex="0">01</div><div tabindex="0">02</div><div tabindex="0">03</div></div><div class="carousel-actions"><button type="button" data-action="previous" aria-label="Previous item">←</button><button type="button" data-action="next" aria-label="Next item">→</button></div></div>`;
+    case 'input': return `<div class="input-demo material-input-study">
+  <div class="md-field">
+    <input id="input-${e.id}" type="text" name="question" autocomplete="off" placeholder=" " aria-describedby="input-hint-${e.id}">
+    <label for="input-${e.id}">What can we help with?</label>
+  </div>
+  <small id="input-hint-${e.id}" class="md-hint">Tap the field. Watch the underline wipe in, then type.</small>
+</div>`;
+    case 'carousel': return `<div class="carousel-shell carousel-focus-study">
+  <div class="carousel-scroller" role="region" aria-roledescription="carousel" aria-label="Focus scaling: three original graphic panels" tabindex="0">
+    <div class="carousel-item is-centered" tabindex="0" role="group" aria-roledescription="slide" aria-label="1 of 3: Discover"><span class="carousel-number">01</span><strong>Discover</strong><span class="carousel-detail">A better first impression.</span></div>
+    <div class="carousel-item" tabindex="0" role="group" aria-roledescription="slide" aria-label="2 of 3: Connect"><span class="carousel-number">02</span><strong>Connect</strong><span class="carousel-detail">Show what changes.</span></div>
+    <div class="carousel-item" tabindex="0" role="group" aria-roledescription="slide" aria-label="3 of 3: Deliver"><span class="carousel-number">03</span><strong>Deliver</strong><span class="carousel-detail">Make the moment land.</span></div>
+  </div>
+  <div class="carousel-actions"><button type="button" data-action="previous" aria-label="Previous carousel slide">←</button><span class="carousel-position" aria-live="polite">1 / 3</span><button type="button" data-action="next" aria-label="Next carousel slide">→</button></div>
+  <small class="footnote">Scroll or use arrows. Centred item enlarges.</small>
+</div>`;
     case 'odometer': return `${rollHTML('12,840')}${button('Roll to 24,715','odometer')}`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
@@ -229,8 +243,43 @@ function doAction(btn,preview){
    case 'split-primary':preview.querySelector('[data-feedback]').textContent='Present · example only';break;
    case 'icon':{const isSaved=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(isSaved));btn.setAttribute('aria-label',isSaved?'Remove favourite':'Save favourite');btn.querySelector('span').textContent=isSaved?'♥':'♡';replay(preview);break;}
    case 'header':preview.querySelector('.mini-header')?.classList.toggle('is-condensed');break;
-   case 'next':case 'previous':{const strip=preview.querySelector('.carousel-scroller');if(strip)strip.scrollBy({left:(action==='next'?1:-1)*strip.clientWidth*.65,behavior:(motionPreference.matches||document.documentElement.classList.contains('motion-off'))?'auto':'smooth'});break;}
+   case 'next':case 'previous':{
+     const strip=preview.querySelector('.carousel-scroller');
+     if(!strip)break;
+     const items=[...strip.querySelectorAll('.carousel-item')];
+     const current=nearestCarouselIndex(strip,items);
+     const next=Math.max(0,Math.min(items.length-1,current+(action==='next'?1:-1)));
+     focusCarouselItem(strip,items[next],!motionPreference.matches);
+     break;
+   }
  }
+}
+function nearestCarouselIndex(strip,items=[...strip.querySelectorAll('.carousel-item')]) {
+ if(!items.length)return 0;
+ const centre=strip.getBoundingClientRect().left+strip.clientWidth/2;
+ let closest=0, distance=Infinity;
+ items.forEach((item,index)=>{
+   const box=item.getBoundingClientRect();
+   const delta=Math.abs(box.left+box.width/2-centre);
+   if(delta<distance){distance=delta;closest=index;}
+ });
+ return closest;
+}
+function updateCarouselPosition(strip){
+ const items=[...strip.querySelectorAll('.carousel-item')];
+ if(!items.length)return;
+ const selected=nearestCarouselIndex(strip,items);
+ items.forEach((item,index)=>item.classList.toggle('is-centered',index===selected));
+ const label=strip.closest('.carousel-shell')?.querySelector('.carousel-position');
+ if(label && label.textContent!==`${selected+1} / ${items.length}`)label.textContent=`${selected+1} / ${items.length}`;
+}
+function focusCarouselItem(strip,item,animate=true){
+ if(!item)return;
+ const scroller=strip.getBoundingClientRect();
+ const box=item.getBoundingClientRect();
+ const target=strip.scrollLeft+(box.left+box.width/2)-(scroller.left+scroller.width/2);
+ strip.scrollTo({left:target,behavior:animate?'smooth':'auto'});
+ if(!animate)updateCarouselPosition(strip);
 }
 function selectPill(btn) {
  const tablist=btn.closest('[role="tablist"]');
@@ -251,6 +300,15 @@ cards.addEventListener('click',event=>{
  if(preview)doAction(btn,preview);
 });
 cards.addEventListener('keydown',event=>{
+ const carousel=event.target.closest?.('.carousel-scroller');
+ if(carousel && ['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
+   event.preventDefault();
+   const items=[...carousel.querySelectorAll('.carousel-item')];
+   const selected=nearestCarouselIndex(carousel,items);
+   const target=event.key==='Home'?0:event.key==='End'?items.length-1:
+     Math.max(0,Math.min(items.length-1,selected+(event.key==='ArrowRight'?1:-1)));
+   focusCarouselItem(carousel,items[target],!motionPreference.matches);
+ }
  const tab=event.target.closest('[role="tab"]');
  if(tab && ['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
    event.preventDefault();
@@ -264,6 +322,15 @@ cards.addEventListener('keydown',event=>{
    if(menu){menu.hidden=true;const p=menu.closest('.preview');const opener=p.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();}
  }
 });
+cards.addEventListener('scroll',event=>{
+ if(!event.target.matches?.('.carousel-scroller'))return;
+ const strip=event.target;
+ if(strip.__focusFrame)return;
+ strip.__focusFrame=requestAnimationFrame(()=>{
+   strip.__focusFrame=0;
+   updateCarouselPosition(strip);
+ });
+},{capture:true,passive:true});
 cards.addEventListener('input',event=>{
  if(event.target.matches('[data-range]')){
   const output=event.target.closest('.slider-wrap').querySelector('output');
