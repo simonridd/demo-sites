@@ -142,3 +142,61 @@
  .carousel-focus-study .carousel-item{padding:18px}
  .collapse-viewport{height:240px}
 }
+
+
+/* Study 069 — Screenshot-led squishy switch: exact ON/OFF semantics, playful press.
+   Adapted independently from user-supplied CSS fragments, not copied source. */
+.demo-toggle .squishy-toggle{
+ display:flex;align-items:center;justify-content:center;gap:14px;
+ color:#18483b;text-align:left;cursor:pointer;width:100%;max-width:300px;
+ touch-action:manipulation;
+}
+.squishy-toggle .switch{position:relative;display:block;flex:0 0 62px;width:62px;height:36px}
+.squishy-toggle .switch input{
+ position:absolute;inset:0;margin:0;padding:0;
+ opacity:0;width:100%;height:100%;z-index:2;cursor:pointer;
+ appearance:none;-webkit-appearance:none;
+}
+.squishy-toggle .switch-track{
+ position:absolute;inset:0;display:block;pointer-events:none;
+ border-radius:22px;border:2px solid #809c90;background:#cadad0;
+ transition:background-color 220ms ease,border-color 220ms ease;
+}
+.squishy-toggle .switch-track::after{
+ content:"";position:absolute;left:3px;top:4px;
+ width:24px;height:24px;border-radius:50%;
+ background:#fff;box-shadow:0 2px 5px #163e3526;
+ transition:left 240ms cubic-bezier(.2,1,.28,1),
+            width 140ms ease,height 140ms ease,top 140ms ease,
+            background-color 180ms ease;
+}
+/* Use :has() to style the parent where supported; sibling selectors below
+   keep the same state working in browsers without :has(). */
+.squishy-toggle .switch:has(input:checked) .switch-track,
+.squishy-toggle .switch input:checked + .switch-track{
+ background:#a7eaca;border-color:#168367;
+}
+.squishy-toggle .switch:has(input:checked) .switch-track::after,
+.squishy-toggle .switch input:checked + .switch-track::after{
+ left:30px;background:#075c55;
+}
+.squishy-toggle .switch:active .switch-track::after{
+ left:2px;width:30px;height:28px;top:2px;
+}
+.squishy-toggle .switch:has(input:checked):active .switch-track::after,
+.squishy-toggle .switch input:checked + .switch-track:active::after{
+ left:26px;width:30px;height:28px;top:2px;
+}
+.squishy-toggle .switch:focus-within .switch-track{
+ outline:3px solid #0d7867;outline-offset:4px;
+}
+.squishy-toggle .switch-copy{display:grid;gap:2px;min-width:0}
+.squishy-toggle .switch-copy strong{font-size:15px;white-space:nowrap}
+.squishy-toggle .switch-status{font-size:12px;color:#3b685b;font-weight:800}
+.demo-toggle .footnote{max-width:245px;line-height:1.5}
+@media (hover:hover) and (pointer:fine){
+ .squishy-toggle .switch:hover .switch-track{border-color:#158368}
+}
+@media (prefers-reduced-motion:reduce){
+ .squishy-toggle .switch-track,.squishy-toggle .switch-track::after{transition:none!important}
+}
