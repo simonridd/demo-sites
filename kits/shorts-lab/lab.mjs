@@ -360,6 +360,10 @@ function doAction(btn,preview){
        field?.blur();field?.focus();
      }else if(preview.dataset.effect==='toggle'){
        preview.querySelector('.squishy-toggle input')?.click();
+     }else if(preview.dataset.effect==='blur'){
+       preview.querySelector('[data-action="blur-mode"][data-mode="liquid"]')?.click();
+     }else if(preview.dataset.effect==='split'){
+       toggleSplitMenu(preview);
      }else if(preview.dataset.effect==='header'){
        preview.querySelector('[data-action="header"]')?.click();
      }else if(preview.dataset.effect==='carousel'){
