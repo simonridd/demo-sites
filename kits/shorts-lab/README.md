@@ -47,7 +47,7 @@ Avoid copying a client's branding, a TV programme, media-player visuals or copyr
 
 The interface now has three distinct objects for each study:
 
-1. **Original video link.** A direct individual link is shown **only** when title and source are verified. As of the initial commit, three links were independently resolved: the YouTube modern slider tutorial, the YouTube toggle tutorial and the original Facebook odometer reel. The other cards say **Find this video (unverified)** and link to a title-scoped YouTube search, not the creator home page. `source-videos.mjs` holds the verified originals; `resolved-videos.mjs` is the machine-audited extension.
+1. **Original video link.** A direct individual link is shown **only** when title and source are verified. The initial commit contained three independently resolved source links: the YouTube modern slider tutorial, the YouTube toggle tutorial and the original Facebook odometer reel. The other cards say **Find this video (unverified)** and link to a title-scoped YouTube search, not the creator home page. `source-videos.mjs` holds the verified originals; `resolved-videos.mjs` is the machine-audited extension.
 2. **Recorded implementation.** Once a real browser capture has been created, `clip-manifest.mjs` points to a committed local MP4 asset and displays an ordinary accessible `<video>` player. Until then the card explicitly reads **Recording pending**. Never silently substitute GIFs, stock video or the creator's copyrighted recording.
 3. **Live implementation.** The authored preview remains in a separate panel with interactive controls; once a real clip exists, **Compare both** starts its playback alongside the preview's original animation.
 
@@ -82,7 +82,7 @@ node --test *.test.cjs quote/*.test.cjs
 
 The capture command starts a temporary **loopback-only server**, opens the actual `kits/shorts-lab/` application in headless Chromium, triggers its existing effect controls, captures the real rendered `.preview` frames, encodes a ~2.5-second, 512×320 H.264 MP4 for each visual study and validates each file. It deliberately skips the 13 non-CSS research references. Existing clips can be regenerated using `--force`. Videos are generated under `kits/shorts-lab/assets/`; the manifest is rewritten to include only validated files. Commit source, recorded assets and manifest together as a reviewed change.
 
-**Status when this second-iteration branch was prepared:** the comparison UI, the exact-link registry and capture scripts exist; the MP4 collection and automatic discovery run have **not** executed in ChatGPT's GitHub connector session. A merged PR alone is not proof that clips exist. Do not merge a gallery that mainly displays "Recording pending"; run the capture workflow and inspect real footage first.
+**Capture acceptance (22 November 2026):** GitHub Actions run [45054054867](https://github.com/simonridd/demo-sites/actions/runs/45054054867) passed its browser-capture and full repository tests. It committed 62 H.264 MP4s (387,455 bytes total) and a manifest containing 62 verified file references. Exact source matches: 45 additional creator-validated YouTube links plus three separately verified originals, yielding **48 direct links** and **27 labelled title-search fallbacks**. Media capture and test execution are verified; original frame-for-frame CSS fidelity is not established, and real iPhone/Safari playback remains a separate acceptance check.
 
 ### Acceptance before main
 
