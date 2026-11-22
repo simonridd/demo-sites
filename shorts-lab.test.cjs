@@ -202,3 +202,11 @@ test('icon choices have real reversible toggle state with animated fill',async()
  assert.match(css,/\.icon-fill\{fill:var\(--icon-accent\);clip-path:inset\(100%/);
  assert.match(css,/\.fill-icon\[aria-pressed="true"\] \.icon-fill/);
 });
+
+test('unpressed icon fill is always empty even while hovering or focused',()=>{
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.fill-icons \.icon-fill\{[^}]*clip-path:inset\(100% 0 0 0\);transition:none/);
+ assert.match(css,/\.fill-icons \.fill-icon\[aria-pressed="true"\] \.icon-fill\{[^}]*clip-path:inset\(0 0 0 0\);transition:clip-path/);
+ assert.doesNotMatch(css,/\.fill-icon:(?:hover|focus-visible):not\(\[aria-pressed="true"\]\) \.icon-fill/);
+ assert.match(css,/@media\(hover:hover\) and \(pointer:fine\)/);
+});
