@@ -1,0 +1,149 @@
+{
+  "channel_id": "UC5DNytAJ6_FISueUfzZCVsw",
+  "searched_this_run": 72,
+  "new_verified_this_run": 45,
+  "all_machine_verified": 45,
+  "creator_shorts_enumerated": 300,
+  "manually_verified": [
+    68,
+    69,
+    75
+  ],
+  "unresolved_this_run": [
+    {
+      "id": 3,
+      "title": "Ditch boring highlighting",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 5,
+      "title": "How to make your main image…",
+      "reason": "ambiguous score 1.00"
+    },
+    {
+      "id": 7,
+      "title": "Why your zoom-in wheel…",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 9,
+      "title": "How to stop layout shifts",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 10,
+      "title": "Translate videos from one…",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 12,
+      "title": "How to scrape branding of…",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 15,
+      "title": "Create bars that fill when…",
+      "reason": "ambiguous score 0.32"
+    },
+    {
+      "id": 16,
+      "title": "Create a complete online…",
+      "reason": "ambiguous score 0.53"
+    },
+    {
+      "id": 23,
+      "title": "Animate pixel characters",
+      "reason": "ambiguous score 0.27"
+    },
+    {
+      "id": 24,
+      "title": "How to create a shimmering…",
+      "reason": "ambiguous score 0.78"
+    },
+    {
+      "id": 29,
+      "title": "AI voice agents explained",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 32,
+      "title": "How to make a glowing voice…",
+      "reason": "ambiguous score 1.00"
+    },
+    {
+      "id": 33,
+      "title": "How to build an AI virtual…",
+      "reason": "ambiguous score 0.60"
+    },
+    {
+      "id": 37,
+      "title": "How to build shoppable video",
+      "reason": "ambiguous score 0.51"
+    },
+    {
+      "id": 38,
+      "title": "What simp-chinese-formal…",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 42,
+      "title": "The fastest way to turn a…",
+      "reason": "ambiguous score 0.32"
+    },
+    {
+      "id": 44,
+      "title": "How to give your calendar…",
+      "reason": "ambiguous score 0.60"
+    },
+    {
+      "id": 46,
+      "title": "Turning any photo into a…",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 52,
+      "title": "How to make your button l…",
+      "reason": "ambiguous score 1.00"
+    },
+    {
+      "id": 53,
+      "title": "Build Find My Friends in Next.js",
+      "reason": "ambiguous score 0.60"
+    },
+    {
+      "id": 54,
+      "title": "How to create YouTube’s…",
+      "reason": "ambiguous score 0.78"
+    },
+    {
+      "id": 62,
+      "title": "Your sparkles are wrong",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 63,
+      "title": "That logo is not an image",
+      "reason": "ambiguous score 0.29"
+    },
+    {
+      "id": 64,
+      "title": "New nudging notifications",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 70,
+      "title": "Wavy loading bars are taking over",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 71,
+      "title": "Your icons look boring",
+      "reason": "no channel-validated result"
+    },
+    {
+      "id": 73,
+      "title": "Your inputs look basic",
+      "reason": "ambiguous score 0.37"
+    }
+  ]
+}
