@@ -1,10 +1,13 @@
 import {effects,researchCount} from './effects-data.mjs';
+import {originalVideoLink,verifiedVideos} from './source-videos.mjs';
+import {clips} from './clip-manifest.mjs';
 
 const cards = document.querySelector('#cards');
 const search = document.querySelector('#search');
 const verdictFilter = document.querySelector('#verdict');
 const familyFilter = document.querySelector('#family');
 const stageOnly = document.querySelector('#stage-only');
+const mediaFilter = document.querySelector('#media-filter');
 const resultCount = document.querySelector('#result-count');
 const contextNote = document.querySelector('#context-note');
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -98,34 +101,54 @@ function previewFor(e) {
   }
 }
 function cardHTML(e) {
- const research = e.family==='Research-only';
- const speculative = e.verdict==='Hold';
- const tagClass = 'verdict-'+e.verdict.replaceAll(' ','-');
- const stageTag = audience==='stage' && e.stage ? '<span class="tag stage-candidate">Stage candidate</span>' : '';
- const source = e.id===75 ? 'Facebook reel' : 'Creator channel';
- return `<article class="card" data-id="${e.id}" data-stage="${audience==='stage'&&e.stage}">
+ const research=e.family==='Research-only';
+ const speculative=e.verdict==='Hold';
+ const tagClass='verdict-'+e.verdict.replaceAll(' ','-');
+ const stageTag=audience==='stage' && e.stage ? '<span class="tag stage-candidate">Stage candidate</span>' : '';
+ const source=originalVideoLink(e);
+ const sourceHTML=source.status==='verified'
+   ? `<a class="source-link source-verified" href="${esc(source.url)}" target="_blank" rel="noopener noreferrer" title="Verified individual video: ${esc(source.evidence)}">↗ Watch original ${esc(source.platform)} video</a>`
+   : `<a class="source-link source-unverified" href="${esc(source.searchUrl)}" target="_blank" rel="noopener noreferrer" title="Search link only; exact source has not been verified">⌕ Find this video <span class="source-caveat">(unverified)</span></a>`;
+ const clip=clips[String(e.id)];
+ const clipHTML=research
+   ? '<div class="clip-unavailable"><span aria-hidden="true">◇</span><strong>Not a visual effect</strong><small>No recording required</small></div>'
+   : clip
+      ? `<video class="clip-player" aria-label="Recorded Motion Atlas implementation for ${esc(e.title)}" controls muted playsinline loop preload="metadata" src="${esc(clip.path)}"></video>`
+      : '<div class="clip-unavailable"><span aria-hidden="true">▻</span><strong>Recording pending</strong><small>Local capture not yet published</small></div>';
+ return `<article class="card" data-id="${e.id}" data-stage="${audience==='stage'&&e.stage}" data-clip="${Boolean(clip)}" data-source="${source.status}">
   <div class="card-inner">
     <span class="card-index">STUDY ${String(e.id).padStart(3,'0')} / 075 · ${esc(e.family)}</span>
     <h3 class="card-title">${esc(e.title)}</h3>
     <div class="tags"><span class="tag ${tagClass}">${esc(e.verdict)}</span><span class="tag">${esc(e.priority)}</span>${stageTag}${speculative?'<span class="tag prototype-flag">Hypothesis</span>':''}</div>
   </div>
-  <div class="preview" data-effect="${esc(e.preview)}"><div class="demo demo-${esc(e.preview)}">${previewFor(e)}</div></div>
+  <div class="comparison-row">
+    <section class="comparison-pane" aria-label="Interactive version of ${esc(e.title)}">
+      <div class="pane-heading"><strong>LIVE · INTERACTIVE</strong><span>Our implementation</span></div>
+      <div class="preview" data-effect="${esc(e.preview)}"><div class="demo demo-${esc(e.preview)}">${previewFor(e)}</div></div>
+    </section>
+    <section class="comparison-pane recorded-pane" aria-label="Recorded version of ${esc(e.title)}">
+      <div class="pane-heading"><strong>RECORDING</strong><span>${clip?'Short MP4 · our version':'Awaiting capture'}</span></div>
+      <div class="clip-shell">${clipHTML}</div>
+    </section>
+  </div>
   <div class="card-bottom">
     <p class="card-note">${esc(e.note)}</p>
-    <div class="card-foot"><a class="source-link" href="${esc(e.source)}" target="_blank" rel="noopener noreferrer" title="Channel link, not a verified individual Short">${source} ↗</a>
-      ${research?' <span class="tag">No CSS trial</span>':playButton(e.id)}
+    <div class="card-foot">
+      <div class="source-area">${sourceHTML}</div>
+      ${research?' <span class="tag">No CSS trial</span>':clip?'<button type="button" class="replay compare-play" data-action="pair">▶ Compare both</button>':playButton(e.id)}
     </div>
   </div>
  </article>`;
 }
 function render(){
- const q=search.value.trim().toLowerCase(),v=verdictFilter.value,f=familyFilter.value;
+ const q=search.value.trim().toLowerCase(),v=verdictFilter.value,f=familyFilter.value,m=mediaFilter.value;
  const filtered=effects.filter(e=>
    (v==='all'||e.verdict===v) && (f==='all'||e.family===f) &&
    (!stageOnly.checked||e.stage) &&
+   (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  cards.innerHTML=filtered.map(cardHTML).join('');
- resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${effects.length-researchCount} interactive/illustrative candidates · ${researchCount} research-only references`;
+ resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${Object.keys(verifiedVideos).length} verified individual source links · ${Object.keys(clips).length} recorded clips`;
  document.querySelector('#empty').hidden=filtered.length>0;
 }
 for(const name of [...new Set(effects.map(e=>e.family))].sort()){
@@ -188,6 +211,7 @@ function doAction(btn,preview){
  const action=btn.dataset.action;
  switch(action){
    case 'replay': replay(preview);break;
+   case 'pair':{replay(preview);const player=preview.closest('.card')?.querySelector('video.clip-player');if(player){player.currentTime=0;player.play()?.catch(()=>{});}break;}
    case 'toggle-media':preview.querySelector('.media-reserve')?.classList.toggle('is-alt');break;
    case 'highlight':{const mark=preview.querySelector('mark');mark?.classList.toggle('is-dim');break;}
    case 'toggle-calm':{const calm=preview.classList.toggle('is-calm');btn.setAttribute('aria-pressed',String(calm));btn.textContent=calm?'Restore motion':'Calm scene';break;}
@@ -249,7 +273,7 @@ cards.addEventListener('input',event=>{
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
 document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
-for(const control of [search,verdictFilter,familyFilter,stageOnly])
+for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){
  radio.addEventListener('change',()=>{
@@ -262,6 +286,6 @@ for(const radio of document.querySelectorAll('[name="audience"]')){
  });
 }
 document.querySelector('#reset').addEventListener('click',()=>{
- search.value='';verdictFilter.value='all';familyFilter.value='all';stageOnly.checked=false;render();search.focus();
+ search.value='';verdictFilter.value='all';familyFilter.value='all';mediaFilter.value='all';stageOnly.checked=false;render();search.focus();
 });
 render();
