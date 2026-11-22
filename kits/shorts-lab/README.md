@@ -129,4 +129,15 @@ These are independent implementations prompted by user-supplied video screenshot
 | 068 | Expressive sliders | **Adopt selectively**: a native range input owns its value, keyboard controls and accessible label. The custom segmented track, narrow thumb, press feedback and live output are visual enhancements, with a static fallback. |
 | 069 | Squishy toggle | **Adopt selectively**: a real checkbox/role switch determines on/off; CSS :has and the sibling checked selector control thumb position, while :active briefly compresses its shape. Its off state must always be unambiguous. |
 
-After changing the corresponding live studies, recreate **only** assets 066.mp4 through 069.mp4 and leave the other 58 clips, original video links and unrelated routes unchanged. Verify each new MP4 shows several visually distinct frames, inspect behaviour in Chromium and WebKit mobile emulation, check keyboard and reduced-motion scenarios, then merge and verify GitHub Pages for the exact commit. The shared product-authoring skills remain unchanged until this kit has been reviewed.
+After changing the live studies, recreate **only** the seven assets 060.mp4, 061.mp4 and 065.mp4 through 069.mp4; leave the other 55 clips, original video links and unrelated routes unchanged. Verify each new MP4 shows several visually distinct frames, inspect behaviour in Chromium and WebKit mobile emulation, check keyboard and reduced-motion scenarios, then merge and verify GitHub Pages for the exact commit. The shared product-authoring skills remain unchanged until this kit has been reviewed.
+
+
+### Three further screenshot-led comparisons in this batch
+
+| ID | Technique | Decision and implementation |
+| --- | --- | --- |
+| 060 | Android frosted blur vs Liquid Glass-inspired treatment | **Prototype both.** Keep one underlying composition and switch between soft translucent blur and a brighter optical lens with specular edge highlights. Both are original CSS illustrations, not official platform widgets or true physical refraction. Contrast, mobile Safari performance and readable fallback take priority. |
+| 061 | Split button with popover | **Adopt selectively.** Primary action always works directly. A separate chevron reveals alternative actions through the native Popover API when supported, with fallback, keyboard arrows, Escape and explicit accessible state. The kit only displays simulated actions. |
+| 065 | Pixel squeeze | **Stage-only prototype.** A bounded, stepped squash with a brief pixel grid is interesting for a theatrical reveal. It should not become routine confirmation or navigation. The reference screenshot did not expose all of its original CSS, so the implementation is independently authored and labelled speculative. |
+
+All original video links and case IDs are retained. The Android/Liquid comparison is intentionally about the optical treatment, not a promise of an Apple or Google component implementation. Check both alternatives on a real mobile browser before promotion; the existing CSS fallback must stay readable without backdrop-filter. This batch's successful capture and publication are separate from the source code changes.
