@@ -86,7 +86,14 @@ function previewFor(e) {
     case 'shine': return `<div class="shine-card">Premium, not loud.</div><small>Hover the card</small>`;
     case 'music-glow': return `<div class="music-glow" aria-hidden="true">♪</div><small>Abstract colour study, not an app clone</small>`;
     case 'video-controls': return `<span class="candidate-label">Unverified — controller trial</span><div class="video-box">▶</div><small>Real playback needs a real media element</small>`;
-    case 'gradient': return `<div class="gradient-board"><strong>Intentional colour.</strong></div>`;
+    case 'gradient': return `<div class="gradient-grain-study">
+  <div class="gradient-grain-samples">
+    <div class="grain-swatch"><strong>Flat</strong><small>smooth interpolation</small></div>
+    <div class="grain-swatch with-grain is-textured" data-grain="true"><strong>Textured</strong><small>same gradient + grain</small></div>
+  </div>
+  <button type="button" class="small-action" data-action="grain" aria-pressed="true">Grain on · compare</button>
+  <small class="footnote">The subtle noise layer uses SVG feTurbulence, mixed at 15% opacity.</small>
+</div>`;
     case 'fab': return `<div class="fab-wrap"><div class="fab-options" hidden><button type="button" aria-label="Note" data-action="fab-choice">✎</button><button type="button" aria-label="Share" data-action="fab-choice">↗</button></div><button class="fab-main" type="button" data-action="fab" aria-expanded="false" aria-label="Open optional tools">＋</button></div><small>Secondary actions only</small>`;
     case 'blur': return `<div class="blur-comparison-study" data-material="android">
    <div class="blur-choice" role="group" aria-label="Compare translucent surface treatments">
@@ -383,7 +390,9 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='image-glow'){
+     if(preview.dataset.effect==='gradient'){
+       preview.querySelector('[data-action="grain"]')?.click();
+     }else if(preview.dataset.effect==='image-glow'){
        preview.querySelector('[data-action="image-glow"]')?.click();
      }else if(preview.dataset.effect==='chips'){
        preview.querySelector('.filter-chip[data-chip="retail"]')?.click();
@@ -431,6 +440,14 @@ function doAction(btn,preview){
      btn.setAttribute('aria-pressed',String(selected));
      const status=btn.closest('.premium-button-study')?.querySelector('.premium-status');
      if(status)status.textContent=selected?'Selected · tap again to clear':'Not selected · ready to explore';
+     break;
+   }
+   case 'grain':{
+     const textured=btn.closest('.gradient-grain-study')?.querySelector('.with-grain');
+     const enabled=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(enabled));
+     if(textured){textured.classList.toggle('is-textured',enabled);textured.dataset.grain=String(enabled);}
+     btn.textContent=enabled?'Grain on · compare':'Grain off · compare';
      break;
    }
    case 'filter-chip':{
