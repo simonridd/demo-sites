@@ -116,3 +116,17 @@ The carousel screenshot included a **partial on-screen CSS snippet**, not its co
 ### Recording consistency
 
 A code change invalidates the older video for that study. Regenerate **only IDs 71, 72, 73 and 74** using the existing capture pipeline with --force; check all four MP4 files, inspect their visible transitions and commit the regenerated assets. Leave the other 58 recordings and source links unchanged. Product-wide instructions and the Co-op demo should remain untouched until review.
+
+
+## Screenshot-led refinements — second batch (22 November 2026)
+
+These are independent implementations prompted by user-supplied video screenshots, not recovered creator source. Stage-first presentation choices can be more theatrical because most audiences will see the scene once or twice. All decorative animation is short and controlled, and all product actions retain semantic HTML.
+
+| ID | Study | Treatment and reuse decision |
+| --- | --- | --- |
+| 066 | Gemini-inspired moving/blurred background | **Adapt for stage**: bounded, blurred colour fields rotate and settle over 2.1 seconds. The scene stays attractive afterward and does not loop. Use for a reveal/section break; do not use as a permanently moving backdrop under working controls. Actual Gemini source/branding is not copied. |
+| 067 | Thinking-bar colour sweep | **Adapt**: multicolour bar animates for two short cycles only when explicitly played, with a truthful illustrative label. Never treat the animation as proof of background processing or completion. |
+| 068 | Expressive sliders | **Adopt selectively**: a native range input owns its value, keyboard controls and accessible label. The custom segmented track, narrow thumb, press feedback and live output are visual enhancements, with a static fallback. |
+| 069 | Squishy toggle | **Adopt selectively**: a real checkbox/role switch determines on/off; CSS :has and the sibling checked selector control thumb position, while :active briefly compresses its shape. Its off state must always be unambiguous. |
+
+After changing the corresponding live studies, recreate **only** assets 066.mp4 through 069.mp4 and leave the other 58 clips, original video links and unrelated routes unchanged. Verify each new MP4 shows several visually distinct frames, inspect behaviour in Chromium and WebKit mobile emulation, check keyboard and reduced-motion scenarios, then merge and verify GitHub Pages for the exact commit. The shared product-authoring skills remain unchanged until this kit has been reviewed.
