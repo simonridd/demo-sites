@@ -94,3 +94,13 @@
 **Application:** Keep Sam as the customer service agent. After his introduction, show the searching, checking and writing around Maya’s contact. Link relevant knowledge to searching, a configured checklist to remembering checks, and a draft summary to writing. Keep Sam reviewing and deciding. Preserve coherent cream/cyan imagery and concise typography, with detail in private notes and canonical reading copy. Frustrations are authored examples, not actual customer research; capabilities require primary-source verification and customer configuration. No runtime readiness, integration, savings or resolved refund is implied by a presentation.
 
 **Scope:** The visual/character narrative is the default for new customer/demo decks. Keep each client’s art direction distinct, select technology where it adds value, and retain the existing website/AVA/presentation owners. Do not put presenter architecture or agent frictions onto customer-facing task screens without a relevant customer purpose. Installed skill adoption requires the owner’s versioned staging and checksum process; record its actual outcome separately.
+
+## 22 November 2026: ordinary language, a resolution and a credible workplace
+
+**Decision:** Customer presentations should tell a human story on their own. Remove generic AI-like explanations, give the customer a specific resolution and make the agent’s image believable for employer and workplace. Keep customer imagery natural rather than staging a sentimental happy ending.
+
+**Reason:** Simon flagged the access/checks footer on Co-op’s spatial scene, noted that Maya never got a resolution, and said Sam did not look like a Co-op colleague in a contact centre/customer experience hub. Maya’s image was already suitable.
+
+**Application:** Maya’s PNG stays unchanged. An identity-preserving edit places Sam at a branded Co-op workstation with a headset and shirt logo. The story now shows his order check, refund for the carton and Maya’s confirmation before he reviews the notes. The summary and ending carry the same outcome. Spatial controls refer to the order, Maya and Sam; generic governance text moves to private notes. Refund eligibility, authority and generated-workplace status are private assumptions, not observed outcomes or universal policy. No amount or settlement time is invented.
+
+**Future check:** Read the audience route without notes. Can the viewer say what happened, who helped and how the request ended? Does each sentence explain this person’s situation, or drift into abstract AI/product prose? Does character imagery establish a credible role? Preserve genuinely material qualifications when needed for a real audience decision, and keep actual privacy/provider/readiness owners intact.

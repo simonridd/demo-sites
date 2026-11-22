@@ -17,6 +17,10 @@ When selecting the next visual technology, use the dated [technology candidates]
 
 Simon approved the Co-op visual storytelling, client | IPI cover and matching character treatment as the standard on 22 November 2026. For new customer-service presentations, introduce both the customer and the agent, each with a goal and friction. Later, connect the agent’s frustrations to specific supported capabilities and show how the work changes, while keeping their judgement and authority clear. Keep stage copy light, use coherent imagery, and retain full reading explanations and private presenter detail. Give every client a distinct art direction; the standard does not require Co-op’s people, styling or all five technologies. Presentation-authoring owns the versioned runtime and template.
 
+## Human story check
+
+Read each customer presentation without speaker notes before delivery. The audience should be able to follow the person’s need, the help, the action and a concrete resolution. Carry that outcome into later confirmations, summaries and the ending. Use ordinary dialogue and specific people, objects and actions. Remove AI-like explanation and generic governance/implementation footnotes when they interrupt the story; retain a material condition if the audience needs it to understand an actual claim. Keep natural customer imagery and avoid forced emotion. Agent imagery should establish employer, role and a believable workplace through clothing, branding and equipment, while preserving the deck’s art direction. Keep authored outcomes, generated settings and capability assumptions private; they are not observed events or actual employee photographs.
+
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.

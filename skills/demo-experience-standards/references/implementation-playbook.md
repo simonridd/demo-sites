@@ -87,3 +87,9 @@ Build a short character arc when it improves the explanation: customer + immedia
 ## Agent friction to useful help
 
 For customer-service presentations, introduce the agent alongside the customer story. Give the agent an immediate aim, then show the work that makes it harder. Use a later concise visual sequence to connect each friction to the relevant supported capability: searching → relevant knowledge; remembering checks → configured checklist; writing → draft summary. Show the person reviewing or choosing, rather than treating an AI suggestion as an approved action. This is a causal story, not a required feature catalogue. Verify product capabilities from primary sources and keep customer configuration and authored-example status private. Leave the images, typography and pacing consistent with the rest of that client’s deck.
+
+## Finish the human story
+
+Use concrete people, objects and actions in the audience presentation. Instead of “relevant context”, show Sam with Maya’s order and message. Resolve the customer’s request explicitly, then make the record and closing agree with that outcome. Put the notes after the action, rather than summarising an unresolved request. A self-contained read-through catches AI-like filler and missing endings more reliably than a blanket banned-word list. Keep implementation/governance detail private unless a material audience condition needs explaining.
+
+Keep a natural customer portrait when it is enough; avoid forced emotion or celebratory posing. Put the agent in a believable work setting with appropriate employer branding and equipment. Preserve identity and art direction when editing an existing portrait. Retain exact prompts, generated-setting status and any authored resolution assumptions privately, and do not imply an actual employee/office photograph or observed transaction.
