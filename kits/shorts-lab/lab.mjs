@@ -93,7 +93,28 @@ function previewFor(e) {
     case 'toggle': return `<label class="switch-line"><input type="checkbox" checked><span>Enabled</span></label><small>Real checkbox state</small>`;
     case 'wavy': return `<div class="wavy-bars" aria-label="Decorative equalizer sample">${[0,1,2,3,4,5].map(i=>`<i style="--i:${i}"></i>`).join('')}</div><small>One short sample, not a fake process</small>`;
     case 'icons': return `<button type="button" class="icon-button" data-action="icon" aria-pressed="false" aria-label="Save favourite"><span>♡</span></button><small>Icon state changes with the action</small>`;
-    case 'header': return `<div class="mini-header"><div>Shorter navigation ↗</div><div>Content remains fully visible.</div></div>${button('Collapse / expand','header')}`;
+    case 'header': return `<div class="collapse-study">
+  <div class="collapse-viewport" tabindex="0" role="region" aria-label="Scroll within this mobile page to collapse its navigation">
+    <div class="collapse-lead" aria-hidden="true"></div>
+    <div class="collapse-header-frame">
+      <nav class="collapse-nav" aria-label="Sample navigation">
+        <a class="collapse-brand" href="#library" aria-label="Motion Atlas">motion<span>·</span></a>
+        <span class="collapse-navlinks"><a href="#library">Gallery</a><a href="../">Kits</a></span>
+        <span class="collapse-avatar" aria-hidden="true">M</span>
+      </nav>
+    </div>
+    <div class="collapse-page">
+      <strong>Scroll to focus.</strong>
+      <p>A full-size header makes an entrance. Once you scroll, it gives the story more room.</p>
+      <div class="collapse-feature"><span>01</span><b>Less chrome.<br>More content.</b></div>
+      <p>Navigation remains visible, readable and usable through the transition.</p>
+      <div class="collapse-feature alt"><span>02</span><b>One clear<br>destination.</b></div>
+      <p>The compact layout never hides an important action.</p>
+    </div>
+  </div>
+  ${button('Scroll down / return to top','header')}
+  <small class="footnote">Scroll inside the panel or use the control.</small>
+</div>`;
     case 'input': return `<div class="input-demo material-input-study">
   <div class="md-field">
     <input id="input-${e.id}" type="text" name="question" autocomplete="off" placeholder=" " aria-describedby="input-hint-${e.id}">
@@ -242,7 +263,13 @@ function doAction(btn,preview){
    case 'split-choice':{const menu=preview.querySelector('.split-menu-items');menu.hidden=true;const opener=preview.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();preview.querySelector('[data-feedback]').textContent=btn.textContent+' · example only';break;}
    case 'split-primary':preview.querySelector('[data-feedback]').textContent='Present · example only';break;
    case 'icon':{const isSaved=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(isSaved));btn.setAttribute('aria-label',isSaved?'Remove favourite':'Save favourite');btn.querySelector('span').textContent=isSaved?'♥':'♡';replay(preview);break;}
-   case 'header':preview.querySelector('.mini-header')?.classList.toggle('is-condensed');break;
+   case 'header':{
+     const viewport=preview.querySelector('.collapse-viewport');
+     if(!viewport)break;
+     const target=viewport.scrollTop>24?0:Math.min(viewport.scrollHeight-viewport.clientHeight,160);
+     viewport.scrollTo({top:target,behavior:motionPreference.matches?'auto':'smooth'});
+     break;
+   }
    case 'next':case 'previous':{
      const strip=preview.querySelector('.carousel-scroller');
      if(!strip)break;
@@ -322,7 +349,17 @@ cards.addEventListener('keydown',event=>{
    if(menu){menu.hidden=true;const p=menu.closest('.preview');const opener=p.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();}
  }
 });
+function updateFallbackNav(viewport){
+ const nav=viewport.querySelector('.collapse-nav');
+ if(!nav)return;
+ // scroll-state containers own the primary implementation where supported;
+ // this class is only a fallback for engines without the new CSS query.
+ if(typeof CSS==='undefined'||!CSS.supports?.('container-type: scroll-state')){
+   nav.classList.toggle('is-condensed',viewport.scrollTop>10);
+ }
+}
 cards.addEventListener('scroll',event=>{
+ if(event.target.matches?.('.collapse-viewport')){updateFallbackNav(event.target);return;}
  if(!event.target.matches?.('.carousel-scroller'))return;
  const strip=event.target;
  if(strip.__focusFrame)return;
