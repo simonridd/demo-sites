@@ -74,3 +74,13 @@
 **Prototype:** Co-op’s nine-scene “Everyday, considered.” proposal uses an original Blender product still, a native CSS typographic reveal, a reviewed Dice UI/21st.dev comparison pattern, one GSAP handoff and one Three.js inspection. Its composition is a candidate for Simon to review; the lesson is to start with the story and art direction.
 
 **Observed:** The attached Chrome cannot create WebGL. Three.js’s actual SVGRenderer supplies a working geometry-only fallback. Camera/view changes update the projected geometry, keyboard controls retain their keys, idle frames stop and leaving the scene disposes it. This does not establish GPU/WebGL, physical-phone, screen-reader or spoken-rehearsal acceptance.
+
+## 22 November 2026: cover partnership and people in the story
+
+**Decision:** Blend the client and actual IPI logo into presentation covers, with a visible pipe and balanced optical sizing. When people carry the story, introduce the customer before the friction and the colleague at the handoff, with original generated portraits that share the deck’s art direction. Return to their immediate needs rather than adding standalone biographies.
+
+**Reason:** Simon liked the original Co-op direction and asked for these two improvements to the base template, starting with Co-op.
+
+**Application:** Co-op’s opening and closing use the retained Co-op | IPI marks. Maya enters before the missing egg; Sam enters when the request reaches a colleague. Matching transparent editorial portraits sit within the existing cream/cyan typography and image system. Static introductions preserve the five bounded technology allocations. Names and context are also in the canonical audience explanation for reading, no-JS and print. Keep prompts, mode, authored-character status and asset provenance in private operator/source material; a generated face is not evidence of a real customer event or staff endorsement. The reusable decision is continuity of branding and people, not a requirement to reuse Maya, Sam or their portrait style in unrelated clients.
+
+**Checks and rollout:** Owner source tests and browser review qualify the implementation separately from this guidance. The presentation owner stages candidate 3.2.0; a guidance merge or Git pull does not upgrade an installed runtime. Chrome hardware WebGL acceptance remains open for manual graphics-setting enablement and retest; the current genuine SVGRenderer fallback remains available.
