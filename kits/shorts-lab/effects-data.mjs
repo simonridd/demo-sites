@@ -1,7 +1,7 @@
 // Original, self-contained lab catalogue derived from the 22 November 2026
 // research register. Titles are catalogue labels, not verified creator CSS.
 // Each line: title | initial verdict | priority | prototype ID | family | stage candidate | evaluation.
-const RAW = String.raw\`
+const RAW = String.raw`
 1 CSS line to change checkboxes|Adapt|P2|checkbox|Controls|no|Native accent-colour is the useful lesson; avoid a replacement checkbox that loses semantics.
 1 line stops boring buttons|Adapt|P2|button|Controls|yes|Short press and hover feedback works for both stages and apps; avoid noisy repetition.
 Ditch boring highlighting|Adapt|P2|highlight|Typography|yes|Strong selection can guide attention; protect contrast and text legibility.
@@ -77,7 +77,7 @@ New collapsing header|Adapt|P2|header|Navigation|yes|Recover space without cover
 Your inputs look basic|Adopt|P1|input|Controls|yes|Focus and validation should be clear before decorative flourishes.
 New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Try native scroll-snap and buttons; maintain focus and visible controls.
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
-\`.trim();
+`.trim();
 const cols=RAW.split("\n");
 export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
