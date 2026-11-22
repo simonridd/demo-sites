@@ -27,6 +27,12 @@ When a customer-service deck explains a product, connect selected supported feat
 
 When performance figures strengthen the story, use named, attributable primary evidence. Keep the metric, unit, range or “up to”, customer scope and material contributing work visible. Link the case study. Distinguish another customer's reported result from local measurements or a forecast; never sum unlike metrics or attribute a wider platform result to one feature. Keep detailed source review and exclusions in operator material. Keep numbers static by default. When emphasis is requested or useful, a short count-up can play once on first stage entry. Preserve final accessible/static values and all qualifiers; settle on interruption and keep reading, print and reduced-motion output still.
 
+## Short moments and a clear next step
+
+A brief presenter-controlled walkthrough can show a capability in use within the deck’s own visual language. Keep native progression, reversible state, complete reading/static content and reduced motion. Use a verified recording excerpt when it matches the story and remains legible; retain recorded UI and theme its surrounding frame. Preserve the existing full-length recording/player workflow. Authored illustration and actual capture have different provenance; keep that distinction accurate privately.
+
+Give repeated scenes different jobs, move optional exploration into backup when it interrupts the story, and close with a concrete request type, team, baseline and measures. Preserve chosen partnership branding through custom scenes, including contrast on dark slides and clear mobile headers.
+
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.
