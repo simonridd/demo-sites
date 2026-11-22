@@ -69,3 +69,11 @@ For each new brief, record the audience/task, selected treatment and benefit, ad
 3. Add one on-demand Three.js viewer when a scoped object/task and suitable model are available. Compare it against the poster-only version before broader use.
 
 Primary references checked 22 November 2026: [GSAP context cleanup](https://gsap.com/docs/v3/GSAP/gsap.context()/), [GSAP standard licence](https://gsap.com/community/standard-license/), [Three.js GLTFLoader](https://threejs.org/docs/pages/GLTFLoader.html), [rendering on demand](https://threejs.org/manual/pages/rendering-on-demand.html), [responsive design](https://threejs.org/manual/pages/responsive.html), and [resource cleanup](https://threejs.org/manual/pages/cleanup.html).
+
+## Fresh presentation art direction
+
+A blank-canvas brief starts with the audience’s situation, the dramatic idea and a distinct art direction. Give each presentation a reason for its typography, image-making, scale, negative space and pacing. Keep the existing renderer/navigation/private-output owner. A previous deck’s layouts are optional working material; choose composition for the new story.
+
+For the Co-op five-technology trial, the technology allocation is explicit and bounded: original Blender still on the opening, CSS type reveal for the human stakes, a native adaptation of a reviewed 21st.dev comparison slider, GSAP for the request handoff and Three.js for inspecting three service views. Other scenes stay still. This is a creative constraint for one trial, not a checklist for future presentations. Retain the private allocation/source record and verify the actual renderer/controller for each claim.
+
+Three.js’s official SVGRenderer can preserve a real interactive 3D diagram when WebGL is unavailable. It has no textures, shadows or advanced shading, so use a simpler authored material/geometry treatment. Keep the static/HTML alternative and distinguish SVG-renderer evidence from WebGL acceptance. Verify projected geometry changes, keyboard controls, stable idle frame count, offscreen cleanup and the final composition, rather than accepting a loaded library as a working feature.

@@ -62,3 +62,15 @@
 - GSAP journey prototype: the reserved connected-support kit uses a pinned, self-hosted timeline to coordinate connector traces and stage emphasis. Stage selection remains functional without GSAP; all authored stages remain readable without JavaScript. Reduced motion and interrupted transitions settle into the selected state. This is a website prototype and a reuse pattern for the presentation owner, not an installed presentation feature or evidence of a live handover.
 
 - Customer-task motion prototype, 22 November: Co-op's native order-support drawer keeps the receipt and selected item in view while the customer chooses an issue and reads relevant guidance. Choices are retained within the page visit; the final screen explicitly separates preparation from submission. This is a reusable interaction approach under review, not a working refund/report service or an adopted visual template for every client.
+
+## 22 November 2026: a fresh presentation needs a fresh art direction
+
+**Decision:** When Simon asks to reimagine a presentation from a blank canvas, establish a new narrative, mood, typography, imagery and composition before choosing implementation components. Reuse the specialist’s navigation, source and privacy contracts while giving the new story its own visual language.
+
+**Reason:** Simon felt the first five remakes still took too much inspiration from the previous solution. He commissioned a new Co-op presentation with full artistic licence and one use each of CSS/motion, 21st.dev, GSAP, Blender and Three.js.
+
+**Scope:** The five-technology constraint belongs to this particular trial. Future decks should select the technologies that improve their story. No new default stack, paid tool, installed runtime or customer-service configuration follows from this request.
+
+**Prototype:** Co-op’s nine-scene “Everyday, considered.” proposal uses an original Blender product still, a native CSS typographic reveal, a reviewed Dice UI/21st.dev comparison pattern, one GSAP handoff and one Three.js inspection. Its composition is a candidate for Simon to review; the lesson is to start with the story and art direction.
+
+**Observed:** The attached Chrome cannot create WebGL. Three.js’s actual SVGRenderer supplies a working geometry-only fallback. Camera/view changes update the projected geometry, keyboard controls retain their keys, idle frames stop and leaving the scene disposes it. This does not establish GPU/WebGL, physical-phone, screen-reader or spoken-rehearsal acceptance.
