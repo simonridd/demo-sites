@@ -255,3 +255,51 @@
 @media(prefers-reduced-motion:reduce){
  .demo-thinking .thinking-light,.demo-thinking .thinking-mark>span{animation:none!important;transform:none!important;will-change:auto;opacity:.8}
 }
+
+
+/* Study 066 — bounded one-shot blurred-and-rotating colour reveal.
+   Screenshot-inspired independent CSS. Localised paint: never a full-page blur.
+   Final (no-JS, no-motion) state matches the settled end frame. */
+.gemini-reveal-study{width:100%;max-width:335px;display:grid;justify-items:center;gap:9px}
+.gemini-reveal{
+ position:relative;overflow:hidden;isolation:isolate;contain:paint;display:grid;
+ width:100%;min-height:162px;border-radius:19px;padding:20px 19px;
+ background:#192345;color:white;text-align:left;align-items:end;
+ box-shadow:0 18px 30px #14213828;border:1px solid #f1e2fc45;
+}
+.gemini-reveal::before{content:"";position:absolute;inset:0;z-index:-2;
+ background:linear-gradient(112deg,#171f45,#392b61 45%,#152f58);
+}
+.gemini-aura{display:block;position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(17px);transform:rotate(110deg) scale(1);opacity:.92}
+.gemini-aura-one{width:200px;height:145px;top:-73px;right:-54px;
+ background:conic-gradient(from 160deg,#f3a6d8,#7b80e8,#b68bed,#f3a6d8)}
+.gemini-aura-two{width:190px;height:115px;bottom:-55px;left:-55px;
+ background:radial-gradient(ellipse at 35% 65%,#8be4e8,#4b8cdc 62%,transparent 73%);opacity:.7}
+.gemini-aura-three{width:120px;height:120px;top:25px;left:35%;
+ background:radial-gradient(circle,#f6afc0,#ab6fb6 55%,transparent 70%);opacity:.44}
+.gemini-reveal-content{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:7px;z-index:1;max-width:260px;text-shadow:0 2px 13px #14193490}
+.gemini-kicker{font-size:9px;letter-spacing:.16em;font-weight:800;color:#e7cefb}
+.gemini-reveal-content strong{font-size:clamp(18px,2.2vw,24px);line-height:1.06;letter-spacing:-.065em;font-weight:800}
+.gemini-accent{position:absolute;right:-18px;top:-34px;font-size:28px;color:#d8c8ff}
+.gemini-reveal-study .footnote{font-size:10px;color:#426357;text-align:center;line-height:1.35;max-width:255px}
+@keyframes atlas-gemini-reveal{
+ 0%{transform:translate3d(-30%,22%,0) rotate(-100deg) scale(.76);filter:blur(31px);opacity:.35}
+ 56%{transform:translate3d(3%,-3%,0) rotate(28deg) scale(1.22);filter:blur(22px);opacity:1}
+ 100%{transform:translate3d(0,0,0) rotate(110deg) scale(1);filter:blur(17px);opacity:.92}
+}
+@keyframes atlas-gemini-secondary{
+ 0%{transform:translate3d(24%,-15%,0) rotate(270deg) scale(.75);filter:blur(27px);opacity:.25}
+ 100%{transform:translate3d(0,0,0) rotate(110deg) scale(1);filter:blur(17px);opacity:.7}
+}
+@keyframes atlas-gemini-copy{
+ 0%{opacity:.45;transform:translateY(8px)}
+ 100%{opacity:1;transform:translateY(0)}
+}
+@media(prefers-reduced-motion:no-preference){
+ .preview.is-playing .gemini-aura-one{animation:atlas-gemini-reveal 2.1s cubic-bezier(.22,1,.36,1) 1 both}
+ .preview.is-playing .gemini-aura-two{animation:atlas-gemini-secondary 2.1s cubic-bezier(.22,1,.36,1) 1 both}
+ .preview.is-playing .gemini-reveal-content{animation:atlas-gemini-copy 600ms 600ms ease-out both}
+}
+@media(prefers-reduced-motion:reduce){
+ .gemini-aura,.gemini-reveal-content{animation:none!important;transition:none!important}
+}
