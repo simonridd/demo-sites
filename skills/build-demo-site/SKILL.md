@@ -21,9 +21,11 @@ Apply the accepted [shared demo experience standards](../demo-experience-standar
 
 For new pages and visual revisions, read [Website design decisions](references/website-design.md). Apply the everyday checks to the components being authored; choose colour, motion and image treatments to suit the client and page. Revisit existing pages when their components are next changed or a visible defect needs fixing.
 
-The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order dialog with an inset panel. Its flat brand surfaces, grocery subject and original vector fallback remain appropriate; use the reasoning rather than copying its visual style into another client.
+The Co-op page is the first applied example: shared corner and border tokens, balanced SVG icons, readable supporting text, retained mobile navigation and a viewport-bounded order-support drawer. Its flat brand surfaces, grocery subject and original vector fallback remain appropriate; use the reasoning rather than copying its visual style into another client.
 
 Co-op also demonstrates optional motion in `co-op/motion.css` and `co-op/motion.js`: a short grocery illustration that plays once on entry, with an optional locally rendered Blender asset and the original vector fallback, a decorative delivery scene, and restrained interface transitions. Follow the [motion guidance](references/website-design.md#motion-as-an-enhancement) when adapting this pattern. Keep the page usable without animation or JavaScript and keep support actions and Messenger authority independent from decorative playback.
+
+The [order-support drawer](references/website-design.md#customer-order-support-drawer) extends the same fictional receipt into item → issue → next-step guidance, retaining choices for the page visit. Native radio groups and dialog behavior carry selection and focus; plain receipt links still work without scripts. Guidance does not submit a report or promise a refund, and contact availability remains owned by the existing Messenger binding.
 
 Its guided support panel progressively enhances ordinary help links into responsive tabs. Preserve its existing FAQ hashes, keyboard orientation and shared receipt actions; retain plain-link fallback and all-topic print output. The reviewed 21st.dev reference and native implementation contract are described in [website design decisions](references/website-design.md#guided-help-and-component-references).
 

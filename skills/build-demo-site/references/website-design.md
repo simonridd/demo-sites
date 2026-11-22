@@ -35,7 +35,7 @@ For the demo collection, prioritise card geometry, separators and search/navigat
 
 ## First application: Co-op support page
 
-The Co-op visual revision applies restrained card/panel radii, alpha border tokens and consistent SVG icon strokes. Its order dialog derives the inset help panel's radius from the outer radius, padding and border, and uses a dynamic viewport height limit with a conventional fallback. Supporting text is at least 14px at default settings, ordinary body/action text is 16px or larger, and mobile navigation remains available. A derived soft background uses OKLCH with an sRGB fallback while approved blue and pale brand colours stay intact.
+The Co-op visual revision applies restrained card/panel radii, alpha border tokens and consistent SVG icon strokes. Its order-support drawer uses a dynamic viewport height with a conventional fallback, a fixed header and a scrollable body. Supporting text is at least 14px at default settings, ordinary body/action text is 16px or larger, and mobile navigation remains available. A derived soft background uses OKLCH with an sRGB fallback while approved blue and pale brand colours stay intact.
 
 Keep its grocery subject and flat brand surfaces. A carousel, dark theme, gradient, blend mode or blurred icon swap would add little to this support task. Reuse its rules in another page only when the component and brand call for them.
 
@@ -71,3 +71,11 @@ Initialize only after the matching panels are present; otherwise retain the orig
 Pin self-hosted dependencies with their provenance, licence notices and integrity checks. The GSAP core belongs only to this reserved kit, with operator/reuse notes in `kits/connected-support/README.md`. Existing presentation owners can adapt the narrative and motion pattern through their normal source/renderer workflow. Do not describe authored examples as observed native outcomes or treat a new website as an installed presentation/runtime upgrade.
 
 The 22 November review keeps this architecture explanation out of customer-site discovery. The kit has neutral framing and its own index at `kits/`; `co-op-journey/` is a compatibility redirect only. Customer-facing reuse should explain the customer’s own process rather than contact-centre implementation. Do not let an attractive component determine the audience or content.
+
+## Customer order-support drawer
+
+Co-op's `order-support.js` enhances the existing inline receipt into a native modal drawer. The same authored item names and quantities supply receipt choices and later summaries. Item → issue → next step is a customer task: missing, damaged and wrong-item choices reveal distinct guidance. Keep choices when navigating back or reopening during the page visit, update later summaries when earlier choices change and reset the drawer scroll on reopen. Do not persist personal order details in browser storage by default.
+
+Use semantic labelled radio groups, deliberate Continue actions and heading focus on each step. Native dialog behavior keeps background content inert and provides Escape; closing returns focus to the initiating link, while the contact action closes and focuses the existing contact section. Give the body its own vertical scroll, preserve the visible close action at narrow widths and enlarged text, and keep the page from scrolling behind it. Short CSS entrances follow the operating system motion preference without delaying state or close actions.
+
+Start from plain `#order-details` links and a readable inline receipt, then move that same section into a dialog only after support and markup checks. Without scripts or dialog support, the receipt, all three advice sections and underlying FAQ/contact links remain useful. The Co-op fixture is fictional and local: guidance is not a report submission, refund decision, actual order lookup or native handover. Never make unavailable Messenger look ready because the local drawer reached its last step. Regression scenarios are in `co-op-order-support.test.cjs`; the implementation and observed verification limits are recorded in `tools/components/co-op-order-support.md`.
