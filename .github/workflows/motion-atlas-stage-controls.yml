@@ -1,0 +1,85 @@
+name: Motion Atlas stage and controls capture
+on:
+  push:
+    branches:
+      - codex/motion-atlas-squishy-toggle-20261122
+    paths:
+      - .github/workflows/motion-atlas-stage-controls.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: motion-atlas-stage-controls-20261122
+  cancel-in-progress: false
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 32
+    steps:
+      - name: Check out isolated branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/motion-atlas-squishy-toggle-20261122
+          persist-credentials: true
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Chromium/WebKit and video codecs
+        run: |
+          set -euxo pipefail
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium webkit
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Run the existing repository tests
+        run: node --test *.test.cjs quote/*.test.cjs
+      - name: Qualify real mobile controls in both rendering engines
+        run: python tools/verify-screenshot-controls.py
+      - name: Capture ONLY four changed studies in Chromium
+        run: python tools/capture-motion-atlas.py --force --ids 66 67 68 69
+      - name: Verify MP4s animate and no other study disappeared
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          root=Path('kits/shorts-lab')
+          mp4s=list((root/'assets').glob('[0-9][0-9][0-9].mp4'))
+          assert len(mp4s)==62, len(mp4s)
+          data=(root/'clip-manifest.mjs').read_text()
+          assert data.count('"kind": "browser-recorded"')==62
+          for idx in (66,67,68,69):
+              movie=root/'assets'/f'{idx:03d}.mp4'
+              assert movie.exists()
+              assert f'./assets/{idx:03d}.mp4' in data
+              ff=subprocess.run(['ffmpeg','-hide_banner','-loglevel','error',
+                 '-i',str(movie),'-f','framemd5','-'],capture_output=True,text=True,check=True)
+              distinct={line.rsplit(',',1)[-1].strip() for line in ff.stdout.splitlines() if line and not line.startswith('#')}
+              print(idx,'unique frames',len(distinct),'size',movie.stat().st_size)
+              assert len(distinct)>=4, f'Non-moving recording: {movie}'
+          PY
+      - name: Re-run regression tests with new recordings
+        run: node --test *.test.cjs quote/*.test.cjs
+      - name: Commit only the four new MP4s and regenerated manifest
+        run: |
+          set -euxo pipefail
+          git config user.name "motion-atlas-capture[bot]"
+          git config user.email "motion-atlas-capture[bot]@users.noreply.github.com"
+          git add kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/067.mp4 kits/shorts-lab/assets/068.mp4 kits/shorts-lab/assets/069.mp4 kits/shorts-lab/clip-manifest.mjs
+          git diff --cached --check
+          git commit -m "Refresh screenshot-led stage and control comparison clips"
+          git push origin HEAD:codex/motion-atlas-squishy-toggle-20261122
+      - name: Keep diagnostics if any qualification fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motion-atlas-stage-controls-failure
+          path: |
+            kits/shorts-lab/assets/066.mp4
+            kits/shorts-lab/assets/067.mp4
+            kits/shorts-lab/assets/068.mp4
+            kits/shorts-lab/assets/069.mp4
+          retention-days: 7
