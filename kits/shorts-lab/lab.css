@@ -53,9 +53,14 @@
 .fill-icons .icon-choice:nth-child(3) .fill-icon{--icon-accent:#178b76;color:#19695a}
 .fill-icons .fill-icon svg{width:36px;height:36px;display:block;overflow:visible}
 .fill-icons .icon-outline{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
-.fill-icons .icon-fill{fill:var(--icon-accent);clip-path:inset(100% 0 0 0);transition:clip-path 420ms cubic-bezier(.16,1,.3,1)}
-.fill-icons .fill-icon:hover:not([aria-pressed="true"]) .icon-fill,.fill-icons .fill-icon:focus-visible:not([aria-pressed="true"]) .icon-fill{clip-path:inset(72% 0 0 0)}
-.fill-icons .fill-icon[aria-pressed="true"] .icon-fill{clip-path:inset(0 0 0 0)}
+/* OFF is categorical, not a hover preview: an off icon is ALWAYS fully empty.
+   Avoid sticky :hover on iOS and immediately clear fill on deselection. */
+.fill-icons .icon-fill{fill:var(--icon-accent);clip-path:inset(100% 0 0 0);transition:none}
+.fill-icons .fill-icon[aria-pressed="true"] .icon-fill{clip-path:inset(0 0 0 0);transition:clip-path 420ms cubic-bezier(.16,1,.3,1)}
+@media(hover:hover) and (pointer:fine){
+ .fill-icons .fill-icon:hover:not([aria-pressed="true"]){border-color:var(--icon-accent);background:#f1f8ee}
+}
+/* Keyboard focus is visible via the button outline; it never partially fills OFF. */
 .fill-icons .fill-icon[aria-pressed="true"]{background:#e8f6e9;transform:scale(1.04)}
 .fill-icons .icon-caption{font-size:10px;font-weight:800;color:#406459;white-space:nowrap}
 @media(prefers-reduced-motion:reduce){.fill-icons .fill-icon,.fill-icons .icon-fill{transition:none!important}.fill-icons .fill-icon[aria-pressed="true"]{transform:none}}
