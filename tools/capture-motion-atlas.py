@@ -140,7 +140,10 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                         elif entry["preview"] == "carousel":
                             preview.locator('[data-action="next"]').click(timeout=800)
                         elif entry["preview"] == "icons":
-                            preview.locator('button[data-action="icon"]').nth(1).click(timeout=800)
+                            # Record the repaired OFF state as well as the new ON state.
+                            icons = preview.locator('button[data-action="icon"]')
+                            icons.first.click(timeout=800)
+                            icons.nth(1).click(timeout=800)
                         elif entry["preview"] == "input":
                             preview.locator(".md-field input").evaluate("(el) => el.blur()")
                         else:
