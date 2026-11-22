@@ -103,7 +103,7 @@ def inspect(page, reduced_motion, engine):
     assert page.locator("article.card").count() == 77
 
     status = card(page, 67)
-    status.locator('[data-action="replay"]').first.click()
+    status.locator('[data-action="pair"],[data-action="replay"]').first.click()
     bar = status.locator(".thinking-light")
     effect_name = bar.evaluate("e=>getComputedStyle(e).animationName")
     if reduced_motion == "reduce":
