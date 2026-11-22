@@ -21,6 +21,12 @@ Simon approved the Co-op visual storytelling, client | IPI cover and matching ch
 
 Read each customer presentation without speaker notes before delivery. The audience should be able to follow the person’s need, the help, the action and a concrete resolution. Carry that outcome into later confirmations, summaries and the ending. Use ordinary dialogue and specific people, objects and actions. Remove AI-like explanation and generic governance/implementation footnotes when they interrupt the story; retain a material condition if the audience needs it to understand an actual claim. Keep natural customer imagery and avoid forced emotion. Agent imagery should establish employer, role and a believable workplace through clothing, branding and equipment, while preserving the deck’s art direction. Keep authored outcomes, generated settings and capability assumptions private; they are not observed events or actual employee photographs.
 
+## Features that help the people
+
+When a customer-service deck explains a product, connect selected supported features to what the agent does and how that helps the customer. A concise feature → agent → customer map may introduce later scenes that show the help in use; it need not become an exhaustive catalogue. Keep the person reviewing suggestions and making decisions. Verify capabilities against primary sources and keep configuration assumptions private.
+
+When performance figures strengthen the story, use named, attributable primary evidence. Keep the metric, unit, range or “up to”, customer scope and material contributing work visible. Link the case study. Distinguish another customer's reported result from local measurements or a forecast; never sum unlike metrics or attribute a wider platform result to one feature. Keep detailed source review and exclusions in operator material. Static numbers are often clearer than animated counters.
+
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.
