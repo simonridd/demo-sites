@@ -1,0 +1,12 @@
+{
+  "ready": false,
+  "reason": "Rive CLI account sign-in is required to export the playable asset.",
+  "authoring": "../../../tools/artwork/build-status/scene.rml",
+  "cliVersion": "1.10.0",
+  "artboard": "BuildSignal",
+  "stateMachine": "BuildStatus",
+  "property": "mode",
+  "runtime": null,
+  "wasm": null,
+  "asset": null
+}

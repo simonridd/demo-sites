@@ -31,6 +31,8 @@ Its guided support panel progressively enhances ordinary help links into respons
 
 The reserved `kits/connected-support/` example is an authored journey explanation with pinned GSAP motion. It belongs in the kit bag for presentations or presenter-led demonstrations, outside `demos.json` and customer-facing navigation. The old `co-op-journey/` route redirects to the kit. Apply the [journey guidance](references/website-design.md#connected-journey-experiments) when adapting the component to a relevant audience and task; a kit is not an installed presentation or Voice Demo Builder feature.
 
+The `kits/build-status/` study supplies an original editable Rive source, a static HTML/SVG state preview and a visual adapter for the existing builder status contract. Its [status-study guidance](references/website-design.md#state-driven-status-studies) distinguishes pending export from a verified runtime. Keep it outside customer discovery and leave native readiness and dial actions with the existing owner.
+
 ## Integrations and public hosting
 
 This repository is public static hosting, not an API secret store. Publish only public website assets and fictional or otherwise publishable content. Keep credentials, tokens, private run evidence and customer records out of source, browser bundles, catalogue entries and URLs.

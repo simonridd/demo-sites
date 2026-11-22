@@ -1,0 +1,11 @@
+{
+  "authoringTool": "Rive CLI",
+  "version": "1.10.0",
+  "sceneSha256": "4aa232939f9e6159bbe981d128172b2f2004d5d039ca916562d36e1f74d162e0",
+  "inspectionProblems": 0,
+  "artboard": "BuildSignal",
+  "stateMachine": "BuildStatus",
+  "viewModelProperty": "mode",
+  "playableExport": "pending-account-sign-in",
+  "browserRuntimeAcceptance": "not-run"
+}

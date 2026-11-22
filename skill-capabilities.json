@@ -76,6 +76,20 @@
         "co-op-order-support.test.cjs"
       ],
       "support": "documented"
+    },
+    {
+      "id": "site-build-status-study",
+      "owner": "build-demo-site",
+      "sources": [
+        "kits/build-status/index.html",
+        "kits/build-status/state-model.mjs",
+        "kits/build-status/signal-player.mjs",
+        "kits/build-status/preview.js",
+        "kits/build-status/signal.css",
+        "tools/artwork/build-status/scene.rml",
+        "build-status-kit.test.cjs"
+      ],
+      "support": "documented"
     }
   ]
 }
