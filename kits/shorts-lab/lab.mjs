@@ -88,7 +88,13 @@ function previewFor(e) {
     case 'nudge': return `<div class="nudge-message">One new insight for you.</div>${button('Nudge once','replay')}`;
     case 'squeeze': return `<button type="button" class="demo-button" data-action="replay">Press to respond</button><small>Press and release</small>`;
     case 'moving-bg': return `<div class="moving-bg">A new perspective.</div><small>Only when explicitly replayed</small>`;
-    case 'thinking': return `<div class="thinking-bar" aria-label="Illustrative pending indicator"><i></i></div><small>Simulated busy · no progress claim</small>`;
+    case 'thinking': return `<div class="thinking-study">
+  <div class="thinking-stage" role="img" aria-label="Illustrative thinking animation; no real system is processing">
+    <div class="thinking-mark" aria-hidden="true"><span>✳</span><strong>Thinking</strong></div>
+    <div class="thinking-rail" aria-hidden="true"><span class="thinking-light"></span><span class="thinking-grain"></span></div>
+  </div>
+  <small class="footnote">Illustrative activity only · Play to see the short colour sweep</small>
+</div>`;
     case 'slider': return `<div class="slider-wrap material-slider-study">
   <div class="slider-heading">
     <label for="range-${e.id}">Interaction intensity</label>
