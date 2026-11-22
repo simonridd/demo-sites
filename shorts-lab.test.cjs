@@ -24,7 +24,7 @@ async function start(){
  const keys=['#cards','#search','#verdict','#family','#stage-only','#result-count','#context-note','#empty','#reset'];
  const nodes=Object.fromEntries(keys.map(k=>[k,fakeNode()]));
  nodes['#search'].value='';nodes['#stage-only'].checked=false;
- const doc={querySelector:s=>nodes[s],querySelectorAll:()=>[],createElement:()=>fakeNode(),documentElement:fakeNode()};
+ const doc={querySelector:s=>nodes[s],querySelectorAll:()=>[],createElement:()=>fakeNode(),addEventListener(){},documentElement:fakeNode()};
  const win={matchMedia:()=>({matches:false})};
  const script=read('kits/shorts-lab/lab.mjs').replace(/^import [^\n]+\n/,'');
  const context=vm.createContext({document:doc,window:win,effects,researchCount:effects.filter(e=>e.family==='Research-only').length,
