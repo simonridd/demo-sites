@@ -25,7 +25,7 @@ Read each customer presentation without speaker notes before delivery. The audie
 
 When a customer-service deck explains a product, connect selected supported features to what the agent does and how that helps the customer. A concise feature → agent → customer map may introduce later scenes that show the help in use; it need not become an exhaustive catalogue. Keep the person reviewing suggestions and making decisions. Verify capabilities against primary sources and keep configuration assumptions private.
 
-When performance figures strengthen the story, use named, attributable primary evidence. Keep the metric, unit, range or “up to”, customer scope and material contributing work visible. Link the case study. Distinguish another customer's reported result from local measurements or a forecast; never sum unlike metrics or attribute a wider platform result to one feature. Keep detailed source review and exclusions in operator material. Static numbers are often clearer than animated counters.
+When performance figures strengthen the story, use named, attributable primary evidence. Keep the metric, unit, range or “up to”, customer scope and material contributing work visible. Link the case study. Distinguish another customer's reported result from local measurements or a forecast; never sum unlike metrics or attribute a wider platform result to one feature. Keep detailed source review and exclusions in operator material. Keep numbers static by default. When emphasis is requested or useful, a short count-up can play once on first stage entry. Preserve final accessible/static values and all qualifiers; settle on interruption and keep reading, print and reduced-motion output still.
 
 ## Apply the lessons
 
