@@ -150,3 +150,9 @@ The **Screenshots supplied** gallery filter is a separate evidence dimension, no
 Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
 
 Study 057 now compares a smooth gradient against the identical gradient with an original SVG `feTurbulence` texture mixed at low opacity. The grain can be toggled without altering the source gradient. Update only changed study recordings (52, 57, 60, 61, 65–69, 76 and 77); preserve the other video assets and all customer routes. Keep the broader product and presentation standards unchanged until visual selection is reviewed.
+
+### Validated reference-batch acceptance
+
+The screenshot-backed review branch holds **77 studies**, including **15 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
+
+See the review pull request for the exact source revision and the final GitHub Pages deployment receipt. The original creator's full CSS was not recovered. Screenshots are evidence references, not proof that her exact implementation has been reproduced.
