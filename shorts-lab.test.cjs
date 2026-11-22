@@ -258,3 +258,23 @@ test('thinking bar is one-shot visual example, not simulated completion',async()
  assert.match(capture,/page\.mouse\.up\(\)/);
  assert.match(capture,/el\.dispatchEvent\(new Event\('input'/);
 });
+
+test('one-shot soft-focus background rotates once then settles; static/reduced-motion survives',async()=>{
+ const {nodes,effects}=await start();
+ const bg=effects.find(e=>e.id===66);
+ assert.equal(bg.preview,'moving-bg');
+ assert.equal(bg.verdict,'Adapt');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="gemini-reveal-study"/);
+ assert.match(html,/class="gemini-aura gemini-aura-one"/);
+ assert.match(html,/class="gemini-aura gemini-aura-two"/);
+ assert.match(html,/background settles; it never loops/);
+ assert.match(html,/aria-label="Illustrative once-only blurred gradient reveal/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.gemini-reveal\{/);
+ assert.match(css,/contain:paint/);
+ assert.match(css,/@keyframes atlas-gemini-reveal/);
+ assert.match(css,/\.preview\.is-playing \.gemini-aura-one\{animation:atlas-gemini-reveal [^}]* 1 both/);
+ assert.doesNotMatch(css,/atlas-gemini-reveal [^;}]*infinite/);
+ assert.match(css,/\.gemini-aura,\.gemini-reveal-content\{animation:none!important/);
+});
