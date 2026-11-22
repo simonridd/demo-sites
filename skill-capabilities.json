@@ -59,11 +59,11 @@
       "id": "site-connected-support-journey",
       "owner": "build-demo-site",
       "sources": [
-        "co-op-journey/index.html",
-        "co-op-journey/journey.js",
-        "co-op-journey/journey.css",
+        "kits/connected-support/index.html",
+        "kits/connected-support/journey.js",
+        "kits/connected-support/journey.css",
         "assets/vendor/gsap/source.json",
-        "co-op-journey.test.cjs"
+        "connected-support-kit.test.cjs"
       ],
       "support": "documented"
     }

@@ -30,9 +30,17 @@
 
 **Scope:** New demo-site, presentation and Voice Demo Builder interface authoring. Review source, dependencies and licence before reusing third-party code. Preserve each existing runtime owner.
 
+## 22 November 2026: customer task versus presenter explanation
+
+**Decision:** Retain the connected-journey component in the kit bag, outside the customer-demo collection. The customer/assistant/knowledge/adviser explanation suits presentations and presenter-led demonstrations. A customer website should support its customer's task; the component may be reused there with genuinely relevant content.
+
+**Reason:** Simon liked the component but identified that this particular explanation did not belong on a page meant to simulate a customer-facing website.
+
+**Application:** The Co-op support page remains the customer experience. The explainer is reserved under `kits/connected-support/`, with neutral kit framing and an entry at `kits/`. The previous route redirects to the kit so existing links keep working. Customer discovery does not list it. Future customer process visuals still need appropriate content and truthful state; no blanket ban on process components is implied.
+
 ## Prototype observations
 
 - Custom Blender artwork: assess the first rendered grocery scene in Co-op before promoting it as a reusable asset-production example. A successful render alone is not proof that a page is clearer, faster or more effective.
 - Curated 21st.dev components: the Co-op guided-help prototype now adapts Arc’s reviewed animated-tabs pattern to native HTML/CSS/JavaScript. Its source/licence review, keyboard contract and plain-link fallback are retained with the component. This validates a way to fit an interaction to the existing stack; no particular component or layout is a portfolio default. See [technology candidates](technology-options.md) for the proposed next experiments.
 
-- GSAP journey prototype: the separate Co-op connected-support route uses a pinned, self-hosted timeline to coordinate connector traces and stage emphasis. Stage selection remains functional without GSAP; all authored stages remain readable without JavaScript. Reduced motion and interrupted transitions settle into the selected state. This is a website prototype and a reuse pattern for the presentation owner, not an installed presentation feature or evidence of a live handover.
+- GSAP journey prototype: the reserved connected-support kit uses a pinned, self-hosted timeline to coordinate connector traces and stage emphasis. Stage selection remains functional without GSAP; all authored stages remain readable without JavaScript. Reduced motion and interrupted transitions settle into the selected state. This is a website prototype and a reuse pattern for the presentation owner, not an installed presentation feature or evidence of a live handover.

@@ -1,4 +1,6 @@
-# Connected support journey: operator and reuse notes
+# Reserved kit: connected support journey
+
+Reserved on 22 November 2026 after Simon identified that this explanation does not belong on a simulated customer-facing website. It is listed only in the kit bag, with neutral preview framing. The old Co-op journey URL redirects here.
 
 This authored explanation follows a missing-item question through customer,
 assistant, knowledge and adviser stages. The order reference and receipt item
@@ -22,7 +24,7 @@ settle motion without changing the selected explanation. There is no timed
 rotation, continuous loop or decorative replay control.
 
 The core file is 73,357 bytes uncompressed. This dependency belongs only to the
-companion page; Co-op's customer help page keeps its native implementation. The
+reserved kit; Co-op's customer help page keeps its native implementation. The
 navigation/controller still works if GSAP is unavailable. Without JavaScript,
 ordinary anchors and all four authored panels remain. Print also includes all
 panels. Tests cover these state boundaries, the actual sequencing API and asset
@@ -30,7 +32,7 @@ integrity; Chrome review covers the visible interaction separately.
 
 ## Presentation reuse
 
-This is a standalone website route and a reference pattern, not a second slide
+This is a reserved component preview and reference pattern, not a second slide
 renderer. A later presentation change should use `presentation-authoring` and
 the selected presentation's canonical source. Adapt the four story beats and
 short connection/emphasis timeline within that owner, preserving its navigation,

@@ -25,6 +25,24 @@ test('collection routes and assets resolve within the GitHub project prefix', as
   }
 });
 
+test('reserved journey components stay outside customer discovery and their kit routes resolve', async () => {
+  const { validateCatalog, filterDemos } = await core;
+  const demos = validateCatalog(JSON.parse(fs.readFileSync('demos.json', 'utf8')));
+  assert.deepEqual(filterDemos(demos, 'Co-op').map(demo => demo.slug), ['co-op']);
+  const prefix = new URL('https://example.github.io/demo-sites/');
+  for (const route of ['kits/', 'kits/connected-support/', 'co-op-journey/']) {
+    const html = fs.readFileSync(route + 'index.html', 'utf8');
+    for (const match of html.matchAll(/(?:src|href)=["']([^"']+)["']/g)) {
+      const target = new URL(match[1], new URL(route, prefix));
+      if (target.origin !== prefix.origin) continue;
+      assert.ok(target.pathname.startsWith(prefix.pathname));
+      let file = target.pathname.slice(prefix.pathname.length);
+      if (!file || file.endsWith('/')) file += 'index.html';
+      assert.ok(fs.existsSync(file), 'Missing kit asset ' + file);
+    }
+  }
+});
+
 test('catalogue rejects route traversal, external asset injection and duplicate demo identities', async () => {
   const { validateCatalog, filterDemos } = await core;
   const source = JSON.parse(fs.readFileSync('demos.json', 'utf8'));
