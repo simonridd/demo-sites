@@ -1,0 +1,89 @@
+name: Qualify screenshot-backed Motion Atlas studies
+on:
+  push:
+    branches:
+      - codex/motion-atlas-squishy-toggle-20261122
+    paths:
+      - .github/workflows/motion-atlas-reference-batch.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: motion-atlas-reference-batch-20261122
+  cancel-in-progress: false
+
+jobs:
+  test-and-film:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout isolated review branch
+        uses: actions/checkout@v4
+        with:
+          ref: codex/motion-atlas-squishy-toggle-20261122
+          persist-credentials: true
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install mobile browser engines and H264 encoder
+        run: |
+          set -euxo pipefail
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium webkit
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+      - name: Run all existing repository tests
+        run: node --test *.test.cjs quote/*.test.cjs
+      - name: Verify screenshot filter and live effects on mobile Chromium and WebKit
+        run: python tools/verify-motion-atlas-screenshot-studies.py
+      - name: Verify native switch and slider accessibility
+        run: python tools/verify-screenshot-controls.py
+      - name: Record only changed and new study previews
+        run: |
+          python tools/capture-motion-atlas.py --force --ids 52 57 60 61 65 66 67 68 69 76 77
+      - name: Verify all 64 MP4s and non-static replacement recordings
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          root=Path('kits/shorts-lab')
+          movies=sorted((root/'assets').glob('[0-9][0-9][0-9].mp4'))
+          assert len(movies)==64, f'Expected 64 recorded clips, found {len(movies)}'
+          manifest=(root/'clip-manifest.mjs').read_text()
+          assert manifest.count('"kind": "browser-recorded"')==64
+          for item in (52,57,60,61,65,66,67,68,69,76,77):
+              video=root/'assets'/f'{item:03d}.mp4'
+              assert video.exists() and video.stat().st_size>1500
+              ff=subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-i',str(video),
+               '-f','framemd5','-'],capture_output=True,text=True,check=True)
+              frames=[line.rsplit(',',1)[-1].strip() for line in ff.stdout.splitlines() if line and not line.startswith('#')]
+              print(item,'frames',len(frames),'distinct',len(set(frames)),'bytes',video.stat().st_size)
+              assert len(frames)>=15 and len(set(frames))>=3, f'Video {item} lacks visible motion'
+              assert f'./assets/{item:03d}.mp4' in manifest
+          PY
+      - name: Re-run whole regression suite against refreshed manifest
+        run: node --test *.test.cjs quote/*.test.cjs
+      - name: Commit only refreshed video assets and manifest
+        run: |
+          set -euxo pipefail
+          git config user.name "motion-atlas-capture[bot]"
+          git config user.email "motion-atlas-capture[bot]@users.noreply.github.com"
+          for n in 052 057 060 061 065 066 067 068 069 076 077; do
+            git add "kits/shorts-lab/assets/${n}.mp4"
+          done
+          git add kits/shorts-lab/clip-manifest.mjs
+          git diff --cached --check
+          git commit -m "Record 11 screenshot-backed Motion Atlas studies"
+          git push origin HEAD:codex/motion-atlas-squishy-toggle-20261122
+      - name: Retain diagnostics if failed
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: motion-atlas-reference-batch-failure
+          path: |
+            kits/shorts-lab/assets/
+            kits/shorts-lab/clip-manifest.mjs
+          retention-days: 7
