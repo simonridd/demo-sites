@@ -66,6 +66,16 @@
         "connected-support-kit.test.cjs"
       ],
       "support": "documented"
+    },
+    {
+      "id": "site-customer-order-support",
+      "owner": "build-demo-site",
+      "sources": [
+        "co-op/order-support.js",
+        "co-op/order-support.css",
+        "co-op-order-support.test.cjs"
+      ],
+      "support": "documented"
     }
   ]
 }

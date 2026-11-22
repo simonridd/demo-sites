@@ -99,20 +99,9 @@ details > div a { font-weight: 700; text-underline-offset: 4px; }
 footer { max-width: var(--max); display: flex; gap: 27px; align-items: center; margin: auto; padding: 30px 28px; border-top: 1px solid var(--line); }
 footer strong { font-size: 1rem; }
 footer a { margin-left: auto; font-size: 0.875rem; text-underline-offset: 4px; }
-dialog { border: 1px solid var(--line); border-radius: var(--radius-dialog); padding: var(--dialog-inset); max-width: 570px; width: calc(100% - 2rem); max-height: calc(100vh - 2rem); max-height: calc(100dvh - 2rem); overflow: auto; color: var(--ink); box-shadow: 0 20px 80px rgb(0 0 0 / 0.2); }
-dialog::backdrop { background: rgb(20 51 66 / 0.54); }
-.receipt-content { padding: 12px; }
-.receipt-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 15px; }
-.receipt-header .eyebrow { margin: 0 0 8px; }
-.receipt-header h2 { font-size: 1.625rem; }
 #close-order { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; border: 1px solid var(--line); border-radius: var(--radius-button); background: white; cursor: pointer; color: var(--ink); }
 #close-order:hover { background: var(--surface-soft); }
 #close-order svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
-.receipt-items { list-style: none; padding: 0; margin: 20px 0 16px; }
-.receipt-items li { display: flex; justify-content: space-between; gap: 15px; border-bottom: 1px solid var(--line); padding: 15px 0; font-size: 1rem; }
-.receipt-items li span:last-child { color: var(--muted); }
-.receipt-help { background: var(--pale); padding: 22px; border-radius: max(0px, calc(var(--radius-dialog) - var(--dialog-inset) - 1px)); font-size: 1rem; }
-.receipt-help p { margin: 8px 0 16px; }
 .text-button { border: 0; background: none; text-align: left; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; padding: 10px 0; cursor: pointer; color: var(--ink); }
 
 @media (max-width: 1000px) {
@@ -170,7 +159,6 @@ dialog::backdrop { background: rgb(20 51 66 / 0.54); }
   footer img { width: 33px; height: 35px; }
   footer a { margin-left: 48px; }
   .button { padding: 12px 17px; }
-  .receipt-header h2 { font-size: 1.4375rem; }
 }
 
 @media (max-width: 360px) {
@@ -178,8 +166,6 @@ dialog::backdrop { background: rgb(20 51 66 / 0.54); }
   .icon { position: static; margin-bottom: 16px; }
   .hero-copy { padding-left: 22px; padding-right: 22px; }
   .eyebrow { letter-spacing: 0.8px; }
-  .receipt-content { padding: 8px; }
-  .receipt-help { padding: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
