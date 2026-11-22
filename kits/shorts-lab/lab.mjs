@@ -257,7 +257,28 @@ function doAction(btn,preview){
  const action=btn.dataset.action;
  switch(action){
    case 'replay': replay(preview);break;
-   case 'pair':{replay(preview);const player=preview.closest('.card')?.querySelector('video.clip-player');if(player){player.currentTime=0;player.play()?.catch(()=>{});}break;}
+   case 'pair':{
+     replay(preview);
+     // Pair real interaction with the actual MP4, not just decorative playback.
+     if(preview.dataset.effect==='icons'){
+       preview.querySelector('button[data-action="icon"]')?.click();
+     }else if(preview.dataset.effect==='input'){
+       const field=preview.querySelector('.md-field input');
+       field?.blur();field?.focus();
+     }else if(preview.dataset.effect==='header'){
+       preview.querySelector('[data-action="header"]')?.click();
+     }else if(preview.dataset.effect==='carousel'){
+       const strip=preview.querySelector('.carousel-scroller');
+       if(strip){
+         const items=[...strip.querySelectorAll('.carousel-item')];
+         const next=(nearestCarouselIndex(strip,items)+1)%items.length;
+         focusCarouselItem(strip,items[next],!motionPreference.matches);
+       }
+     }
+     const player=preview.closest('.card')?.querySelector('video.clip-player');
+     if(player){player.currentTime=0;player.play()?.catch(()=>{});}
+     break;
+   }
    case 'toggle-media':preview.querySelector('.media-reserve')?.classList.toggle('is-alt');break;
    case 'highlight':{const mark=preview.querySelector('mark');mark?.classList.toggle('is-dim');break;}
    case 'toggle-calm':{const calm=preview.classList.toggle('is-calm');btn.setAttribute('aria-pressed',String(calm));btn.textContent=calm?'Restore motion':'Calm scene';break;}
