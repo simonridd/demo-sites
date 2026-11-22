@@ -85,7 +85,7 @@ def act(preview, entry):
     elif key == "shine":
         preview.locator(".shine-card").hover(timeout=1200)
     elif key in ("button", "button-looks"):
-        preview.locator(".demo-button").hover(timeout=1200)
+        preview.locator("button.demo-button").hover(timeout=1200)
     elif key == "glass":
         preview.locator(".glass-card").hover(timeout=1200)
     elif key in actions:
