@@ -126,7 +126,29 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
     try:
         total_frames = max(15, round(seconds * fps))
         for frame in range(total_frames):
-            if frame == 2:
+            # Study 068: move the native range across several browser frames.
+            # Study 069: hold the pointer down to capture thumb compression,
+            # then release for each genuine checkbox state change.
+            if entry["preview"] == "slider":
+                if 2 <= frame <= 20:
+                    value = round(10 + 78 * (frame - 2) / 18) if frame <= 11 else round(88 - 62 * (frame - 11) / 9)
+                    preview.locator('[data-range]').evaluate(
+                        """(el, value) => {
+                          el.value = String(value);
+                          el.dispatchEvent(new Event('input', {bubbles: true}));
+                        }""", value
+                    )
+            elif entry["preview"] == "toggle":
+                if frame in (2, 14):
+                    toggle = preview.locator('.squishy-toggle input')
+                    bbox = toggle.bounding_box()
+                    if not bbox:
+                        raise RuntimeError('Cannot locate native switch for press capture')
+                    page.mouse.move(bbox['x'] + bbox['width']/2, bbox['y'] + bbox['height']/2)
+                    page.mouse.down()
+                if frame in (5, 18):
+                    page.mouse.up()
+            elif frame == 2:
                 try:
                     act(preview, entry)
                 except PlaywrightTimeout:
