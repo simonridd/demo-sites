@@ -7,6 +7,7 @@ const search = document.querySelector('#search');
 const verdictFilter = document.querySelector('#verdict');
 const familyFilter = document.querySelector('#family');
 const stageOnly = document.querySelector('#stage-only');
+const mediaFilter = document.querySelector('#media-filter');
 const resultCount = document.querySelector('#result-count');
 const contextNote = document.querySelector('#context-note');
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -140,10 +141,11 @@ function cardHTML(e) {
  </article>`;
 }
 function render(){
- const q=search.value.trim().toLowerCase(),v=verdictFilter.value,f=familyFilter.value;
+ const q=search.value.trim().toLowerCase(),v=verdictFilter.value,f=familyFilter.value,m=mediaFilter.value;
  const filtered=effects.filter(e=>
    (v==='all'||e.verdict===v) && (f==='all'||e.family===f) &&
    (!stageOnly.checked||e.stage) &&
+   (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  cards.innerHTML=filtered.map(cardHTML).join('');
  resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${Object.keys(verifiedVideos).length} verified individual source links · ${Object.keys(clips).length} recorded clips`;
@@ -271,7 +273,7 @@ cards.addEventListener('input',event=>{
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
 document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
-for(const control of [search,verdictFilter,familyFilter,stageOnly])
+for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){
  radio.addEventListener('change',()=>{
@@ -284,6 +286,6 @@ for(const radio of document.querySelectorAll('[name="audience"]')){
  });
 }
 document.querySelector('#reset').addEventListener('click',()=>{
- search.value='';verdictFilter.value='all';familyFilter.value='all';stageOnly.checked=false;render();search.focus();
+ search.value='';verdictFilter.value='all';familyFilter.value='all';mediaFilter.value='all';stageOnly.checked=false;render();search.focus();
 });
 render();
