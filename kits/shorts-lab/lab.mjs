@@ -92,10 +92,56 @@ function previewFor(e) {
     case 'slider': return `<div class="slider-wrap"><output class="slider-value" for="range-${e.id}">50</output><input id="range-${e.id}" type="range" min="0" max="100" value="50" data-range><small>Native slider with live value</small></div>`;
     case 'toggle': return `<label class="switch-line"><input type="checkbox" checked><span>Enabled</span></label><small>Real checkbox state</small>`;
     case 'wavy': return `<div class="wavy-bars" aria-label="Decorative equalizer sample">${[0,1,2,3,4,5].map(i=>`<i style="--i:${i}"></i>`).join('')}</div><small>One short sample, not a fake process</small>`;
-    case 'icons': return `<button type="button" class="icon-button" data-action="icon" aria-pressed="false" aria-label="Save favourite"><span>♡</span></button><small>Icon state changes with the action</small>`;
-    case 'header': return `<div class="mini-header"><div>Shorter navigation ↗</div><div>Content remains fully visible.</div></div>${button('Collapse / expand','header')}`;
-    case 'input': return `<div class="input-demo"><label for="input-${e.id}">What can we help with?</label><input id="input-${e.id}" type="text" placeholder="Start typing…"></div>`;
-    case 'carousel': return `<div class="carousel-shell"><div class="carousel-scroller" aria-label="Example gallery"><div tabindex="0">01</div><div tabindex="0">02</div><div tabindex="0">03</div></div><div class="carousel-actions"><button type="button" data-action="previous" aria-label="Previous item">←</button><button type="button" data-action="next" aria-label="Next item">→</button></div></div>`;
+    case 'icons': return `<div class="fill-icons" role="group" aria-label="Choose filled icon states">
+  ${[
+   ['heart','Heart','M12 21s-8.5-5.5-9.6-10.2C1.6 6.7 4.3 3 8.2 3c1.7 0 3.1.8 3.8 2 0.8-1.2 2.1-2 3.8-2 3.9 0 6.6 3.7 5.8 7.8C20.5 15.5 12 21 12 21z'],
+   ['star','Star','M12 2.8l2.8 5.8 6.4.9-4.6 4.5 1.1 6.3L12 17.4 6.3 20.3l1.1-6.3L2.8 9.5l6.4-.9z'],
+   ['bookmark','Bookmark','M6 3h12v18l-6-4-6 4z']
+  ].map(([kind,label,shape])=>`<div class="icon-choice" data-icon-kind="${kind}">
+    <button type="button" class="icon-button fill-icon" data-action="icon" data-kind="${kind}" aria-pressed="false" aria-label="Save ${label.toLowerCase()}">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path class="icon-fill" d="${shape}"/><path class="icon-outline" d="${shape}"/></svg>
+    </button>
+    <span class="icon-caption" aria-live="polite">${label} · off</span>
+  </div>`).join('')}
+</div><small class="footnote">Tap, hover or focus. Fill rises to confirm selection.</small>`;
+    case 'header': return `<div class="collapse-study">
+  <div class="collapse-viewport" tabindex="0" role="region" aria-label="Scroll within this mobile page to collapse its navigation">
+    <div class="collapse-lead" aria-hidden="true"></div>
+    <div class="collapse-header-frame">
+      <nav class="collapse-nav" aria-label="Sample navigation">
+        <a class="collapse-brand" href="#library" aria-label="Motion Atlas">motion<span>·</span></a>
+        <span class="collapse-navlinks"><a href="#library">Gallery</a><a href="../">Kits</a></span>
+        <span class="collapse-avatar" aria-hidden="true">M</span>
+      </nav>
+    </div>
+    <div class="collapse-page">
+      <strong>Scroll to focus.</strong>
+      <p>A full-size header makes an entrance. Once you scroll, it gives the story more room.</p>
+      <div class="collapse-feature"><span>01</span><b>Less chrome.<br>More content.</b></div>
+      <p>Navigation remains visible, readable and usable through the transition.</p>
+      <div class="collapse-feature alt"><span>02</span><b>One clear<br>destination.</b></div>
+      <p>The compact layout never hides an important action.</p>
+    </div>
+  </div>
+  ${button('Scroll down / return to top','header')}
+  <small class="footnote">Scroll inside the panel or use the control.</small>
+</div>`;
+    case 'input': return `<div class="input-demo material-input-study">
+  <div class="md-field">
+    <input id="input-${e.id}" type="text" name="question" autocomplete="off" placeholder=" " aria-describedby="input-hint-${e.id}">
+    <label for="input-${e.id}">What can we help with?</label>
+  </div>
+  <small id="input-hint-${e.id}" class="md-hint">Tap the field. Watch the underline wipe in, then type.</small>
+</div>`;
+    case 'carousel': return `<div class="carousel-shell carousel-focus-study">
+  <div class="carousel-scroller" role="region" aria-roledescription="carousel" aria-label="Focus scaling: three original graphic panels" tabindex="0">
+    <div class="carousel-item is-centered" tabindex="0" role="group" aria-roledescription="slide" aria-label="1 of 3: Discover"><span class="carousel-number">01</span><strong>Discover</strong><span class="carousel-detail">A better first impression.</span></div>
+    <div class="carousel-item" tabindex="0" role="group" aria-roledescription="slide" aria-label="2 of 3: Connect"><span class="carousel-number">02</span><strong>Connect</strong><span class="carousel-detail">Show what changes.</span></div>
+    <div class="carousel-item" tabindex="0" role="group" aria-roledescription="slide" aria-label="3 of 3: Deliver"><span class="carousel-number">03</span><strong>Deliver</strong><span class="carousel-detail">Make the moment land.</span></div>
+  </div>
+  <div class="carousel-actions"><button type="button" data-action="previous" aria-label="Previous carousel slide">←</button><span class="carousel-position" aria-live="polite">1 / 3</span><button type="button" data-action="next" aria-label="Next carousel slide">→</button></div>
+  <small class="footnote">Scroll or use arrows. Centred item enlarges.</small>
+</div>`;
     case 'odometer': return `${rollHTML('12,840')}${button('Roll to 24,715','odometer')}`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
@@ -211,7 +257,28 @@ function doAction(btn,preview){
  const action=btn.dataset.action;
  switch(action){
    case 'replay': replay(preview);break;
-   case 'pair':{replay(preview);const player=preview.closest('.card')?.querySelector('video.clip-player');if(player){player.currentTime=0;player.play()?.catch(()=>{});}break;}
+   case 'pair':{
+     replay(preview);
+     // Pair real interaction with the actual MP4, not just decorative playback.
+     if(preview.dataset.effect==='icons'){
+       preview.querySelector('button[data-action="icon"]')?.click();
+     }else if(preview.dataset.effect==='input'){
+       const field=preview.querySelector('.md-field input');
+       field?.blur();field?.focus();
+     }else if(preview.dataset.effect==='header'){
+       preview.querySelector('[data-action="header"]')?.click();
+     }else if(preview.dataset.effect==='carousel'){
+       const strip=preview.querySelector('.carousel-scroller');
+       if(strip){
+         const items=[...strip.querySelectorAll('.carousel-item')];
+         const next=(nearestCarouselIndex(strip,items)+1)%items.length;
+         focusCarouselItem(strip,items[next],!motionPreference.matches);
+       }
+     }
+     const player=preview.closest('.card')?.querySelector('video.clip-player');
+     if(player){player.currentTime=0;player.play()?.catch(()=>{});}
+     break;
+   }
    case 'toggle-media':preview.querySelector('.media-reserve')?.classList.toggle('is-alt');break;
    case 'highlight':{const mark=preview.querySelector('mark');mark?.classList.toggle('is-dim');break;}
    case 'toggle-calm':{const calm=preview.classList.toggle('is-calm');btn.setAttribute('aria-pressed',String(calm));btn.textContent=calm?'Restore motion':'Calm scene';break;}
@@ -227,10 +294,60 @@ function doAction(btn,preview){
    case 'split-menu':{const menu=preview.querySelector('.split-menu-items');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));if(!menu.hidden) menu.querySelector('button')?.focus();break;}
    case 'split-choice':{const menu=preview.querySelector('.split-menu-items');menu.hidden=true;const opener=preview.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();preview.querySelector('[data-feedback]').textContent=btn.textContent+' · example only';break;}
    case 'split-primary':preview.querySelector('[data-feedback]').textContent='Present · example only';break;
-   case 'icon':{const isSaved=btn.getAttribute('aria-pressed')!=='true';btn.setAttribute('aria-pressed',String(isSaved));btn.setAttribute('aria-label',isSaved?'Remove favourite':'Save favourite');btn.querySelector('span').textContent=isSaved?'♥':'♡';replay(preview);break;}
-   case 'header':preview.querySelector('.mini-header')?.classList.toggle('is-condensed');break;
-   case 'next':case 'previous':{const strip=preview.querySelector('.carousel-scroller');if(strip)strip.scrollBy({left:(action==='next'?1:-1)*strip.clientWidth*.65,behavior:(motionPreference.matches||document.documentElement.classList.contains('motion-off'))?'auto':'smooth'});break;}
+   case 'icon':{
+     const selected=btn.getAttribute('aria-pressed')!=='true';
+     const kind=btn.dataset.kind||'heart';
+     const label=kind[0].toUpperCase()+kind.slice(1);
+     btn.setAttribute('aria-pressed',String(selected));
+     btn.setAttribute('aria-label',selected?`Remove ${kind}`:`Save ${kind}`);
+     const caption=btn.closest('.icon-choice')?.querySelector('.icon-caption');
+     if(caption)caption.textContent=`${label} · ${selected?'on':'off'}`;
+     break;
+   }
+   case 'header':{
+     const viewport=preview.querySelector('.collapse-viewport');
+     if(!viewport)break;
+     const target=viewport.scrollTop>24?0:Math.min(viewport.scrollHeight-viewport.clientHeight,160);
+     viewport.scrollTo({top:target,behavior:motionPreference.matches?'auto':'smooth'});
+     break;
+   }
+   case 'next':case 'previous':{
+     const strip=preview.querySelector('.carousel-scroller');
+     if(!strip)break;
+     const items=[...strip.querySelectorAll('.carousel-item')];
+     const current=nearestCarouselIndex(strip,items);
+     const next=Math.max(0,Math.min(items.length-1,current+(action==='next'?1:-1)));
+     focusCarouselItem(strip,items[next],!motionPreference.matches);
+     break;
+   }
  }
+}
+function nearestCarouselIndex(strip,items=[...strip.querySelectorAll('.carousel-item')]) {
+ if(!items.length)return 0;
+ const centre=strip.getBoundingClientRect().left+strip.clientWidth/2;
+ let closest=0, distance=Infinity;
+ items.forEach((item,index)=>{
+   const box=item.getBoundingClientRect();
+   const delta=Math.abs(box.left+box.width/2-centre);
+   if(delta<distance){distance=delta;closest=index;}
+ });
+ return closest;
+}
+function updateCarouselPosition(strip){
+ const items=[...strip.querySelectorAll('.carousel-item')];
+ if(!items.length)return;
+ const selected=nearestCarouselIndex(strip,items);
+ items.forEach((item,index)=>item.classList.toggle('is-centered',index===selected));
+ const label=strip.closest('.carousel-shell')?.querySelector('.carousel-position');
+ if(label && label.textContent!==`${selected+1} / ${items.length}`)label.textContent=`${selected+1} / ${items.length}`;
+}
+function focusCarouselItem(strip,item,animate=true){
+ if(!item)return;
+ const scroller=strip.getBoundingClientRect();
+ const box=item.getBoundingClientRect();
+ const target=strip.scrollLeft+(box.left+box.width/2)-(scroller.left+scroller.width/2);
+ strip.scrollTo({left:target,behavior:animate?'smooth':'auto'});
+ if(!animate)updateCarouselPosition(strip);
 }
 function selectPill(btn) {
  const tablist=btn.closest('[role="tablist"]');
@@ -251,6 +368,15 @@ cards.addEventListener('click',event=>{
  if(preview)doAction(btn,preview);
 });
 cards.addEventListener('keydown',event=>{
+ const carousel=event.target.closest?.('.carousel-scroller');
+ if(carousel && ['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
+   event.preventDefault();
+   const items=[...carousel.querySelectorAll('.carousel-item')];
+   const selected=nearestCarouselIndex(carousel,items);
+   const target=event.key==='Home'?0:event.key==='End'?items.length-1:
+     Math.max(0,Math.min(items.length-1,selected+(event.key==='ArrowRight'?1:-1)));
+   focusCarouselItem(carousel,items[target],!motionPreference.matches);
+ }
  const tab=event.target.closest('[role="tab"]');
  if(tab && ['ArrowRight','ArrowLeft','Home','End'].includes(event.key)){
    event.preventDefault();
@@ -264,6 +390,25 @@ cards.addEventListener('keydown',event=>{
    if(menu){menu.hidden=true;const p=menu.closest('.preview');const opener=p.querySelector('[data-action="split-menu"]');opener.setAttribute('aria-expanded','false');opener.focus();}
  }
 });
+function updateFallbackNav(viewport){
+ const nav=viewport.querySelector('.collapse-nav');
+ if(!nav)return;
+ // scroll-state containers own the primary implementation where supported;
+ // this class is only a fallback for engines without the new CSS query.
+ if(typeof CSS==='undefined'||!CSS.supports?.('container-type: scroll-state')){
+   nav.classList.toggle('is-condensed',viewport.scrollTop>10);
+ }
+}
+cards.addEventListener('scroll',event=>{
+ if(event.target.matches?.('.collapse-viewport')){updateFallbackNav(event.target);return;}
+ if(!event.target.matches?.('.carousel-scroller'))return;
+ const strip=event.target;
+ if(strip.__focusFrame)return;
+ strip.__focusFrame=requestAnimationFrame(()=>{
+   strip.__focusFrame=0;
+   updateCarouselPosition(strip);
+ });
+},{capture:true,passive:true});
 cards.addEventListener('input',event=>{
  if(event.target.matches('[data-range]')){
   const output=event.target.closest('.slider-wrap').querySelector('output');

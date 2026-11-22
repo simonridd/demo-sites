@@ -88,6 +88,12 @@ def act(preview, entry):
         preview.locator("button.demo-button").hover(timeout=1200)
     elif key == "glass":
         preview.locator(".glass-card").hover(timeout=1200)
+    elif key == "icons":
+        preview.locator('button[data-action="icon"]').first.click(timeout=1200)
+    elif key == "input":
+        field = preview.locator(".md-field input")
+        field.focus(timeout=1200)
+        field.fill("Where is my order?", timeout=1200)
     elif key in actions:
         preview.locator(f'[data-action="{actions[key]}"]').first.click(timeout=1200)
     else:
@@ -127,12 +133,18 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
-                        else:
+                        elif entry["preview"] == "carousel":
                             preview.locator('[data-action="next"]').click(timeout=800)
+                        elif entry["preview"] == "icons":
+                            preview.locator('button[data-action="icon"]').nth(1).click(timeout=800)
+                        elif entry["preview"] == "input":
+                            preview.locator(".md-field input").evaluate("(el) => el.blur()")
+                        else:
+                            preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:
                         pass
             png = preview.screenshot(type="png", animations="allow", timeout=5000)

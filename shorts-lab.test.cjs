@@ -140,3 +140,65 @@ test('media evidence filters distinguish exact source matches from title-only se
  nodes['#media-filter'].value='ready';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,0);
 });
+
+test('screenshot-led carousel focuses the centred slide with a safe CSS/JS fallback',async()=>{
+ const {nodes,effects}=await start();
+ const item=effects.find(x=>x.id===74);
+ assert.equal(item.preview,'carousel');
+ assert.match(item.evidence,/screenshot/);
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="carousel-shell carousel-focus-study"/);
+ assert.match(html,/aria-roledescription="carousel"/);
+ assert.match(html,/aria-roledescription="slide"/);
+ assert.match(html,/Previous carousel slide/);
+ assert.match(html,/Next carousel slide/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(js,/nearestCarouselIndex/);
+ assert.match(js,/focusCarouselItem/);
+ assert.match(css,/scroll-snap-align:center/);
+ assert.match(css,/aspect-ratio:3\s*\/\s*4/);
+ assert.match(css,/animation-timeline:view\(inline\)/);
+ assert.match(css,/@supports\(animation-timeline:view\(inline\)\)/);
+ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+});
+test('Material-inspired input has persistent semantic label and focus underline',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(x=>x.id===73).preview,'input');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="input-demo material-input-study"/);
+ assert.match(html,/class="md-field"/);
+ assert.match(html,/aria-describedby="input-hint-73"/);
+ assert.match(html,/for="input-73"/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.md-field:focus-within::after/);
+ assert.match(css,/input:not\(:placeholder-shown\)\+label/);
+ assert.match(css, /user-invalid/);
+});
+test('scroll-state mobile navigation retains links and provides older browser fallback',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(x=>x.id===72).preview,'header');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="collapse-viewport"/);
+ assert.match(html,/aria-label="Sample navigation"/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/container-type:scroll-state/);
+ assert.match(css,/@container atlas-sticky-nav scroll-state\(stuck: top\)/);
+ assert.match(js,/updateFallbackNav/);
+ assert.match(js,/scrollTop>10/);
+});
+test('icon choices have real reversible toggle state with animated fill',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(x=>x.id===71).preview,'icons');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/aria-label="Choose filled icon states"/);
+ for(const kind of ['heart','star','bookmark'])assert.ok(html.includes('data-kind="'+kind+'"'));
+ assert.match(html,/aria-pressed="false"/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(js,/case 'icon'/);
+ assert.match(js,/btn\.setAttribute\('aria-pressed',String\(selected\)\)/);
+ assert.match(css,/\.icon-fill\{fill:var\(--icon-accent\);clip-path:inset\(100%/);
+ assert.match(css,/\.fill-icon\[aria-pressed="true"\] \.icon-fill/);
+});
