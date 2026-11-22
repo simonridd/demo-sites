@@ -62,7 +62,7 @@ python3 tools/resolve-motion-videos.py --limit 8
 python3 tools/resolve-motion-videos.py
 ```
 
-The resolver accepts a YouTube URL only when both the originating channel and the video title match strongly. It writes `kits/shorts-lab/resolved-videos.mjs` and an auditable `video-link-resolution.json`. Truncated titles and low-confidence matches stay unresolved and retain their exact-title search fallback. Review new links in a browser before committing; do not override the three manually verified ones.
+The resolver first enumerates the creator's own Shorts tab, then searches individually when an entry is missing; it accepts a YouTube URL only when the originating creator and video title match strongly. It writes `kits/shorts-lab/resolved-videos.mjs` and an auditable `video-link-resolution.json`. Truncated titles and low-confidence matches stay unresolved and retain their exact-title search fallback. Review new links in a browser before committing; do not override the three manually verified ones.
 
 ### Capturing *our actual site*, not a separate mock-up
 
