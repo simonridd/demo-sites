@@ -130,3 +130,14 @@
 **Application:** Co-op uses native presenter fragments for guidance/checks and reviewed summary/code, with Maya's refund between. The existing late-delivery recording was inspected but its different story and retained capture/acceptance limitations did not fit this sequence. It is unchanged and unselected. The authored illustrated walkthrough uses the deck's cream/cyan typography, no separate player or automatic progression. The full-length capture/assembly owner remains unchanged.
 
 **Story and checks:** Fourteen main scenes preserve the character arc; Three.js remains in optional exploration with native return to the same notes step. The pilot selects missing-item calls, a team and a baseline for after-call work, summary corrections and repeat contact, with resolution quality. No dates, team size, measured gains or configured customer codes are invented. Retain chosen partnership marks across custom scenes, with light/dark contrast and narrow-header checks. Native arrows/Space, reverse steps, optional return, reading, print and reduced-motion/static paths retain their contracts.
+
+
+## 22 November 2026: story, full demonstration, outcomes and next decision
+
+**Decision:** Simon asked to apply the explicit demo-switch principle to Holcim after the Co-op work. Put people, friction and capability explanation before the full demonstrations. Return to the demonstrated next step, sourced results and a practical pilot. Retain client | IPI throughout.
+
+**Application:** Holcim introduces Jamie and Emily, maps Copilot help to their work, then gives the presenter five retained playback choices. Back returns to the choices; Continue returns to the selected example's outcome. Existing player bytes, media, audio and controls remain unchanged. The AVA example recaps requirements for adviser follow-up; it does not show correction handling or an actual transfer. Keep exact selection/source evidence private. The original overview and combined offline edition stay available for comparison. A hosted-player dependency does not become an offline media package when the slides are downloaded.
+
+**Button trial:** Simon supplied an inset-shadow/gradient/one-pixel press example and asked whether to incorporate it. The restrained Holcim-coloured treatment is limited to demo launch actions, with keyboard focus, flat disabled treatment and reduced-motion handling. Ordinary navigation stays quiet. It remains a selective trial pending his feedback, not a mandatory global button redesign.
+
+**Checks:** Verify actual launch destinations and retained query/hash, native playback, close/unload, return focus, keyboard ownership, selected outcome copy and mobile reading. Keep tests, deployment, installed adoption and any unperformed physical-device or spoken rehearsal separate. The presentation owner owns the portable host; recording and assembly owners retain the players.
