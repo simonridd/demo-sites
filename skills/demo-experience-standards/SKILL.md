@@ -13,6 +13,10 @@ For the core CSS/21st.dev/GSAP/Blender/Three.js stack, use the [implementation p
 
 When selecting the next visual technology, use the dated [technology candidates](references/technology-options.md) as a starting point and verify current source, licence and runtime fit. They are research candidates, not adopted dependencies.
 
+## Accepted presentation standard
+
+Simon approved the Co-op visual storytelling, client | IPI cover and matching character treatment as the standard on 22 November 2026. For new customer-service presentations, introduce both the customer and the agent, each with a goal and friction. Later, connect the agent’s frustrations to specific supported capabilities and show how the work changes, while keeping their judgement and authority clear. Keep stage copy light, use coherent imagery, and retain full reading explanations and private presenter detail. Give every client a distinct art direction; the standard does not require Co-op’s people, styling or all five technologies. Presentation-authoring owns the versioned runtime and template.
+
 ## Apply the lessons
 
 - Decorative motion plays naturally, settles promptly and has no replay or watch-again button. Preserve purposeful playback, slide navigation, guided explanation and real task controls.
