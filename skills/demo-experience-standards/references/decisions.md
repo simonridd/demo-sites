@@ -141,3 +141,14 @@
 **Button trial:** Simon supplied an inset-shadow/gradient/one-pixel press example and asked whether to incorporate it. The restrained Holcim-coloured treatment is limited to demo launch actions, with keyboard focus, flat disabled treatment and reduced-motion handling. Ordinary navigation stays quiet. It remains a selective trial pending his feedback, not a mandatory global button redesign.
 
 **Checks:** Verify actual launch destinations and retained query/hash, native playback, close/unload, return focus, keyboard ownership, selected outcome copy and mobile reading. Keep tests, deployment, installed adoption and any unperformed physical-device or spoken rehearsal separate. The presentation owner owns the portable host; recording and assembly owners retain the players.
+
+
+## 22 November 2026: choose evidence for the customer's first value
+
+**Decision:** Simon noted repeated case-study figures and asked for a reusable bank of 10–15, each aligned to a Copilot aspect, audience and the area likely to bring the customer most or first value.
+
+**Application:** Presentation-authoring owns a 15-card public-source research bank covering knowledge/guidance, service resolution, onboarding, continuity, summaries/records, quality of draft notes, hardship identification and adoption. Each card retains the primary URL, review date, metric, unit, qualifier, cohort, attribution and limits, with relevance tags and audience wording. Nine organisations provide the figures; multiple cards from one case are not independent case studies. Existing published decks are not silently rewritten.
+
+**Selection rule:** Customer priority and demonstrated help come first; then evidence fit and attribution, audience/industry and freshness. Recent use is a tie-breaker, not a rule against useful evidence. Prefer one proof and one complement, normally from different organisations. Store the choice and rejected alternatives in operator material. Capability tags are editorial matches, not isolated causal measurements.
+
+**Boundaries:** Do not add unrelated metrics, turn acceptance into accuracy, percentages into percentage points, forecasts into results or whole-programme gains into one-feature effects. Leave checklist/sales effects unnumbered when suitable evidence is missing. Supervisor/QA and virtual-agent results belong to their own use cases. The bank is an authoring reference and must not be embedded wholesale in audience output. Complete versioned package and installed discovery checks remain owned by presentation-authoring.
