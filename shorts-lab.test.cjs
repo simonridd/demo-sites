@@ -26,8 +26,11 @@ async function start(){
  nodes['#search'].value='';nodes['#stage-only'].checked=false;
  const doc={querySelector:s=>nodes[s],querySelectorAll:()=>[],createElement:()=>fakeNode(),addEventListener(){},documentElement:fakeNode()};
  const win={matchMedia:()=>({matches:false})};
- const script=read('kits/shorts-lab/lab.mjs').replace(/^import [^\n]+\n/,'');
- const context=vm.createContext({document:doc,window:win,effects,researchCount:effects.filter(e=>e.family==='Research-only').length,
+ const script=read('kits/shorts-lab/lab.mjs').replace(/^import [^\n]+\n/gm,'');
+ const verifiedVideos={68:{url:'https://www.youtube.com/watch?v=rtaqbWsttLI',platform:'YouTube',evidence:'test'},69:{url:'https://www.youtube.com/watch?v=aaoYm6wkjTU',platform:'YouTube',evidence:'test'},75:{url:'https://www.facebook.com/reel/2025089661358011',platform:'Facebook',evidence:'test'}};
+ const originalVideoLink=e=>verifiedVideos[e.id]?{...verifiedVideos[e.id],status:'verified'}:{status:'unverified',searchUrl:'https://www.youtube.com/results?search_query='+encodeURIComponent(e.title)};
+ const clips={};
+ const context=vm.createContext({document:doc,window:win,effects,researchCount:effects.filter(e=>e.family==='Research-only').length,verifiedVideos,originalVideoLink,clips,
   console,clearTimeout,setTimeout:()=>1});
  vm.runInContext(script,context,{timeout:3000,filename:'lab.mjs'});
  return {nodes,effects,context};
@@ -101,4 +104,29 @@ test('native controls, keyboard patterns, motion fallback and existing app isola
  assert.match(css,/scroll-snap-type:x mandatory/);
  assert.match(readme,/not a faithful source-code archive/i);
  assert.doesNotMatch(html,/messenger-config|sdk\/web|genesys/i);
+});
+
+test('source links do not masquerade as exact video URLs and clips require real files',async()=>{
+ const {nodes}=await start();
+ const html=nodes['#cards'].innerHTML;
+ assert.equal((html.match(/data-source="verified"/g)||[]).length,3);
+ assert.equal((html.match(/data-source="unverified"/g)||[]).length,72);
+ assert.equal((html.match(/class="source-link source-verified"/g)||[]).length,3);
+ assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,75);
+ assert.ok(!html.includes('Creator channel ↗'));
+ assert.ok(!html.includes('class="clip-player"'));
+ assert.match(html,/Watch original Facebook video/);
+ assert.match(html,/watch\?v=rtaqbWsttLI/);
+ assert.match(html,/watch\?v=aaoYm6wkjTU/);
+});
+test('capture workflow supplies concrete browser previews and a strict manifest',()=>{
+ const python=read('tools/capture-motion-atlas.py');
+ const links=read('tools/resolve-motion-videos.py');
+ const data=read('kits/shorts-lab/source-videos.mjs');
+ assert.match(python,/preview\.screenshot/);
+ assert.match(python,/ffprobe/);
+ assert.match(python,/write_manifest/);
+ assert.match(links,/CHANNEL_ID = "UC5DNytAJ6_FISueUfzZCVsw"/);
+ assert.match(links,/is_right_creator/);
+ assert.match(data,/import \{resolvedVideos\}/);
 });
