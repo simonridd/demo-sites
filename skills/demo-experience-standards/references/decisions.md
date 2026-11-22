@@ -104,3 +104,13 @@
 **Application:** Maya’s PNG stays unchanged. An identity-preserving edit places Sam at a branded Co-op workstation with a headset and shirt logo. The story now shows his order check, refund for the carton and Maya’s confirmation before he reviews the notes. The summary and ending carry the same outcome. Spatial controls refer to the order, Maya and Sam; generic governance text moves to private notes. Refund eligibility, authority and generated-workplace status are private assumptions, not observed outcomes or universal policy. No amount or settlement time is invented.
 
 **Future check:** Read the audience route without notes. Can the viewer say what happened, who helped and how the request ended? Does each sentence explain this person’s situation, or drift into abstract AI/product prose? Does character imagery establish a credible role? Preserve genuinely material qualifications when needed for a real audience decision, and keep actual privacy/provider/readiness owners intact.
+
+## 22 November 2026: features help the agent help the customer
+
+**Decision:** Give Copilot an explicit feature-to-person explanation, then bring the story together with sourced performance figures. Map a selected feature to Sam's work and Maya's benefit; later scenes show the feature in use. Keep human review and decisions visible.
+
+**Reason:** Simon asked for one or more slides explaining how Copilot helps Sam assist Maya and a slide with performance improvements.
+
+**Application:** Co-op adds a static knowledge/checklist/summary-and-wrap-up map after Sam's frustrations and a two-case results slide after his notes. Eir reports up to 60 seconds saved per voice call; Probe CX reports 25–30% less after-call work for an automotive finance client with Copilot summaries and coaching. Names, qualifiers, units, contributing coaching and primary links stay visible. Exact sources and excluded wider-platform measures remain private. These are published cases, not Co-op measurements, forecasts, additive savings or guarantees.
+
+**Scope and checks:** This is a reusable narrative and evidence practice, not a requirement for a feature table or metrics on every deck. Preserve the client's art direction, native runtime and private source contracts. Stage and mobile reading checks qualify the two new static scenes; no extra motion dependency or Genesys configuration is introduced. Presentation-authoring owns versioned release/adoption receipts.
