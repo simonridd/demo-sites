@@ -210,3 +210,51 @@ test('unpressed icon fill is always empty even while hovering or focused',()=>{
  assert.doesNotMatch(css,/\.fill-icon:(?:hover|focus-visible):not\(\[aria-pressed="true"\]\) \.icon-fill/);
  assert.match(css,/@media\(hover:hover\) and \(pointer:fine\)/);
 });
+
+test('Google-inspired range control keeps native semantics while decorating the rail',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===68).preview,'slider');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="slider-wrap material-slider-study"/);
+ assert.match(html,/type="range" min="0" max="100" step="1" value="50"/);
+ assert.match(html,/aria-describedby="range-hint-68"/);
+ assert.match(html,/class="material-range-rail"/);
+ assert.match(html,/class="material-range-thumb"/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/\.material-range:active \.material-range-thumb/);
+ assert.match(css,/\.material-range:focus-within/);
+ assert.match(js,/--position/);
+ assert.match(js,/output.textContent=input.value\+'%'/);
+});
+test('squishy switch is a real labelled checkbox whose visual position follows checked state',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===69).preview,'toggle');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="switch-line squishy-toggle"/);
+ assert.match(html,/type="checkbox" role="switch"/);
+ assert.match(html,/aria-label="Live updates"/);
+ assert.match(html,/aria-checked="false"/);
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(css,/\.switch:has\(input:checked\) \.switch-track::after/);
+ assert.match(css,/\.switch:active \.switch-track::after/);
+ assert.match(css,/\.switch:focus-within \.switch-track/);
+ assert.match(js,/setAttribute\('aria-checked',String\(input.checked\)\)/);
+});
+test('thinking bar is one-shot visual example, not simulated completion',async()=>{
+ const {nodes,effects}=await start();
+ assert.equal(effects.find(e=>e.id===67).preview,'thinking');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="thinking-stage" role="img"/);
+ assert.match(html,/no real system is processing/);
+ assert.match(html,/Illustrative activity only/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.preview.is-playing \.demo-thinking \.thinking-light/);
+ assert.match(css,/@keyframes atlas-thinking-sweep/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ const capture=read('tools/capture-motion-atlas.py');
+ assert.match(capture,/page\.mouse\.down\(\)/);
+ assert.match(capture,/page\.mouse\.up\(\)/);
+ assert.match(capture,/el\.dispatchEvent\(new Event\('input'/);
+});
