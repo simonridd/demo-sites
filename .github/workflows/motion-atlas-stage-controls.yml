@@ -1,4 +1,4 @@
-name: Motion Atlas stage and controls capture
+name: Motion Atlas screenshot-led comparison release
 on:
   push:
     branches:
@@ -38,9 +38,11 @@ jobs:
       - name: Run the existing repository tests
         run: node --test *.test.cjs quote/*.test.cjs
       - name: Qualify real mobile controls in both rendering engines
-        run: python tools/verify-screenshot-controls.py
-      - name: Capture ONLY four changed studies in Chromium
-        run: python tools/capture-motion-atlas.py --force --ids 66 67 68 69
+        run: |
+          python tools/verify-screenshot-controls.py
+          python tools/verify-motion-atlas-materials.py
+      - name: Record all eleven revised and new visual studies
+        run: python tools/capture-motion-atlas.py --force --ids 52 57 60 61 65 66 67 68 69 76 77
       - name: Verify MP4s animate and no other study disappeared
         run: |
           python - <<'PY'
@@ -48,10 +50,10 @@ jobs:
           import subprocess
           root=Path('kits/shorts-lab')
           mp4s=list((root/'assets').glob('[0-9][0-9][0-9].mp4'))
-          assert len(mp4s)==62, len(mp4s)
+          assert len(mp4s)==64, len(mp4s)
           data=(root/'clip-manifest.mjs').read_text()
-          assert data.count('"kind": "browser-recorded"')==62
-          for idx in (66,67,68,69):
+          assert data.count('"kind": "browser-recorded"')==64
+          for idx in (52,57,60,61,65,66,67,68,69,76,77):
               movie=root/'assets'/f'{idx:03d}.mp4'
               assert movie.exists()
               assert f'./assets/{idx:03d}.mp4' in data
@@ -63,14 +65,14 @@ jobs:
           PY
       - name: Re-run regression tests with new recordings
         run: node --test *.test.cjs quote/*.test.cjs
-      - name: Commit only the four new MP4s and regenerated manifest
+      - name: Commit only eleven refreshed MP4s and the verified manifest
         run: |
           set -euxo pipefail
           git config user.name "motion-atlas-capture[bot]"
           git config user.email "motion-atlas-capture[bot]@users.noreply.github.com"
-          git add kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/067.mp4 kits/shorts-lab/assets/068.mp4 kits/shorts-lab/assets/069.mp4 kits/shorts-lab/clip-manifest.mjs
+          git add kits/shorts-lab/assets/052.mp4 kits/shorts-lab/assets/057.mp4 kits/shorts-lab/assets/060.mp4 kits/shorts-lab/assets/061.mp4 kits/shorts-lab/assets/065.mp4 kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/067.mp4 kits/shorts-lab/assets/068.mp4 kits/shorts-lab/assets/069.mp4 kits/shorts-lab/assets/076.mp4 kits/shorts-lab/assets/077.mp4 kits/shorts-lab/clip-manifest.mjs
           git diff --cached --check
-          git commit -m "Refresh screenshot-led stage and control comparison clips"
+          git commit -m "Refresh eleven screenshot-led visual comparison clips"
           git push origin HEAD:codex/motion-atlas-squishy-toggle-20261122
       - name: Keep diagnostics if any qualification fails
         if: failure()
@@ -78,8 +80,15 @@ jobs:
         with:
           name: motion-atlas-stage-controls-failure
           path: |
+            kits/shorts-lab/assets/052.mp4
+            kits/shorts-lab/assets/057.mp4
+            kits/shorts-lab/assets/060.mp4
+            kits/shorts-lab/assets/061.mp4
+            kits/shorts-lab/assets/065.mp4
             kits/shorts-lab/assets/066.mp4
             kits/shorts-lab/assets/067.mp4
             kits/shorts-lab/assets/068.mp4
             kits/shorts-lab/assets/069.mp4
+            kits/shorts-lab/assets/076.mp4
+            kits/shorts-lab/assets/077.mp4
           retention-days: 7
