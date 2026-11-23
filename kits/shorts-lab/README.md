@@ -145,7 +145,7 @@ All original video links and case IDs are retained. The Android/Liquid compariso
 
 ## Screenshot-supplied filter and image glow (current review)
 
-The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, and 78**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, and 79**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
 
 Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
 
@@ -172,4 +172,11 @@ The other screenshot-backed effects were favourably reviewed and should remain u
 
 **Study 078 — neon text:** A new screenshot-supplied *optional prototype* with cyan/pink layered shadows and a brief "ignition" when the labelled button is selected. The unlit text remains readable and the on/off state is reversible. A plausible effect for an occasional stage headline or avatar introduction, not ordinary interface typography. The original creator's exact code has not been recovered.
 
-Re-record only the updated 050 and 066 clips and the new 078 clip; verify that all 65 visual studies have matching MP4s. Preserve the other 62 recordings and all customer-demo integrations.
+Re-record only the updated 050 and 066 clips and the new 078 and 079 clips; verify that all 66 visual studies have matching MP4s. Preserve the other 62 recordings and all customer-demo integrations.
+
+
+### Study 079 — holographic conference-ticket concept
+
+A new screenshot-supplied **stage-first prototype**, implemented independently: a fictional event pass with static legible information, a colourful iridescent foil layer, controlled tilt/light-angle change and an explicit **NOT VALID FOR ENTRY** label. Intended for workshop openers, event landing pages or a one-off presentation reveal, not ticket sales or authentication. This is a visual concept, with no barcode, customer data, external asset or entry claim. Tap/click to tilt; reduced-motion shows a static ticket with the same content. The creator's original code and exact video frames were not recovered in this build.
+
+The user judged all *other* screenshot-backed effects positively. Preserve their current appearance as the kit baseline, not as an automatic instruction to ship them into unrelated products. Validate the new holographic ticket and the corrected Gemini activity behaviour independently before publishing.
