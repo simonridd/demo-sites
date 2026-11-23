@@ -655,3 +655,61 @@
  .demo-neon-text .neon-sign-words,
  .demo-neon-text .neon-sign-words em{transition:none!important;animation:none!important}
 }
+
+
+/* 079: Original holographic conference-pass prototype, not a valid ticket.
+   Screen-referenced foil shift; the user can toggle the light angle on touch. */
+.demo-holo-ticket .holo-ticket-study{width:100%;max-width:340px;display:grid;gap:9px;justify-items:center}
+.demo-holo-ticket .holo-ticket{
+ position:relative;isolation:isolate;overflow:hidden;width:100%;aspect-ratio:1.72;
+ max-height:188px;min-height:157px;display:grid;align-content:center;
+ border-radius:18px;padding:17px 19px;text-align:left;
+ background:linear-gradient(132deg,#111d39 0%,#374276 28%,#292851 62%,#102534 100%);
+ color:#f4f8ff;box-shadow:0 16px 25px #0d2b4438,inset 0 1px 1px #ffffff66;
+ transform:perspective(600px) rotateX(0deg) rotateY(-5deg);
+ transition:transform 650ms cubic-bezier(.22,1,.36,1),box-shadow 550ms;
+}
+.demo-holo-ticket .holo-ticket-foil{
+ position:absolute;inset:-55%;z-index:0;pointer-events:none;opacity:.78;
+ background:conic-gradient(from 40deg at 50% 50%,
+ #d5aaf0 0deg,#7fdef2 58deg,#f4eaae 112deg,#ec98c8 170deg,
+ #8ac7f9 238deg,#adf9d6 302deg,#d5aaf0 360deg);
+ mix-blend-mode:screen;filter:blur(12px) saturate(1.2);
+ transform:translateX(-21%) rotate(-22deg) scale(.86);
+ transition:transform 850ms cubic-bezier(.2,.87,.25,1),opacity 400ms;
+}
+.demo-holo-ticket .holo-ticket::before{
+ content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:repeating-linear-gradient(112deg,transparent 0 11px,#ffffff15 12px 13px,transparent 14px 35px);
+ mix-blend-mode:overlay;opacity:.68;
+}
+.demo-holo-ticket .holo-ticket-rim{
+ position:absolute;inset:1px;z-index:4;pointer-events:none;border-radius:17px;
+ border:1px solid #ffffffb8;box-shadow:inset 0 0 14px #e5faff40;
+}
+.demo-holo-ticket .holo-ticket-details{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:space-between;gap:13px;text-shadow:0 1px 10px #0b0b31ba}
+.demo-holo-ticket .holo-ticket-top,.demo-holo-ticket .holo-ticket-bottom{display:flex;gap:8px;justify-content:space-between;align-items:center;color:#f5f6ff;letter-spacing:.08em;font-size:8px;font-weight:820}
+.demo-holo-ticket .holo-ticket-bottom{letter-spacing:.06em;font-size:7px;opacity:.94}
+.demo-holo-ticket .holo-ticket-center{display:grid;gap:4px}
+.demo-holo-ticket .holo-ticket-center>span{font-size:8px;letter-spacing:.12em;font-weight:770;color:#e8f7ff}
+.demo-holo-ticket .holo-ticket-center strong{font-size:clamp(24px,3.5vw,36px);line-height:.93;letter-spacing:-.065em;font-weight:890}
+.demo-holo-ticket .holo-ticket[data-tilted="true"]{
+ transform:perspective(600px) rotateX(7deg) rotateY(12deg) scale(1.025);
+ box-shadow:0 19px 30px #27325b53,inset 0 1px 1px #ffffffa8;
+}
+.demo-holo-ticket .holo-ticket[data-tilted="true"] .holo-ticket-foil{
+ transform:translateX(14%) rotate(64deg) scale(1.18);opacity:.93;
+}
+.demo-holo-ticket .holo-ticket-toggle{
+ border:1px solid #5c90a1;background:#174c61;color:#fff;border-radius:9px;
+ min-height:37px;padding:8px 16px;font-size:12px;font-weight:830;touch-action:manipulation;
+}
+.demo-holo-ticket .holo-ticket-toggle:focus-visible{outline:3px solid #137c72;outline-offset:3px}
+.demo-holo-ticket .footnote{font-size:10px;text-align:center;color:#3d6259;max-width:290px;line-height:1.4}
+@media(hover:hover) and (pointer:fine){
+ .demo-holo-ticket .holo-ticket:hover{box-shadow:0 18px 29px #27325b60}
+}
+@media(prefers-reduced-motion:reduce){
+ .demo-holo-ticket .holo-ticket,.demo-holo-ticket .holo-ticket-foil{transition:none!important;animation:none!important}
+ .demo-holo-ticket .holo-ticket,.demo-holo-ticket .holo-ticket[data-tilted="true"]{transform:none}
+}
