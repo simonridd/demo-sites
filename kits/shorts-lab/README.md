@@ -145,7 +145,7 @@ All original video links and case IDs are retained. The Android/Liquid compariso
 
 ## Screenshot-supplied filter and image glow (current review)
 
-The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, and 77**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, and 78**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
 
 Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
 
@@ -153,7 +153,7 @@ Study 057 now compares a smooth gradient against the identical gradient with an 
 
 ### Validated reference-batch acceptance
 
-The screenshot-backed review branch holds **77 studies**, including **15 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
+The screenshot-backed review branch holds **77 studies**, including **17 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
 
 See the review pull request for the exact source revision and the final GitHub Pages deployment receipt. The original creator's full CSS was not recovered. Screenshots are evidence references, not proof that her exact implementation has been reproduced.
 
@@ -162,3 +162,14 @@ See the review pull request for the exact source revision and the final GitHub P
 The user correctly identified that the screenshot's `animation: drift ... infinite alternate` and registered `--fast` custom property produce **ongoing** motion, with a fast state while a button is active and a delayed return to the slow period on release. The first Motion Atlas interpretation incorrectly used a single 2.1-second scene reveal. Study 066 now demonstrates continuous ambient movement, a press-and-hold activity trigger, a pause toggle and a static reduced-motion fallback. Other screenshot-backed studies remain visually accepted in the kit and are intentionally unchanged; this does **not** promote them automatically into product design standards.
 
 The existing recorded Study 066 MP4 is invalidated by this correction; regenerate only `assets/066.mp4`, check the changing frames and preserve the other 63 recordings. Include a real mobile interaction test before publishing. 
+
+
+### Visual baseline and two additional references (23 November 2026)
+
+The other screenshot-backed effects were favourably reviewed and should remain unchanged in the kit. Approval applies to the appearance of these **kit studies**, not automatic adoption into every product, or proof of original creator-code fidelity.
+
+**Study 050 — premium card shine:** A revised dark-teal hero card uses a short directional light sweep and restrained surface depth. Hover/focus on desktop or a direct tap on the card can replay the glint. All text remains readable without animation. Use selectively in presentation cover or portfolio card, not every control.
+
+**Study 078 — neon text:** A new screenshot-supplied *optional prototype* with cyan/pink layered shadows and a brief "ignition" when the labelled button is selected. The unlit text remains readable and the on/off state is reversible. A plausible effect for an occasional stage headline or avatar introduction, not ordinary interface typography. The original creator's exact code has not been recovered.
+
+Re-record only the updated 050 and 066 clips and the new 078 clip; verify that all 65 visual studies have matching MP4s. Preserve the other 62 recordings and all customer-demo integrations.
