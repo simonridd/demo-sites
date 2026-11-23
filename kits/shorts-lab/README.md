@@ -203,3 +203,5 @@ The pure helper is `imagekit-avatar.mjs`. It accepts public HTTPS ImageKit image
 An optional, non-autoplay video element offers ImageKit's official public face-tracked video sample on demand. This demonstrates the documented `fo-face` transformation, but does not qualify performance, pricing, model accuracy or any private-avatar workflow. Official documentation: https://imagekit.io/docs/image-resize-and-crop and https://imagekit.io/docs/video-resize-and-crop.
 
 **Scope:** the working Motion Atlas kit is the deliverable. The rest of the user-approved screenshot studies remain unchanged, and portfolio-wide product/presentation instructions remain untouched until the gallery is reviewed. Add only Study 080's MP4 to the existing 66, yielding 67 visual/illustrative clips.
+
+**Safari qualification note:** The initial CSS-only two-second return occasionally remained in fast mode in WebKit. Continuous gradients now use pointer/keyboard events and an explicit two-second release timer to restore the slow pace while keeping the same visual treatment. Re-record Study 066 and revalidate the paired MP4 after this change.
