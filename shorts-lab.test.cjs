@@ -110,7 +110,7 @@ test('source links do not masquerade as exact video URLs and clips require real 
  const {nodes}=await start();
  const html=nodes['#cards'].innerHTML;
  assert.equal((html.match(/data-source="verified"/g)||[]).length,3);
- assert.equal((html.match(/data-source="unverified"/g)||[]).length,74);
+ assert.equal((html.match(/data-source="unverified"/g)||[]).length,79-3);
  assert.equal((html.match(/class="source-link source-verified"/g)||[]).length,3);
  assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,79);
  assert.ok(!html.includes('Creator channel ↗'));
@@ -136,7 +136,7 @@ test('media evidence filters distinguish exact source matches from title-only se
  nodes['#media-filter'].value='exact';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,3);
  nodes['#media-filter'].value='unverified';nodes['#media-filter'].handlers.change();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,74);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,79-3);
  nodes['#media-filter'].value='ready';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,0);
 });
@@ -339,7 +339,7 @@ test('pixel squeeze only animates a stage study on explicit replay',async()=>{
 test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
  const {nodes,effects}=await start();
  assert.equal(effects.length,79);
- const screenshotIds=[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79];
+ const screenshotIds=[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79];
  assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
  nodes['#screenshots-only'].checked=true;
  nodes['#screenshots-only'].handlers.change();
@@ -448,4 +448,28 @@ test('holographic conference ticket has reversible foil tilt and is explicitly f
  const js=read('kits/shorts-lab/lab.mjs');
  assert.match(js,/case 'ticket-tilt'/);
  assert.match(js,/btn\.setAttribute\('aria-pressed',String\(tilted\)\)/);
+});
+
+test('Apple-style superellipse has adjustable native geometry and Safari polygon fallback',async()=>{
+ const {nodes,effects}=await start();
+ const study=effects.find(e=>e.id===36);
+ assert.equal(study.preview,'superellipse');
+ assert.equal(study.screenshotProvided,true);
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="superellipse-study"/);
+ assert.match(html,/class="superellipse-app-icon superellipse-round"/);
+ assert.match(html,/class="superellipse-app-icon superellipse-continuous"/);
+ assert.match(html,/data-superellipse-tile/);
+ assert.match(html,/data-superellipse-range/);
+ assert.match(html,/Corner curvature/);
+ assert.match(html,/Older browsers use a computed shape fallback/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/corner-shape:superellipse\(var\(--icon-curvature\)\)/);
+ assert.match(css,/@supports not \(corner-shape: superellipse\(2\)\)/);
+ assert.match(css,/clip-path:polygon\(/);
+ assert.match(css,/:focus-visible/);
+ const script=read('kits/shorts-lab/lab.mjs');
+ assert.match(script,/function applySuperellipseFallback/);
+ assert.match(script,/CSS\.supports\?\.\('corner-shape','superellipse\(2\)'\)/);
+ assert.match(script,/event\.target\.matches\('\[data-superellipse-range\]'\)/);
 });
