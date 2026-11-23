@@ -285,7 +285,7 @@
 .gemini-reveal-study .footnote{font-size:10px;color:#426357;text-align:center;line-height:1.35;max-width:255px}
 @property --atlas-ambient-fast{
  syntax:"<number>";
- inherits:false;
+ inherits:true;
  initial-value:0;
 }
 .gemini-reveal.is-ambient{
