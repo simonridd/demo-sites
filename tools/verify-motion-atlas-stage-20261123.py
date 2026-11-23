@@ -41,7 +41,7 @@ def check():
                     )
                     page=ctx.new_page()
                     page.goto(url,wait_until="networkidle")
-                    assert page.locator(".card").count()==79
+                    assert page.locator(".card").count()==80
 
                     # Real ambient card, originally mistaken for a one-shot effect.
                     scene=page.locator('.card[data-id="66"]')
@@ -125,17 +125,40 @@ def check():
                         shape_clip=tile.evaluate("el=>getComputedStyle(el).clipPath")
                         assert shape_clip.startswith('polygon('),(engine,shape_clip)
 
+                    # Real public ImageKit face-crop transforms, not a CSS fake.
+                    avatar=page.locator('.card[data-id="80"]')
+                    avatar.scroll_into_view_if_needed()
+                    result=avatar.locator('.face-crop-result')
+                    assert 'fo-face' in result.get_attribute('src')
+                    center=avatar.locator('[data-action="avatar-mode"][data-crop-mode="center"]')
+                    center.tap()
+                    assert center.get_attribute('aria-pressed')=="true"
+                    assert 'fo-face' not in result.get_attribute('src')
+                    circle=avatar.locator('[data-action="avatar-mode"][data-crop-mode="circle"]')
+                    circle.tap()
+                    assert circle.get_attribute('aria-pressed')=="true"
+                    assert 'fo-face' in result.get_attribute('src')
+                    assert 'r-max' in result.get_attribute('src')
+                    input=avatar.locator('[data-avatar-url]')
+                    input.fill('https://example.com/private.jpg')
+                    avatar.locator('[data-action="avatar-load"]').tap()
+                    assert "public HTTPS ImageKit" in avatar.locator('.avatar-load-status').inner_text()
+                    input.fill('https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg')
+                    avatar.locator('[data-action="avatar-load"]').tap()
+                    assert "Previewing the selected public ImageKit image URL" in avatar.locator('.avatar-load-status').inner_text()
+
                     screenshot=page.locator("#screenshots-only")
                     screenshot.check()
-                    assert page.locator(".card").count()==19
+                    assert page.locator(".card").count()==20
                     assert page.locator('.card[data-id="36"]').count()==1
                     assert page.locator('.card[data-id="50"]').count()==1
                     assert page.locator('.card[data-id="78"]').count()==1
                     assert page.locator('.card[data-id="79"]').count()==1
+                    assert page.locator('.card[data-id="80"]').count()==1
                     screenshot.uncheck()
-                    assert page.locator(".card").count()==79
+                    assert page.locator(".card").count()==80
 
-                    print(f"PASS {engine} {motion}: 79 cards; 19 screenshot references; ambient, pause, shine, neon, ticket")
+                    print(f"PASS {engine} {motion}: 79 cards; 20 screenshot references; ambient, pause, shine, neon, ticket")
                     completed+=1
                     ctx.close()
             finally:browser.close()
