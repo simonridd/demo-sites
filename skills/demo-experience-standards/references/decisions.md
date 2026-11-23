@@ -174,3 +174,8 @@ He explicitly requested the raised “fancy” button treatment for this product
 ### 23 November 2026 · A redesign reopens composition
 
 Simon rejected the heavier dark-green Voice Demo Builder preview because it continued the old visual patterns despite a richer motion treatment. He asked for a fresh design that prioritises appropriate Motion Atlas components and a report explaining what was considered, omitted and why. Preserve the application's functional owners and evidence contracts, not its existing palette, panel layout or card architecture. Start with art direction and comparative selection; distinguish direct reuse, adaptations and research limits. Co-op demonstrates deliberate storytelling and visual choices, not a mandatory customer style. The new light/optical study is a proposal, not accepted production styling.
+
+
+### 23 November 2026 · Give icons a job and qualify light materials
+
+Simon rejected repeated diagonal arrows in the Voice Demo Builder study as generic and found the pale refractive object unsuccessful on the light canvas. Use labelled navigation or a meaningful icon; omit decorative arrows from cards and actions. Check material edges, optical contrast and text across the actual light composition, including access/workspace views, rather than assuming a dark treatment survives recolouring. He asked for a working test deployment over the existing service before considering a full production replacement. Preserve real-state and readiness owners; a visual prototype is not functional acceptance.
