@@ -499,3 +499,19 @@ test('ImageKit avatar trial shows real public face crop and correctly reports pr
  assert.match(helper,/fo-face:r-max/);
  assert.doesNotMatch(helper,/privateKey|private_key|apiSecret|simonridd/i);
 });
+
+test('ImageKit public crop URL builder rejects private or unrelated media URLs',async()=>{
+ const {pathToFileURL}=require('node:url');
+ const {join}=require('node:path');
+ const helper=await import(pathToFileURL(join(__dirname,'kits/shorts-lab/imagekit-avatar.mjs')));
+ const versions=helper.imagekitAvatarVariants();
+ assert.match(versions.original,/^https:\/\/ik\.imagekit\.io\/ikmedia\//);
+ assert.match(versions.center,/w-224%2Ch-224/);
+ assert.match(versions.face,/fo-face/);
+ assert.match(versions.circle,/fo-face%3Ar-max/);
+ assert.throws(()=>helper.imagekitAvatarVariants('http://ik.imagekit.io/a.jpg'),/public HTTPS/);
+ assert.throws(()=>helper.imagekitAvatarVariants('https://example.com/photo.jpg'),/public HTTPS/);
+ assert.throws(()=>helper.imagekitAvatarVariants('https://bob:secret@ik.imagekit.io/a.jpg'),/public HTTPS/);
+ assert.throws(()=>helper.imagekitAvatarVariants(versions.face),/already transformed/);
+ assert.throws(()=>helper.imagekitAvatarVariants(versions.original,4096),/Avatar dimension/);
+});
