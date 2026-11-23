@@ -16,7 +16,7 @@ function fakeNode(){
   value:'all',checked:false,hidden:false,innerHTML:'',textContent:'',dataset:{},style:{setProperty(){}},
   classList:{add:x=>cls.add(x),remove:x=>cls.delete(x),contains:x=>cls.has(x),toggle(x){if(cls.has(x)){cls.delete(x);return false;}cls.add(x);return true;}},
   addEventListener:(event,callback)=>{handlers[event]=callback;},
-  append(){},focus(){},contains(){return true;},handlers
+  append(){},focus(){},contains(){return true;},querySelector(){return null;},handlers
  };
 }
 async function start(){
