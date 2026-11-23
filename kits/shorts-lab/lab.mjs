@@ -15,6 +15,18 @@ const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const activeTimers = new WeakMap();
 const activeFrames = new WeakMap();
 let audience = 'stage';
+let ambientObserver=null;
+function observeAmbient(){
+ ambientObserver?.disconnect();
+ ambientObserver=null;
+ const stage=cards.querySelector('.gemini-reveal.is-ambient');
+ if(!stage)return;
+ if(typeof IntersectionObserver!=='function')return;
+ ambientObserver=new IntersectionObserver(entries=>{
+   for(const entry of entries)entry.target.classList.toggle('is-offscreen',!entry.isIntersecting);
+ },{threshold:0.08});
+ ambientObserver.observe(stage);
+}
 
 const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const button = (label, action, extra = '') => `<button type="button" class="small-action" data-action="${action}" ${extra}>${label}</button>`;
@@ -83,7 +95,15 @@ function previewFor(e) {
     case 'formats': return `<div class="format-mock"><i>WebP</i><i>AVIF</i></div><small>Compare measured bytes, not labels</small>`;
     case 'vector-logo': return `<div class="vector-logo" aria-label="Original illustrative K mark">k↗</div><small>Use licensed client marks in real work</small>`;
     case 'unknown-shape': return `<span class="candidate-label">Unverified — shape study</span><div class="squircle">◇</div>`;
-    case 'shine': return `<div class="shine-card">Premium, not loud.</div><small>Hover the card</small>`;
+    case 'shine': return `<div class="shine-study">
+  <button class="shine-card shine-card-premium" type="button" data-action="shine-play" aria-label="Replay premium card light sweep">
+    <span class="shine-corner" aria-hidden="true">ATLAS / 050</span>
+    <span class="shine-graphic" aria-hidden="true"><span class="shine-orb"></span><span class="shine-orbit"></span></span>
+    <span class="shine-copy"><span>THE ART OF THE REVEAL</span><strong>Make it<br>memorable.</strong></span>
+    <span class="shine-icon" aria-hidden="true">↗</span>
+  </button>
+  <small class="footnote">Hover, focus or tap to replay one soft light sweep.</small>
+</div>`;
     case 'music-glow': return `<div class="music-glow" aria-hidden="true">♪</div><small>Abstract colour study, not an app clone</small>`;
     case 'video-controls': return `<span class="candidate-label">Unverified — controller trial</span><div class="video-box">▶</div><small>Real playback needs a real media element</small>`;
     case 'gradient': return `<div class="gradient-grain-study">
@@ -297,6 +317,7 @@ function render(){
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  cards.innerHTML=filtered.map(cardHTML).join('');
+ observeAmbient();
  resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${Object.keys(verifiedVideos).length} verified individual source links · ${Object.keys(clips).length} recorded clips`;
  document.querySelector('#empty').hidden=filtered.length>0;
 }
@@ -394,7 +415,9 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='moving-bg'){
+     if(preview.dataset.effect==='shine'){
+       preview.querySelector('[data-action="shine-play"]')?.focus();
+     }else if(preview.dataset.effect==='moving-bg'){
        const stage=preview.querySelector('.gemini-reveal');
        if(stage?.classList.contains('is-paused'))preview.querySelector('[data-action="ambient-toggle"]')?.click();
      }else if(preview.dataset.effect==='gradient'){
@@ -442,6 +465,7 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'shine-play': replay(preview);break;
    case 'ambient-toggle':{
      const stage=preview.querySelector('.gemini-reveal');
      if(!stage)break;
@@ -680,7 +704,10 @@ cards.addEventListener('input',event=>{
  }
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
-document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);
+ document.querySelectorAll('.gemini-reveal.is-ambient').forEach(stage=>stage.classList.toggle('is-tab-hidden',document.hidden));
+});
 for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly,screenshotsOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){
