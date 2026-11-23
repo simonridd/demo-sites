@@ -36,11 +36,11 @@ async function start(){
  return {nodes,effects,context};
 }
 
-test('all 77 source references remain distinct and their review decisions are explicit',async()=>{
+test('all 79 source references remain distinct and their review decisions are explicit',async()=>{
  const effects=await getEffects();
- assert.equal(effects.length,77);
- assert.equal(new Set(effects.map(e=>e.id)).size,77);
- assert.equal(new Set(effects.map(e=>e.preview)).size,77);
+ assert.equal(effects.length,79);
+ assert.equal(new Set(effects.map(e=>e.id)).size,79);
+ assert.equal(new Set(effects.map(e=>e.preview)).size,79);
  assert.equal(effects.filter(e=>e.family==='Research-only').length,13);
  assert.equal(effects.filter(e=>e.verdict==='Hold').length,7);
  assert.equal(effects.filter(e=>e.stage).length>35,true);
@@ -49,13 +49,13 @@ test('all 77 source references remain distinct and their review decisions are ex
   assert.match(e.source,/^https:\/\/(?:www\.youtube\.com|www\.facebook\.com)\//);
  }
 });
-test('full gallery renders exactly 77 labelled cards with real previews or truthful research markers',async()=>{
+test('full gallery renders exactly 79 labelled cards with real previews or truthful research markers',async()=>{
  const {nodes,effects}=await start();
  const html=nodes['#cards'].innerHTML;
- assert.equal((html.match(/<article class="card"/g)||[]).length,77);
- assert.equal((html.match(/class="preview"/g)||[]).length,77);
+ assert.equal((html.match(/<article class="card"/g)||[]).length,79);
+ assert.equal((html.match(/class="preview"/g)||[]).length,79);
  assert.equal((html.match(/No CSS trial/g)||[]).length,13);
- assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,64);
+ assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,66);
  for(const e of effects)assert.ok(html.includes('data-id="'+e.id+'"'),e.title);
  assert.ok(!html.includes('undefined'));
 });
@@ -73,7 +73,7 @@ test('search, verdict and stage filters are functional and independent',async()=
  nodes['#stage-only'].handlers.change();
  assert.ok((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length>35);
  nodes['#reset'].handlers.click();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,77);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,79);
 });
 test('replay in card footer reaches the actual corresponding preview',async()=>{
  const {nodes}=await start();
@@ -112,7 +112,7 @@ test('source links do not masquerade as exact video URLs and clips require real 
  assert.equal((html.match(/data-source="verified"/g)||[]).length,3);
  assert.equal((html.match(/data-source="unverified"/g)||[]).length,74);
  assert.equal((html.match(/class="source-link source-verified"/g)||[]).length,3);
- assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,77);
+ assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,79);
  assert.ok(!html.includes('Creator channel ↗'));
  assert.ok(!html.includes('class="clip-player"'));
  assert.match(html,/Watch original Facebook video/);
@@ -338,8 +338,8 @@ test('pixel squeeze only animates a stage study on explicit replay',async()=>{
 
 test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
  const {nodes,effects}=await start();
- assert.equal(effects.length,77);
- const screenshotIds=[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77];
+ assert.equal(effects.length,79);
+ const screenshotIds=[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79];
  assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
  nodes['#screenshots-only'].checked=true;
  nodes['#screenshots-only'].handlers.change();
@@ -353,7 +353,7 @@ test('screenshots supplied filter selects only user-provided screenshot referenc
  assert.match(nodes['#cards'].innerHTML,/data-id="77"/);
  nodes['#reset'].handlers.click();
  assert.equal(nodes['#screenshots-only'].checked,false);
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,77);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,79);
 });
 test('filter chips are real, single-selection content filters, not decorative pills',async()=>{
  const {nodes,effects}=await start();
@@ -411,4 +411,41 @@ test('ambient motion is suspended offscreen/hidden without changing its intended
  assert.match(js,/classList\.toggle\('is-offscreen',!entry\.isIntersecting\)/);
  assert.match(css,/\.is-offscreen \.gemini-aura/);
  assert.match(css,/\.is-tab-hidden \.gemini-aura/);
+});
+
+test('optional neon stage study is readable without light and fully reversible',async()=>{
+ const {nodes,effects}=await start();
+ const neon=effects.find(e=>e.id===78);
+ assert.equal(neon.preview,'neon-text');
+ assert.equal(neon.screenshotProvided,true);
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="neon-text-study"/);
+ assert.match(html,/class="neon-sign" data-lit="false"/);
+ assert.match(html,/data-action="neon-toggle" aria-pressed="false"/);
+ assert.match(html,/Neon off · type remains readable/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.neon-sign\[data-lit="true"\] \.neon-sign-words/);
+ assert.match(css,/@keyframes atlas-neon-ignite/);
+ assert.doesNotMatch(css,/atlas-neon-ignite [^;\n}]*infinite/);
+ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/case 'neon-toggle'/);
+});
+test('holographic conference ticket has reversible foil tilt and is explicitly fictional',async()=>{
+ const {nodes,effects}=await start();
+ const ticket=effects.find(e=>e.id===79);
+ assert.equal(ticket.preview,'holo-ticket');
+ assert.equal(ticket.screenshotProvided,true);
+ assert.equal(ticket.verdict,'Prototype');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="holo-ticket-study"/);
+ assert.match(html,/class="holo-ticket" data-tilted="false"/);
+ assert.match(html,/NOT VALID FOR ENTRY/);
+ assert.match(html,/data-action="ticket-tilt" aria-pressed="false"/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/\.holo-ticket\[data-tilted="true"\] \.holo-ticket-foil/);
+ assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/case 'ticket-tilt'/);
+ assert.match(js,/btn\.setAttribute\('aria-pressed',String\(tilted\)\)/);
 });
