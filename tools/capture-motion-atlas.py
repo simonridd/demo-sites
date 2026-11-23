@@ -37,8 +37,8 @@ def catalogue():
             raise ValueError(f"Broken source row {index}")
         title, verdict, priority, preview, family, stage, note = fields
         rows.append(dict(id=index, title=title, preview=preview, family=family))
-    if len(rows) != 79:
-        raise RuntimeError(f"Expected 79 catalogue rows, got {len(rows)}")
+    if len(rows) != 80:
+        raise RuntimeError(f"Expected 80 catalogue rows, got {len(rows)}")
     return rows
 
 
