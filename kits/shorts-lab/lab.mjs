@@ -325,6 +325,15 @@ function previewFor(e) {
     <button type="button" data-action="avatar-load">Preview</button>
   </div>
   <small class="avatar-load-status" role="status" aria-live="polite" id="avatar-url-hint-${e.id}">Using ImageKit's public documentation portrait; no account connection or uploads.</small>
+  <details class="avatar-video-example">
+    <summary>Try face-tracked video (public demo)</summary>
+    <video controls playsinline preload="none" aria-label="ImageKit public example of face-tracked portrait video" width="200" height="260">
+      <source src="https://ik.imagekit.io/demo/speak-phone.mp4?tr=fo-face,ar-9_16" type="video/mp4">
+      Your browser cannot play this example video.
+    </video>
+    <small>ImageKit processes the face tracking remotely when requested. No autoplay or private content.</small>
+    <a href="https://imagekit.io/docs/video-resize-and-crop" target="_blank" rel="noopener noreferrer">ImageKit video face-crop documentation</a>
+  </details>
   <small class="footnote">These are real ImageKit URL transformations, not simulated face detection. Use only public images you have permission to process.</small>
 </div>`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
