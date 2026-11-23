@@ -310,7 +310,7 @@ function previewFor(e) {
       <figcaption>Original image</figcaption>
     </figure>
     <figure class="avatar-crop-after">
-      <img class="face-crop-result" src="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face" alt="ImageKit face-aware square crop of the public demonstration portrait" loading="lazy" width="150" height="150">
+      <img class="face-crop-result" data-crop="face" src="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face" alt="ImageKit face-aware square crop of the public demonstration portrait" loading="lazy" width="150" height="150">
       <figcaption class="face-crop-caption">Face-aware</figcaption>
     </figure>
   </div>
@@ -548,6 +548,7 @@ function doAction(btn,preview){
        const variants=imagekitAvatarVariants(input.value,224);
        for(const option of study.querySelectorAll('[data-action="avatar-mode"]'))option.setAttribute('aria-pressed',String(option===btn));
        result.src=variants[mode];
+       result.dataset.crop=mode;
        result.alt=mode==='center'?'Centre-cropped public demonstration portrait':mode==='circle'?'Face-aware circular portrait crop':'Face-aware square portrait crop';
        study.querySelector('.face-crop-caption').textContent=mode==='circle'?'Circular face crop':mode==='center'?'Centre crop':'Face-aware';
        study.querySelector('.avatar-load-status').textContent='Selected '+(mode==='center'?'centre crop':mode==='circle'?'circular face crop':'face-aware crop')+' · real ImageKit transformation';
@@ -566,6 +567,7 @@ function doAction(btn,preview){
        const selected=study.querySelector('[data-action="avatar-mode"][aria-pressed="true"]');
        const mode=selected?.dataset.cropMode||'face';
        study.querySelector('.face-crop-result').src=variants[mode];
+       study.querySelector('.face-crop-result').dataset.crop=mode;
        study.querySelector('.avatar-load-status').textContent='Previewing the selected public ImageKit image URL';
      }catch(error){
        study.querySelector('.avatar-load-status').textContent=error.message;
@@ -751,6 +753,12 @@ document.addEventListener('pointerdown',event=>{
    if(wrapper && !wrapper.contains(event.target))closeSplitMenu(wrapper.closest('.preview'));
  }
 });
+cards.addEventListener('error',event=>{
+ const img=event.target;
+ if(!img.matches?.('.face-crop-study img'))return;
+ const status=img.closest('.face-crop-study')?.querySelector('.avatar-load-status');
+ if(status)status.textContent='The remote ImageKit image could not be loaded. Try a different public URL.';
+},true);
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
  if(!btn || !cards.contains(btn)) return;
