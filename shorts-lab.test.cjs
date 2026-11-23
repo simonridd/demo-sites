@@ -36,11 +36,11 @@ async function start(){
  return {nodes,effects,context};
 }
 
-test('all 79 source references remain distinct and their review decisions are explicit',async()=>{
+test('all 80 source references remain distinct and their review decisions are explicit',async()=>{
  const effects=await getEffects();
- assert.equal(effects.length,79);
- assert.equal(new Set(effects.map(e=>e.id)).size,79);
- assert.equal(new Set(effects.map(e=>e.preview)).size,79);
+ assert.equal(effects.length,80);
+ assert.equal(new Set(effects.map(e=>e.id)).size,80);
+ assert.equal(new Set(effects.map(e=>e.preview)).size,80);
  assert.equal(effects.filter(e=>e.family==='Research-only').length,13);
  assert.equal(effects.filter(e=>e.verdict==='Hold').length,7);
  assert.equal(effects.filter(e=>e.stage).length>35,true);
@@ -49,13 +49,13 @@ test('all 79 source references remain distinct and their review decisions are ex
   assert.match(e.source,/^https:\/\/(?:www\.youtube\.com|www\.facebook\.com)\//);
  }
 });
-test('full gallery renders exactly 79 labelled cards with real previews or truthful research markers',async()=>{
+test('full gallery renders exactly 80 labelled cards with real previews or truthful research markers',async()=>{
  const {nodes,effects}=await start();
  const html=nodes['#cards'].innerHTML;
- assert.equal((html.match(/<article class="card"/g)||[]).length,79);
- assert.equal((html.match(/class="preview"/g)||[]).length,79);
+ assert.equal((html.match(/<article class="card"/g)||[]).length,80);
+ assert.equal((html.match(/class="preview"/g)||[]).length,80);
  assert.equal((html.match(/No CSS trial/g)||[]).length,13);
- assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,66);
+ assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,67);
  for(const e of effects)assert.ok(html.includes('data-id="'+e.id+'"'),e.title);
  assert.ok(!html.includes('undefined'));
 });
@@ -73,7 +73,7 @@ test('search, verdict and stage filters are functional and independent',async()=
  nodes['#stage-only'].handlers.change();
  assert.ok((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length>35);
  nodes['#reset'].handlers.click();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,79);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,80);
 });
 test('replay in card footer reaches the actual corresponding preview',async()=>{
  const {nodes}=await start();
@@ -110,9 +110,9 @@ test('source links do not masquerade as exact video URLs and clips require real 
  const {nodes}=await start();
  const html=nodes['#cards'].innerHTML;
  assert.equal((html.match(/data-source="verified"/g)||[]).length,3);
- assert.equal((html.match(/data-source="unverified"/g)||[]).length,79-3);
+ assert.equal((html.match(/data-source="unverified"/g)||[]).length,80-3);
  assert.equal((html.match(/class="source-link source-verified"/g)||[]).length,3);
- assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,79);
+ assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,80);
  assert.ok(!html.includes('Creator channel ↗'));
  assert.ok(!html.includes('class="clip-player"'));
  assert.match(html,/Watch original Facebook video/);
@@ -136,7 +136,7 @@ test('media evidence filters distinguish exact source matches from title-only se
  nodes['#media-filter'].value='exact';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,3);
  nodes['#media-filter'].value='unverified';nodes['#media-filter'].handlers.change();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,79-3);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,80-3);
  nodes['#media-filter'].value='ready';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,0);
 });
@@ -338,8 +338,8 @@ test('pixel squeeze only animates a stage study on explicit replay',async()=>{
 
 test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
  const {nodes,effects}=await start();
- assert.equal(effects.length,79);
- const screenshotIds=[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79];
+ assert.equal(effects.length,80);
+ const screenshotIds=[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80];
  assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
  nodes['#screenshots-only'].checked=true;
  nodes['#screenshots-only'].handlers.change();
@@ -353,7 +353,7 @@ test('screenshots supplied filter selects only user-provided screenshot referenc
  assert.match(nodes['#cards'].innerHTML,/data-id="77"/);
  nodes['#reset'].handlers.click();
  assert.equal(nodes['#screenshots-only'].checked,false);
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,79);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,80);
 });
 test('filter chips are real, single-selection content filters, not decorative pills',async()=>{
  const {nodes,effects}=await start();
@@ -472,4 +472,30 @@ test('Apple-style superellipse has adjustable native geometry and Safari polygon
  assert.match(script,/function applySuperellipseFallback/);
  assert.match(script,/CSS\.supports\?\.\('corner-shape','superellipse\(2\)'\)/);
  assert.match(script,/event\.target\.matches\('\[data-superellipse-range\]'\)/);
+});
+
+test('ImageKit avatar trial shows real public face crop and correctly reports provenance',async()=>{
+ const {nodes,effects}=await start();
+ const study=effects.find(e=>e.id===80);
+ assert.equal(study.preview,'face-crop');
+ assert.equal(study.screenshotProvided,true);
+ assert.equal(study.verdict,'Prototype');
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="face-crop-study"/);
+ assert.match(html,/data-action="avatar-mode" data-crop-mode="center" aria-pressed="false"/);
+ assert.match(html,/data-action="avatar-mode" data-crop-mode="face" aria-pressed="true"/);
+ assert.match(html,/data-action="avatar-mode" data-crop-mode="circle" aria-pressed="false"/);
+ assert.match(html,/tr=w-224,h-224,fo-face/);
+ assert.match(html,/Using ImageKit's public documentation portrait/);
+ assert.match(html,/no account connection or uploads/);
+ assert.match(html,/data-action="avatar-load"/);
+ assert.match(html,/Use only public images you have permission to process/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/case 'avatar-mode'/);
+ assert.match(js,/case 'avatar-load'/);
+ assert.match(js,/imagekitAvatarVariants\(input\.value,224\)/);
+ const helper=read('kits/shorts-lab/imagekit-avatar.mjs');
+ assert.match(helper,/publicDemoPortrait/);
+ assert.match(helper,/fo-face:r-max/);
+ assert.doesNotMatch(helper,/privateKey|private_key|apiSecret|simonridd/i);
 });
