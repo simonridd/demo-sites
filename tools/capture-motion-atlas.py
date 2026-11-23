@@ -83,7 +83,11 @@ def act(preview, entry):
         preview.locator('input[type="checkbox"]').first.check(timeout=1200, force=True)
         preview.locator('input[type="checkbox"]').first.uncheck(timeout=1200, force=True)
     elif key == "shine":
-        preview.locator(".shine-card").hover(timeout=1200)
+        preview.locator('[data-action="shine-play"]').click(timeout=1200)
+    elif key == "neon-text":
+        preview.locator('[data-action="neon-toggle"]').click(timeout=1200)
+    elif key == "holo-ticket":
+        preview.locator('[data-action="ticket-tilt"]').click(timeout=1200)
     elif key == "button":
         preview.locator("button.demo-button").hover(timeout=1200)
     elif key == "button-looks":
@@ -180,7 +184,7 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient", "holo-ticket"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
@@ -205,6 +209,8 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             preview.locator('button.premium-action').click(timeout=800)
                         elif entry["preview"] == "gradient":
                             preview.locator('[data-action="grain"]').click(timeout=800)
+                        elif entry["preview"] == "holo-ticket":
+                            preview.locator('[data-action="ticket-tilt"]').click(timeout=800)
                         else:
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:
