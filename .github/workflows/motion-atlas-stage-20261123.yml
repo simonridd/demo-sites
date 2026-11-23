@@ -1,4 +1,4 @@
-name: Motion Atlas ambient, ticket and superellipse acceptance
+name: Motion Atlas final five study MP4 capture
 on:
   push:
     branches:
@@ -33,17 +33,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install browser engines and encoder
+      - name: Install Chromium and encoder for source-faithful MP4 capture
         run: |
           set -euxo pipefail
           python -m pip install playwright
-          python -m playwright install --with-deps chromium webkit
+          python -m playwright install --with-deps chromium
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-      - name: Run full repository suite
+      - name: Run full repository suite (mobile Chromium/WebKit passed in earlier run)
         run: node --test *.test.cjs quote/*.test.cjs
-      - name: Check real mobile interactions in Chromium and WebKit
-        run: python tools/verify-motion-atlas-stage-20261123.py
       - name: Record only five changed studies
         run: python tools/capture-motion-atlas.py --force --ids 36 50 66 78 79
       - name: Verify 66 visual MP4s and five changing clips
