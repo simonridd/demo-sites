@@ -1,0 +1,47 @@
+{
+  "creatorFootage": false,
+  "recordings": [
+    {
+      "kind": "spotlight",
+      "path": "./assets/spotlight-preview.mp4",
+      "source": "Actual original Chromium DOM and real pointer/native controls; silent capture",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 540,
+            "nb_frames": "60"
+          }
+        ],
+        "format": {
+          "duration": "6.000000",
+          "size": "44164"
+        }
+      }
+    },
+    {
+      "kind": "bubbles",
+      "path": "./assets/bubbles-preview.mp4",
+      "source": "Actual original Chromium DOM and real pointer/native controls; silent capture",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 540,
+            "nb_frames": "80"
+          }
+        ],
+        "format": {
+          "duration": "8.000000",
+          "size": "57910"
+        }
+      }
+    }
+  ]
+}

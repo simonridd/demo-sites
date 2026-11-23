@@ -71,3 +71,5 @@ For a suitable visual or functional component, inspect `kits/shorts-lab/effects/
 
 
 For outstanding Motion Atlas ideas, use the delivery audit alongside the registry. Study 25 now includes an explicit scroll-scrubbed object; retain quiet content entrances and verify actual position-driven geometry before adopting it in another target. See the reuse reference for the current research and integration boundaries.
+
+Issue 101's cross-card spotlight and confined utility dock are independent review pilots. Use the [Hyperplexed trial contract](references/hyperplexed-interaction-trials.md) for source/licence evidence, cached geometry, inline/focus fallback, lifecycle and acceptance boundaries; no customer, call-control or shared-standard adoption is implied.

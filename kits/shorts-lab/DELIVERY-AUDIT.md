@@ -62,3 +62,10 @@ Chromium and WebKit are exercised locally. Firefox's installed engine currently 
 - **176 existing browser regression assertions** pass across those engines. Firefox remains unavailable as described above.
 - Start/midpoint/end and narrow screenshots were inspected. Study **025.mp4** alone was recaptured from the actual gallery and ffprobe-validated (2.5 s, 512×320); all 69 manifest references remain preserved. The self-contained export is checked after extraction for all 23 mounts, real scroll behavior, the audit and same-origin assets in both engines.
 - Shared source guidance and installed guidance carry the clearer-motion decision and audit boundaries, preserving unrelated installed content. No new visitor dependency or customer-route change is introduced. These checks establish this library revision; another target still needs its own lifecycle and release checks.
+
+
+## Issue 101 · Hyperplexed practical pilots
+
+[Issue 101](https://github.com/simonridd/demo-sites/issues/101) now has two isolated [review pilots](./trials/hyperplexed/): a shared card spotlight (static/border/face comparisons) and an off-by-default dock of 1–3 secondary utilities with a complete inline baseline. The source review pins the original MIT bubbles repository/package, distinguishes current code from legacy documentation, and chooses a smaller confined implementation without vendor runtime or physics. The card-choice-to-deck interaction remains a specialised stage candidate; other effects retain their duplication/rejection decisions. No catalogue IDs, approved recordings, customer routes or real phone/call/presentation state changes.
+
+The earlier Jhey and Codegrid work remains in [PR 98](https://github.com/simonridd/demo-sites/pull/98) and [PR 100](https://github.com/simonridd/demo-sites/pull/100), awaiting review separately. These pilots are not deployed or promoted into shared experience standards, and do not close the existing arbitrary-backdrop or ImageKit integration boundaries.
