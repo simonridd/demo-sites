@@ -162,3 +162,10 @@ Simon found the scroll-driven object example too subtle to identify what animate
 ### 23 November 2026 · Discover effects through a shared selection guide
 
 Simon asked that presentation, website and other authoring skills know when to use and omit the growing Motion Atlas collection. Keep one shared audience/task decision guide, linked from the owners and coordinator, rather than repeating a catalogue in every skill. Distinguish available native effects, review-only pilots and research. The still alternative, actual functional state and existing renderer/lifecycle remain authoritative. The request approves this discovery/selection approach, not blanket adoption of every prototype.
+
+
+### 23 November 2026 · Voice Demo Builder identity and primary actions
+
+Simon asked for the mobile header to stay in reach while scrolling, compacting to a small IPI mark and “Voice Demo Builder” instead of losing the identity offscreen. Keep the full identity at the top and on desktop, preserve workspace access and keyboard focus, and reserve layout space so compaction does not jump the page. Use native scrolling and reduced-motion support.
+
+He explicitly requested the raised “fancy” button treatment for this product on mobile and desktop: a restrained brand gradient, inset highlight, lower edge and short press feedback. Apply it to prominent build, save/confirm, verified call and workspace primary actions. Keep ordinary navigation quiet, disabled states flat and focus clear; reduced motion retains the visual depth without movement. This accepts that treatment for Voice Demo Builder, not an indiscriminate redesign of every client site or an animation-library dependency. Button appearance never changes readiness, consent or submission/call authority. Source hosting, installed owner and actual call qualification remain separate.
