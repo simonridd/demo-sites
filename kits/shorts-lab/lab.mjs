@@ -85,7 +85,23 @@ function previewFor(e) {
     case 'squircle': return `<div class="squircle">◉</div><small>Normal radius fallback</small>`;
     case 'voice-orb': return `<div class="voice-orb" aria-hidden="true"></div><small>Sample visual only · no audio source</small>`;
     case 'pattern': return `<div class="pattern-board"><b>Just enough.</b></div>`;
-    case 'superellipse': return `<div class="superellipse">SOFT</div><small>Progressive enhancement</small>`;
+    case 'superellipse': return `<div class="superellipse-study">
+  <div class="superellipse-comparison">
+    <div class="superellipse-cell">
+      <div class="superellipse-app-icon superellipse-round" aria-hidden="true"><span>✳</span></div>
+      <span class="superellipse-caption">border-radius</span>
+    </div>
+    <div class="superellipse-cell">
+      <div class="superellipse-app-icon superellipse-continuous" data-superellipse-tile style="--icon-curvature:2" aria-hidden="true"><span>✳</span></div>
+      <span class="superellipse-caption">superellipse()</span>
+    </div>
+  </div>
+  <div class="superellipse-curve">
+    <label for="superellipse-range-${e.id}">Corner curvature <output for="superellipse-range-${e.id}" data-superellipse-value>2.00</output></label>
+    <input id="superellipse-range-${e.id}" type="range" min="1" max="4" step=".25" value="2" data-superellipse-range aria-describedby="superellipse-hint-${e.id}">
+  </div>
+  <small id="superellipse-hint-${e.id}" class="footnote">Adjust the icon curvature. Older browsers use a computed shape fallback.</small>
+</div>`;
     case 'video-ratio': return `<span class="candidate-label">Unverified — media trial</span><div class="video-box">16:9</div>${button('Toggle aspect ratio','ratio')}`;
     case 'pill': return `<div class="glide-pills" role="tablist" aria-label="Example sections" style="--selected:0"><button id="pill-${e.id}-0" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="true" tabindex="0" data-action="pill" data-index="0">Discover</button><button id="pill-${e.id}-1" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="false" tabindex="-1" data-action="pill" data-index="1">Show</button><button id="pill-${e.id}-2" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="false" tabindex="-1" data-action="pill" data-index="2">Decide</button></div><small id="pill-panel-${e.id}" role="tabpanel" aria-labelledby="pill-${e.id}-0" aria-live="polite" data-pill-status>Discover section</small>`;
     case 'price-roll': return `${rollHTML('129.00','£')}${button('Compare £249.00','price')}`;
@@ -339,6 +355,7 @@ function render(){
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  cards.innerHTML=filtered.map(cardHTML).join('');
+ for(const tile of cards.querySelectorAll?.('[data-superellipse-tile]')||[])applySuperellipseFallback(tile,Number(tile.style.getPropertyValue('--icon-curvature'))||2);
  observeAmbient();
  resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${Object.keys(verifiedVideos).length} verified individual source links · ${Object.keys(clips).length} recorded clips`;
  document.querySelector('#empty').hidden=filtered.length>0;
@@ -746,7 +763,34 @@ cards.addEventListener('change',event=>{
  const text=input.closest('.squishy-toggle')?.querySelector('.switch-status');
  if(text)text.textContent=input.checked?'On':'Off';
 });
+function applySuperellipseFallback(tile,curve){
+ // CSS corner-shape is not universally supported; polygon approximates the
+ // same continuously curved boundary. Use 96 points for a smooth mobile edge.
+ if(!tile)return;
+ const native=typeof CSS!=='undefined' && CSS.supports?.('corner-shape','superellipse(2)');
+ if(native){tile.style.clipPath='';return;}
+ const exponent=2**curve,points=[];
+ for(let index=0;index<96;index++){
+   const angle=2*Math.PI*index/96;
+   const x=Math.cos(angle),y=Math.sin(angle);
+   const xx=50+50*Math.sign(x)*Math.abs(x)**(2/exponent);
+   const yy=50+50*Math.sign(y)*Math.abs(y)**(2/exponent);
+   points.push(xx.toFixed(2)+'% '+yy.toFixed(2)+'%');
+ }
+ tile.style.clipPath='polygon('+points.join(',')+')';
+}
 cards.addEventListener('input',event=>{
+ if(event.target.matches('[data-superellipse-range]')){
+  const study=event.target.closest('.superellipse-study');
+  const value=Math.max(1,Math.min(4,Number(event.target.value)||2));
+  const tile=study?.querySelector('[data-superellipse-tile]');
+  if(tile){
+   tile.style.setProperty('--icon-curvature',String(value));
+   applySuperellipseFallback(tile,value);
+  }
+  const output=study?.querySelector('[data-superellipse-value]');
+  if(output){output.value=value.toFixed(2);output.textContent=value.toFixed(2);}
+ }
  if(event.target.matches('[data-range]')){
   const slider=event.target.closest('.slider-wrap');
   const output=slider?.querySelector('output');
