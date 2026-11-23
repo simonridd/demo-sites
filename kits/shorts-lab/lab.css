@@ -258,8 +258,8 @@
 
 
 /* Study 066 — screenshot-grounded, continuous soft-focus ambient motion.
-   Normal drift runs indefinitely at 9s; :active speeds to 2s. On release
-   the custom-property transition returns to slow after a 2s delay.
+   Normal drift runs indefinitely at 9s; an explicit press handler speeds to 2s.
+   The release handler returns to slow after a 2s delay across WebKit/Chromium.
    All blur is confined to this little stage and static with reduced motion. */
 .gemini-reveal-study{width:100%;max-width:335px;display:grid;justify-items:center;gap:9px}
 .gemini-reveal{
@@ -292,11 +292,9 @@
  --atlas-ambient-fast:0;
  min-height:205px;
  gap:12px;
- transition:--atlas-ambient-fast 0s 2s;
 }
-.gemini-reveal.is-ambient:has(.gemini-activity:active){
+.gemini-reveal.is-ambient.is-fast{
  --atlas-ambient-fast:1;
- transition:none;
 }
 .gemini-reveal.is-ambient .gemini-aura{
  /* Transform-only motion avoids re-rasterising blurred pixels each frame. */
