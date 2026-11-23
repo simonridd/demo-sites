@@ -112,7 +112,11 @@
         "kits/shorts-lab/effects/viewport.html",
         "tools/verify-practical-effects.py",
         "tools/verify-motion-delivery.py",
-        "kits/shorts-lab/RECONCILIATION-REVIEW-2.md"
+        "kits/shorts-lab/RECONCILIATION-REVIEW-2.md",
+        "kits/shorts-lab/effects/scroll-object.mjs",
+        "kits/shorts-lab/effects/scroll-object.html",
+        "kits/shorts-lab/DELIVERY-AUDIT.md",
+        "tools/verify-scroll-object.py"
       ],
       "support": "opt-in reusable studies; target integration remains owner-controlled"
     }

@@ -60,7 +60,21 @@
 .ma-effect[data-load=pending][data-running=true]:not([data-treatment=static]):not([data-treatment=progress]) .ma-loading-layout::after{animation:ma-shimmer 1.3s linear infinite}
 .ma-effect[data-treatment=progress][data-load=pending] .ma-loading-layout::before{content:"Loading…";position:absolute;inset:0;display:grid;place-items:center;background:var(--ma-bg);z-index:1}
 @keyframes ma-shimmer{to{transform:translateX(110%)}}
-.ma-scroll{width:100%;height:220px;overflow:auto;border:1px solid #89b8a9;border-radius:8px;padding:16px;overscroll-behavior:contain;scrollbar-width:thin;color:var(--ma-fg)}.ma-scroll p{font-size:.875rem}.ma-scroll-space{height:175px}.ma-scroll-object{background:var(--ma-accent);color:var(--ma-bg);padding:22px 12px;border-radius:8px;font-size:1rem;font-weight:750;opacity:1}
+.ma-effect[data-atlas=reveal] select{appearance:none;min-height:44px;padding-right:32px;background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);background-position:calc(100% - 17px) 50%,calc(100% - 12px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.ma-scroll-demo{width:100%;min-width:0}.ma-scroll-instruction{font-size:.9rem;margin:0 0 12px}.ma-scroll{width:100%;height:320px;overflow:auto;border:1px solid #89b8a9;border-radius:8px;overscroll-behavior:contain;scrollbar-width:thin;color:var(--ma-fg)}
+.ma-scroll-track{height:1100px;position:relative}.ma-scroll-scene{height:318px;position:sticky;top:0;display:grid;place-items:center;overflow:clip;background-image:linear-gradient(#89b8a91c 1px,transparent 1px),linear-gradient(90deg,#89b8a91c 1px,transparent 1px);background-size:32px 32px;--ma-route:var(--ma-path,0px);--ma-rise:var(--ma-travel);--ma-turn:270deg;--ma-small:.7;--ma-large:1.2}
+.ma-scroll-object{width:104px;height:118px;grid-area:1/1;z-index:1;transform-origin:center;opacity:1}.ma-scroll-object svg{width:100%;height:100%;display:block}.ma-scroll-reference{grid-area:1/1;width:104px;height:118px;border:2px dashed #89b8a9;border-radius:6px;opacity:.65}
+.ma-scroll-route{position:absolute;inset:30px 16px auto;display:flex;justify-content:space-between;font-size:.7rem;letter-spacing:.1em;color:var(--ma-fg)}.ma-scroll-scene-label{position:absolute;bottom:18px;margin:0;font-size:.65rem;letter-spacing:.12em;color:var(--ma-fg)}
+.ma-scroll-readout{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;margin-top:10px;font-size:.8rem}.ma-scroll-readout output{font-variant-numeric:tabular-nums;font-weight:750}.ma-scroll-engine{color:var(--ma-accent)}
+.ma-effect[data-object-motion=translate] .ma-scroll-scene{--ma-turn:0deg;--ma-small:1;--ma-large:1}
+.ma-effect[data-object-motion=rotate] .ma-scroll-scene{--ma-route:0px;--ma-rise:0px;--ma-small:1;--ma-large:1}
+.ma-effect[data-object-motion=scale] .ma-scroll-scene{--ma-route:0px;--ma-rise:0px;--ma-turn:0deg}
+.ma-effect[data-scroll-mode=scrub][data-scroll-engine=native]:not([data-reduced=true]) .ma-scroll-object{animation:ma-scroll-scrub linear both;animation-timeline:scroll(nearest block)}
+@keyframes ma-scroll-scrub{0%{transform:translate(calc(var(--ma-route) * -.5),calc(var(--ma-rise) / 4)) rotate(0deg) scale(var(--ma-small))}50%{transform:translate(0,calc(var(--ma-rise) / -4)) rotate(calc(var(--ma-turn) / 2)) scale(var(--ma-large))}100%{transform:translate(calc(var(--ma-route) * .5),calc(var(--ma-rise) / 4)) rotate(var(--ma-turn)) scale(var(--ma-small))}}
+.ma-effect:not([data-scroll-mode=scrub]) .ma-scroll-scene{position:relative;top:350px}.ma-effect:not([data-scroll-mode=scrub]) .ma-scroll-reference{display:none}
+.ma-effect:not([data-scroll-mode=scrub]) .ma-scroll-route{display:none}
+.ma-effect[data-scroll-mode=static] .ma-scroll-scene{position:sticky;top:0}
+@media print{.ma-scroll{height:auto;overflow:visible}.ma-scroll-track{height:auto}.ma-scroll-scene{position:relative!important;top:0!important}.ma-scroll-object{transform:none!important}}
 @supports(animation-timeline:view()){
  .ma-effect[data-scroll-mode=entry]:not([data-reduced=true]) .ma-scroll-object{animation:ma-scroll-in linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
  .ma-effect[data-scroll-mode=exit]:not([data-reduced=true]) .ma-scroll-object{animation:ma-scroll-through linear both;animation-timeline:view();animation-range:cover 0% cover 100%}

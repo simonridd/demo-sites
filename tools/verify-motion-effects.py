@@ -43,7 +43,7 @@ with sync_playwright() as pw:
   page.goto(args.url+'/kits/shorts-lab/effects/');page.wait_for_selector('[data-atlas="comparison"][data-enhanced="true"]')
   effect=lambda name:page.locator(f'[data-atlas="{name}"]')
   check(page.locator('[data-atlas]').count()==23,engine+': all twenty-three effects mount')
-  # Every new component starts still (scroll timelines activate only by selection).
+  # No component runs timed autoplay; the scroll study responds only to input.
   check(page.locator('[data-atlas][data-running="true"]').count()==0,engine+': no automatic motion')
   comparison=effect('comparison');slider=comparison.locator('[data-comparison]')
   slider.focus();slider.press('Home');check(slider.input_value()=='0',engine+': range Home')
@@ -118,7 +118,7 @@ with sync_playwright() as pw:
   reveal=effect('reveal');option(reveal,'scrollMode','entry');scroll=reveal.locator('.ma-scroll');target=reveal.locator('.ma-scroll-object')
   supported=page.evaluate("CSS.supports('animation-timeline: view()')")
   samples=[]
-  for top in (0,150,260,150,0):
+  for top in (0,300,550,300,0):
    scroll.evaluate('(el,top)=>el.scrollTop=top',top);page.wait_for_timeout(100)
    samples.append(target.evaluate('(el)=>({opacity:getComputedStyle(el).opacity,transform:getComputedStyle(el).transform})'))
   if supported:

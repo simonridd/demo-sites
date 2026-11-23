@@ -152,3 +152,8 @@
 **Selection rule:** Customer priority and demonstrated help come first; then evidence fit and attribution, audience/industry and freshness. Recent use is a tie-breaker, not a rule against useful evidence. Prefer one proof and one complement, normally from different organisations. Store the choice and rejected alternatives in operator material. Capability tags are editorial matches, not isolated causal measurements.
 
 **Boundaries:** Do not add unrelated metrics, turn acceptance into accuracy, percentages into percentage points, forecasts into results or whole-programme gains into one-feature effects. Leave checklist/sales effects unnumbered when suitable evidence is missing. Supervisor/QA and virtual-agent results belong to their own use cases. The bank is an authoring reference and must not be embedded wholesale in audience output. Complete versioned package and installed discovery checks remain owned by presentation-authoring.
+
+
+### 23 November 2026 · Make a motion study's subject unmistakable
+
+Simon found the scroll-driven object example too subtle to identify what animated. When motion is the subject of a study or presentation, show a distinct object, strong spatial change and explicit input/output relationship; provide isolated controls and a large example. Keep subtle Co-op entrances available for ordinary task content. Verify real scroll-to-transform mapping, reversal, stillness between inputs, responsive geometry and initial/changed reduced motion. This accepts clearer explanation, not decorative motion on every page. The same review asks for undelivered ideas to be reconciled; retain a current delivery ledger separating implementation gaps, unapproved research, unresolved sources and qualification.

@@ -1,6 +1,6 @@
 # Reusable Motion Atlas effects
 
-Twenty-three native study families plus an optional media-hotspot adapter, with no runtime packages, CDN requests, microphone capture or automatic integration into another product. [Working examples](./index.html), [registry](./registry.json), [media hotspots](./hotspots.html) and [static comparison](./static-comparison.html).
+Twenty-three native study families plus an optional media-hotspot adapter, with no runtime packages, CDN requests, microphone capture or automatic integration into another product. [Working examples](./index.html), [large scroll object](./scroll-object.html), [delivery audit](../DELIVERY-AUDIT.md), [registry](./registry.json), [media hotspots](./hotspots.html) and [static comparison](./static-comparison.html).
 
 Export a self-contained copy with `python tools/package-motion-effects.py --output /absolute/motion-atlas-effects.zip`. The export includes our sample video; in a source-only copy of the optional hotspot example, supply your own approved video URL (the repository example references the sibling study 81 MP4).
 
@@ -36,7 +36,7 @@ Serve over HTTP. Keep URLs appropriate to the deployment prefix; the included ex
 
 - `update(name, value)` applies bounded numeric configuration or a documented preset. Size, duration, colour presets, geometry and data stay local to the component. CSS variables are documented below for deliberate visual adaptation.
 - `play()` restarts a one-pass animation; after Pause it resumes. `pause()` toggles suspension; `stop()` settles on the static state. Functional comparison, loading and optical controls have their own actions instead of decorative playback controls.
-- No effect starts moving on mount. A state change to an active orb or pulse is a deliberate owner input. Offscreen and hidden documents suspend CSS animation; there is no per-frame JavaScript scroll/animation loop. Resize/font completion only remeasures marquee tiling when necessary.
+- No effect starts moving on mount. A state change to an active orb or pulse is a deliberate owner input. Offscreen and hidden documents suspend CSS animation; there is no continuous per-frame JavaScript scroll loop. Scroll-driven studies update only from actual events; native timelines own their transforms, with a bounded event fallback where unavailable. Resize/font completion remeasures only relevant geometry.
 - CSS and the controller both respect initial and changed reduced-motion preferences. Print and forced-colour fallbacks preserve content. Turning motion off does not disable task controls or turn pending work into success.
 - `destroy()` aborts owned event listeners, disconnects observers, clears delayed demo loading and settles motion. Pass any real request cancellation to its existing owner separately.
 - Keep `aria-hidden` on decorative layers, stable real text outside them, visible keyboard focus and native controls. The animated examples are explicitly simulated. To supply real activity: `motion.setState('listening', {label:'Listening', simulated:false})`; this must follow the real voice bridge, not an animation timer. `update('level', actualRms)` bounds a supplied level to 0–1; no microphone is requested.
@@ -72,7 +72,11 @@ Study **26**, issue **75**. `state`: idle / active / busy / offline; `mode`, `du
 
 ## Reveal
 
-Study **25**, issue **76**. `scrollMode`: once / entry / exit / static; `travel`: 28 px everyday or 100 px stage. The once-only observer/650 ms ease-out recipe is adapted from `co-op/motion.js`; scroll modes use CSS view timelines with explicit entry and exit keyframes. Unsupported timelines leave the subject visible. No fallback scroll listener runs per frame. Static content remains in normal flow, including fragments and focus.
+Study **25**, issue **76**. [Large working example](./scroll-object.html). `scrollMode`: scrub (default) / once / entry / exit / static; `objectMotion`: combined / translate / rotate / scale; `travel`: 0–180 px (example presets 120 stage, 28 quiet, 180 large). Scrub binds the cube's horizontal path, 270° rotation and 0.7→1.2→0.7 scale directly to the containing scroll position. Dashed geometry marks its static centre, and the output reports real scroll percentage without live-region announcements. Start/Midpoint/End move the actual scroller instantly, retaining focus. No timed autoplay or fake progress.
+
+Native `scroll(nearest block)` owns the transform; unsupported engines use a passive scroll listener with at most one queued frame, with no continuous loop. The native path only reads scroll position for its output; measured horizontal room updates on resize. Keep the scene's `overflow:clip`: `overflow:hidden` would create a different nearest scrolling ancestor. Both paths settle to a complete, still cube under initial/changed OS or global reduced motion. `destroy()` cancels queued work and observers.
+
+The once-only observer/650 ms ease-out recipe is adapted from `co-op/motion.js`; entry/exit use native view timelines and retain a visible fallback. Keep these quieter modes for ordinary content. Use the conspicuous scrubbed object only when its motion explains a spatial/narrative relationship in a hero, chapter or demo scene. In production, replace the illustrative cube with owned art and retain all essential content outside the animated layer. Do not apply scrubbed motion to forms, navigation or body copy.
 
 Use to explain selected editorial objects, not every form control or content block. Drive presentation lifecycle through the existing renderer. Browser support is capability-detected; test the actual target engine rather than assuming support from the browser name.
 

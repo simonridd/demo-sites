@@ -1,3 +1,4 @@
+import {mountScrollObject} from './scroll-object.mjs';
 import {mountPracticalEffect,practicalKinds} from './practical.mjs';
 // No auto-mount, globals, framework or visitor dependencies. One controller owns
 // one component. Copy this directory; keep the MIT comparison notice alongside it.
@@ -14,6 +15,7 @@ export function mountEffect(root,initial={}) {
  let destroyed=false,pending=0,observer=null,resize=null,onceObserver=null,frame=0;
  let duration=4,desired=false,paused=false,seen=false,loadVersion=0,onceAnimation=null;
  const q=selector=>root.querySelector(selector),all=selector=>[...root.querySelectorAll(selector)];
+ const scrollObject=kind==='reveal'?mountScrollObject(root,{signal,isReduced:()=>media.matches||doc.documentElement.classList.contains('motion-off')}):null;
  const on=(node,event,fn,options={})=>node.addEventListener(event,fn,{...options,signal});
  const announce=text=>{const el=q('.ma-state span')||q('.ma-state');if(el)el.textContent=text;};
  const setControl=(name,value)=>{const input=q(`[data-option="${name}"]`);if(input)input.value=String(value);};
@@ -33,6 +35,7 @@ export function mountEffect(root,initial={}) {
   root.dataset.reduced=String(reduced);
   root.dataset.running=String(desired&&!reduced&&root.dataset.mode!=='static');
   root.dataset.suspended=String(paused||doc.hidden||root.dataset.visible==='false');
+  scrollObject?.refresh();
  }
  function stop(){desired=false;paused=false;root.dataset.complete='false';sync();}
  function pause(){paused=!paused;sync();q('[data-atlas-action="pause"]')?.setAttribute('aria-pressed',String(paused));}
@@ -42,7 +45,7 @@ export function mountEffect(root,initial={}) {
   paused=false;
   if(kind==='shimmer'){load();return;}
   if(kind==='comparison'){setComparison(50);return;}
-  if(kind==='reveal'){seen=false;q('.ma-scroll').scrollTop=220;onceReveal();return;}
+  if(kind==='reveal'){scrollObject.checkpoint(.5);return;}
   if(kind==='refraction')return;
   if((kind==='voice-orb'||kind==='pulse')&&['idle','offline',undefined].includes(root.dataset.state))return;
   desired=false;root.dataset.complete='false';sync();void root.offsetWidth;
@@ -105,7 +108,7 @@ export function mountEffect(root,initial={}) {
   },800);
  }
  function onceReveal(){
-  const target=q('.ma-scroll-object');if(!target||root.dataset.scrollMode!=='once'||seen||media.matches)return;
+  const target=q('.ma-scroll-object');if(!target||root.dataset.scrollMode!=='once'||seen||media.matches||doc.documentElement.classList.contains('motion-off'))return;
   seen=true;
   if(!target.contains(doc.activeElement)&&typeof target.animate==='function'){
    onceAnimation=target.animate([{opacity:0,transform:'translateY(28px)'},{opacity:1,transform:'none'}],{duration:650,easing:'cubic-bezier(.22,1,.36,1)'});
@@ -114,7 +117,7 @@ export function mountEffect(root,initial={}) {
  function observeReveal(){
   onceObserver?.disconnect();onceObserver=null;seen=false;
   onceAnimation?.cancel();
-  if(kind!=='reveal'||root.dataset.scrollMode!=='once'||media.matches||!win.IntersectionObserver)return;
+  if(kind!=='reveal'||root.dataset.scrollMode!=='once'||media.matches||doc.documentElement.classList.contains('motion-off')||!win.IntersectionObserver)return;
   onceObserver=new win.IntersectionObserver(entries=>{
    if(entries.some(e=>e.isIntersecting)){onceReveal();onceObserver.disconnect();}
   },{root:q('.ma-scroll'),threshold:.12});
@@ -144,7 +147,7 @@ export function mountEffect(root,initial={}) {
    case 'halo':root.style.setProperty('--ma-halo',clamp(value,4,30,14)+'px');return;
    case 'amplitude':root.style.setProperty('--ma-amplitude',clamp(value,.1,1,.8));return;
    case 'delay':root.style.setProperty('--ma-delay',clamp(value,0,250,80)+'ms');return;
-   case 'travel':root.style.setProperty('--ma-travel',clamp(value,0,100,28)+'px');return;
+   case 'travel':root.style.setProperty('--ma-travel',clamp(value,0,180,120)+'px');scrollObject?.refresh();return;
    case 'distortion':q('feDisplacementMap')?.setAttribute('scale',String(clamp(value,0,70,36)));return;
    case 'count':{
     const list=q('.ma-list');if(!list)return;
@@ -158,7 +161,12 @@ export function mountEffect(root,initial={}) {
     root.dataset.compare=value;
     q('.ma-compare-description').textContent=value==='dom'?'Same layout in wireframe and finished CSS. Both copies are illustrative and inert.':'Reveal the same landscape before and after. Both images remain available in side-by-side mode.';
     return;
-   case 'scrollMode':root.dataset.scrollMode=value;observeReveal();return;
+   case 'scrollMode':
+    if(!['scrub','once','entry','exit','static'].includes(value))return;
+    root.dataset.scrollMode=value;observeReveal();scrollObject?.refresh();return;
+   case 'objectMotion':
+    if(!['combined','translate','rotate','scale'].includes(value))return;
+    root.dataset.objectMotion=value;scrollObject?.refresh();return;
    default:
     if(!['pattern','direction','intensity','use','index','variant','art','treatment','palette','optics'].includes(name))return;
     root.dataset[name]=String(value);
@@ -167,7 +175,7 @@ export function mountEffect(root,initial={}) {
     if(name==='direction')indexChildren();
   }
  }
- const actionHandlers={play,pause,stop,load,retry:load,cancel:()=>cancelLoad(),before:()=>setComparison(0),after:()=>setComparison(100),reset:()=>setComparison(50),
+ const actionHandlers={play,pause,stop,scrollStart:()=>scrollObject?.checkpoint(0),scrollMiddle:()=>scrollObject?.checkpoint(.5),scrollEnd:()=>scrollObject?.checkpoint(1),load,retry:load,cancel:()=>cancelLoad(),before:()=>setComparison(0),after:()=>setComparison(100),reset:()=>setComparison(50),
   theme:()=>{root.dataset.theme=root.dataset.theme==='dark'?'light':'dark';q('[data-atlas-action="theme"]').setAttribute('aria-pressed',String(root.dataset.theme==='light'));},
   side:()=>{const side=root.dataset.side!=='true';root.dataset.side=String(side);q('[data-atlas-action="side"]').setAttribute('aria-pressed',String(side));},
   glow:()=>{const glow=root.dataset.glow!=='true';root.dataset.glow=String(glow);q('[data-atlas-action="glow"]').setAttribute('aria-pressed',String(glow));}};
@@ -218,7 +226,7 @@ export function mountEffect(root,initial={}) {
   root,play,pause,stop,setState,update,setComparison,setLoading,
   destroy(){
    if(destroyed)return;stop();cancelLoad();destroyed=true;abort.abort();observer?.disconnect();resize?.disconnect();onceObserver?.disconnect();globalMotion.disconnect();siblings?.disconnect();win.cancelAnimationFrame(frame);
-   onceAnimation?.cancel();
+   onceAnimation?.cancel();scrollObject?.destroy();
    root.dataset.enhanced='false';q('[data-comparison]')?.setAttribute('disabled','');
   }
  };

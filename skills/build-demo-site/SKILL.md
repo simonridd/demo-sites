@@ -68,3 +68,6 @@ Preserve this source skill under `skills/build-demo-site/`; keep the installed p
 ## Reusable Motion Atlas effects
 
 For a suitable visual or functional component, inspect `kits/shorts-lab/effects/registry.json` and its integration guide before writing a new effect. The [Motion Atlas reuse guide](references/motion-atlas.md) lists scope, APIs, static/reduced-motion behavior and target-owner integration. This is an opt-in library, not a request to restyle existing customer pages. Co-op remains the source recipe for once-only entrances and the Co-op presentation supplies the native comparison-slider pattern. Reuse behavior and licences; preserve each client's content and art direction.
+
+
+For outstanding Motion Atlas ideas, use the delivery audit alongside the registry. Study 25 now includes an explicit scroll-scrubbed object; retain quiet content entrances and verify actual position-driven geometry before adopting it in another target. See the reuse reference for the current research and integration boundaries.
