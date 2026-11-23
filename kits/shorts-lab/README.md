@@ -220,3 +220,8 @@ Current catalogue: **82 studies**, **69 visual studies**, **13 research-only row
 ## Later 23 November intake
 
 Twelve further existing rows gain refined techniques and reliability comparisons, with no new catalogue IDs: image wipes, CSS counters, typewriter, rotating borders, five-dot metaballs, scroll progress, grouped focus, colour-mix tokens, scrollbar gutters, viewport sizing, reduced-motion behavior and image delivery. The reusable collection now has **23 families**. Aurora issue 82 is reconciled with the already implemented study 82 rather than duplicated. See [second-intake reconciliation](./RECONCILIATION-REVIEW-2.md), [all portable recipes](./effects/README.md#second-intake-existing-studies-extended) and their working examples.
+
+
+## Scroll-object correction and undelivered-idea audit
+
+Study 25 now defaults to a clearly visible cube scrubbed by actual scroll position, with movement/rotation/scale isolation, keyboard checkpoints, a real percentage and a [large example](./effects/scroll-object.html). Quiet once-only, entry, exit and static modes remain. Only recording 025.mp4 changes. No IDs or customer routes are added. The [current delivery audit](./DELIVERY-AUDIT.md) reconciles both previous intakes, open platform/vendor boundaries, unresolved source links and the newly captured creator/Jhey research suggestions.

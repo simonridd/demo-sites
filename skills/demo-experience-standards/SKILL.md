@@ -67,3 +67,6 @@ Keep exact sources and validation limits in operator material. Update this sourc
 ## Motion Atlas reuse
 
 Use the [Motion Atlas guidance](references/motion-atlas.md) to discover selected native effects and their integration contract. The 23 November library extends existing studies rather than duplicating them and exposes real-state/loading adapters, teardown, static alternatives and reduced-motion behavior. Choose an effect because it helps this audience's task. Optional library availability is not adoption across every website, presentation or demo app; their existing renderers, media, real readiness and release owners remain authoritative.
+
+
+For outstanding Motion Atlas ideas, use the delivery audit alongside the registry. Study 25 now includes an explicit scroll-scrubbed object; retain quiet content entrances and verify actual position-driven geometry before adopting it in another target. See the reuse reference for the current research and integration boundaries.

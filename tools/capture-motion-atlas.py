@@ -102,8 +102,8 @@ def act(preview, entry):
         elif kind == 'refraction':
             portable.locator('[data-option="distortion"]').fill('65')
         elif kind == 'reveal':
-            portable.locator('[data-option="scrollMode"]').select_option('exit')
-            portable.locator('.ma-scroll').evaluate('(el) => el.scrollTop = 220')
+            portable.locator('[data-option="scrollMode"]').select_option('scrub')
+            portable.locator('.ma-scroll').evaluate('(el) => el.scrollTop = 0')
         elif kind == 'shimmer':
             portable.locator('[data-atlas-action="load"]').click()
         else:
@@ -246,7 +246,7 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                 preview.locator('[data-comparison]').evaluate("(el, value) => {el.value=value; el.dispatchEvent(new Event('input',{bubbles:true}));}", round((frame-2)/(total_frames-3)*100))
             if entry["preview"] == 'reveal' and frame > 2:
                 progress=(frame-2)/(total_frames-3)
-                preview.locator('.ma-scroll').evaluate('(el, value) => el.scrollTop=value', round(430*(progress*2 if progress<.5 else (1-progress)*2)))
+                preview.locator('.ma-scroll').evaluate('(el, value) => el.scrollTop=(el.scrollHeight-el.clientHeight)*value', (progress*2 if progress<.5 else (1-progress)*2))
             if frame == round(total_frames * .58):
                 if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient", "holo-ticket", "face-crop"):
                     try:
