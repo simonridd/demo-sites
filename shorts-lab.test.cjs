@@ -489,6 +489,8 @@ test('ImageKit avatar trial shows real public face crop and correctly reports pr
  assert.match(html,/Using ImageKit's public documentation portrait/);
  assert.match(html,/no account connection or uploads/);
  assert.match(html,/data-action="avatar-load"/);
+ assert.match(html,/preload="none"/);
+ assert.match(html,/speak-phone\.mp4\?tr=fo-face,ar-9_16/);
  assert.match(html,/Use only public images you have permission to process/);
  const js=read('kits/shorts-lab/lab.mjs');
  assert.match(js,/case 'avatar-mode'/);
