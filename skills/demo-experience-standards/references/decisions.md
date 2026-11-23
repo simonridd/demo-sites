@@ -157,3 +157,8 @@
 ### 23 November 2026 · Make a motion study's subject unmistakable
 
 Simon found the scroll-driven object example too subtle to identify what animated. When motion is the subject of a study or presentation, show a distinct object, strong spatial change and explicit input/output relationship; provide isolated controls and a large example. Keep subtle Co-op entrances available for ordinary task content. Verify real scroll-to-transform mapping, reversal, stillness between inputs, responsive geometry and initial/changed reduced motion. This accepts clearer explanation, not decorative motion on every page. The same review asks for undelivered ideas to be reconciled; retain a current delivery ledger separating implementation gaps, unapproved research, unresolved sources and qualification.
+
+
+### 23 November 2026 · Discover effects through a shared selection guide
+
+Simon asked that presentation, website and other authoring skills know when to use and omit the growing Motion Atlas collection. Keep one shared audience/task decision guide, linked from the owners and coordinator, rather than repeating a catalogue in every skill. Distinguish available native effects, review-only pilots and research. The still alternative, actual functional state and existing renderer/lifecycle remain authoritative. The request approves this discovery/selection approach, not blanket adoption of every prototype.

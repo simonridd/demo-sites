@@ -40,9 +40,10 @@
       "owner": "demo-experience-standards",
       "sources": [
         "skills/demo-experience-standards/SKILL.md",
-        "skills/demo-experience-standards/references/decisions.md"
+        "skills/demo-experience-standards/references/decisions.md",
+        "skills/demo-experience-standards/references/motion-selection.md"
       ],
-      "support": "documented"
+      "support": "shared task-based selection guidance; opt-in effects and review status remain owner-controlled"
     },
     {
       "id": "site-coop-guided-help",
