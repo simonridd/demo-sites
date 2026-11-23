@@ -88,6 +88,8 @@ def act(preview, entry):
         preview.locator('[data-action="neon-toggle"]').click(timeout=1200)
     elif key == "holo-ticket":
         preview.locator('[data-action="ticket-tilt"]').click(timeout=1200)
+    elif key == "face-crop":
+        preview.locator('[data-action="avatar-mode"][data-crop-mode="center"]').click(timeout=1200)
     elif key == "button":
         preview.locator("button.demo-button").hover(timeout=1200)
     elif key == "button-looks":
@@ -194,7 +196,7 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient", "holo-ticket"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient", "holo-ticket", "face-crop"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
@@ -221,6 +223,8 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             preview.locator('[data-action="grain"]').click(timeout=800)
                         elif entry["preview"] == "holo-ticket":
                             preview.locator('[data-action="ticket-tilt"]').click(timeout=800)
+                        elif entry["preview"] == "face-crop":
+                            preview.locator('[data-action="avatar-mode"][data-crop-mode="circle"]').click(timeout=800)
                         else:
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:
