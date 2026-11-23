@@ -37,7 +37,7 @@ How to make a glowing voice…|Adapt|P2|voice-orb|Motion|yes|An audio-reactive o
 How to build an AI virtual…|Out of scope|—|virtual-agent|Research-only|no|Full app integration is not a reusable CSS study.
 Create background patterns…|Adapt|P2|pattern|Surfaces|yes|Subtle composition can add depth without distracting from the story.
 How to make videos shoppable|Out of scope|—|shoppable-video|Research-only|no|Commerce workflows need their own scope and integration security.
-How to use superellipse()|Prototype|P3|superellipse|Experimental CSS|yes|Progressively enhance shape grammar while keeping ordinary rounded corners.
+How to use superellipse()|Prototype|P2|superellipse|Experimental CSS|yes|Apple-style continuous icon corners compared with ordinary border-radius; explore adjustable superellipse curvature with fallback clipping in unsupported browsers. Use for own app icons, never counterfeit brand artwork.
 How to build shoppable video|Out of scope|—|shoppable-tutorial|Research-only|no|Building a checkout-enabled player is an application, not a visual effect.
 What simp-chinese-formal…|Skip|—|language-font|Research-only|no|Language-specific typography may matter elsewhere; not a reusable demo effect.
 Resize videos by editing…|Hold|P3|video-ratio|Experimental study|yes|Truncated title; illustrate verified aspect-ratio alternatives only.
@@ -87,8 +87,8 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- screenshotProvided:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79].includes(i+1),
- evidence:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79].includes(i+1),
+ evidence:[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
