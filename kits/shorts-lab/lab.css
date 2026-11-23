@@ -520,3 +520,62 @@
 .gradient-grain-study>.small-action:focus-visible{outline:3px solid #0c7461;outline-offset:4px}
 .gradient-grain-study .footnote{text-align:center;font-size:10px;max-width:250px;line-height:1.45;color:#3e6659}
 @media(prefers-reduced-motion:reduce){.gradient-grain-samples .with-grain::after{transition:none!important}}
+
+
+/* Study 050 — premium card shine. Screen-reference interpretation rather than
+   copied creator CSS. A single directional glint plus subtle surface depth. */
+.demo-shine .shine-study{display:grid;justify-items:center;gap:8px;width:100%;max-width:340px}
+.demo-shine .shine-card.shine-card-premium{
+ position:relative;isolation:isolate;display:block;overflow:hidden;text-align:left;
+ width:100%;height:168px;padding:16px 18px;border:1px solid #a5d8cf63;
+ border-radius:18px;background:linear-gradient(135deg,#173a46,#1b6760 53%,#a4ba93 145%);
+ color:#f3f9f3;box-shadow:inset 0 1px 1px #ffffff4b,inset 0 -3px 6px #041e2633,
+ 0 13px 23px #082a303b;font-size:inherit;cursor:pointer;touch-action:manipulation;
+ transition:transform 220ms cubic-bezier(.22,1,.36,1),box-shadow 220ms;
+}
+.demo-shine .shine-card-premium::before{
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+ background:radial-gradient(ellipse at 80% 12%,#d5ffe55e,transparent 50%),
+ linear-gradient(140deg,#ffffff10,transparent 48%,#ffffff0c);
+}
+.demo-shine .shine-card-premium::after{
+ content:"";position:absolute;z-index:3;top:-65%;bottom:-65%;left:-65%;
+ width:42%;pointer-events:none;opacity:0;transform:translateX(0) skew(-22deg);
+ background:linear-gradient(90deg,transparent 0%,#dfffff24 24%,#ffffffa0 53%,#c0ffeb21 77%,transparent 100%);
+}
+.demo-shine .shine-corner{position:absolute;top:15px;left:17px;color:#d4f1e5;letter-spacing:.17em;font-size:9px;font-weight:760}
+.demo-shine .shine-graphic{position:absolute;right:13px;top:17px;width:110px;height:109px;display:grid;place-items:center}
+.demo-shine .shine-orb{position:absolute;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 30% 20%,#f2fff4,#8be6c1 33%,#3cb29d 60%,#226378 86%);box-shadow:0 0 25px #7dfbc962, inset -10px -10px 17px #052d4c45}
+.demo-shine .shine-orbit{position:absolute;width:108px;height:53px;border:1px solid #effff3b9;border-radius:50%;transform:rotate(-32deg);box-shadow:0 0 9px #d2ffe655}
+.demo-shine .shine-copy{position:absolute;bottom:18px;left:18px;z-index:1;display:grid;gap:5px}
+.demo-shine .shine-copy>span{font-size:8px;font-weight:830;letter-spacing:.14em;color:#d4f1e5}
+.demo-shine .shine-copy strong{font-size:27px;letter-spacing:-.075em;line-height:.89;font-weight:850}
+.demo-shine .shine-icon{position:absolute;bottom:15px;right:18px;font-size:26px;font-weight:300;color:#ebfffa}
+.demo-shine .shine-study>.footnote{font-size:10px;color:#3d6556;line-height:1.4;max-width:260px;text-align:center}
+@keyframes atlas-premium-sheen{
+ 0%{transform:translateX(0) skew(-22deg);opacity:0}
+ 18%{opacity:.8}
+ 82%{opacity:.9}
+ 100%{transform:translateX(510%) skew(-22deg);opacity:0}
+}
+@media(hover:hover) and (pointer:fine){
+ .demo-shine .shine-card-premium:hover{transform:translateY(-3px);box-shadow:inset 0 1px 1px #ffffff4b,0 17px 27px #082a303b}
+}
+@media(prefers-reduced-motion:no-preference){
+ .demo-shine .shine-card-premium:hover::after,
+ .demo-shine .shine-card-premium:focus-visible::after,
+ .preview.is-playing .shine-card-premium::after{
+  animation:atlas-premium-sheen 1.15s cubic-bezier(.23,.74,.29,1) 1;
+ }
+}
+.demo-shine .shine-card-premium:active{transform:translateY(1px) scale(.992)}
+.demo-shine .shine-card-premium:focus-visible{outline:3px solid #138c73;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+ .demo-shine .shine-card-premium,.demo-shine .shine-card-premium::after{animation:none!important;transition:none!important}
+ .demo-shine .shine-card-premium:active{transform:none}
+}
+/* Keep ambient 066 rendering scoped to its own visible card or active tab. */
+.gemini-reveal.is-ambient.is-offscreen .gemini-aura,
+.gemini-reveal.is-ambient.is-tab-hidden .gemini-aura{
+ animation-play-state:paused!important;will-change:auto;
+}
