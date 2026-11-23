@@ -273,15 +273,18 @@ test('Gemini ambient study remains alive until paused and accelerates only on ac
  assert.match(html,/release to return after a 2-second delay/);
  const css=read('kits/shorts-lab/lab.css');
  assert.match(css,/@property --atlas-ambient-fast/);
- assert.match(css,/transition:--atlas-ambient-fast 0s 2s/);
- assert.match(css,/:has\(\.gemini-activity:active\)/);
+ assert.match(css,/\.gemini-reveal\.is-ambient\.is-fast\{/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/function setAmbientPressed/);
+ assert.match(js,/cards\.addEventListener\('pointerdown'/);
+ assert.match(js,/document\.addEventListener\('pointerup'/);
+ assert.match(js,/},2000\)/);
  assert.match(css,/--atlas-ambient-fast:1/);
  assert.match(css,/calc\(9s - 7s \* var\(--atlas-ambient-fast\)\)/);
  assert.match(css,/infinite alternate/);
  assert.match(css,/\.is-paused \.gemini-aura\{animation-play-state:paused\}/);
  assert.match(css,/prefers-reduced-motion:reduce/);
  assert.doesNotMatch(css,/atlas-gemini-reveal/);
- const js=read('kits/shorts-lab/lab.mjs');
  assert.match(js,/case 'ambient-toggle'/);
 });
 
