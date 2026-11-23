@@ -259,26 +259,31 @@ test('thinking bar is one-shot visual example, not simulated completion',async()
  assert.match(capture,/el\.dispatchEvent\(new Event\('input'/);
 });
 
-test('one-shot soft-focus background rotates once then settles; static/reduced-motion survives',async()=>{
+test('Gemini ambient study remains alive until paused and accelerates only on active press',async()=>{
  const {nodes,effects}=await start();
- const bg=effects.find(e=>e.id===66);
- assert.equal(bg.preview,'moving-bg');
- assert.equal(bg.verdict,'Adapt');
+ const study=effects.find(e=>e.id===66);
+ assert.equal(study.preview,'moving-bg');
+ assert.equal(study.verdict,'Adapt');
  const html=nodes['#cards'].innerHTML;
- assert.match(html,/class="gemini-reveal-study"/);
- assert.match(html,/class="gemini-aura gemini-aura-one"/);
- assert.match(html,/class="gemini-aura gemini-aura-two"/);
- assert.match(html,/background settles; it never loops/);
- assert.match(html,/aria-label="Illustrative once-only blurred gradient reveal/);
+ assert.match(html,/class="gemini-reveal is-ambient"/);
+ assert.match(html,/aria-label="Continuous ambient blurred-gradient demonstration"/);
+ assert.match(html,/data-action="ambient-toggle" aria-pressed="false"/);
+ assert.match(html,/class="gemini-activity"/);
+ assert.match(html,/Continuous 9-second drift/);
+ assert.match(html,/release to return after a 2-second delay/);
  const css=read('kits/shorts-lab/lab.css');
- assert.match(css,/\.gemini-reveal\{/);
- assert.match(css,/contain:paint/);
- assert.match(css,/@keyframes atlas-gemini-reveal/);
- assert.match(css,/\.preview\.is-playing \.gemini-aura-one\{animation:atlas-gemini-reveal [^}]* 1 both/);
- assert.doesNotMatch(css,/atlas-gemini-reveal [^;}]*infinite/);
- assert.match(css,/\.gemini-aura,\.gemini-reveal-content\{animation:none!important/);
+ assert.match(css,/@property --atlas-ambient-fast/);
+ assert.match(css,/transition:--atlas-ambient-fast 0s 2s/);
+ assert.match(css,/:has\(\.gemini-activity:active\)/);
+ assert.match(css,/--atlas-ambient-fast:1/);
+ assert.match(css,/calc\(9s - 7s \* var\(--atlas-ambient-fast\)\)/);
+ assert.match(css,/infinite alternate/);
+ assert.match(css,/\.is-paused \.gemini-aura\{animation-play-state:paused\}/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ assert.doesNotMatch(css,/atlas-gemini-reveal/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/case 'ambient-toggle'/);
 });
-
 
 test('Android frosted blur and Liquid Glass-inspired surface remain explicit alternatives',async()=>{
  const {nodes,effects}=await start();
