@@ -106,16 +106,36 @@ def check():
                     if motion=="reduce":
                         assert ticket.evaluate("el=>getComputedStyle(el).transform")=="none"
 
+                    # Continuous icon corners adjust with a native slider.
+                    shape=page.locator('.card[data-id="36"]')
+                    shape.scroll_into_view_if_needed()
+                    curve=shape.locator('[data-superellipse-range]')
+                    out=shape.locator('[data-superellipse-value]')
+                    tile=shape.locator('[data-superellipse-tile]')
+                    assert curve.input_value()=="2"
+                    assert out.inner_text()=="2.00"
+                    curve.evaluate("""el => {
+                      el.value='3.25';
+                      el.dispatchEvent(new Event('input',{bubbles:true}));
+                    }""")
+                    assert out.inner_text()=="3.25"
+                    assert tile.evaluate("el=>el.style.getPropertyValue('--icon-curvature')")=="3.25"
+                    native=page.evaluate("CSS.supports('corner-shape','superellipse(2)')")
+                    if not native:
+                        shape_clip=tile.evaluate("el=>getComputedStyle(el).clipPath")
+                        assert shape_clip.startswith('polygon('),(engine,shape_clip)
+
                     screenshot=page.locator("#screenshots-only")
                     screenshot.check()
-                    assert page.locator(".card").count()==18
+                    assert page.locator(".card").count()==19
+                    assert page.locator('.card[data-id="36"]').count()==1
                     assert page.locator('.card[data-id="50"]').count()==1
                     assert page.locator('.card[data-id="78"]').count()==1
                     assert page.locator('.card[data-id="79"]').count()==1
                     screenshot.uncheck()
                     assert page.locator(".card").count()==79
 
-                    print(f"PASS {engine} {motion}: 79 cards; 18 screenshot references; ambient, pause, shine, neon, ticket")
+                    print(f"PASS {engine} {motion}: 79 cards; 19 screenshot references; ambient, pause, shine, neon, ticket")
                     completed+=1
                     ctx.close()
             finally:browser.close()
