@@ -145,7 +145,7 @@ All original video links and case IDs are retained. The Android/Liquid compariso
 
 ## Screenshot-supplied filter and image glow (current review)
 
-The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, and 79**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **36, 50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, and 79**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
 
 Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
 
@@ -172,7 +172,7 @@ The other screenshot-backed effects were favourably reviewed and should remain u
 
 **Study 078 — neon text:** A new screenshot-supplied *optional prototype* with cyan/pink layered shadows and a brief "ignition" when the labelled button is selected. The unlit text remains readable and the on/off state is reversible. A plausible effect for an occasional stage headline or avatar introduction, not ordinary interface typography. The original creator's exact code has not been recovered.
 
-Re-record only the updated 050 and 066 clips and the new 078 and 079 clips; verify that all 66 visual studies have matching MP4s. Preserve the other 62 recordings and all customer-demo integrations.
+Re-record only the updated 036, 050 and 066 clips and the new 078 and 079 clips; verify that all 66 visual studies have matching MP4s. Preserve the other 62 recordings and all customer-demo integrations.
 
 
 ### Study 079 — holographic conference-ticket concept
@@ -180,3 +180,11 @@ Re-record only the updated 050 and 066 clips and the new 078 and 079 clips; veri
 A new screenshot-supplied **stage-first prototype**, implemented independently: a fictional event pass with static legible information, a colourful iridescent foil layer, controlled tilt/light-angle change and an explicit **NOT VALID FOR ENTRY** label. Intended for workshop openers, event landing pages or a one-off presentation reveal, not ticket sales or authentication. This is a visual concept, with no barcode, customer data, external asset or entry claim. Tap/click to tilt; reduced-motion shows a static ticket with the same content. The creator's original code and exact video frames were not recovered in this build.
 
 The user judged all *other* screenshot-backed effects positively. Preserve their current appearance as the kit baseline, not as an automatic instruction to ship them into unrelated products. Validate the new holographic ticket and the corrected Gemini activity behaviour independently before publishing.
+
+### Study 036 — original Apple-style superellipse icon geometry (23 November 2026)
+
+This screenshot-led refinement compares a standard CSS rounded icon with a continuously curved superellipse icon. Both use **original artwork**, not Apple's application assets. A native range input adjusts the curve; `corner-shape: superellipse()` is preferred where supported, and a generated high-resolution polygon approximates the shape in browsers where the experimental property is missing (including relevant WebKit builds). With JavaScript disabled a static fallback polygon remains visible. No client branding or app icon asset changes are made.
+
+Because `corner-shape` is not yet Baseline across major browser engines, keep this effect in the experimental kit. The screenshot is evidence of the technique, not proof that this CSS is the creator's original stylesheet or that Apple uses this exact implementation.
+
+Regenerate only Study 036's recorded MP4 alongside the current release acceptance; leave all unrelated screenshot-backed studies unchanged. The user has positively reviewed the other screenshot-backed kit examples.
