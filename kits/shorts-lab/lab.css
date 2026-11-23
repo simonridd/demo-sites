@@ -579,3 +579,79 @@
 .gemini-reveal.is-ambient.is-tab-hidden .gemini-aura{
  animation-play-state:paused!important;will-change:auto;
 }
+
+
+/* Study 078 · Neon typography — optional stage / portfolio experiment.
+   Original layered text-shadow treatment with readable OFF state.
+   It is not a transcription of Ania Kubów's original stylesheet. */
+.demo-neon-text .neon-text-study{
+ width:100%;max-width:330px;display:grid;justify-items:center;gap:9px;
+}
+.demo-neon-text .neon-sign{
+ position:relative;isolation:isolate;overflow:hidden;
+ width:100%;min-height:168px;border-radius:15px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+ background:radial-gradient(ellipse at 60% 60%,#182a42,#101524 78%),#101524;
+ border:1px solid #556381;color:#90a4b8;contain:paint;
+ box-shadow:inset 0 0 22px #030918b0,0 12px 22px #061b2836;
+}
+.demo-neon-text .neon-sign::before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:
+  linear-gradient(90deg,#ffffff06 1px,transparent 1px),
+  linear-gradient(#ffffff05 1px,transparent 1px);
+ background-size:38px 27px;opacity:.48;
+}
+.demo-neon-text .neon-sign-frame{
+ position:absolute;inset:13px 13px;border:1px solid #5570858c;
+ border-radius:10px;box-shadow:inset 0 0 8px #8ea5c518;pointer-events:none;
+}
+.demo-neon-text .neon-sign-words{
+ display:block;position:relative;z-index:1;text-align:center;
+ font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ font-size:clamp(31px,5vw,42px);letter-spacing:.035em;font-weight:900;line-height:1;
+ color:#879bad;-webkit-text-stroke:1px #446578;
+ text-shadow:0 0 1px #3b5261;
+ transition:color 140ms ease,text-shadow 140ms ease,-webkit-text-stroke-color 140ms ease;
+}
+.demo-neon-text .neon-sign-words em{
+ font-style:normal;color:#9a7796;-webkit-text-stroke:1px #68436d;
+ transition:color 140ms ease,text-shadow 140ms ease,-webkit-text-stroke-color 140ms ease;
+}
+.demo-neon-text .neon-sign-caption{
+ position:relative;z-index:1;font-size:8px;font-weight:800;letter-spacing:.16em;
+ color:#778d9a;text-align:center;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-words{
+ color:#edfdff;-webkit-text-stroke-color:#b9ffff;
+ text-shadow:0 0 3px #ebffff,0 0 9px #62f8ef,0 0 17px #16d1cb,0 0 30px #0e9accaa;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-words em{
+ color:#ffe8fc;-webkit-text-stroke-color:#ffe4fc;
+ text-shadow:0 0 3px #fff,0 0 10px #ff77ec,0 0 19px #ec4bdc,0 0 32px #ad23be;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-frame{
+ border-color:#97e8f6b2;box-shadow:inset 0 0 13px #4fedf855,0 0 16px #51d8eb3b;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-caption{color:#cbeef8}
+.demo-neon-text .neon-switch{
+ min-height:38px;padding:8px 15px;border:1px solid #227663;border-radius:9px;
+ color:white;background:#1a6658;font-size:12px;font-weight:800;box-shadow:none;
+ touch-action:manipulation;
+}
+.demo-neon-text .neon-switch[aria-pressed="true"]{background:#315178;border-color:#638ac1}
+.demo-neon-text .neon-switch:focus-visible{outline:3px solid #136c63;outline-offset:4px}
+.demo-neon-text .neon-status{font-size:10px;color:#3e6758;text-align:center}
+@keyframes atlas-neon-ignite{
+ 0%,10%,16%,26%,43%{opacity:.32}
+ 12%,23%,34%,54%,100%{opacity:1}
+}
+@media(prefers-reduced-motion:no-preference){
+ .demo-neon-text .neon-sign.is-igniting[data-lit="true"] .neon-sign-words{
+  animation:atlas-neon-ignite .83s steps(1,end) 1;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .demo-neon-text .neon-sign-words,
+ .demo-neon-text .neon-sign-words em{transition:none!important;animation:none!important}
+}
