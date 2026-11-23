@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "issue": 99,
+  "status": "review-only; human prototype review and target-owner acceptance required",
+  "catalogueIdsAdded": [],
+  "approvedRecordingsChanged": [],
+  "sourceVerification": "Issue descriptions; direct watch/oEmbed fetches throttled. No creator source or footage copied.",
+  "trials": [
+    {
+      "key": "gallery",
+      "route": "gallery.html",
+      "source": "https://www.youtube.com/watch?v=ORlDTZjXmIU",
+      "engine": "Native passive scroll events / bounded CSS clip",
+      "overlapStudyIds": [
+        25,
+        74
+      ]
+    },
+    {
+      "key": "stack",
+      "route": "stack.html",
+      "source": "https://www.youtube.com/watch?v=FW0VdAYF8ro",
+      "engine": "Existing local GSAP 3.15.1, paused context, native scroll",
+      "overlapStudyIds": [
+        25
+      ]
+    },
+    {
+      "key": "hero",
+      "route": "hero.html",
+      "source": "https://www.youtube.com/watch?v=t38bIJQqoB8",
+      "engine": "Existing local GSAP 3.15.1, paused context, native scroll",
+      "overlapStudyIds": [
+        17,
+        21,
+        25
+      ]
+    }
+  ],
+  "budgets": {
+    "initialBytes": 55000,
+    "activatedBytes": 135000,
+    "CLS": 0.01,
+    "chromiumLocalLCPms": 1500,
+    "localScrollFrameP95ms": 40
+  },
+  "unqualified": [
+    "Creator footage frame-by-frame comparison",
+    "Physical iPhone/Android keyboard/toolbar",
+    "GPU/battery/60/120Hz field performance",
+    "Installed Firefox profile launch"
+  ],
+  "furtherResearch": [
+    "Route/shared-element transitions",
+    "Interactive SVG pointer parallax",
+    "Fullscreen navigation choreography",
+    "Scroll-linked frame sequence"
+  ]
+}

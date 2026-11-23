@@ -1,0 +1,68 @@
+{
+  "source": "our independent browser implementations, not creator footage",
+  "recordings": [
+    {
+      "kind": "gallery",
+      "path": "./assets/gallery-preview.mp4",
+      "method": "Actual Chromium viewport screenshots at real scroll positions; 48 frames / 12 fps, silent",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 540,
+            "nb_frames": "48"
+          }
+        ],
+        "format": {
+          "duration": "4.000000",
+          "size": "170695"
+        }
+      }
+    },
+    {
+      "kind": "stack",
+      "path": "./assets/stack-preview.mp4",
+      "method": "Actual Chromium viewport screenshots at real scroll positions; 48 frames / 12 fps, silent",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 540,
+            "nb_frames": "48"
+          }
+        ],
+        "format": {
+          "duration": "4.000000",
+          "size": "122061"
+        }
+      }
+    },
+    {
+      "kind": "hero",
+      "path": "./assets/hero-preview.mp4",
+      "method": "Actual Chromium viewport screenshots at real scroll positions; 48 frames / 12 fps, silent",
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "width": 960,
+            "height": 540,
+            "nb_frames": "48"
+          }
+        ],
+        "format": {
+          "duration": "4.000000",
+          "size": "90313"
+        }
+      }
+    }
+  ]
+}

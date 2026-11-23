@@ -6,6 +6,7 @@ The unmodified library retains its own copyright and licence notice.
 
 Licence: https://gsap.com/standard-license/
 
-Used only by the reserved connected-support kit. This is not an MIT
+Used by the reserved connected-support kit and, on deliberate activation only,
+the review-only Codegrid card-stack/hero trials. The gallery uses native CSS/JS. This is not an MIT
 distribution. Review the current licence and the intended product use before
 adopting it for a different authoring tool or visual animation builder.

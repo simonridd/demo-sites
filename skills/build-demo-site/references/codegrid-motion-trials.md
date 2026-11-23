@@ -1,0 +1,7 @@
+# Codegrid motion trials · review contract
+
+Issue 99's three independent prototypes live under `kits/shorts-lab/trials/codegrid/`: semantic expanding project gallery, bounded peeling card-stack narrative and three-phase hero. Read their README for credited sources, provenance limits, native/static contracts, APIs and measured budgets. Keep them on the review branch until human prototype review and target-owner acceptance; no adoption into shared design standards is implied.
+
+The gallery uses scoped native scroll events and stable links. Stack/hero reuse the existing pinned GSAP core on demand, with one paused timeline driven by native scroll. Preserve the vendor file, source metadata and standard licence; an animation-authoring product needs its own licence/runtime review. Do not introduce ScrollTrigger, a framework migration, custom smooth scrolling, WebGL or creator assets merely to match a tutorial stack.
+
+Use the actual host's existing renderer, route/slide lifecycle, keys, fragments, audio timing and readiness owner if accepted. Teardown cancels queued work and reverts its context. Keep complete static/no-script/print content, singular accessible reading text, focus-preserving reduction and real browser Back behavior. Run `tools/verify-codegrid-trials.py`; record cold bytes, CLS/LCP and scroll intervals as local observations, separately from physical iPhone/GPU/battery and field acceptance. The approved 82 catalogue identities, 69 recordings and 23-family registry remain unchanged.
