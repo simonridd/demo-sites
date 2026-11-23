@@ -264,6 +264,15 @@ function previewFor(e) {
    <small class="footnote">A blurred copy of the same transparent artwork creates the coloured halo.</small>
 </div>`;
 
+    case 'neon-text': return `<div class="neon-text-study">
+  <div class="neon-sign" data-lit="false" role="group" aria-label="Illustrative neon sign">
+    <span class="neon-sign-frame" aria-hidden="true"></span>
+    <strong class="neon-sign-words">AFTER <em>DARK</em></strong>
+    <span class="neon-sign-caption">IDEAS THAT STAY WITH YOU</span>
+  </div>
+  <button type="button" class="neon-switch" data-action="neon-toggle" aria-pressed="false" aria-label="Turn neon sign on">Light the sign <span aria-hidden="true">✦</span></button>
+  <small class="footnote neon-status" aria-live="polite">Neon off · type remains readable</small>
+</div>`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
 }
@@ -415,7 +424,10 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='shine'){
+     if(preview.dataset.effect==='neon-text'){
+       const toggle=preview.querySelector('[data-action="neon-toggle"]');
+       if(toggle?.getAttribute('aria-pressed')!=='true')toggle?.click();
+     }else if(preview.dataset.effect==='shine'){
        preview.querySelector('[data-action="shine-play"]')?.focus();
      }else if(preview.dataset.effect==='moving-bg'){
        const stage=preview.querySelector('.gemini-reveal');
@@ -465,6 +477,24 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'neon-toggle':{
+     const study=preview.querySelector('.neon-text-study');
+     const sign=study?.querySelector('.neon-sign');
+     if(!sign)break;
+     const lit=btn.getAttribute('aria-pressed')!=='true';
+     sign.dataset.lit=String(lit);
+     btn.setAttribute('aria-pressed',String(lit));
+     btn.setAttribute('aria-label',lit?'Turn neon sign off':'Turn neon sign on');
+     btn.innerHTML=lit?'Switch off <span aria-hidden="true">✦</span>':'Light the sign <span aria-hidden="true">✦</span>';
+     const status=study.querySelector('.neon-status');
+     if(status)status.textContent=lit?'Neon on · decorative effect':'Neon off · type remains readable';
+     sign.classList.remove('is-igniting');
+     if(lit&&!motionPreference.matches&&!document.documentElement.classList.contains('motion-off')){
+       void sign.offsetWidth;
+       sign.classList.add('is-igniting');
+     }
+     break;
+   }
    case 'shine-play': replay(preview);break;
    case 'ambient-toggle':{
      const stage=preview.querySelector('.gemini-reveal');
