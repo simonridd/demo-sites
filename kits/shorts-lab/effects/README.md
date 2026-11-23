@@ -82,7 +82,7 @@ Study **24**, issue **77**. `shape`: card / rows / message; `treatment`: shimmer
 
 ## Pixel
 
-Study **23**, issue **78**. `variant`: sprite / pixel (preserves the original text bounce); `art`: smooth / pixel; `size`, `duration`, `mode`. Original sheet: eight 64 × 64 cells in a **512 × 64 SVG**, stepped with `steps(8,end)`. One-shot playback settles on cell seven; a loop returns to cell zero. The sheet is small vector artwork with no image decoder package.
+Study **23**, issue **78**. `variant`: sprite / pixel (preserves the original text bounce); `art`: smooth / pixel; `size`, `duration`, `mode`. Original sheet: eight 64 × 64 cells in a **512 × 64 SVG**, stepped with `steps(8,end)`. One-shot playback settles on cell seven; a loop returns to cell zero. The sheet is small vector artwork with no image decoder package. Its image URL is declared directly in the element’s inline background style, so it resolves against the host document in both gallery and portable paths; do not move that relative URL into a custom property consumed from another stylesheet.
 
 Keep a representative still under reduced motion. Use for a justified chapter cue or authored gesture, not arbitrary mascots or implied speech/listening. A pixel-rendering option does not change the original illustration's licence or provenance.
 

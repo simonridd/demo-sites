@@ -37,8 +37,9 @@ with sync_playwright() as pw:
    continue
   engines.append({'name':engine,'version':browser.version})
   context=browser.new_context(viewport={'width':1440,'height':1000},reduced_motion='no-preference',has_touch=True)
-  page=context.new_page();errors=[]
+  page=context.new_page();errors=[];failed_resources=[]
   page.on('pageerror',lambda error:errors.append(str(error)))
+  page.on('response',lambda response:failed_resources.append({'url':response.url,'status':response.status}) if response.url.startswith(args.url.rstrip('/')+'/') and response.status>=400 else None)
   page.goto(args.url+'/kits/shorts-lab/effects/');page.wait_for_selector('[data-atlas="comparison"][data-enhanced="true"]')
   effect=lambda name:page.locator(f'[data-atlas="{name}"]')
   check(page.locator('[data-atlas]').count()==23,engine+': all twenty-three effects mount')
@@ -193,6 +194,7 @@ with sync_playwright() as pw:
   recorded=page.locator('.card[data-id="81"] video');recorded.scroll_into_view_if_needed();recorded.evaluate('(el)=>el.play()');page.wait_for_timeout(250)
   check(recorded.evaluate('(el)=>el.currentTime>0&&!el.error'),engine+': recorded implementation actually plays')
   check(not errors,engine+': gallery and customer route have no runtime errors '+str(errors))
+  check(not failed_resources,engine+': all same-site gallery and library resources load '+str(failed_resources))
   context.close();browser.close()
  # Static fallback, actual JS disabled and original page with no scripts.
  browser=pw.chromium.launch()
