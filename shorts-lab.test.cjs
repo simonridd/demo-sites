@@ -21,6 +21,8 @@ function fakeNode(){
 }
 async function start(){
  const effects=await getEffects();
+ const {renderStudy}=await import('./kits/shorts-lab/effects/studies.mjs');
+ const mountEffects=()=>({controllers:[],destroy(){}});
  const keys=['#cards','#search','#verdict','#family','#media-filter','#stage-only','#screenshots-only','#result-count','#context-note','#empty','#reset'];
  const nodes=Object.fromEntries(keys.map(k=>[k,fakeNode()]));
  nodes['#search'].value='';nodes['#media-filter'].value='all';nodes['#stage-only'].checked=false;nodes['#screenshots-only'].checked=false;
@@ -31,16 +33,16 @@ async function start(){
  const originalVideoLink=e=>verifiedVideos[e.id]?{...verifiedVideos[e.id],status:'verified'}:{status:'unverified',searchUrl:'https://www.youtube.com/results?search_query='+encodeURIComponent(e.title)};
  const clips={};
  const context=vm.createContext({document:doc,window:win,effects,researchCount:effects.filter(e=>e.family==='Research-only').length,verifiedVideos,originalVideoLink,clips,
-  console,clearTimeout,setTimeout:()=>1});
+  renderStudy,mountEffects,console,clearTimeout,setTimeout:()=>1});
  vm.runInContext(script,context,{timeout:3000,filename:'lab.mjs'});
  return {nodes,effects,context};
 }
 
-test('all 80 source references remain distinct and their review decisions are explicit',async()=>{
+test('all 82 source references remain distinct and their review decisions are explicit',async()=>{
  const effects=await getEffects();
- assert.equal(effects.length,80);
- assert.equal(new Set(effects.map(e=>e.id)).size,80);
- assert.equal(new Set(effects.map(e=>e.preview)).size,80);
+ assert.equal(effects.length,82);
+ assert.equal(new Set(effects.map(e=>e.id)).size,82);
+ assert.equal(new Set(effects.map(e=>e.preview)).size,82);
  assert.equal(effects.filter(e=>e.family==='Research-only').length,13);
  assert.equal(effects.filter(e=>e.verdict==='Hold').length,7);
  assert.equal(effects.filter(e=>e.stage).length>35,true);
@@ -49,13 +51,13 @@ test('all 80 source references remain distinct and their review decisions are ex
   assert.match(e.source,/^https:\/\/(?:www\.youtube\.com|www\.facebook\.com)\//);
  }
 });
-test('full gallery renders exactly 80 labelled cards with real previews or truthful research markers',async()=>{
+test('full gallery renders exactly 82 labelled cards with real previews or truthful research markers',async()=>{
  const {nodes,effects}=await start();
  const html=nodes['#cards'].innerHTML;
- assert.equal((html.match(/<article class="card"/g)||[]).length,80);
- assert.equal((html.match(/class="preview"/g)||[]).length,80);
+ assert.equal((html.match(/<article class="card"/g)||[]).length,82);
+ assert.equal((html.match(/class="preview"/g)||[]).length,82);
  assert.equal((html.match(/No CSS trial/g)||[]).length,13);
- assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,67);
+ assert.equal((html.match(/class="replay" data-action="replay"/g)||[]).length,69);
  for(const e of effects)assert.ok(html.includes('data-id="'+e.id+'"'),e.title);
  assert.ok(!html.includes('undefined'));
 });
@@ -73,7 +75,7 @@ test('search, verdict and stage filters are functional and independent',async()=
  nodes['#stage-only'].handlers.change();
  assert.ok((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length>35);
  nodes['#reset'].handlers.click();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,80);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,82);
 });
 test('replay in card footer reaches the actual corresponding preview',async()=>{
  const {nodes}=await start();
@@ -110,9 +112,9 @@ test('source links do not masquerade as exact video URLs and clips require real 
  const {nodes}=await start();
  const html=nodes['#cards'].innerHTML;
  assert.equal((html.match(/data-source="verified"/g)||[]).length,3);
- assert.equal((html.match(/data-source="unverified"/g)||[]).length,80-3);
+ assert.equal((html.match(/data-source="unverified"/g)||[]).length,82-3);
  assert.equal((html.match(/class="source-link source-verified"/g)||[]).length,3);
- assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,80);
+ assert.equal((html.match(/class="clip-unavailable"/g)||[]).length,82);
  assert.ok(!html.includes('Creator channel ↗'));
  assert.ok(!html.includes('class="clip-player"'));
  assert.match(html,/Watch original Facebook video/);
@@ -136,7 +138,7 @@ test('media evidence filters distinguish exact source matches from title-only se
  nodes['#media-filter'].value='exact';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,3);
  nodes['#media-filter'].value='unverified';nodes['#media-filter'].handlers.change();
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,80-3);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,82-3);
  nodes['#media-filter'].value='ready';nodes['#media-filter'].handlers.change();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,0);
 });
@@ -341,8 +343,8 @@ test('pixel squeeze only animates a stage study on explicit replay',async()=>{
 
 test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
  const {nodes,effects}=await start();
- assert.equal(effects.length,80);
- const screenshotIds=[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80];
+ assert.equal(effects.length,82);
+ const screenshotIds=[22,23,24,25,26,27,32,34,36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82];
  assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
  nodes['#screenshots-only'].checked=true;
  nodes['#screenshots-only'].handlers.change();
@@ -350,13 +352,13 @@ test('screenshots supplied filter selects only user-provided screenshot referenc
  assert.equal((gallery.match(/<article class="card"/g)||[]).length,screenshotIds.length);
  for(const id of screenshotIds) assert.ok(gallery.includes('data-id="'+id+'"'),'Screenshot '+id);
  assert.ok(!gallery.includes('data-id="75"'),'Facebook reel without screenshot should not be tagged');
- nodes['#search'].value='glowing';
+ nodes['#search'].value='glowing images';
  nodes['#search'].handlers.input();
  assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,1);
  assert.match(nodes['#cards'].innerHTML,/data-id="77"/);
  nodes['#reset'].handlers.click();
  assert.equal(nodes['#screenshots-only'].checked,false);
- assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,80);
+ assert.equal((nodes['#cards'].innerHTML.match(/<article class="card"/g)||[]).length,82);
 });
 test('filter chips are real, single-selection content filters, not decorative pills',async()=>{
  const {nodes,effects}=await start();

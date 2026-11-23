@@ -1,3 +1,6 @@
+import {renderStudy} from './effects/studies.mjs';
+import {mountEffects} from './effects/atlas.mjs';
+
 import {effects,researchCount} from './effects-data.mjs';
 import {originalVideoLink,verifiedVideos} from './source-videos.mjs';
 import {clips} from './clip-manifest.mjs';
@@ -16,6 +19,7 @@ const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const activeTimers = new WeakMap();
 const activeFrames = new WeakMap();
 let audience = 'stage';
+let atlasMount=null;
 const ambientReturnTimers=new WeakMap();
 let activeAmbientButton=null;
 function setAmbientPressed(button,pressed,immediate=false){
@@ -65,9 +69,11 @@ function researchPreview(e) {
     'shoppable-video':'◫','shoppable-tutorial':'▣','language-font':'字',
     calendar:'▦','calendar-theme':'▦','friends-app':'⌖',payments:'£',
     'payments-tutorial':'£',education:'✳'})[e.preview] || '↗';
-  return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">${icon}</div><strong>Research, not a CSS effect</strong><span>${esc(e.note)}</span></div>`;
+  return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">${icon}</div><strong>Research, not a CSS effect</strong><span>${esc(e.note)}</span>${[35,37].includes(e.id)?'<a href="./effects/hotspots.html">Try the native media-hotspot prototype</a>':''}</div>`;
 }
 function previewFor(e) {
+  const upgraded=renderStudy(e.preview,e.id);
+  if(upgraded!==null)return upgraded;
   if (e.family === 'Research-only') return researchPreview(e);
   const title = esc(e.title);
   const simple = (visual, caption = '') => `${visual}${caption ? `<small class="footnote">${caption}</small>` : ''}`;
@@ -163,7 +169,7 @@ function previewFor(e) {
       <div class="blur-pane material-glass" aria-hidden="true"><span class="material-glyph">✦</span><span class="material-title">A little clarity.</span><span class="material-description">One clear moment.</span></div>
    </div>
    <small class="footnote" data-blur-caption>Android-style soft backdrop. Contrast is preserved.</small>
- </div>`;
+ </div>${renderStudy("refraction",e.id)}`;
     case 'split': return `<div class="split-popover-study">
    <div class="split-wrap">
      <button class="split-primary" type="button" data-action="split-primary">Present <span aria-hidden="true">↗</span></button>
@@ -410,7 +416,9 @@ function render(){
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
  releaseAmbient(true);
+ atlasMount?.destroy();
  cards.innerHTML=filtered.map(cardHTML).join('');
+ atlasMount=mountEffects(cards);
  for(const tile of cards.querySelectorAll?.('[data-superellipse-tile]')||[])applySuperellipseFallback(tile,Number(tile.style.getPropertyValue('--icon-curvature'))||2);
  observeAmbient();
  resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${Object.keys(verifiedVideos).length} verified individual source links · ${Object.keys(clips).length} recorded clips`;
@@ -445,6 +453,8 @@ function animateCount(preview){
  activeFrames.set(preview,requestAnimationFrame(tick));
 }
 function replay(preview) {
+ const portable=atlasMount?.controllers.find(effect=>preview?.contains(effect.root));
+ if(portable){portable.play();return;}
  if (!preview || motionPreference.matches || document.documentElement.classList.contains('motion-off')) return;
  preview.classList.remove('is-playing');
  // Restart this scoped one-shot only; do not autostart dozens of cards.

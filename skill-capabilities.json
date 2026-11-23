@@ -90,6 +90,23 @@
         "build-status-kit.test.cjs"
       ],
       "support": "documented"
+    },
+    {
+      "id": "motion-atlas-native-effects",
+      "owner": "build-demo-site",
+      "sources": [
+        "kits/shorts-lab/effects/atlas.mjs",
+        "kits/shorts-lab/effects/atlas.css",
+        "kits/shorts-lab/effects/studies.mjs",
+        "kits/shorts-lab/effects/registry.json",
+        "kits/shorts-lab/effects/README.md",
+        "kits/shorts-lab/RECONCILIATION.md",
+        "motion-effects.test.cjs",
+        "tools/verify-motion-effects.py",
+        "tools/package-motion-effects.py",
+        "tools/serve-motion-preview.py"
+      ],
+      "support": "opt-in reusable studies; target integration remains owner-controlled"
     }
   ]
 }

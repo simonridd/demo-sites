@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "runtimeDependencies": [],
+  "entry": "atlas.mjs",
+  "stylesheet": "atlas.css",
+  "examples": "index.html",
+  "guide": "README.md",
+  "effects": [
+    {
+      "key": "pattern",
+      "studyIds": [
+        34
+      ],
+      "issues": [
+        71
+      ],
+      "use": "Stage and creative hero artwork",
+      "config": "README.md#pattern",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "voice-orb",
+      "studyIds": [
+        32
+      ],
+      "issues": [
+        72
+      ],
+      "use": "State-bound voice surfaces",
+      "config": "README.md#voice-orb",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "refraction",
+      "studyIds": [
+        60
+      ],
+      "issues": [
+        73
+      ],
+      "use": "Bounded authored-scene optics",
+      "config": "README.md#refraction",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "marquee",
+      "studyIds": [
+        27
+      ],
+      "issues": [
+        74
+      ],
+      "use": "Nonessential chapter/project strips",
+      "config": "README.md#marquee",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "pulse",
+      "studyIds": [
+        26
+      ],
+      "issues": [
+        75
+      ],
+      "use": "Truthful activity feedback",
+      "config": "README.md#pulse",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "reveal",
+      "studyIds": [
+        25
+      ],
+      "issues": [
+        76
+      ],
+      "use": "Selected editorial objects",
+      "config": "README.md#reveal",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "shimmer",
+      "studyIds": [
+        24
+      ],
+      "issues": [
+        77
+      ],
+      "use": "Actual pending data",
+      "config": "README.md#shimmer",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "pixel",
+      "studyIds": [
+        23
+      ],
+      "issues": [
+        78
+      ],
+      "use": "Contextual authored gesture",
+      "config": "README.md#pixel",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "stagger",
+      "studyIds": [
+        22
+      ],
+      "issues": [
+        79
+      ],
+      "use": "Sequential explanations and decorative waves",
+      "config": "README.md#stagger",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "comparison",
+      "studyIds": [
+        81
+      ],
+      "issues": [
+        80
+      ],
+      "use": "Image and UI case studies",
+      "config": "README.md#comparison",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "aurora-text",
+      "studyIds": [
+        82
+      ],
+      "issues": [],
+      "use": "Short hero/chapter headings",
+      "config": "README.md#aurora-text",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    }
+  ],
+  "optionalExtensions": [
+    {
+      "key": "media-hotspots",
+      "studyIds": [
+        35,
+        37
+      ],
+      "issues": [
+        70
+      ],
+      "entry": "hotspots.mjs",
+      "example": "hotspots.html",
+      "targets": "Explicitly allowed local anchors",
+      "integration": "Native media only; ImageKit SDK and commerce deferred"
+    }
+  ]
+}
