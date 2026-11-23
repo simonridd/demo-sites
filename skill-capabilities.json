@@ -116,7 +116,16 @@
         "kits/shorts-lab/effects/scroll-object.mjs",
         "kits/shorts-lab/effects/scroll-object.html",
         "kits/shorts-lab/DELIVERY-AUDIT.md",
-        "tools/verify-scroll-object.py"
+        "tools/verify-scroll-object.py",
+        "kits/shorts-lab/trials/codegrid/gallery.html",
+        "kits/shorts-lab/trials/codegrid/stack.html",
+        "kits/shorts-lab/trials/codegrid/hero.html",
+        "kits/shorts-lab/trials/codegrid/scenes.mjs",
+        "kits/shorts-lab/trials/codegrid/README.md",
+        "tools/verify-codegrid-trials.py",
+        "kits/shorts-lab/trials/codegrid/trials.json",
+        "tools/capture-codegrid-trials.py",
+        "tools/package-codegrid-trials.py"
       ],
       "support": "opt-in reusable studies; target integration remains owner-controlled"
     }

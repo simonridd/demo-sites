@@ -1,0 +1,72 @@
+{
+  "checks": 257,
+  "repositoryTests": 92,
+  "skillParity": {
+    "skills": 2,
+    "mappings": 9
+  },
+  "metrics": [
+    {
+      "engine": "chromium",
+      "version": "159.0.8154.6",
+      "kind": "gallery",
+      "initialBytes": 22748,
+      "activatedBytes": 22748,
+      "lcpMs": 68,
+      "cls": 0,
+      "frameP95ms": 17.299999999813735
+    },
+    {
+      "engine": "chromium",
+      "version": "159.0.8154.6",
+      "kind": "stack",
+      "initialBytes": 22862,
+      "activatedBytes": 96219,
+      "lcpMs": 28,
+      "cls": 3.573570251464844e-05,
+      "frameP95ms": 16.800000000279397
+    },
+    {
+      "engine": "chromium",
+      "version": "159.0.8154.6",
+      "kind": "hero",
+      "initialBytes": 21090,
+      "activatedBytes": 94447,
+      "lcpMs": 24,
+      "cls": 1.4580683274702591e-05,
+      "frameP95ms": 16.800000000279397
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "kind": "gallery",
+      "initialBytes": 21544,
+      "activatedBytes": 21544,
+      "lcpMs": 220,
+      "cls": 0,
+      "frameP95ms": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "kind": "stack",
+      "initialBytes": 21247,
+      "activatedBytes": 94604,
+      "lcpMs": 78,
+      "cls": 0,
+      "frameP95ms": 18
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "kind": "hero",
+      "initialBytes": 20651,
+      "activatedBytes": 94008,
+      "lcpMs": 73,
+      "cls": 0,
+      "frameP95ms": 18
+    }
+  ],
+  "deployment": false,
+  "review": "Human prototype review and target-owner acceptance required; issue 99 remains open"
+}

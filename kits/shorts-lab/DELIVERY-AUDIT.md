@@ -62,3 +62,10 @@ Chromium and WebKit are exercised locally. Firefox's installed engine currently 
 - **176 existing browser regression assertions** pass across those engines. Firefox remains unavailable as described above.
 - Start/midpoint/end and narrow screenshots were inspected. Study **025.mp4** alone was recaptured from the actual gallery and ffprobe-validated (2.5 s, 512×320); all 69 manifest references remain preserved. The self-contained export is checked after extraction for all 23 mounts, real scroll behavior, the audit and same-origin assets in both engines.
 - Shared source guidance and installed guidance carry the clearer-motion decision and audit boundaries, preserving unrelated installed content. No new visitor dependency or customer-route change is introduced. These checks establish this library revision; another target still needs its own lifecycle and release checks.
+
+
+## Issue 99 · Codegrid independent story trials
+
+[Issue 99](https://github.com/simonridd/demo-sites/issues/99) now has three isolated [review routes](./trials/codegrid/): an expanding project list, peeling 3D narrative stack and multi-phase hero. They compare complete still compositions with deliberate native-scroll exploration. The gallery needs no GSAP; the two coordinated scenes reuse the existing local pinned core on demand. No catalogue ID, approved clip, customer page or presentation player changes. Direct creator-video fetches were throttled, so source descriptions remain the brief rather than claimed frame-by-frame verification. See the route's source/lifecycle/evidence notes and human-review gate. The four further Codegrid candidates remain research.
+
+The earlier issue 96 first three trials are implemented separately in [PR 98](https://github.com/simonridd/demo-sites/pull/98), still awaiting owner acceptance. This branch does not merge or publish them. Both creator shortlists remain separate from approved effects and the open arbitrary-backdrop/ImageKit integrations.
