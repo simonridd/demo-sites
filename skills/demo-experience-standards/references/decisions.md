@@ -179,3 +179,5 @@ Simon rejected the heavier dark-green Voice Demo Builder preview because it cont
 ### 23 November 2026 · Give icons a job and qualify light materials
 
 Simon rejected repeated diagonal arrows in the Voice Demo Builder study as generic and found the pale refractive object unsuccessful on the light canvas. Use labelled navigation or a meaningful icon; omit decorative arrows from cards and actions. Check material edges, optical contrast and text across the actual light composition, including access/workspace views, rather than assuming a dark treatment survives recolouring. He asked for a working test deployment over the existing service before considering a full production replacement. Preserve real-state and readiness owners; a visual prototype is not functional acceptance.
+
+He then found the original mobile app less AI-generated than the test. For this builder, prefer clear product typography and useful task density over the study’s oversized italic serif and oversized focal object. Premium is not a required font style or an effects quota; preserve purposeful loading and interaction feedback while matching the device and task.
