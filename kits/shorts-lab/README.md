@@ -1,18 +1,18 @@
-# Motion Atlas — 77 referenced techniques
+# Motion Atlas — 82 studies and reusable effects
 
 Standalone, public-static, **originally implemented** experimental kit at `/kits/shorts-lab/`. It is not part of `demos.json`, is not a customer journey, has no Genesys/IVA/AVA binding, and does not modify any of the customer demos.
 
 ## Purpose and stage/product distinction
 
-The user explicitly prioritises **one-off presentation impact** as well as product UI quality. An effect can be worth rehearsing for a stage moment while still being a poor default in an everyday tool. Use the **One-off presentation** and **Everyday product** modes to judge the same 77 references with different expectations. The initial verdict remains in both modes so it is not silently rewritten. 'Stage candidate' is a review invitation, **not** approval to use or ship.
+The user explicitly prioritises **one-off presentation impact** as well as product UI quality. An effect can be worth rehearsing for a stage moment while still being a poor default in an everyday tool. Use the **One-off presentation** and **Everyday product** modes to judge the same 82 references with different expectations. The initial verdict remains in both modes so it is not silently rewritten. 'Stage candidate' is a review invitation, **not** approval to use or ship.
 
 The atlas holds:
-- The original **75** named research rows plus two later screenshot-led studies (76–77), including incomplete titles and the Facebook odometer reel.
-- **64** candidate studies with original HTML/CSS/JS visual or functional experiments, including speculative examples explicitly marked as hypotheses.
+- The original **80** stable studies plus before/after comparison (81) and aurora text (82), including incomplete titles and the Facebook odometer reel.
+- **69** candidate studies with original HTML/CSS/JS visual or functional experiments, including speculative examples explicitly marked as hypotheses.
 - **13** non-CSS or out-of-scope research references, retained as explanation cards. They are not claimed as working implementations of translation, commerce, calendar, payment, AI agents or location sharing.
-- Zero third-party animation packages, CDN imports, analytics scripts, credentials, actual audio, video or live account actions.
+- No third-party animation packages, analytics scripts, credentials or live account actions. Local MP4s record our own implementations; the retained ImageKit avatar trial uses optional public remote media.
 
-This is a **working visual comparison kit**. It is **not** a faithful source-code archive of Ania Kubów's original implementations and does not establish that each source video was watched frame by frame. Most rows came from an indexed titles catalogue without deep-link verification; "Creator channel" intentionally links to the channel, not an invented exact Short. The Facebook odometer has the direct source link; that original CSS was not recovered.
+This is a **working visual comparison kit**. It is **not** a faithful source-code archive of Ania Kubów's original implementations and does not establish that each source video was watched frame by frame. Most rows originated in an indexed titles catalogue. Cards now distinguish verified individual links from explicitly unverified title-search fallbacks. The Facebook odometer has the direct source link; that original CSS was not recovered.
 
 ## Included interactions
 
@@ -31,7 +31,7 @@ Most previews **do not autoplay**: select the local Play control. Controls in a 
 
 ### Promotion discipline
 
-**Do not update the portfolio-wide design instructions yet.** The next phase is human selection from the atlas. For each accepted effect, record: intended audience, effect benefit, no-animation state, keyboard and mobile behaviour, exact original source if recovered, licence, runtime/performance impact, owner of the target component, regression evidence and appropriate target product. Then update shared experience standards and the relevant specialist skills in the same reviewed change, without changing unrelated functionality.
+The 23 November request authorises portable effects and shared usage guidance. The [reusable library](./effects/) and [integration guide](./effects/README.md) document opt-in recipes, while target-product adoption remains deliberate. For each accepted effect, record: intended audience, effect benefit, no-animation state, keyboard and mobile behaviour, exact original source if recovered, licence, runtime/performance impact, owner of the target component, regression evidence and appropriate target product. Then update shared experience standards and the relevant specialist skills in the same reviewed change, without changing unrelated functionality.
 
 Avoid copying a client's branding, a TV programme, media-player visuals or copyrighted assets. The techniques and original demonstrator graphics belong to this kit; reproduction of the creator's actual CSS is not claimed.
 
@@ -40,7 +40,7 @@ Avoid copying a client's branding, a TV programme, media-player visuals or copyr
 - Creator channel: https://www.youtube.com/@aniakubow/shorts
 - Referenced original odometer Facebook reel: https://www.facebook.com/reel/2025089661358011
 - Review baseline: 22 November 2026, 75-row local research register (verdicts migrated to `effects-data.mjs` with the evidence caveats). Titles truncated in the source remain deliberately truncated. Do not invent full names or video URLs.
-- Existing design decisions: `skills/build-demo-site/references/website-design.md` and `skills/demo-experience-standards/references/implementation-playbook.md`. These are **not modified** by this experimental page.
+- Existing design decisions: `skills/build-demo-site/references/website-design.md` and `skills/demo-experience-standards/references/implementation-playbook.md`. Updated selectively for the requested portable-library workflow; existing customer routes are preserved.
 
 
 ## Side-by-side video comparison — second iteration
@@ -84,7 +84,7 @@ The capture command starts a temporary **loopback-only server**, opens the actua
 
 **Capture acceptance (22 November 2026):** GitHub Actions run [45054054867](https://github.com/simonridd/demo-sites/actions/runs/45054054867) passed its browser-capture and full repository tests. It committed 62 H.264 MP4s (387,455 bytes total) and a manifest containing 62 verified file references. Exact source matches: 45 additional creator-validated YouTube links plus three separately verified originals, yielding **48 direct links** and **27 labelled title-search fallbacks**. Media capture and test execution are verified; original frame-for-frame CSS fidelity is not established, and real iPhone/Safari playback remains a separate acceptance check.
 
-### Acceptance before main
+### Historical capture acceptance (initial 75-study release)
 
 - At least the first five high-value clips (IDs 40, 41, 68, 69, 75) play next to functioning live previews; their exact source links are checked individually.
 - Complete the 62 applicable clips or explicitly document and fix individual capture failures before claiming full video coverage.
@@ -205,3 +205,18 @@ An optional, non-autoplay video element offers ImageKit's official public face-t
 **Scope:** the working Motion Atlas kit is the deliverable. The rest of the user-approved screenshot studies remain unchanged, and portfolio-wide product/presentation instructions remain untouched until the gallery is reviewed. Add only Study 080's MP4 to the existing 66, yielding 67 visual/illustrative clips.
 
 **Safari qualification note:** The initial CSS-only two-second return occasionally remained in fast mode in WebKit. Continuous gradients now use pointer/keyboard events and an explicit two-second release timer to restore the slow pace while keeping the same visual treatment. Re-record Study 066 and revalidate the paired MP4 after this change.
+
+
+## 23 November portable-effects update
+
+Current catalogue: **82 studies**, **69 visual studies**, **13 research-only rows**, **42 screenshot-intake rows**. All original 80 study IDs and titles remain fixed. See [reconciliation](./RECONCILIATION.md) for issues 70–80, previous captures, actual Co-op reuse, verification and deferred integration boundaries.
+
+- [Working portable examples](./effects/), [machine-readable registry](./effects/registry.json) and [configuration/API guide](./effects/README.md).
+- Eleven native effect families and a separate [native image/video hotspot prototype](./effects/hotspots.html), linked from existing research rows 35/37.
+- New IDs only for **81 comparison** and **82 aurora text**. Existing patterned backgrounds, orb, marquee, pulse, scroll reveal, skeleton, sprite, stagger and optical studies are extended in place.
+- No automatic installation into customer websites, presentations, demo apps or readiness/call owners. No new visitor dependency. The completed PR remains source until reviewed and merged; Pages publication is a separate event.
+
+
+## Later 23 November intake
+
+Twelve further existing rows gain refined techniques and reliability comparisons, with no new catalogue IDs: image wipes, CSS counters, typewriter, rotating borders, five-dot metaballs, scroll progress, grouped focus, colour-mix tokens, scrollbar gutters, viewport sizing, reduced-motion behavior and image delivery. The reusable collection now has **23 families**. Aurora issue 82 is reconciled with the already implemented study 82 rather than duplicated. See [second-intake reconciliation](./RECONCILIATION-REVIEW-2.md), [all portable recipes](./effects/README.md#second-intake-existing-studies-extended) and their working examples.

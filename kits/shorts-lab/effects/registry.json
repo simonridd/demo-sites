@@ -1,0 +1,349 @@
+{
+  "schemaVersion": 1,
+  "runtimeDependencies": [],
+  "entry": "atlas.mjs",
+  "stylesheet": "atlas.css",
+  "examples": "index.html",
+  "guide": "README.md",
+  "effects": [
+    {
+      "key": "pattern",
+      "studyIds": [
+        34
+      ],
+      "issues": [
+        71
+      ],
+      "use": "Stage and creative hero artwork",
+      "config": "README.md#pattern",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "voice-orb",
+      "studyIds": [
+        32
+      ],
+      "issues": [
+        72
+      ],
+      "use": "State-bound voice surfaces",
+      "config": "README.md#voice-orb",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "refraction",
+      "studyIds": [
+        60
+      ],
+      "issues": [
+        73
+      ],
+      "use": "Bounded authored-scene optics",
+      "config": "README.md#refraction",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "marquee",
+      "studyIds": [
+        27
+      ],
+      "issues": [
+        74
+      ],
+      "use": "Nonessential chapter/project strips",
+      "config": "README.md#marquee",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "pulse",
+      "studyIds": [
+        26
+      ],
+      "issues": [
+        75
+      ],
+      "use": "Truthful activity feedback",
+      "config": "README.md#pulse",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "reveal",
+      "studyIds": [
+        25
+      ],
+      "issues": [
+        76
+      ],
+      "use": "Selected editorial objects",
+      "config": "README.md#reveal",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "shimmer",
+      "studyIds": [
+        24
+      ],
+      "issues": [
+        77
+      ],
+      "use": "Actual pending data",
+      "config": "README.md#shimmer",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "pixel",
+      "studyIds": [
+        23
+      ],
+      "issues": [
+        78
+      ],
+      "use": "Contextual authored gesture",
+      "config": "README.md#pixel",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "stagger",
+      "studyIds": [
+        22
+      ],
+      "issues": [
+        79
+      ],
+      "use": "Sequential explanations and decorative waves",
+      "config": "README.md#stagger",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "comparison",
+      "studyIds": [
+        81
+      ],
+      "issues": [
+        80
+      ],
+      "use": "Image and UI case studies",
+      "config": "README.md#comparison",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "aurora-text",
+      "studyIds": [
+        82
+      ],
+      "issues": [
+        82
+      ],
+      "use": "Short hero/chapter headings",
+      "config": "README.md#aurora-text",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "tv-intro",
+      "studyIds": [
+        21
+      ],
+      "issues": [
+        81
+      ],
+      "use": "One-image wipes and preserved typography intro",
+      "config": "README.md#tv-intro",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "count-up",
+      "studyIds": [
+        20
+      ],
+      "issues": [
+        83
+      ],
+      "use": "CSS integer / JS number comparison",
+      "config": "README.md#count-up",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "typewriter",
+      "studyIds": [
+        17
+      ],
+      "issues": [
+        84
+      ],
+      "use": "Short editorial headings; never actual demo output",
+      "config": "README.md#typewriter",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "border",
+      "studyIds": [
+        18
+      ],
+      "issues": [
+        86
+      ],
+      "use": "One premium focal border",
+      "config": "README.md#border",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "metaball",
+      "studyIds": [
+        19
+      ],
+      "issues": [
+        85
+      ],
+      "use": "Small five-dot merging illustration",
+      "config": "README.md#metaball",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "progress",
+      "studyIds": [
+        15
+      ],
+      "issues": [
+        87
+      ],
+      "use": "Reading position, never workflow completion",
+      "config": "README.md#progress",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "focus-within",
+      "studyIds": [
+        14
+      ],
+      "issues": [
+        88
+      ],
+      "use": "Native grouped field focus",
+      "config": "README.md#focus-within",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "palette",
+      "studyIds": [
+        11
+      ],
+      "issues": [
+        89
+      ],
+      "use": "Derived tokens with measured text contrast",
+      "config": "README.md#palette",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "layout-shift-2",
+      "studyIds": [
+        9
+      ],
+      "issues": [
+        90
+      ],
+      "use": "Measured native scrollbar stability",
+      "config": "README.md#layout-shift-2",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "mobile",
+      "studyIds": [
+        8
+      ],
+      "issues": [
+        91
+      ],
+      "use": "Real viewport units and safe-area layout",
+      "config": "README.md#mobile",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "reduced-motion",
+      "studyIds": [
+        6
+      ],
+      "issues": [
+        93
+      ],
+      "use": "Behavioural motion audit",
+      "config": "README.md#reduced-motion",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "formats",
+      "studyIds": [
+        47
+      ],
+      "issues": [
+        94
+      ],
+      "use": "Measured native image delivery",
+      "config": "README.md#formats",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    }
+  ],
+  "optionalExtensions": [
+    {
+      "key": "media-hotspots",
+      "studyIds": [
+        35,
+        37
+      ],
+      "issues": [
+        70
+      ],
+      "entry": "hotspots.mjs",
+      "example": "hotspots.html",
+      "targets": "Explicitly allowed local anchors",
+      "integration": "Native media only; ImageKit SDK and commerce deferred"
+    }
+  ],
+  "additionalStylesheet": "practical.css"
+}

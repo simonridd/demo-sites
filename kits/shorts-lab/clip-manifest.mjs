@@ -124,7 +124,7 @@ export const clips = Object.freeze({
   "27": {
     "path": "./assets/027.mp4",
     "kind": "browser-recorded",
-    "durationSeconds": 2.5
+    "durationSeconds": 4.0
   },
   "28": {
     "path": "./assets/028.mp4",
@@ -333,6 +333,16 @@ export const clips = Object.freeze({
   },
   "80": {
     "path": "./assets/080.mp4",
+    "kind": "browser-recorded",
+    "durationSeconds": 2.5
+  },
+  "81": {
+    "path": "./assets/081.mp4",
+    "kind": "browser-recorded",
+    "durationSeconds": 2.5
+  },
+  "82": {
+    "path": "./assets/082.mp4",
     "kind": "browser-recorded",
     "durationSeconds": 2.5
   }

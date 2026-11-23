@@ -37,8 +37,8 @@ def catalogue():
             raise ValueError(f"Broken source row {index}")
         title, verdict, priority, preview, family, stage, note = fields
         rows.append(dict(id=index, title=title, preview=preview, family=family))
-    if len(rows) != 80:
-        raise RuntimeError(f"Expected 80 catalogue rows, got {len(rows)}")
+    if len(rows) != 82:
+        raise RuntimeError(f"Expected 82 catalogue rows, got {len(rows)}")
     return rows
 
 
@@ -73,7 +73,42 @@ def act(preview, entry):
         "fab": "fab", "nudge": "replay", "carousel": "next",
         "squeeze": "replay", "border": "replay",
     }
-    if key == "pill":
+    portable = preview.locator('[data-atlas]').first
+    if portable.count():
+        kind = portable.get_attribute('data-atlas')
+        if kind == 'palette':
+            portable.locator('[data-option="space"]').select_option('oklch')
+        elif kind == 'focus-within':
+            portable.locator('.ma-focus-basic input').fill('hello@example.com')
+        elif kind == 'layout-shift-2':
+            portable.locator('[data-option="scrollbars"]').select_option('classic')
+            portable.locator('[data-atlas-action="overflow"]').click()
+        elif kind == 'progress':
+            portable.locator('[data-option="variant"]').select_option('scroll')
+        elif kind in ('formats', 'mobile'):
+            # These are real layout/delivery studies, not synthetic motion.
+            pass
+        elif kind == 'reduced-motion':
+            portable.locator('[data-option="mode"]').select_option('loop')
+            portable.locator('[data-atlas-action="play"]').click()
+        elif kind in ('pulse', 'voice-orb'):
+            portable.locator('[data-option="state"]').select_option('active' if kind == 'pulse' else 'listening')
+        elif kind == 'marquee':
+            portable.locator('[data-option="mode"]').select_option('loop')
+            portable.locator('[data-option="duration"]').fill('1')
+            portable.locator('[data-atlas-action="play"]').click()
+        elif kind == 'comparison':
+            portable.locator('[data-atlas-action="after"]').click()
+        elif kind == 'refraction':
+            portable.locator('[data-option="distortion"]').fill('65')
+        elif kind == 'reveal':
+            portable.locator('[data-option="scrollMode"]').select_option('exit')
+            portable.locator('.ma-scroll').evaluate('(el) => el.scrollTop = 220')
+        elif kind == 'shimmer':
+            portable.locator('[data-atlas-action="load"]').click()
+        else:
+            portable.locator('[data-atlas-action="play"]').click()
+    elif key == "pill":
         preview.locator('[data-index="1"]').click(timeout=1200)
     elif key == "slider":
         preview.locator('[data-range]').evaluate(
@@ -203,6 +238,15 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                 except PlaywrightTimeout:
                     # A missing local action is not a reason to fabricate motion.
                     pass
+            if entry["preview"] == 'progress' and frame > 2:
+                preview.locator('.ma-reading').evaluate('(el,r)=>el.scrollTop=(el.scrollHeight-el.clientHeight)*r', (frame-2)/(total_frames-3))
+            if entry["preview"] == 'reduced-motion' and frame == round(total_frames*.55):
+                preview.locator('[data-option="preference"]').select_option('reduce')
+            if entry["preview"] == 'comparison' and frame > 2:
+                preview.locator('[data-comparison]').evaluate("(el, value) => {el.value=value; el.dispatchEvent(new Event('input',{bubbles:true}));}", round((frame-2)/(total_frames-3)*100))
+            if entry["preview"] == 'reveal' and frame > 2:
+                progress=(frame-2)/(total_frames-3)
+                preview.locator('.ma-scroll').evaluate('(el, value) => el.scrollTop=value', round(430*(progress*2 if progress<.5 else (1-progress)*2)))
             if frame == round(total_frames * .58):
                 if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient", "holo-ticket", "face-crop"):
                     try:
@@ -237,7 +281,10 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:
                         pass
-            png = preview.screenshot(type="png", animations="allow", timeout=5000)
+            stage = preview.locator('.ma-stage').first
+            # Record the real component's visual surface at readable size; the
+            # working controls remain in the same Atlas preview and own motion.
+            png = stage.screenshot(type="png", animations="allow", timeout=5000) if stage.count() else preview.screenshot(type="png", animations="allow", timeout=5000)
             proc.stdin.write(png)
             page.wait_for_timeout(round(1000 / fps))
         proc.stdin.close()
@@ -277,14 +324,14 @@ def write_manifest(rows):
         if not output.exists():
             continue
         try:
-            ffprobe(output)
+            metadata = ffprobe(output)
         except Exception:
             # Never advertise a missing, corrupt or incorrect recording.
             continue
         live[str(e["id"])] = {
             "path": f"./assets/{e['id']:03d}.mp4",
             "kind": "browser-recorded",
-            "durationSeconds": SECONDS,
+            "durationSeconds": float(metadata["duration"]),
         }
     content = (
         "// Generated by tools/capture-motion-atlas.py from real browser previews.\n"
@@ -326,7 +373,7 @@ def main():
     successes = []
     failures = []
     with local_site() as url, sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True)
+        browser = pw.chromium.launch(headless=True, ignore_default_args=["--hide-scrollbars"])
         context = browser.new_context(
             viewport={"width": 1440, "height": 960},
             device_scale_factor=1, reduced_motion="no-preference",
@@ -350,7 +397,7 @@ def main():
                 # Cleanly reload to reset each effect to its authored initial state.
                 page.reload(wait_until="networkidle")
                 page.wait_for_selector(f'.card[data-id="{e["id"]}"]', timeout=20000)
-                record_one(page, e, temp)
+                record_one(page, e, temp, seconds=4 if e["preview"] == "marquee" else SECONDS)
                 ffprobe(temp)
                 temp.replace(final)
                 successes.append(e["id"])

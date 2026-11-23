@@ -62,3 +62,8 @@ Record an actual user correction or observed result as a dated decision, includi
 Keep exact sources and validation limits in operator material. Update this source skill, its installed copy and the portfolio catalogue when its scope or ownership changes. Existing packages and native runtimes require their normal release process; a guidance update is not a runtime upgrade.
 
 “Voice Demo Builder” is the working audience-facing name for the unattended website-to-voice workflow. Keep existing `website-receptionist` APIs, saved identities and Environment Builder/official AVA ownership unchanged. Do not rename existing native resources as a side effect.
+
+
+## Motion Atlas reuse
+
+Use the [Motion Atlas guidance](references/motion-atlas.md) to discover selected native effects and their integration contract. The 23 November library extends existing studies rather than duplicating them and exposes real-state/loading adapters, teardown, static alternatives and reduced-motion behavior. Choose an effect because it helps this audience's task. Optional library availability is not adoption across every website, presentation or demo app; their existing renderers, media, real readiness and release owners remain authoritative.

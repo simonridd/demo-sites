@@ -82,16 +82,18 @@ Glowing images|Adapt|P2|image-glow|Creative|yes|Create a coloured halo from an o
 Neon text|Prototype|P3|neon-text|Typography|yes|Optional neon-sign typography with layered shadow glow and a brief ignition when selected. Retain clear unlit text; reserve for short presentation moments or rare creative portfolio features.
 Holographic conference ticket|Prototype|P2|holo-ticket|Stage-only|yes|A fictional event pass with iridescent foil, viewing-angle highlights and tilt response. Worth trying for event and workshop openers; decoration only, never proof of booking or admission.
 ImageKit face-aware avatar crop|Prototype|P2|face-crop|Avatar media|no|ImageKit public face-aware cropping compared with ordinary center crop and circular framing. Useful for customer/adviser avatar thumbnails, but portrait quality and consent need testing before demo deployment.
+Before and after comparison|Adopt|P1|comparison|Controls|yes|Two aligned images or inert live DOM layers, a crisp white divider and a native keyboard/touch slider. Functional for project case studies and presentation explanations.
+Aurora inside text|Adapt|P2|aurora-text|Typography|yes|Slow animated gradient inside short headings, with optional glow and readable static fallback. Reserve for hero or presentation titles, never body copy or task labels.
 `.trim();
 const cols=RAW.split("\n");
 export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- screenshotProvided:[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80].includes(i+1),
- evidence:[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[6,8,9,11,14,15,17,18,19,20,21,22,23,24,25,26,27,32,34,36,47,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82].includes(i+1),
+ evidence:[6,8,9,11,14,15,17,18,19,20,21,22,23,24,25,26,27,32,34,36,47,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
-if(effects.length!==80) throw new Error("Expected 80 studies, including screenshot-backed ImageKit avatar crop trial");
+if(effects.length!==82) throw new Error("Expected 82 studies; original 80 IDs preserved");
 export const researchCount=effects.filter(e=>e.family==="Research-only").length;

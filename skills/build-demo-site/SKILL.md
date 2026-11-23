@@ -63,3 +63,8 @@ Use another free port if needed. Inspect the actual collection and changed demo 
 For requested publication, show the completed page in local preview, commit only the intended site changes, push through the existing GitHub workflow and inspect the Pages build/deployment result. GitHub connector tools are preferred when sufficient; normal Git/gh is a fallback for repository/Pages operations they do not expose. Use the actual Pages-returned URL. A push alone does not establish a successful published site; check the deployed source revision and returned page/assets. Do not introduce another host or a required build framework for a static page.
 
 Preserve this source skill under `skills/build-demo-site/`; keep the installed personal copy in `~/.codex/skills/build-demo-site` aligned when updating the workflow. Report page URLs, commit/build identity, checks performed and any remaining integration dependency. Keep source/fixture checks separate from observed native behavior.
+
+
+## Reusable Motion Atlas effects
+
+For a suitable visual or functional component, inspect `kits/shorts-lab/effects/registry.json` and its integration guide before writing a new effect. The [Motion Atlas reuse guide](references/motion-atlas.md) lists scope, APIs, static/reduced-motion behavior and target-owner integration. This is an opt-in library, not a request to restyle existing customer pages. Co-op remains the source recipe for once-only entrances and the Co-op presentation supplies the native comparison-slider pattern. Reuse behavior and licences; preserve each client's content and art direction.
