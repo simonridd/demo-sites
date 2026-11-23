@@ -124,7 +124,7 @@ These are independent implementations prompted by user-supplied video screenshot
 
 | ID | Study | Treatment and reuse decision |
 | --- | --- | --- |
-| 066 | Gemini-inspired moving/blurred background | **Adapt for stage**: bounded, blurred colour fields rotate and settle over 2.1 seconds. The scene stays attractive afterward and does not loop. Use for a reveal/section break; do not use as a permanently moving backdrop under working controls. Actual Gemini source/branding is not copied. |
+| 066 | Gemini-inspired moving/blurred background | **Adapt for stage**: indefinite gentle motion (9-second drift) becomes more energetic while the activity control is held (2-second period), then returns to ambient pace after a 2-second delay. Includes Pause/Resume and static reduced-motion presentation. Best behind a one-off presentation title or AI sequence; do not imply actual processing or use constant background motion throughout an ordinary workflow. Original Gemini source/branding is not copied. |
 | 067 | Thinking-bar colour sweep | **Adapt**: multicolour bar animates for two short cycles only when explicitly played, with a truthful illustrative label. Never treat the animation as proof of background processing or completion. |
 | 068 | Expressive sliders | **Adopt selectively**: a native range input owns its value, keyboard controls and accessible label. The custom segmented track, narrow thumb, press feedback and live output are visual enhancements, with a static fallback. |
 | 069 | Squishy toggle | **Adopt selectively**: a real checkbox/role switch determines on/off; CSS :has and the sibling checked selector control thumb position, while :active briefly compresses its shape. Its off state must always be unambiguous. |
@@ -156,3 +156,9 @@ Study 057 now compares a smooth gradient against the identical gradient with an 
 The screenshot-backed review branch holds **77 studies**, including **15 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
 
 See the review pull request for the exact source revision and the final GitHub Pages deployment receipt. The original creator's full CSS was not recovered. Screenshots are evidence references, not proof that her exact implementation has been reproduced.
+
+### Study 066 correction — ambient, not one-shot (23 November 2026)
+
+The user correctly identified that the screenshot's `animation: drift ... infinite alternate` and registered `--fast` custom property produce **ongoing** motion, with a fast state while a button is active and a delayed return to the slow period on release. The first Motion Atlas interpretation incorrectly used a single 2.1-second scene reveal. Study 066 now demonstrates continuous ambient movement, a press-and-hold activity trigger, a pause toggle and a static reduced-motion fallback. Other screenshot-backed studies remain visually accepted in the kit and are intentionally unchanged; this does **not** promote them automatically into product design standards.
+
+The existing recorded Study 066 MP4 is invalidated by this correction; regenerate only `assets/066.mp4`, check the changing frames and preserve the other 63 recordings. Include a real mobile interaction test before publishing. 
