@@ -713,3 +713,54 @@
  .demo-holo-ticket .holo-ticket,.demo-holo-ticket .holo-ticket-foil{transition:none!important;animation:none!important}
  .demo-holo-ticket .holo-ticket,.demo-holo-ticket .holo-ticket[data-tilted="true"]{transform:none}
 }
+
+
+
+/* Study 036 — original Apple-style continuous app-icon corner comparison.
+   Native experimental corner-shape where supported, JS-calculated polygon
+   fallback in Safari/Firefox. No copied Apple application icons or assets. */
+.superellipse-study{width:100%;max-width:330px;display:grid;justify-items:stretch;gap:12px}
+.superellipse-study .superellipse-comparison{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.superellipse-study .superellipse-cell{display:grid;justify-items:center;gap:8px;min-width:0}
+.superellipse-study .superellipse-app-icon{
+ position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;
+ aspect-ratio:1;width:min(100%,116px);border:0;padding:0;
+ background:linear-gradient(145deg,#1b7d95 4%,#95eac1 55%,#d9f8ba);
+ box-shadow:inset 0 2px 5px #ffffff8a,inset 0 -10px 13px #183e5d33;
+ color:#fff;
+}
+.superellipse-study .superellipse-app-icon::before{
+ content:"";position:absolute;inset:10%;z-index:-1;opacity:.75;
+ background:radial-gradient(circle at 23% 20%,#ffffffc2,transparent 30%),
+ linear-gradient(140deg,#ffffff38,#054b68a0);
+ border-radius:inherit;
+}
+.superellipse-study .superellipse-app-icon>span{
+ font-size:57px;line-height:1;text-shadow:0 5px 14px #11516f7c;
+}
+.superellipse-study .superellipse-round{border-radius:27%}
+.superellipse-study .superellipse-continuous{
+ --icon-curvature:2;
+ border-radius:27%;
+ corner-shape:superellipse(var(--icon-curvature));
+}
+.superellipse-study .superellipse-caption{
+ font-size:10px;font-weight:800;color:#2c6758;white-space:nowrap;
+}
+.superellipse-study .superellipse-curve{display:grid;gap:6px}
+.superellipse-study .superellipse-curve label{
+ display:flex;justify-content:space-between;align-items:center;gap:12px;
+ font-size:12px;color:#315d4d;font-weight:750;
+}
+.superellipse-study .superellipse-curve output{
+ font-variant-numeric:tabular-nums;font-size:14px;font-weight:900;color:#186657;
+}
+.superellipse-study input[type=range]{width:100%;min-height:31px;accent-color:#1e7f65;cursor:pointer;touch-action:pan-y}
+.superellipse-study input[type=range]:focus-visible{outline:3px solid #178573;outline-offset:3px;border-radius:10px}
+.superellipse-study .footnote{font-size:10px;color:#3d675c;text-align:center;line-height:1.4}
+@supports not (corner-shape: superellipse(2)){
+ .superellipse-study .superellipse-continuous{clip-path:polygon(100.00% 50.00%,99.88% 65.65%,99.52% 72.08%,98.91% 76.94%,98.06% 80.93%,96.96% 84.33%,95.59% 87.27%,93.96% 89.82%,92.04% 92.04%,89.82% 93.96%,87.27% 95.59%,84.33% 96.96%,80.93% 98.06%,76.94% 98.91%,72.08% 99.52%,65.65% 99.88%,50.00% 100.00%,34.35% 99.88%,27.92% 99.52%,23.06% 98.91%,19.07% 98.06%,15.67% 96.96%,12.73% 95.59%,10.18% 93.96%,7.96% 92.04%,6.04% 89.82%,4.41% 87.27%,3.04% 84.33%,1.94% 80.93%,1.09% 76.94%,0.48% 72.08%,0.12% 65.65%,0.00% 50.00%,0.12% 34.35%,0.48% 27.92%,1.09% 23.06%,1.94% 19.07%,3.04% 15.67%,4.41% 12.73%,6.04% 10.18%,7.96% 7.96%,10.18% 6.04%,12.73% 4.41%,15.67% 3.04%,19.07% 1.94%,23.06% 1.09%,27.92% 0.48%,34.35% 0.12%,50.00% 0.00%,65.65% 0.12%,72.08% 0.48%,76.94% 1.09%,80.93% 1.94%,84.33% 3.04%,87.27% 4.41%,89.82% 6.04%,92.04% 7.96%,93.96% 10.18%,95.59% 12.73%,96.96% 15.67%,98.06% 19.07%,98.91% 23.06%,99.52% 27.92%,99.88% 34.35%)}
+}
+@media(prefers-reduced-motion:reduce){
+ .superellipse-study *{transition:none!important;animation:none!important}
+}
