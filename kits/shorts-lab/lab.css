@@ -803,3 +803,13 @@
 }
 .demo-face-crop .avatar-load-status{min-height:14px}
 @media(max-width:560px){.demo-face-crop .face-crop-study{max-width:330px}}
+
+
+/* Optional official ImageKit face-tracked video sample, never auto-requested. */
+.demo-face-crop .avatar-video-example{width:100%;border:1px solid #b4cbbb;border-radius:9px;background:#e4efdf;padding:6px 10px;color:#2a594d;font-size:11px}
+.demo-face-crop .avatar-video-example summary{cursor:pointer;font-weight:800;padding:6px 2px;list-style:revert}
+.demo-face-crop .avatar-video-example[open]{display:grid;justify-items:center;gap:8px}
+.demo-face-crop .avatar-video-example video{display:block;max-width:min(100%,190px);max-height:260px;border-radius:9px;background:#132728}
+.demo-face-crop .avatar-video-example small{font-size:10px;line-height:1.4;text-align:center;color:#365e53}
+.demo-face-crop .avatar-video-example a{color:#0a615a;text-decoration:underline;text-underline-offset:2px;font-size:10px}
+.demo-face-crop .avatar-video-example summary:focus-visible{outline:3px solid #1d806d;outline-offset:2px}
