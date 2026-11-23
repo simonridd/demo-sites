@@ -200,6 +200,6 @@ Official public image examples:
 
 The pure helper is `imagekit-avatar.mjs`. It accepts public HTTPS ImageKit image URLs only; it rejects URLs with embedded credentials and pre-existing transformations. **No private key, account code, email address, access token or customer portrait is bundled.** Face detection happens on ImageKit's delivery side. Image failures are reported instead of claiming success. Do not use customer/adviser portraits or connect an account without separate usage/privacy qualification.
 
-ImageKit also documents video face tracking, but that requires separate latency/cost evaluation and is NOT included in this static demonstration. Official documentation: https://imagekit.io/docs/image-resize-and-crop and https://imagekit.io/docs/video-resize-and-crop.
+An optional, non-autoplay video element offers ImageKit's official public face-tracked video sample on demand. This demonstrates the documented `fo-face` transformation, but does not qualify performance, pricing, model accuracy or any private-avatar workflow. Official documentation: https://imagekit.io/docs/image-resize-and-crop and https://imagekit.io/docs/video-resize-and-crop.
 
 **Scope:** the working Motion Atlas kit is the deliverable. The rest of the user-approved screenshot studies remain unchanged, and portfolio-wide product/presentation instructions remain untouched until the gallery is reviewed. Add only Study 080's MP4 to the existing 66, yielding 67 visual/illustrative clips.
