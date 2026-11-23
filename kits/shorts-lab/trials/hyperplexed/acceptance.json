@@ -1,0 +1,44 @@
+{
+  "browserAssertions": 158,
+  "repositoryTests": 92,
+  "skillParity": {
+    "skills": 2,
+    "mappings": 9
+  },
+  "metrics": [
+    {
+      "engine": "chromium",
+      "version": "159.0.8154.6",
+      "dockInitial": {
+        "bytes": 25718,
+        "cls": 0
+      },
+      "spotlightInitial": {
+        "bytes": 18167,
+        "cls": 0
+      }
+    },
+    {
+      "engine": "webkit",
+      "version": "27.2",
+      "dockInitial": {
+        "bytes": 25718,
+        "cls": 0
+      },
+      "spotlightInitial": {
+        "bytes": 18167,
+        "cls": 0
+      }
+    }
+  ],
+  "contrastMinimum": 5.372,
+  "focusContrastMinimum": 6.040913056936624,
+  "unavailableEngines": [
+    {
+      "engine": "firefox",
+      "reason": "Installed engine launch unavailable; no passing qualification"
+    }
+  ],
+  "deployment": false,
+  "review": "Research pilots only; owner/product acceptance required"
+}

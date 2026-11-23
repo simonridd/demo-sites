@@ -116,7 +116,16 @@
         "kits/shorts-lab/effects/scroll-object.mjs",
         "kits/shorts-lab/effects/scroll-object.html",
         "kits/shorts-lab/DELIVERY-AUDIT.md",
-        "tools/verify-scroll-object.py"
+        "tools/verify-scroll-object.py",
+        "kits/shorts-lab/trials/hyperplexed/spotlight.html",
+        "kits/shorts-lab/trials/hyperplexed/bubbles.html",
+        "kits/shorts-lab/trials/hyperplexed/spotlight.mjs",
+        "kits/shorts-lab/trials/hyperplexed/bubbles.mjs",
+        "kits/shorts-lab/trials/hyperplexed/README.md",
+        "tools/verify-hyperplexed-trials.py",
+        "tools/capture-hyperplexed-trials.py",
+        "kits/shorts-lab/trials/hyperplexed/source-review.json",
+        "tools/package-hyperplexed-trials.py"
       ],
       "support": "opt-in reusable studies; target integration remains owner-controlled"
     }

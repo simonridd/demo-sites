@@ -1,0 +1,51 @@
+{
+  "issue": 101,
+  "upstream": {
+    "repository": "githyperplexed/bubbles",
+    "commit": "9fb99cd36ca1df8cf32e2e43f175e77a47297c15",
+    "package": "@hyperplexed/bubbles",
+    "version": "0.8.1",
+    "licence": "MIT, Copyright (c) 2026 Hyperplexed",
+    "reviewedFiles": [
+      "README.md",
+      "packages/core/README.md",
+      "packages/core/package.json",
+      "packages/core/src/index.ts",
+      "packages/core/src/options.ts",
+      "packages/core/src/elements/panel.ts"
+    ],
+    "codeDocDifference": "Pinned panel.ts uses region; README still calls it a nonmodal dialog. No screen-reader-user audit is claimed."
+  },
+  "packageInspection": {
+    "version": "0.8.1",
+    "url": "https://registry.npmjs.org/@hyperplexed/bubbles/-/bubbles-0.8.1.tgz",
+    "integrity": "sha512-nwqITd40QpkWRU1WKn4NEOYohXQnVJXl+l1eD3l4uRC2rM8yRQmMdZ7p8aUFhZ/zzUm9Rq7tUyD6so0f+VH3tw==",
+    "tarballBytes": 105860,
+    "distJavaScriptBytes": 110263,
+    "files": 31,
+    "runtimeDependencies": {},
+    "note": "Published package inspected as an archive only; not installed or executed. TS source size is not claimed as transfer cost."
+  },
+  "decision": "Independent confined reimplementation, not a vendor runtime integration or API-compatible substitute. Original MIT notice retained for attribution.",
+  "actualRuntimeDependencies": [],
+  "originalDemo": "https://bubbles.hyperplexed.io/ opened and visually inspected in Chromium",
+  "spotlightReferences": [
+    {
+      "url": "https://www.youtube.com/watch?v=htGfnF1zN4g",
+      "type": "Creator tutorial reference; no footage copied"
+    },
+    {
+      "url": "https://codepen.io/AThorne/pen/ZEjGZrV",
+      "type": "Community reproduction inspected; not the creator original; no source copied"
+    }
+  ],
+  "existingStudyOverlap": [
+    50,
+    18,
+    77
+  ],
+  "reserved": [
+    "Stateful card-choice-to-deck transition, for a specific stage brief"
+  ],
+  "adoption": "Review pilots only. No publication, app integration or shared standards promotion."
+}
