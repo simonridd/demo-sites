@@ -1,4 +1,4 @@
-name: Motion Atlas final five study MP4 capture
+name: Motion Atlas final ImageKit avatar pilot and 80-study release
 on:
   push:
     branches:
@@ -37,24 +37,26 @@ jobs:
         run: |
           set -euxo pipefail
           python -m pip install playwright
-          python -m playwright install --with-deps chromium
+          python -m playwright install --with-deps chromium webkit
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-      - name: Run full repository suite (mobile Chromium/WebKit passed in earlier run)
+      - name: Run full repository suite
         run: node --test *.test.cjs quote/*.test.cjs
-      - name: Record only five changed studies
-        run: python tools/capture-motion-atlas.py --force --ids 36 50 66 78 79
-      - name: Verify 66 visual MP4s and five changing clips
+      - name: Run mobile Chromium and WebKit acceptance for all 80 studies
+        run: python tools/verify-motion-atlas-stage-20261123.py
+      - name: Record only ImageKit avatar study 080
+        run: python tools/capture-motion-atlas.py --force --ids 80
+      - name: Verify 67 visual MP4s and changing imagekit avatar clip
         run: |
           python - <<'PY'
           from pathlib import Path
           import subprocess
           directory=Path('kits/shorts-lab/assets')
           vids=sorted(directory.glob('[0-9][0-9][0-9].mp4'))
-          assert len(vids)==66, len(vids)
+          assert len(vids)==67, len(vids)
           manifest=Path('kits/shorts-lab/clip-manifest.mjs').read_text()
-          assert manifest.count('"kind": "browser-recorded"')==66
-          for idx in (36,50,66,78,79):
+          assert manifest.count('"kind": "browser-recorded"')==67
+          for idx in (80,):
               file=directory/f'{idx:03d}.mp4'
               result=subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-i',str(file),'-f','framemd5','-'],
                 capture_output=True,text=True,check=True)
@@ -65,14 +67,14 @@ jobs:
           PY
       - name: Run all regressions against new manifest
         run: node --test *.test.cjs quote/*.test.cjs
-      - name: Commit only five validated recordings and manifest
+      - name: Commit only the new avatar recording and manifest
         run: |
           set -euxo pipefail
           git config user.name "motion-atlas-capture[bot]"
           git config user.email "motion-atlas-capture[bot]@users.noreply.github.com"
-          git add kits/shorts-lab/assets/036.mp4 kits/shorts-lab/assets/050.mp4 kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/078.mp4 kits/shorts-lab/assets/079.mp4 kits/shorts-lab/clip-manifest.mjs
+          git add kits/shorts-lab/assets/080.mp4 kits/shorts-lab/clip-manifest.mjs
           git diff --cached --check
-          git commit -m "Refresh superellipse, Gemini and premium shine plus neon/ticket"
+          git commit -m "Capture real ImageKit face-aware avatar study 080"
           git fetch origin fix/motion-atlas-ambient-gemini-20261123
           git rebase origin/fix/motion-atlas-ambient-gemini-20261123
           git push origin HEAD:fix/motion-atlas-ambient-gemini-20261123
@@ -82,10 +84,6 @@ jobs:
         with:
           name: ticket-and-ambient-diagnostics
           path: |
-            kits/shorts-lab/assets/036.mp4
-            kits/shorts-lab/assets/050.mp4
-            kits/shorts-lab/assets/066.mp4
-            kits/shorts-lab/assets/078.mp4
-            kits/shorts-lab/assets/079.mp4
+            kits/shorts-lab/assets/080.mp4
             kits/shorts-lab/clip-manifest.mjs
           retention-days: 7
