@@ -1,6 +1,7 @@
 import {effects,researchCount} from './effects-data.mjs';
 import {originalVideoLink,verifiedVideos} from './source-videos.mjs';
 import {clips} from './clip-manifest.mjs';
+import {imagekitAvatarVariants,publicDemoPortrait} from './imagekit-avatar.mjs';
 
 const cards = document.querySelector('#cards');
 const search = document.querySelector('#search');
@@ -302,6 +303,30 @@ function previewFor(e) {
   <button type="button" class="holo-ticket-toggle" data-action="ticket-tilt" aria-pressed="false" aria-label="Tilt holographic ticket to change its light angle">Tilt for the light ↗</button>
   <small class="footnote">Fictional event pass. Tilt and foil are visual experiments, not a real ticket.</small>
 </div>`;
+    case 'face-crop': return `<div class="face-crop-study">
+  <div class="avatar-crop-comparison">
+    <figure class="avatar-crop-before">
+      <img src="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg" alt="ImageKit public demonstration portrait before processing" loading="lazy" width="280" height="160">
+      <figcaption>Original image</figcaption>
+    </figure>
+    <figure class="avatar-crop-after">
+      <img class="face-crop-result" src="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face" alt="ImageKit face-aware square crop of the public demonstration portrait" loading="lazy" width="150" height="150">
+      <figcaption class="face-crop-caption">Face-aware</figcaption>
+    </figure>
+  </div>
+  <div class="avatar-mode-options" role="group" aria-label="Compare avatar crop modes">
+    <button type="button" data-action="avatar-mode" data-crop-mode="center" aria-pressed="false">Centre</button>
+    <button type="button" data-action="avatar-mode" data-crop-mode="face" aria-pressed="true">Face-aware</button>
+    <button type="button" data-action="avatar-mode" data-crop-mode="circle" aria-pressed="false">Circle</button>
+  </div>
+  <label class="avatar-public-label" for="avatar-url-${e.id}">Try a public ImageKit portrait URL</label>
+  <div class="avatar-try-url">
+    <input id="avatar-url-${e.id}" type="url" data-avatar-url value="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg" autocomplete="off" spellcheck="false" aria-describedby="avatar-url-hint-${e.id}">
+    <button type="button" data-action="avatar-load">Preview</button>
+  </div>
+  <small class="avatar-load-status" role="status" aria-live="polite" id="avatar-url-hint-${e.id}">Using ImageKit's public documentation portrait; no account connection or uploads.</small>
+  <small class="footnote">These are real ImageKit URL transformations, not simulated face detection. Use only public images you have permission to process.</small>
+</div>`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
 }
@@ -454,7 +479,10 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='holo-ticket'){
+     if(preview.dataset.effect==='face-crop'){
+       const chosen=preview.querySelector('[data-action="avatar-mode"][data-crop-mode="circle"]');
+       chosen?.click();
+     }else if(preview.dataset.effect==='holo-ticket'){
        preview.querySelector('[data-action="ticket-tilt"]')?.click();
      }else if(preview.dataset.effect==='neon-text'){
        const toggle=preview.querySelector('[data-action="neon-toggle"]');
@@ -509,6 +537,41 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'avatar-mode':{
+     const study=preview.querySelector('.face-crop-study');
+     const result=study?.querySelector('.face-crop-result');
+     const input=study?.querySelector('[data-avatar-url]');
+     if(!result||!input)break;
+     const mode=btn.dataset.cropMode;
+     if(!['center','face','circle'].includes(mode))break;
+     try{
+       const variants=imagekitAvatarVariants(input.value,224);
+       for(const option of study.querySelectorAll('[data-action="avatar-mode"]'))option.setAttribute('aria-pressed',String(option===btn));
+       result.src=variants[mode];
+       result.alt=mode==='center'?'Centre-cropped public demonstration portrait':mode==='circle'?'Face-aware circular portrait crop':'Face-aware square portrait crop';
+       study.querySelector('.face-crop-caption').textContent=mode==='circle'?'Circular face crop':mode==='center'?'Centre crop':'Face-aware';
+       study.querySelector('.avatar-load-status').textContent='Selected '+(mode==='center'?'centre crop':mode==='circle'?'circular face crop':'face-aware crop')+' · real ImageKit transformation';
+     }catch(error){
+       study.querySelector('.avatar-load-status').textContent=error.message;
+     }
+     break;
+   }
+   case 'avatar-load':{
+     const study=preview.querySelector('.face-crop-study');
+     const input=study?.querySelector('[data-avatar-url]');
+     if(!input)break;
+     try{
+       const variants=imagekitAvatarVariants(input.value,224);
+       study.querySelector('.avatar-crop-before img').src=variants.original;
+       const selected=study.querySelector('[data-action="avatar-mode"][aria-pressed="true"]');
+       const mode=selected?.dataset.cropMode||'face';
+       study.querySelector('.face-crop-result').src=variants[mode];
+       study.querySelector('.avatar-load-status').textContent='Previewing the selected public ImageKit image URL';
+     }catch(error){
+       study.querySelector('.avatar-load-status').textContent=error.message;
+     }
+     break;
+   }
    case 'ticket-tilt':{
      const ticket=preview.querySelector('.holo-ticket');
      if(!ticket)break;
