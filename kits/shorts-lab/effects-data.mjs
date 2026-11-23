@@ -51,7 +51,7 @@ Turning any photo into a…|Hold|P3|photo-candidate|Experimental study|yes|Unkno
 WebP or AVIF?|Adopt|P1|formats|Reliability|no|Compare measured bytes and clarity at realistic sizes; format alone is not a style.
 Your logo should not be a…|Adapt|P2|vector-logo|Brand|yes|Use authorised vector assets; do not replace client marks with approximations.
 The correct way to make n…|Hold|P3|unknown-shape|Experimental study|yes|Incomplete source; a native shape study is a hypothesis, not verified code.
-Premium card shine in CSS|Adapt|P2|shine|Surfaces|yes|A single premium project card can earn a subtle light sweep.
+Premium card shine in CSS|Adapt|P2|shine|Surfaces|yes|A tactile premium card uses a single directional glint, depth, and gentle hover elevation, with tap-to-replay on mobile. Use sparingly in presentations and portfolio hero cards.
 Create a Spotify-style gl…|Adapt|P2|music-glow|Creative|yes|Explore a glow treatment without copying another product's identity.
 How to make your button l…|Adapt|P2|button-looks|Controls|yes|A stateful button makeover must retain focus, disabled and pressed states.
 Build Find My Friends in Next.js|Out of scope|—|friends-app|Research-only|no|Location sharing is an application involving privacy, not a visual skin.
@@ -85,8 +85,8 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- screenshotProvided:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1),
- evidence:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1),
+ evidence:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
