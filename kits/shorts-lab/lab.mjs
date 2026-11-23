@@ -16,6 +16,27 @@ const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const activeTimers = new WeakMap();
 const activeFrames = new WeakMap();
 let audience = 'stage';
+const ambientReturnTimers=new WeakMap();
+let activeAmbientButton=null;
+function setAmbientPressed(button,pressed,immediate=false){
+ const stage=button?.closest?.('.gemini-reveal.is-ambient');
+ if(!stage)return;
+ const previous=ambientReturnTimers.get(stage);
+ if(previous)clearTimeout(previous);
+ ambientReturnTimers.delete(stage);
+ if(pressed){stage.classList.add('is-fast');return;}
+ if(immediate){stage.classList.remove('is-fast');return;}
+ ambientReturnTimers.set(stage,setTimeout(()=>{
+  stage.classList.remove('is-fast');
+  ambientReturnTimers.delete(stage);
+ },2000));
+}
+function releaseAmbient(immediate=false){
+ if(!activeAmbientButton)return;
+ setAmbientPressed(activeAmbientButton,false,immediate);
+ activeAmbientButton=null;
+}
+
 let ambientObserver=null;
 function observeAmbient(){
  ambientObserver?.disconnect();
@@ -388,6 +409,7 @@ function render(){
    (!screenshotsOnly.checked||e.screenshotProvided) &&
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
+ releaseAmbient(true);
  cards.innerHTML=filtered.map(cardHTML).join('');
  for(const tile of cards.querySelectorAll?.('[data-superellipse-tile]')||[])applySuperellipseFallback(tile,Number(tile.style.getPropertyValue('--icon-curvature'))||2);
  observeAmbient();
@@ -768,6 +790,28 @@ cards.addEventListener('error',event=>{
  const status=img.closest('.face-crop-study')?.querySelector('.avatar-load-status');
  if(status)status.textContent='The remote ImageKit image could not be loaded. Try a different public URL.';
 },true);
+cards.addEventListener('pointerdown',event=>{
+ const btn=event.target.closest?.('.gemini-activity');
+ if(!btn)return;
+ if(activeAmbientButton&&activeAmbientButton!==btn)releaseAmbient(true);
+ activeAmbientButton=btn;
+ setAmbientPressed(btn,true);
+});
+document.addEventListener('pointerup',()=>releaseAmbient());
+document.addEventListener('pointercancel',()=>releaseAmbient());
+cards.addEventListener('keydown',event=>{
+ const btn=event.target.closest?.('.gemini-activity');
+ if(!btn||![' ','Enter','Space'].includes(event.key)||event.repeat)return;
+ activeAmbientButton=btn;
+ setAmbientPressed(btn,true);
+});
+cards.addEventListener('keyup',event=>{
+ const btn=event.target.closest?.('.gemini-activity');
+ if(btn&&[' ','Enter','Space'].includes(event.key))releaseAmbient();
+});
+document.addEventListener('focusout',event=>{
+ if(event.target===activeAmbientButton)releaseAmbient(true);
+},true);
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
  if(!btn || !cards.contains(btn)) return;
@@ -883,7 +927,7 @@ cards.addEventListener('input',event=>{
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
 document.addEventListener('visibilitychange',()=>{
- if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);
+ if(document.hidden){releaseAmbient(true);document.querySelectorAll('.preview').forEach(settleCount);}
  document.querySelectorAll('.gemini-reveal.is-ambient').forEach(stage=>stage.classList.toggle('is-tab-hidden',document.hidden));
 });
 for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly,screenshotsOnly])
