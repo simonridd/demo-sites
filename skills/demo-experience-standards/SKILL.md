@@ -15,7 +15,7 @@ When selecting the next visual technology, use the dated [technology candidates]
 
 ## Choosing motion and interaction
 
-When a brief would benefit from a visual treatment, use the [motion selection guide](references/motion-selection.md). Start with the audience benefit and still alternative, prefer the target's existing native pattern, and distinguish available Atlas components from review pilots and research. Choose still content for dense evidence and task-critical copy; never use animation to establish real activity or readiness. Carry the selected treatment or deliberate omission into the existing specialist handoff. This is selection guidance, not a request to apply effects everywhere or upgrade a renderer.
+When a brief would benefit from a visual treatment, use the [motion selection guide](references/motion-selection.md). Start with the audience benefit and still alternative. For refinement, prefer the target's useful native pattern; for an explicit redesign, preserve functional owners and contracts while reopening art direction and composition. Distinguish available Atlas components from review pilots and research. Choose still content for dense evidence and task-critical copy; never use animation to establish real activity or readiness. Carry the selected treatment or deliberate omission into the existing specialist handoff. This is selection guidance, not a request to apply effects everywhere or upgrade a renderer.
 
 ## Accepted presentation standard
 
