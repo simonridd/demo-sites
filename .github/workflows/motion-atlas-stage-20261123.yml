@@ -44,9 +44,9 @@ jobs:
         run: node --test *.test.cjs quote/*.test.cjs
       - name: Run mobile Chromium and WebKit acceptance for all 80 studies
         run: python tools/verify-motion-atlas-stage-20261123.py
-      - name: Record only ImageKit avatar study 080
-        run: python tools/capture-motion-atlas.py --force --ids 80
-      - name: Verify 67 visual MP4s and changing imagekit avatar clip
+      - name: Record corrected Gemini ambient and ImageKit avatar study
+        run: python tools/capture-motion-atlas.py --force --ids 66 80
+      - name: Verify 67 visual MP4s, corrected Gemini and avatar recordings
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -56,7 +56,7 @@ jobs:
           assert len(vids)==67, len(vids)
           manifest=Path('kits/shorts-lab/clip-manifest.mjs').read_text()
           assert manifest.count('"kind": "browser-recorded"')==67
-          for idx in (80,):
+          for idx in (66,80):
               file=directory/f'{idx:03d}.mp4'
               result=subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-i',str(file),'-f','framemd5','-'],
                 capture_output=True,text=True,check=True)
@@ -72,9 +72,9 @@ jobs:
           set -euxo pipefail
           git config user.name "motion-atlas-capture[bot]"
           git config user.email "motion-atlas-capture[bot]@users.noreply.github.com"
-          git add kits/shorts-lab/assets/080.mp4 kits/shorts-lab/clip-manifest.mjs
+          git add kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/080.mp4 kits/shorts-lab/clip-manifest.mjs
           git diff --cached --check
-          git commit -m "Capture real ImageKit face-aware avatar study 080"
+          git commit -m "Refresh Gemini ambient and add real ImageKit avatar recording"
           git fetch origin fix/motion-atlas-ambient-gemini-20261123
           git rebase origin/fix/motion-atlas-ambient-gemini-20261123
           git push origin HEAD:fix/motion-atlas-ambient-gemini-20261123
@@ -84,6 +84,7 @@ jobs:
         with:
           name: ticket-and-ambient-diagnostics
           path: |
+            kits/shorts-lab/assets/066.mp4
             kits/shorts-lab/assets/080.mp4
             kits/shorts-lab/clip-manifest.mjs
           retention-days: 7
