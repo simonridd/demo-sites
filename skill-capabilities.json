@@ -116,7 +116,11 @@
         "kits/shorts-lab/effects/scroll-object.mjs",
         "kits/shorts-lab/effects/scroll-object.html",
         "kits/shorts-lab/DELIVERY-AUDIT.md",
-        "tools/verify-scroll-object.py"
+        "tools/verify-scroll-object.py",
+        "kits/shorts-lab/trials/jhey-practical/index.html",
+        "kits/shorts-lab/trials/jhey-practical/patterns.mjs",
+        "kits/shorts-lab/trials/jhey-practical/README.md",
+        "tools/verify-jhey-trials.py"
       ],
       "support": "opt-in reusable studies; target integration remains owner-controlled"
     }
