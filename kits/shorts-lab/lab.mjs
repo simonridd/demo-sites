@@ -273,6 +273,19 @@ function previewFor(e) {
   <button type="button" class="neon-switch" data-action="neon-toggle" aria-pressed="false" aria-label="Turn neon sign on">Light the sign <span aria-hidden="true">✦</span></button>
   <small class="footnote neon-status" aria-live="polite">Neon off · type remains readable</small>
 </div>`;
+    case 'holo-ticket': return `<div class="holo-ticket-study">
+  <div class="holo-ticket" data-tilted="false" role="group" aria-label="Original holographic conference invitation concept; not a valid event admission">
+    <div class="holo-ticket-foil" aria-hidden="true"></div>
+    <div class="holo-ticket-details">
+      <div class="holo-ticket-top"><span>ATLAS / FUTURES</span><span>CONCEPT PASS · 001</span></div>
+      <div class="holo-ticket-center"><span>DESIGN SYSTEMS · EXPERIENCE</span><strong>THE NEXT<br>CHAPTER.</strong><span>EXPLORING WHAT'S POSSIBLE</span></div>
+      <div class="holo-ticket-bottom"><span>EXPERIMENTAL ADMISSION</span><span>NOT VALID FOR ENTRY</span></div>
+    </div>
+    <div class="holo-ticket-rim" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="holo-ticket-toggle" data-action="ticket-tilt" aria-pressed="false" aria-label="Tilt holographic ticket to change its light angle">Tilt for the light ↗</button>
+  <small class="footnote">Fictional event pass. Tilt and foil are visual experiments, not a real ticket.</small>
+</div>`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
 }
@@ -424,7 +437,9 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='neon-text'){
+     if(preview.dataset.effect==='holo-ticket'){
+       preview.querySelector('[data-action="ticket-tilt"]')?.click();
+     }else if(preview.dataset.effect==='neon-text'){
        const toggle=preview.querySelector('[data-action="neon-toggle"]');
        if(toggle?.getAttribute('aria-pressed')!=='true')toggle?.click();
      }else if(preview.dataset.effect==='shine'){
@@ -477,6 +492,15 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'ticket-tilt':{
+     const ticket=preview.querySelector('.holo-ticket');
+     if(!ticket)break;
+     const tilted=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(tilted));
+     ticket.dataset.tilted=String(tilted);
+     btn.textContent=tilted?'Return to front':'Tilt for the light ↗';
+     break;
+   }
    case 'neon-toggle':{
      const study=preview.querySelector('.neon-text-study');
      const sign=study?.querySelector('.neon-sign');
