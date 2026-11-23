@@ -67,7 +67,7 @@ Your sparkles are wrong|Skip|—|sparkles|Stage-only|yes|A moment of theatrical 
 That logo is not an image|Adapt|P2|css-logo|Brand|yes|Original CSS mark can be a study, but never forge an approved logo.
 New nudging notifications|Adapt|P2|nudge|Status|yes|New information can nudge once; never create false urgency.
 New squeeze effect|Prototype|P3|squeeze|Stage-only|yes|A short original pixel-like squash and jagged-grid reveal. Stage candidate only; source mechanism unverified and not suitable for routine app buttons.
-Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|One-shot rotating soft-focus colour reveal: excellent stage backdrop where it builds anticipation, but never a perpetual blur behind app controls.
+Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|Living soft-focus colour fields drift indefinitely at a gentle nine-second pace, accelerate while an activity control is held and return to normal two seconds after release. Excellent for a focused presentation backdrop; pause and reduced-motion support are essential.
 Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Bounded illustrated colour sweep for a thinking state; the static label explicitly denies real progress. Use only while the owning system reports pending work.
 Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Material-inspired active/inactive rails, slim thumb and compressible pressed state; retains native range semantics and visible value.
 Your toggles look cheap|Adopt|P1|toggle|Controls|yes|Native checkbox role switch with CSS :has() thumb that compresses on press, moves and changes colour, and settles to unambiguous on/off.
