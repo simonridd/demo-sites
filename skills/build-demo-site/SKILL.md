@@ -73,3 +73,6 @@ For a suitable visual or functional component, inspect `kits/shorts-lab/effects/
 
 
 For outstanding Motion Atlas ideas, use the delivery audit alongside the registry. Study 25 now includes an explicit scroll-scrubbed object; retain quiet content entrances and verify actual position-driven geometry before adopting it in another target. See the reuse reference for the current research and integration boundaries.
+
+
+Before selecting Motion Atlas for a page, apply `demo-experience-standards` and its `references/motion-selection.md`. Choose the effect for the user’s task, retain the still/native alternative, and check whether it is an available component, review pilot or research. Use the registry/API for implementation; keep the page’s own links, state and lifecycle authoritative. Do not infer that a polished-page request requires decorative motion.
