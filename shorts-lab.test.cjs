@@ -339,7 +339,7 @@ test('pixel squeeze only animates a stage study on explicit replay',async()=>{
 test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
  const {nodes,effects}=await start();
  assert.equal(effects.length,77);
- const screenshotIds=[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77];
+ const screenshotIds=[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77];
  assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
  nodes['#screenshots-only'].checked=true;
  nodes['#screenshots-only'].handlers.change();
@@ -383,4 +383,32 @@ test('image glow duplicates original transparent image without affecting the sha
  assert.match(css,/@media\(prefers-reduced-motion:reduce\)/);
  const art=read('kits/shorts-lab/assets/077-glow-bloom.svg');
  assert.match(art,/<svg/);
+});
+
+test('premium card shine uses one glint, supports touch replay and keeps focus accessible',async()=>{
+ const {nodes,effects}=await start();
+ const study=effects.find(e=>e.id===50);
+ assert.equal(study.preview,'shine');
+ assert.equal(study.screenshotProvided,true);
+ const html=nodes['#cards'].innerHTML;
+ assert.match(html,/class="shine-card shine-card-premium"/);
+ assert.match(html,/data-action="shine-play"/);
+ assert.match(html,/aria-label="Replay premium card light sweep"/);
+ const css=read('kits/shorts-lab/lab.css');
+ assert.match(css,/@keyframes atlas-premium-sheen/);
+ assert.match(css,/\.preview\.is-playing \.shine-card-premium::after/);
+ assert.match(css,/\.shine-card-premium:focus-visible/);
+ assert.doesNotMatch(css,/atlas-premium-sheen [^;\n}]*infinite/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/case 'shine-play'/);
+});
+test('ambient motion is suspended offscreen/hidden without changing its intended state',()=>{
+ const css=read('kits/shorts-lab/lab.css');
+ const js=read('kits/shorts-lab/lab.mjs');
+ assert.match(js,/function observeAmbient/);
+ assert.match(js,/ambientObserver\.observe\(stage\)/);
+ assert.match(js,/classList\.toggle\('is-offscreen',!entry\.isIntersecting\)/);
+ assert.match(css,/\.is-offscreen \.gemini-aura/);
+ assert.match(css,/\.is-tab-hidden \.gemini-aura/);
 });
