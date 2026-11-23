@@ -79,16 +79,17 @@ New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Centred sc
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
 YouTube-style filter chips|Adopt|P1|chips|Navigation|yes|Compact horizontally scrollable filter chips with single-selection state, overflow navigation and keyboard controls. Better for filtering collections than for replacing multi-step navigation.
 Glowing images|Adapt|P2|image-glow|Creative|yes|Create a coloured halo from an original transparent image without replacing its edges or distorting a client's asset. Best for a hero or rare presentation spotlight, not every image.
+Neon text|Prototype|P3|neon-text|Typography|yes|Optional neon-sign typography with layered shadow glow and a brief ignition when selected. Retain clear unlit text; reserve for short presentation moments or rare creative portfolio features.
 `.trim();
 const cols=RAW.split("\n");
 export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- screenshotProvided:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1),
- evidence:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78].includes(i+1),
+ evidence:[50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
-if(effects.length!==77) throw new Error("Expected 77 studies including screenshot-led filter chips and image glow");
+if(effects.length!==78) throw new Error("Expected 78 studies including optional neon-text experiment");
 export const researchCount=effects.filter(e=>e.family==="Research-only").length;
