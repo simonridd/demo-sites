@@ -141,7 +141,20 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
             # Study 068: move the native range across several browser frames.
             # Study 069: hold the pointer down to capture thumb compression,
             # then release for each genuine checkbox state change.
-            if entry["preview"] == "slider":
+            if entry["preview"] == "moving-bg":
+                # Demonstrate gentle ambient movement, then a real press-and-hold
+                # speed change. The 2s return delay is tested separately.
+                if frame == 4:
+                    control = preview.locator(".gemini-activity")
+                    box = control.bounding_box()
+                    if not box:
+                        raise RuntimeError("Ambient speed-up button could not be located")
+                    page.mouse.move(box["x"] + box["width"]/2,
+                                    box["y"] + box["height"]/2)
+                    page.mouse.down()
+                if frame == 13:
+                    page.mouse.up()
+            elif entry["preview"] == "slider":
                 if 2 <= frame <= 20:
                     value = round(10 + 78 * (frame - 2) / 18) if frame <= 11 else round(88 - 62 * (frame - 11) / 9)
                     preview.locator('[data-range]').evaluate(
