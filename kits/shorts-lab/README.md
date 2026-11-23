@@ -145,7 +145,7 @@ All original video links and case IDs are retained. The Android/Liquid compariso
 
 ## Screenshot-supplied filter and image glow (current review)
 
-The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **36, 50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, and 79**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **36, 50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, and 80**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
 
 Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
 
@@ -188,3 +188,18 @@ This screenshot-led refinement compares a standard CSS rounded icon with a conti
 Because `corner-shape` is not yet Baseline across major browser engines, keep this effect in the experimental kit. The screenshot is evidence of the technique, not proof that this CSS is the creator's original stylesheet or that Apple uses this exact implementation.
 
 Regenerate only Study 036's recorded MP4 alongside the current release acceptance; leave all unrelated screenshot-backed studies unchanged. The user has positively reviewed the other screenshot-backed kit examples.
+
+### Study 080 — ImageKit face-aware avatars (23 November 2026)
+
+**Screenshot-supplied exploratory integration.** Uses ImageKit's public documentation portrait and actual public URL transformations to compare an unmodified image, square face-aware crop, conventional centre crop, and a circular face-aware avatar. The buttons switch genuine transformed image URLs, not simulated face detection. An optional public-image URL input allows other eligible ImageKit-hosted portraits without uploading anything or storing credentials.
+
+Official public image examples:
+- Original: https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg
+- Face-aware: https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face
+- Circular: https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face:r-max
+
+The pure helper is `imagekit-avatar.mjs`. It accepts public HTTPS ImageKit image URLs only; it rejects URLs with embedded credentials and pre-existing transformations. **No private key, account code, email address, access token or customer portrait is bundled.** Face detection happens on ImageKit's delivery side. Image failures are reported instead of claiming success. Do not use customer/adviser portraits or connect an account without separate usage/privacy qualification.
+
+ImageKit also documents video face tracking, but that requires separate latency/cost evaluation and is NOT included in this static demonstration. Official documentation: https://imagekit.io/docs/image-resize-and-crop and https://imagekit.io/docs/video-resize-and-crop.
+
+**Scope:** the working Motion Atlas kit is the deliverable. The rest of the user-approved screenshot studies remain unchanged, and portfolio-wide product/presentation instructions remain untouched until the gallery is reviewed. Add only Study 080's MP4 to the existing 66, yielding 67 visual/illustrative clips.
