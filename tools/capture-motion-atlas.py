@@ -158,6 +158,16 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     page.mouse.down()
                 if frame == 13:
                     page.mouse.up()
+            elif entry["preview"] == "superellipse":
+                # Capture genuine continuous shape changes in the real app icon.
+                if 2 <= frame <= 20:
+                    curve=1.25 + 2.5 * (frame-2) / 18
+                    preview.locator('[data-superellipse-range]').evaluate(
+                        """(el, v) => {
+                          el.value = v.toFixed(2);
+                          el.dispatchEvent(new Event('input',{bubbles:true}));
+                        }""", curve
+                    )
             elif entry["preview"] == "slider":
                 if 2 <= frame <= 20:
                     value = round(10 + 78 * (frame - 2) / 18) if frame <= 11 else round(88 - 62 * (frame - 11) / 9)
