@@ -257,9 +257,10 @@
 }
 
 
-/* Study 066 — bounded one-shot blurred-and-rotating colour reveal.
-   Screenshot-inspired independent CSS. Localised paint: never a full-page blur.
-   Final (no-JS, no-motion) state matches the settled end frame. */
+/* Study 066 — screenshot-grounded, continuous soft-focus ambient motion.
+   Normal drift runs indefinitely at 9s; an explicit press handler speeds to 2s.
+   The release handler returns to slow after a 2s delay across WebKit/Chromium.
+   All blur is confined to this little stage and static with reduced motion. */
 .gemini-reveal-study{width:100%;max-width:335px;display:grid;justify-items:center;gap:9px}
 .gemini-reveal{
  position:relative;overflow:hidden;isolation:isolate;contain:paint;display:grid;
@@ -282,28 +283,62 @@
 .gemini-reveal-content strong{font-size:clamp(18px,2.2vw,24px);line-height:1.06;letter-spacing:-.065em;font-weight:800}
 .gemini-accent{position:absolute;right:-18px;top:-34px;font-size:28px;color:#d8c8ff}
 .gemini-reveal-study .footnote{font-size:10px;color:#426357;text-align:center;line-height:1.35;max-width:255px}
-@keyframes atlas-gemini-reveal{
- 0%{transform:translate3d(-30%,22%,0) rotate(-100deg) scale(.76);filter:blur(31px);opacity:.35}
- 56%{transform:translate3d(3%,-3%,0) rotate(28deg) scale(1.22);filter:blur(22px);opacity:1}
- 100%{transform:translate3d(0,0,0) rotate(110deg) scale(1);filter:blur(17px);opacity:.92}
+@property --atlas-ambient-fast{
+ syntax:"<number>";
+ inherits:true;
+ initial-value:0;
 }
-@keyframes atlas-gemini-secondary{
- 0%{transform:translate3d(24%,-15%,0) rotate(270deg) scale(.75);filter:blur(27px);opacity:.25}
- 100%{transform:translate3d(0,0,0) rotate(110deg) scale(1);filter:blur(17px);opacity:.7}
+.gemini-reveal.is-ambient{
+ --atlas-ambient-fast:0;
+ min-height:205px;
+ gap:12px;
 }
-@keyframes atlas-gemini-copy{
- 0%{opacity:.45;transform:translateY(8px)}
- 100%{opacity:1;transform:translateY(0)}
+.gemini-reveal.is-ambient.is-fast{
+ --atlas-ambient-fast:1;
+}
+.gemini-reveal.is-ambient .gemini-aura{
+ /* Transform-only motion avoids re-rasterising blurred pixels each frame. */
+ will-change:transform;
+}
+@keyframes atlas-gemini-ambient-drift{
+ from{transform:translate3d(-9%,4%,0) rotate(-13deg) scale(1)}
+ to{transform:translate3d(10%,-8%,0) rotate(25deg) scale(1.2)}
+}
+@keyframes atlas-gemini-ambient-counter{
+ from{transform:translate3d(9%,5%,0) rotate(17deg) scale(1)}
+ to{transform:translate3d(-8%,-9%,0) rotate(-18deg) scale(1.16)}
 }
 @media(prefers-reduced-motion:no-preference){
- .preview.is-playing .gemini-aura-one{animation:atlas-gemini-reveal 2.1s cubic-bezier(.22,1,.36,1) 1 both}
- .preview.is-playing .gemini-aura-two{animation:atlas-gemini-secondary 2.1s cubic-bezier(.22,1,.36,1) 1 both}
- .preview.is-playing .gemini-reveal-content{animation:atlas-gemini-copy 600ms 600ms ease-out both}
+ .preview .gemini-reveal.is-ambient .gemini-aura-one{
+  animation:atlas-gemini-ambient-drift calc(9s - 7s * var(--atlas-ambient-fast)) ease-in-out infinite alternate;
+ }
+ .preview .gemini-reveal.is-ambient .gemini-aura-two{
+  animation:atlas-gemini-ambient-counter calc(10s - 7s * var(--atlas-ambient-fast)) ease-in-out infinite alternate;
+ }
+ .preview .gemini-reveal.is-ambient .gemini-aura-three{
+  animation:atlas-gemini-ambient-drift calc(12s - 8s * var(--atlas-ambient-fast)) ease-in-out infinite alternate-reverse;
+ }
+ .preview .gemini-reveal.is-ambient.is-paused .gemini-aura{animation-play-state:paused}
 }
+.gemini-motion-controls{
+ position:relative;z-index:2;display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+}
+.gemini-motion-controls button{
+ min-height:34px;border:1px solid #dac6f284;border-radius:9px;padding:7px 11px;
+ color:#fff;background:#201f4ab8;font-size:11px;font-weight:800;
+ box-shadow:inset 0 1px #ffffff29;touch-action:manipulation;
+}
+.gemini-motion-controls button:focus-visible{outline:3px solid #d5dcff;outline-offset:3px}
+.gemini-motion-controls button[aria-pressed=true]{background:#4b3a74}
+.gemini-motion-controls .gemini-activity{background:#b3a8ff;color:#16213c;border-color:#ddd8ff}
+.gemini-motion-controls .gemini-activity:active{background:#eee4ff;transform:scale(.97)}
 @media(prefers-reduced-motion:reduce){
- .gemini-aura,.gemini-reveal-content{animation:none!important;transition:none!important}
+ .gemini-reveal.is-ambient .gemini-aura{animation:none!important;transition:none!important;will-change:auto}
+ .gemini-reveal.is-ambient{transition:none!important}
+ .gemini-motion-controls .gemini-activity:active{transform:none}
 }
-
+/* Manual global calm mode retains all content and normal button semantics. */
+.motion-off .gemini-reveal.is-ambient .gemini-aura{animation:none!important;will-change:auto}
 
 /* Studies 060/061/065 — source screenshots are inspiration; original CSS.
    Android blur and Liquid Glass-style are compared without impersonating OS UI. */
@@ -483,3 +518,296 @@
 .gradient-grain-study>.small-action:focus-visible{outline:3px solid #0c7461;outline-offset:4px}
 .gradient-grain-study .footnote{text-align:center;font-size:10px;max-width:250px;line-height:1.45;color:#3e6659}
 @media(prefers-reduced-motion:reduce){.gradient-grain-samples .with-grain::after{transition:none!important}}
+
+
+/* Study 050 — premium card shine. Screen-reference interpretation rather than
+   copied creator CSS. A single directional glint plus subtle surface depth. */
+.demo-shine .shine-study{display:grid;justify-items:center;gap:8px;width:100%;max-width:340px}
+.demo-shine .shine-card.shine-card-premium{
+ position:relative;isolation:isolate;display:block;overflow:hidden;text-align:left;
+ width:100%;height:168px;padding:16px 18px;border:1px solid #a5d8cf63;
+ border-radius:18px;background:linear-gradient(135deg,#173a46,#1b6760 53%,#a4ba93 145%);
+ color:#f3f9f3;box-shadow:inset 0 1px 1px #ffffff4b,inset 0 -3px 6px #041e2633,
+ 0 13px 23px #082a303b;font-size:inherit;cursor:pointer;touch-action:manipulation;
+ transition:transform 220ms cubic-bezier(.22,1,.36,1),box-shadow 220ms;
+}
+.demo-shine .shine-card-premium::before{
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+ background:radial-gradient(ellipse at 80% 12%,#d5ffe55e,transparent 50%),
+ linear-gradient(140deg,#ffffff10,transparent 48%,#ffffff0c);
+}
+.demo-shine .shine-card-premium::after{
+ content:"";position:absolute;z-index:3;top:-65%;bottom:-65%;left:-65%;
+ width:42%;pointer-events:none;opacity:0;transform:translateX(0) skew(-22deg);
+ background:linear-gradient(90deg,transparent 0%,#dfffff24 24%,#ffffffa0 53%,#c0ffeb21 77%,transparent 100%);
+}
+.demo-shine .shine-corner{position:absolute;top:15px;left:17px;color:#d4f1e5;letter-spacing:.17em;font-size:9px;font-weight:760}
+.demo-shine .shine-graphic{position:absolute;right:13px;top:17px;width:110px;height:109px;display:grid;place-items:center}
+.demo-shine .shine-orb{position:absolute;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 30% 20%,#f2fff4,#8be6c1 33%,#3cb29d 60%,#226378 86%);box-shadow:0 0 25px #7dfbc962, inset -10px -10px 17px #052d4c45}
+.demo-shine .shine-orbit{position:absolute;width:108px;height:53px;border:1px solid #effff3b9;border-radius:50%;transform:rotate(-32deg);box-shadow:0 0 9px #d2ffe655}
+.demo-shine .shine-copy{position:absolute;bottom:18px;left:18px;z-index:1;display:grid;gap:5px}
+.demo-shine .shine-copy>span{font-size:8px;font-weight:830;letter-spacing:.14em;color:#d4f1e5}
+.demo-shine .shine-copy strong{font-size:27px;letter-spacing:-.075em;line-height:.89;font-weight:850}
+.demo-shine .shine-icon{position:absolute;bottom:15px;right:18px;font-size:26px;font-weight:300;color:#ebfffa}
+.demo-shine .shine-study>.footnote{font-size:10px;color:#3d6556;line-height:1.4;max-width:260px;text-align:center}
+@keyframes atlas-premium-sheen{
+ 0%{transform:translateX(0) skew(-22deg);opacity:0}
+ 18%{opacity:.8}
+ 82%{opacity:.9}
+ 100%{transform:translateX(510%) skew(-22deg);opacity:0}
+}
+@media(hover:hover) and (pointer:fine){
+ .demo-shine .shine-card-premium:hover{transform:translateY(-3px);box-shadow:inset 0 1px 1px #ffffff4b,0 17px 27px #082a303b}
+}
+@media(prefers-reduced-motion:no-preference){
+ .demo-shine .shine-card-premium:hover::after,
+ .demo-shine .shine-card-premium:focus-visible::after,
+ .preview.is-playing .shine-card-premium::after{
+  animation:atlas-premium-sheen 1.15s cubic-bezier(.23,.74,.29,1) 1;
+ }
+}
+.demo-shine .shine-card-premium:active{transform:translateY(1px) scale(.992)}
+.demo-shine .shine-card-premium:focus-visible{outline:3px solid #138c73;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){
+ .demo-shine .shine-card-premium,.demo-shine .shine-card-premium::after{animation:none!important;transition:none!important}
+ .demo-shine .shine-card-premium:active{transform:none}
+}
+/* Keep ambient 066 rendering scoped to its own visible card or active tab. */
+.gemini-reveal.is-ambient.is-offscreen .gemini-aura,
+.gemini-reveal.is-ambient.is-tab-hidden .gemini-aura{
+ animation-play-state:paused!important;will-change:auto;
+}
+
+
+/* Study 078 · Neon typography — optional stage / portfolio experiment.
+   Original layered text-shadow treatment with readable OFF state.
+   It is not a transcription of Ania Kubów's original stylesheet. */
+.demo-neon-text .neon-text-study{
+ width:100%;max-width:330px;display:grid;justify-items:center;gap:9px;
+}
+.demo-neon-text .neon-sign{
+ position:relative;isolation:isolate;overflow:hidden;
+ width:100%;min-height:168px;border-radius:15px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+ background:radial-gradient(ellipse at 60% 60%,#182a42,#101524 78%),#101524;
+ border:1px solid #556381;color:#90a4b8;contain:paint;
+ box-shadow:inset 0 0 22px #030918b0,0 12px 22px #061b2836;
+}
+.demo-neon-text .neon-sign::before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:
+  linear-gradient(90deg,#ffffff06 1px,transparent 1px),
+  linear-gradient(#ffffff05 1px,transparent 1px);
+ background-size:38px 27px;opacity:.48;
+}
+.demo-neon-text .neon-sign-frame{
+ position:absolute;inset:13px 13px;border:1px solid #5570858c;
+ border-radius:10px;box-shadow:inset 0 0 8px #8ea5c518;pointer-events:none;
+}
+.demo-neon-text .neon-sign-words{
+ display:block;position:relative;z-index:1;text-align:center;
+ font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+ font-size:clamp(31px,5vw,42px);letter-spacing:.035em;font-weight:900;line-height:1;
+ color:#879bad;-webkit-text-stroke:1px #446578;
+ text-shadow:0 0 1px #3b5261;
+ transition:color 140ms ease,text-shadow 140ms ease,-webkit-text-stroke-color 140ms ease;
+}
+.demo-neon-text .neon-sign-words em{
+ font-style:normal;color:#9a7796;-webkit-text-stroke:1px #68436d;
+ transition:color 140ms ease,text-shadow 140ms ease,-webkit-text-stroke-color 140ms ease;
+}
+.demo-neon-text .neon-sign-caption{
+ position:relative;z-index:1;font-size:8px;font-weight:800;letter-spacing:.16em;
+ color:#778d9a;text-align:center;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-words{
+ color:#edfdff;-webkit-text-stroke-color:#b9ffff;
+ text-shadow:0 0 3px #ebffff,0 0 9px #62f8ef,0 0 17px #16d1cb,0 0 30px #0e9accaa;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-words em{
+ color:#ffe8fc;-webkit-text-stroke-color:#ffe4fc;
+ text-shadow:0 0 3px #fff,0 0 10px #ff77ec,0 0 19px #ec4bdc,0 0 32px #ad23be;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-frame{
+ border-color:#97e8f6b2;box-shadow:inset 0 0 13px #4fedf855,0 0 16px #51d8eb3b;
+}
+.demo-neon-text .neon-sign[data-lit="true"] .neon-sign-caption{color:#cbeef8}
+.demo-neon-text .neon-switch{
+ min-height:38px;padding:8px 15px;border:1px solid #227663;border-radius:9px;
+ color:white;background:#1a6658;font-size:12px;font-weight:800;box-shadow:none;
+ touch-action:manipulation;
+}
+.demo-neon-text .neon-switch[aria-pressed="true"]{background:#315178;border-color:#638ac1}
+.demo-neon-text .neon-switch:focus-visible{outline:3px solid #136c63;outline-offset:4px}
+.demo-neon-text .neon-status{font-size:10px;color:#3e6758;text-align:center}
+@keyframes atlas-neon-ignite{
+ 0%,10%,16%,26%,43%{opacity:.32}
+ 12%,23%,34%,54%,100%{opacity:1}
+}
+@media(prefers-reduced-motion:no-preference){
+ .demo-neon-text .neon-sign.is-igniting[data-lit="true"] .neon-sign-words{
+  animation:atlas-neon-ignite .83s steps(1,end) 1;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .demo-neon-text .neon-sign-words,
+ .demo-neon-text .neon-sign-words em{transition:none!important;animation:none!important}
+}
+
+
+/* 079: Original holographic conference-pass prototype, not a valid ticket.
+   Screen-referenced foil shift; the user can toggle the light angle on touch. */
+.demo-holo-ticket .holo-ticket-study{width:100%;max-width:340px;display:grid;gap:9px;justify-items:center}
+.demo-holo-ticket .holo-ticket{
+ position:relative;isolation:isolate;overflow:hidden;width:100%;aspect-ratio:1.72;
+ max-height:188px;min-height:157px;display:grid;align-content:center;
+ border-radius:18px;padding:17px 19px;text-align:left;
+ background:linear-gradient(132deg,#111d39 0%,#374276 28%,#292851 62%,#102534 100%);
+ color:#f4f8ff;box-shadow:0 16px 25px #0d2b4438,inset 0 1px 1px #ffffff66;
+ transform:perspective(600px) rotateX(0deg) rotateY(-5deg);
+ transition:transform 650ms cubic-bezier(.22,1,.36,1),box-shadow 550ms;
+}
+.demo-holo-ticket .holo-ticket-foil{
+ position:absolute;inset:-55%;z-index:0;pointer-events:none;opacity:.78;
+ background:conic-gradient(from 40deg at 50% 50%,
+ #d5aaf0 0deg,#7fdef2 58deg,#f4eaae 112deg,#ec98c8 170deg,
+ #8ac7f9 238deg,#adf9d6 302deg,#d5aaf0 360deg);
+ mix-blend-mode:screen;filter:blur(12px) saturate(1.2);
+ transform:translateX(-21%) rotate(-22deg) scale(.86);
+ transition:transform 850ms cubic-bezier(.2,.87,.25,1),opacity 400ms;
+}
+.demo-holo-ticket .holo-ticket::before{
+ content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:repeating-linear-gradient(112deg,transparent 0 11px,#ffffff15 12px 13px,transparent 14px 35px);
+ mix-blend-mode:overlay;opacity:.68;
+}
+.demo-holo-ticket .holo-ticket-rim{
+ position:absolute;inset:1px;z-index:4;pointer-events:none;border-radius:17px;
+ border:1px solid #ffffffb8;box-shadow:inset 0 0 14px #e5faff40;
+}
+.demo-holo-ticket .holo-ticket-details{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:space-between;gap:13px;text-shadow:0 1px 10px #0b0b31ba}
+.demo-holo-ticket .holo-ticket-top,.demo-holo-ticket .holo-ticket-bottom{display:flex;gap:8px;justify-content:space-between;align-items:center;color:#f5f6ff;letter-spacing:.08em;font-size:8px;font-weight:820}
+.demo-holo-ticket .holo-ticket-bottom{letter-spacing:.06em;font-size:7px;opacity:.94}
+.demo-holo-ticket .holo-ticket-center{display:grid;gap:4px}
+.demo-holo-ticket .holo-ticket-center>span{font-size:8px;letter-spacing:.12em;font-weight:770;color:#e8f7ff}
+.demo-holo-ticket .holo-ticket-center strong{font-size:clamp(24px,3.5vw,36px);line-height:.93;letter-spacing:-.065em;font-weight:890}
+.demo-holo-ticket .holo-ticket[data-tilted="true"]{
+ transform:perspective(600px) rotateX(7deg) rotateY(12deg) scale(1.025);
+ box-shadow:0 19px 30px #27325b53,inset 0 1px 1px #ffffffa8;
+}
+.demo-holo-ticket .holo-ticket[data-tilted="true"] .holo-ticket-foil{
+ transform:translateX(14%) rotate(64deg) scale(1.18);opacity:.93;
+}
+.demo-holo-ticket .holo-ticket-toggle{
+ border:1px solid #5c90a1;background:#174c61;color:#fff;border-radius:9px;
+ min-height:37px;padding:8px 16px;font-size:12px;font-weight:830;touch-action:manipulation;
+}
+.demo-holo-ticket .holo-ticket-toggle:focus-visible{outline:3px solid #137c72;outline-offset:3px}
+.demo-holo-ticket .footnote{font-size:10px;text-align:center;color:#3d6259;max-width:290px;line-height:1.4}
+@media(hover:hover) and (pointer:fine){
+ .demo-holo-ticket .holo-ticket:hover{box-shadow:0 18px 29px #27325b60}
+}
+@media(prefers-reduced-motion:reduce){
+ .demo-holo-ticket .holo-ticket,.demo-holo-ticket .holo-ticket-foil{transition:none!important;animation:none!important}
+ .demo-holo-ticket .holo-ticket,.demo-holo-ticket .holo-ticket[data-tilted="true"]{transform:none}
+}
+
+
+
+/* Study 036 — original Apple-style continuous app-icon corner comparison.
+   Native experimental corner-shape where supported, JS-calculated polygon
+   fallback in Safari/Firefox. No copied Apple application icons or assets. */
+.superellipse-study{width:100%;max-width:330px;display:grid;justify-items:stretch;gap:12px}
+.superellipse-study .superellipse-comparison{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.superellipse-study .superellipse-cell{display:grid;justify-items:center;gap:8px;min-width:0}
+.superellipse-study .superellipse-app-icon{
+ position:relative;isolation:isolate;overflow:hidden;display:grid;place-items:center;
+ aspect-ratio:1;width:min(100%,116px);border:0;padding:0;
+ background:linear-gradient(145deg,#1b7d95 4%,#95eac1 55%,#d9f8ba);
+ box-shadow:inset 0 2px 5px #ffffff8a,inset 0 -10px 13px #183e5d33;
+ color:#fff;
+}
+.superellipse-study .superellipse-app-icon::before{
+ content:"";position:absolute;inset:10%;z-index:-1;opacity:.75;
+ background:radial-gradient(circle at 23% 20%,#ffffffc2,transparent 30%),
+ linear-gradient(140deg,#ffffff38,#054b68a0);
+ border-radius:inherit;
+}
+.superellipse-study .superellipse-app-icon>span{
+ font-size:57px;line-height:1;text-shadow:0 5px 14px #11516f7c;
+}
+.superellipse-study .superellipse-round{border-radius:27%}
+.superellipse-study .superellipse-continuous{
+ --icon-curvature:2;
+ border-radius:27%;
+ corner-shape:superellipse(var(--icon-curvature));
+}
+.superellipse-study .superellipse-caption{
+ font-size:10px;font-weight:800;color:#2c6758;white-space:nowrap;
+}
+.superellipse-study .superellipse-curve{display:grid;gap:6px}
+.superellipse-study .superellipse-curve label{
+ display:flex;justify-content:space-between;align-items:center;gap:12px;
+ font-size:12px;color:#315d4d;font-weight:750;
+}
+.superellipse-study .superellipse-curve output{
+ font-variant-numeric:tabular-nums;font-size:14px;font-weight:900;color:#186657;
+}
+.superellipse-study input[type=range]{width:100%;min-height:31px;accent-color:#1e7f65;cursor:pointer;touch-action:pan-y}
+.superellipse-study input[type=range]:focus-visible{outline:3px solid #178573;outline-offset:3px;border-radius:10px}
+.superellipse-study .footnote{font-size:10px;color:#3d675c;text-align:center;line-height:1.4}
+@supports not (corner-shape: superellipse(2)){
+ .superellipse-study .superellipse-continuous{border-radius:0;clip-path:polygon(100.00% 50.00%,99.88% 65.65%,99.52% 72.08%,98.91% 76.94%,98.06% 80.93%,96.96% 84.33%,95.59% 87.27%,93.96% 89.82%,92.04% 92.04%,89.82% 93.96%,87.27% 95.59%,84.33% 96.96%,80.93% 98.06%,76.94% 98.91%,72.08% 99.52%,65.65% 99.88%,50.00% 100.00%,34.35% 99.88%,27.92% 99.52%,23.06% 98.91%,19.07% 98.06%,15.67% 96.96%,12.73% 95.59%,10.18% 93.96%,7.96% 92.04%,6.04% 89.82%,4.41% 87.27%,3.04% 84.33%,1.94% 80.93%,1.09% 76.94%,0.48% 72.08%,0.12% 65.65%,0.00% 50.00%,0.12% 34.35%,0.48% 27.92%,1.09% 23.06%,1.94% 19.07%,3.04% 15.67%,4.41% 12.73%,6.04% 10.18%,7.96% 7.96%,10.18% 6.04%,12.73% 4.41%,15.67% 3.04%,19.07% 1.94%,23.06% 1.09%,27.92% 0.48%,34.35% 0.12%,50.00% 0.00%,65.65% 0.12%,72.08% 0.48%,76.94% 1.09%,80.93% 1.94%,84.33% 3.04%,87.27% 4.41%,89.82% 6.04%,92.04% 7.96%,93.96% 10.18%,95.59% 12.73%,96.96% 15.67%,98.06% 19.07%,98.91% 23.06%,99.52% 27.92%,99.88% 34.35%)}
+}
+@media(prefers-reduced-motion:reduce){
+ .superellipse-study *{transition:none!important;animation:none!important}
+}
+
+
+/* Study 080 — actual public ImageKit face-aware crop, not an AI simulation.
+   Portraits are the official documentation's public example; no account key. */
+.demo-face-crop .face-crop-study{display:grid;gap:9px;justify-items:stretch;width:100%;max-width:355px}
+.demo-face-crop .avatar-crop-comparison{display:grid;grid-template-columns:1.1fr 1fr;gap:11px;align-items:start}
+.demo-face-crop .avatar-crop-comparison figure{margin:0;display:grid;gap:6px;justify-items:center;min-width:0}
+.demo-face-crop .avatar-crop-comparison img{
+ width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#c9d8cb;
+ box-shadow:0 7px 14px #142c2725; border:1px solid #c1d2c2;
+}
+.demo-face-crop .avatar-crop-before img{border-radius:12px}
+.demo-face-crop .avatar-crop-after img{border-radius:12px}
+.demo-face-crop .avatar-crop-after img[data-crop="circle"]{border-radius:50%}
+.demo-face-crop .avatar-crop-comparison figcaption{font-size:10px;font-weight:790;text-align:center;color:#326453}
+.demo-face-crop .avatar-mode-options{display:flex;gap:4px;background:#d3e3d6;border:1px solid #b1c7b9;padding:4px;border-radius:9px}
+.demo-face-crop .avatar-mode-options button{
+ background:transparent;color:#265747;flex:1;min-height:35px;
+ padding:7px 5px;border-radius:6px;font-size:11px;font-weight:750;
+}
+.demo-face-crop .avatar-mode-options button[aria-pressed="true"]{background:#145a4b;color:#fff;box-shadow:0 2px 7px #13453533}
+.demo-face-crop .avatar-mode-options button:focus-visible{outline:3px solid #056a55;outline-offset:3px}
+.demo-face-crop .avatar-public-label{font-size:10px;font-weight:780;color:#32604f}
+.demo-face-crop .avatar-try-url{display:flex;gap:6px;align-items:stretch;width:100%;min-width:0}
+.demo-face-crop .avatar-try-url input{
+ flex:1 1 0;min-width:0;padding:8px 9px;font-size:10px;line-height:1.35;
+ border:1px solid #8eb09e;border-radius:6px;color:#24493d;background:#fff;
+}
+.demo-face-crop .avatar-try-url input:focus-visible{outline:2px solid #086b59;outline-offset:2px}
+.demo-face-crop .avatar-try-url button{
+ flex:0 0 auto;min-height:38px;padding:8px 12px;border-radius:6px;
+ font-size:11px;font-weight:780;background:#1f6957;color:#fff;
+}
+.demo-face-crop .avatar-try-url button:focus-visible{outline:2px solid #086b59;outline-offset:3px}
+.demo-face-crop .avatar-load-status,.demo-face-crop .footnote{
+ display:block;font-size:10px;line-height:1.35;color:#3a6656;text-align:center;
+}
+.demo-face-crop .avatar-load-status{min-height:14px}
+@media(max-width:560px){.demo-face-crop .face-crop-study{max-width:330px}}
+
+
+/* Optional official ImageKit face-tracked video sample, never auto-requested. */
+.demo-face-crop .avatar-video-example{width:100%;border:1px solid #b4cbbb;border-radius:9px;background:#e4efdf;padding:6px 10px;color:#2a594d;font-size:11px}
+.demo-face-crop .avatar-video-example summary{cursor:pointer;font-weight:800;padding:6px 2px;list-style:revert}
+.demo-face-crop .avatar-video-example[open]{display:grid;justify-items:center;gap:8px}
+.demo-face-crop .avatar-video-example video{display:block;max-width:min(100%,190px);max-height:260px;border-radius:9px;background:#132728}
+.demo-face-crop .avatar-video-example small{font-size:10px;line-height:1.4;text-align:center;color:#365e53}
+.demo-face-crop .avatar-video-example a{color:#0a615a;text-decoration:underline;text-underline-offset:2px;font-size:10px}
+.demo-face-crop .avatar-video-example summary:focus-visible{outline:3px solid #1d806d;outline-offset:2px}

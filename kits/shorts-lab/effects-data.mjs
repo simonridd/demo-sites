@@ -37,7 +37,7 @@ How to make a glowing voice…|Adapt|P2|voice-orb|Motion|yes|An audio-reactive o
 How to build an AI virtual…|Out of scope|—|virtual-agent|Research-only|no|Full app integration is not a reusable CSS study.
 Create background patterns…|Adapt|P2|pattern|Surfaces|yes|Subtle composition can add depth without distracting from the story.
 How to make videos shoppable|Out of scope|—|shoppable-video|Research-only|no|Commerce workflows need their own scope and integration security.
-How to use superellipse()|Prototype|P3|superellipse|Experimental CSS|yes|Progressively enhance shape grammar while keeping ordinary rounded corners.
+How to use superellipse()|Prototype|P2|superellipse|Experimental CSS|yes|Apple-style continuous icon corners compared with ordinary border-radius; explore adjustable superellipse curvature with fallback clipping in unsupported browsers. Use for own app icons, never counterfeit brand artwork.
 How to build shoppable video|Out of scope|—|shoppable-tutorial|Research-only|no|Building a checkout-enabled player is an application, not a visual effect.
 What simp-chinese-formal…|Skip|—|language-font|Research-only|no|Language-specific typography may matter elsewhere; not a reusable demo effect.
 Resize videos by editing…|Hold|P3|video-ratio|Experimental study|yes|Truncated title; illustrate verified aspect-ratio alternatives only.
@@ -51,7 +51,7 @@ Turning any photo into a…|Hold|P3|photo-candidate|Experimental study|yes|Unkno
 WebP or AVIF?|Adopt|P1|formats|Reliability|no|Compare measured bytes and clarity at realistic sizes; format alone is not a style.
 Your logo should not be a…|Adapt|P2|vector-logo|Brand|yes|Use authorised vector assets; do not replace client marks with approximations.
 The correct way to make n…|Hold|P3|unknown-shape|Experimental study|yes|Incomplete source; a native shape study is a hypothesis, not verified code.
-Premium card shine in CSS|Adapt|P2|shine|Surfaces|yes|A single premium project card can earn a subtle light sweep.
+Premium card shine in CSS|Adapt|P2|shine|Surfaces|yes|A tactile premium card uses a single directional glint, depth, and gentle hover elevation, with tap-to-replay on mobile. Use sparingly in presentations and portfolio hero cards.
 Create a Spotify-style gl…|Adapt|P2|music-glow|Creative|yes|Explore a glow treatment without copying another product's identity.
 How to make your button l…|Adapt|P2|button-looks|Controls|yes|A stateful button makeover must retain focus, disabled and pressed states.
 Build Find My Friends in Next.js|Out of scope|—|friends-app|Research-only|no|Location sharing is an application involving privacy, not a visual skin.
@@ -67,7 +67,7 @@ Your sparkles are wrong|Skip|—|sparkles|Stage-only|yes|A moment of theatrical 
 That logo is not an image|Adapt|P2|css-logo|Brand|yes|Original CSS mark can be a study, but never forge an approved logo.
 New nudging notifications|Adapt|P2|nudge|Status|yes|New information can nudge once; never create false urgency.
 New squeeze effect|Prototype|P3|squeeze|Stage-only|yes|A short original pixel-like squash and jagged-grid reveal. Stage candidate only; source mechanism unverified and not suitable for routine app buttons.
-Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|One-shot rotating soft-focus colour reveal: excellent stage backdrop where it builds anticipation, but never a perpetual blur behind app controls.
+Copy Gemini’s moving background|Adapt|P2|moving-bg|Stage-only|yes|Living soft-focus colour fields drift indefinitely at a gentle nine-second pace, accelerate while an activity control is held and return to normal two seconds after release. Excellent for a focused presentation backdrop; pause and reduced-motion support are essential.
 Make Gemini’s thinking bar|Adapt|P2|thinking|Status|yes|Bounded illustrated colour sweep for a thinking state; the static label explicitly denies real progress. Use only while the owning system reports pending work.
 Copy Google’s modern sliders|Adopt|P1|slider|Controls|yes|Material-inspired active/inactive rails, slim thumb and compressible pressed state; retains native range semantics and visible value.
 Your toggles look cheap|Adopt|P1|toggle|Controls|yes|Native checkbox role switch with CSS :has() thumb that compresses on press, moves and changes colour, and settles to unambiguous on/off.
@@ -79,16 +79,19 @@ New modern carousel CSS tutorial|Prototype|P3|carousel|Navigation|yes|Centred sc
 Odometer reel (Facebook original)|Adapt|P2|odometer|Numbers|yes|Reconstructed independently; Ania offers original source via comment, not extracted from reel.
 YouTube-style filter chips|Adopt|P1|chips|Navigation|yes|Compact horizontally scrollable filter chips with single-selection state, overflow navigation and keyboard controls. Better for filtering collections than for replacing multi-step navigation.
 Glowing images|Adapt|P2|image-glow|Creative|yes|Create a coloured halo from an original transparent image without replacing its edges or distorting a client's asset. Best for a hero or rare presentation spotlight, not every image.
+Neon text|Prototype|P3|neon-text|Typography|yes|Optional neon-sign typography with layered shadow glow and a brief ignition when selected. Retain clear unlit text; reserve for short presentation moments or rare creative portfolio features.
+Holographic conference ticket|Prototype|P2|holo-ticket|Stage-only|yes|A fictional event pass with iridescent foil, viewing-angle highlights and tilt response. Worth trying for event and workshop openers; decoration only, never proof of booking or admission.
+ImageKit face-aware avatar crop|Prototype|P2|face-crop|Avatar media|no|ImageKit public face-aware cropping compared with ordinary center crop and circular framing. Useful for customer/adviser avatar thumbnails, but portrait quality and consent need testing before demo deployment.
 `.trim();
 const cols=RAW.split("\n");
 export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- screenshotProvided:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1),
- evidence:[52,57,60,61,65,66,67,68,69,71,72,73,74,76,77].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80].includes(i+1),
+ evidence:[36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });
-if(effects.length!==77) throw new Error("Expected 77 studies including screenshot-led filter chips and image glow");
+if(effects.length!==80) throw new Error("Expected 80 studies, including screenshot-backed ImageKit avatar crop trial");
 export const researchCount=effects.filter(e=>e.family==="Research-only").length;

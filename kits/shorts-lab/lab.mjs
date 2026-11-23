@@ -1,6 +1,7 @@
 import {effects,researchCount} from './effects-data.mjs';
 import {originalVideoLink,verifiedVideos} from './source-videos.mjs';
 import {clips} from './clip-manifest.mjs';
+import {imagekitAvatarVariants,publicDemoPortrait} from './imagekit-avatar.mjs';
 
 const cards = document.querySelector('#cards');
 const search = document.querySelector('#search');
@@ -15,6 +16,39 @@ const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const activeTimers = new WeakMap();
 const activeFrames = new WeakMap();
 let audience = 'stage';
+const ambientReturnTimers=new WeakMap();
+let activeAmbientButton=null;
+function setAmbientPressed(button,pressed,immediate=false){
+ const stage=button?.closest?.('.gemini-reveal.is-ambient');
+ if(!stage)return;
+ const previous=ambientReturnTimers.get(stage);
+ if(previous)clearTimeout(previous);
+ ambientReturnTimers.delete(stage);
+ if(pressed){stage.classList.add('is-fast');return;}
+ if(immediate){stage.classList.remove('is-fast');return;}
+ ambientReturnTimers.set(stage,setTimeout(()=>{
+  stage.classList.remove('is-fast');
+  ambientReturnTimers.delete(stage);
+ },2000));
+}
+function releaseAmbient(immediate=false){
+ if(!activeAmbientButton)return;
+ setAmbientPressed(activeAmbientButton,false,immediate);
+ activeAmbientButton=null;
+}
+
+let ambientObserver=null;
+function observeAmbient(){
+ ambientObserver?.disconnect();
+ ambientObserver=null;
+ const stage=cards.querySelector('.gemini-reveal.is-ambient');
+ if(!stage)return;
+ if(typeof IntersectionObserver!=='function')return;
+ ambientObserver=new IntersectionObserver(entries=>{
+   for(const entry of entries)entry.target.classList.toggle('is-offscreen',!entry.isIntersecting);
+ },{threshold:0.08});
+ ambientObserver.observe(stage);
+}
 
 const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const button = (label, action, extra = '') => `<button type="button" class="small-action" data-action="${action}" ${extra}>${label}</button>`;
@@ -73,7 +107,23 @@ function previewFor(e) {
     case 'squircle': return `<div class="squircle">◉</div><small>Normal radius fallback</small>`;
     case 'voice-orb': return `<div class="voice-orb" aria-hidden="true"></div><small>Sample visual only · no audio source</small>`;
     case 'pattern': return `<div class="pattern-board"><b>Just enough.</b></div>`;
-    case 'superellipse': return `<div class="superellipse">SOFT</div><small>Progressive enhancement</small>`;
+    case 'superellipse': return `<div class="superellipse-study">
+  <div class="superellipse-comparison">
+    <div class="superellipse-cell">
+      <div class="superellipse-app-icon superellipse-round" aria-hidden="true"><span>✳</span></div>
+      <span class="superellipse-caption">border-radius</span>
+    </div>
+    <div class="superellipse-cell">
+      <div class="superellipse-app-icon superellipse-continuous" data-superellipse-tile style="--icon-curvature:2" aria-hidden="true"><span>✳</span></div>
+      <span class="superellipse-caption">superellipse()</span>
+    </div>
+  </div>
+  <div class="superellipse-curve">
+    <label for="superellipse-range-${e.id}">Corner curvature <output for="superellipse-range-${e.id}" data-superellipse-value>2.00</output></label>
+    <input id="superellipse-range-${e.id}" type="range" min="1" max="4" step=".25" value="2" data-superellipse-range aria-describedby="superellipse-hint-${e.id}">
+  </div>
+  <small id="superellipse-hint-${e.id}" class="footnote">Adjust the icon curvature. Older browsers use a computed shape fallback.</small>
+</div>`;
     case 'video-ratio': return `<span class="candidate-label">Unverified — media trial</span><div class="video-box">16:9</div>${button('Toggle aspect ratio','ratio')}`;
     case 'pill': return `<div class="glide-pills" role="tablist" aria-label="Example sections" style="--selected:0"><button id="pill-${e.id}-0" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="true" tabindex="0" data-action="pill" data-index="0">Discover</button><button id="pill-${e.id}-1" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="false" tabindex="-1" data-action="pill" data-index="1">Show</button><button id="pill-${e.id}-2" type="button" role="tab" aria-controls="pill-panel-${e.id}" aria-selected="false" tabindex="-1" data-action="pill" data-index="2">Decide</button></div><small id="pill-panel-${e.id}" role="tabpanel" aria-labelledby="pill-${e.id}-0" aria-live="polite" data-pill-status>Discover section</small>`;
     case 'price-roll': return `${rollHTML('129.00','£')}${button('Compare £249.00','price')}`;
@@ -83,7 +133,15 @@ function previewFor(e) {
     case 'formats': return `<div class="format-mock"><i>WebP</i><i>AVIF</i></div><small>Compare measured bytes, not labels</small>`;
     case 'vector-logo': return `<div class="vector-logo" aria-label="Original illustrative K mark">k↗</div><small>Use licensed client marks in real work</small>`;
     case 'unknown-shape': return `<span class="candidate-label">Unverified — shape study</span><div class="squircle">◇</div>`;
-    case 'shine': return `<div class="shine-card">Premium, not loud.</div><small>Hover the card</small>`;
+    case 'shine': return `<div class="shine-study">
+  <button class="shine-card shine-card-premium" type="button" data-action="shine-play" aria-label="Replay premium card light sweep">
+    <span class="shine-corner" aria-hidden="true">ATLAS / 050</span>
+    <span class="shine-graphic" aria-hidden="true"><span class="shine-orb"></span><span class="shine-orbit"></span></span>
+    <span class="shine-copy"><span>THE ART OF THE REVEAL</span><strong>Make it<br>memorable.</strong></span>
+    <span class="shine-icon" aria-hidden="true">↗</span>
+  </button>
+  <small class="footnote">Hover, focus or tap to replay one soft light sweep.</small>
+</div>`;
     case 'music-glow': return `<div class="music-glow" aria-hidden="true">♪</div><small>Abstract colour study, not an app clone</small>`;
     case 'video-controls': return `<span class="candidate-label">Unverified — controller trial</span><div class="video-box">▶</div><small>Real playback needs a real media element</small>`;
     case 'gradient': return `<div class="gradient-grain-study">
@@ -129,13 +187,17 @@ function previewFor(e) {
    <small class="footnote">Experimental stage transition · original CSS, not recovered creator source.</small>
  </div>`;
     case 'moving-bg': return `<div class="gemini-reveal-study">
- <div class="gemini-reveal" role="img" aria-label="Illustrative once-only blurred gradient reveal with soft rotation; original CSS study">
+ <div class="gemini-reveal is-ambient" role="group" aria-label="Continuous ambient blurred-gradient demonstration">
    <span class="gemini-aura gemini-aura-one" aria-hidden="true"></span>
    <span class="gemini-aura gemini-aura-two" aria-hidden="true"></span>
    <span class="gemini-aura gemini-aura-three" aria-hidden="true"></span>
-   <span class="gemini-reveal-content"><span class="gemini-kicker">A NEW MOMENT</span><strong>Something extraordinary.</strong><span class="gemini-accent">✳</span></span>
+   <span class="gemini-reveal-content"><span class="gemini-kicker">ALWAYS IN MOTION</span><strong>A living backdrop.</strong><span class="gemini-accent">✳</span></span>
+   <div class="gemini-motion-controls">
+     <button type="button" data-action="ambient-toggle" aria-pressed="false" aria-label="Pause ambient background movement">Pause</button>
+     <button type="button" class="gemini-activity" aria-describedby="gemini-hint-${e.id}">Hold to accelerate</button>
+   </div>
  </div>
- <small class="footnote">Play once to reveal. The background settles; it never loops.</small>
+ <small id="gemini-hint-${e.id}" class="footnote">Continuous 9-second drift. Hold to speed up to 2 seconds; release to return after a 2-second delay. Reduced motion stays static.</small>
 </div>`;
     case 'thinking': return `<div class="thinking-study">
   <div class="thinking-stage" role="img" aria-label="Illustrative thinking animation; no real system is processing">
@@ -240,6 +302,61 @@ function previewFor(e) {
    <small class="footnote">A blurred copy of the same transparent artwork creates the coloured halo.</small>
 </div>`;
 
+    case 'neon-text': return `<div class="neon-text-study">
+  <div class="neon-sign" data-lit="false" role="group" aria-label="Illustrative neon sign">
+    <span class="neon-sign-frame" aria-hidden="true"></span>
+    <strong class="neon-sign-words">AFTER <em>DARK</em></strong>
+    <span class="neon-sign-caption">IDEAS THAT STAY WITH YOU</span>
+  </div>
+  <button type="button" class="neon-switch" data-action="neon-toggle" aria-pressed="false" aria-label="Turn neon sign on">Light the sign <span aria-hidden="true">✦</span></button>
+  <small class="footnote neon-status" aria-live="polite">Neon off · type remains readable</small>
+</div>`;
+    case 'holo-ticket': return `<div class="holo-ticket-study">
+  <div class="holo-ticket" data-tilted="false" role="group" aria-label="Original holographic conference invitation concept; not a valid event admission">
+    <div class="holo-ticket-foil" aria-hidden="true"></div>
+    <div class="holo-ticket-details">
+      <div class="holo-ticket-top"><span>ATLAS / FUTURES</span><span>CONCEPT PASS · 001</span></div>
+      <div class="holo-ticket-center"><span>DESIGN SYSTEMS · EXPERIENCE</span><strong>THE NEXT<br>CHAPTER.</strong><span>EXPLORING WHAT'S POSSIBLE</span></div>
+      <div class="holo-ticket-bottom"><span>EXPERIMENTAL ADMISSION</span><span>NOT VALID FOR ENTRY</span></div>
+    </div>
+    <div class="holo-ticket-rim" aria-hidden="true"></div>
+  </div>
+  <button type="button" class="holo-ticket-toggle" data-action="ticket-tilt" aria-pressed="false" aria-label="Tilt holographic ticket to change its light angle">Tilt for the light ↗</button>
+  <small class="footnote">Fictional event pass. Tilt and foil are visual experiments, not a real ticket.</small>
+</div>`;
+    case 'face-crop': return `<div class="face-crop-study">
+  <div class="avatar-crop-comparison">
+    <figure class="avatar-crop-before">
+      <img src="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg" alt="ImageKit public demonstration portrait before processing" loading="lazy" width="280" height="160">
+      <figcaption>Original image</figcaption>
+    </figure>
+    <figure class="avatar-crop-after">
+      <img class="face-crop-result" data-crop="face" src="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face" alt="ImageKit face-aware square crop of the public demonstration portrait" loading="lazy" width="150" height="150">
+      <figcaption class="face-crop-caption">Face-aware</figcaption>
+    </figure>
+  </div>
+  <div class="avatar-mode-options" role="group" aria-label="Compare avatar crop modes">
+    <button type="button" data-action="avatar-mode" data-crop-mode="center" aria-pressed="false">Centre</button>
+    <button type="button" data-action="avatar-mode" data-crop-mode="face" aria-pressed="true">Face-aware</button>
+    <button type="button" data-action="avatar-mode" data-crop-mode="circle" aria-pressed="false">Circle</button>
+  </div>
+  <label class="avatar-public-label" for="avatar-url-${e.id}">Try a public ImageKit portrait URL</label>
+  <div class="avatar-try-url">
+    <input id="avatar-url-${e.id}" type="url" data-avatar-url value="https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg" autocomplete="off" spellcheck="false" aria-describedby="avatar-url-hint-${e.id}">
+    <button type="button" data-action="avatar-load">Preview</button>
+  </div>
+  <small class="avatar-load-status" role="status" aria-live="polite" id="avatar-url-hint-${e.id}">Using ImageKit's public documentation portrait; no account connection or uploads.</small>
+  <details class="avatar-video-example">
+    <summary>Try face-tracked video (public demo)</summary>
+    <video controls playsinline preload="none" aria-label="ImageKit public example of face-tracked portrait video" width="200" height="260">
+      <source src="https://ik.imagekit.io/demo/speak-phone.mp4?tr=fo-face,ar-9_16" type="video/mp4">
+      Your browser cannot play this example video.
+    </video>
+    <small>ImageKit processes the face tracking remotely when requested. No autoplay or private content.</small>
+    <a href="https://imagekit.io/docs/video-resize-and-crop" target="_blank" rel="noopener noreferrer">ImageKit video face-crop documentation</a>
+  </details>
+  <small class="footnote">These are real ImageKit URL transformations, not simulated face detection. Use only public images you have permission to process.</small>
+</div>`;
     default: return `<div class="research-scene"><div class="research-symbol" aria-hidden="true">?</div><strong>No claimed reproduction</strong><span>Further source inspection required: ${title}</span></div>`;
   }
 }
@@ -292,7 +409,10 @@ function render(){
    (!screenshotsOnly.checked||e.screenshotProvided) &&
    (m==='all'||(m==='exact'&&Boolean(verifiedVideos[e.id]))||(m==='unverified'&&!verifiedVideos[e.id])||(m==='ready'&&Boolean(clips[String(e.id)]))||(m==='pending'&&!clips[String(e.id)])) &&
    (!q || (e.title+' '+e.note+' '+e.family+' '+e.verdict).toLowerCase().includes(q)));
+ releaseAmbient(true);
  cards.innerHTML=filtered.map(cardHTML).join('');
+ for(const tile of cards.querySelectorAll?.('[data-superellipse-tile]')||[])applySuperellipseFallback(tile,Number(tile.style.getPropertyValue('--icon-curvature'))||2);
+ observeAmbient();
  resultCount.textContent=`${filtered.length} of ${effects.length} studies · ${Object.keys(verifiedVideos).length} verified individual source links · ${Object.keys(clips).length} recorded clips`;
  document.querySelector('#empty').hidden=filtered.length>0;
 }
@@ -390,7 +510,20 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='gradient'){
+     if(preview.dataset.effect==='face-crop'){
+       const chosen=preview.querySelector('[data-action="avatar-mode"][data-crop-mode="circle"]');
+       chosen?.click();
+     }else if(preview.dataset.effect==='holo-ticket'){
+       preview.querySelector('[data-action="ticket-tilt"]')?.click();
+     }else if(preview.dataset.effect==='neon-text'){
+       const toggle=preview.querySelector('[data-action="neon-toggle"]');
+       if(toggle?.getAttribute('aria-pressed')!=='true')toggle?.click();
+     }else if(preview.dataset.effect==='shine'){
+       preview.querySelector('[data-action="shine-play"]')?.focus();
+     }else if(preview.dataset.effect==='moving-bg'){
+       const stage=preview.querySelector('.gemini-reveal');
+       if(stage?.classList.contains('is-paused'))preview.querySelector('[data-action="ambient-toggle"]')?.click();
+     }else if(preview.dataset.effect==='gradient'){
        preview.querySelector('[data-action="grain"]')?.click();
      }else if(preview.dataset.effect==='image-glow'){
        preview.querySelector('[data-action="image-glow"]')?.click();
@@ -435,6 +568,80 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'avatar-mode':{
+     const study=preview.querySelector('.face-crop-study');
+     const result=study?.querySelector('.face-crop-result');
+     const input=study?.querySelector('[data-avatar-url]');
+     if(!result||!input)break;
+     const mode=btn.dataset.cropMode;
+     if(!['center','face','circle'].includes(mode))break;
+     try{
+       const variants=imagekitAvatarVariants(input.value,224);
+       for(const option of study.querySelectorAll('[data-action="avatar-mode"]'))option.setAttribute('aria-pressed',String(option===btn));
+       result.src=variants[mode];
+       result.dataset.crop=mode;
+       result.alt=mode==='center'?'Centre-cropped public demonstration portrait':mode==='circle'?'Face-aware circular portrait crop':'Face-aware square portrait crop';
+       study.querySelector('.face-crop-caption').textContent=mode==='circle'?'Circular face crop':mode==='center'?'Centre crop':'Face-aware';
+       study.querySelector('.avatar-load-status').textContent='Selected '+(mode==='center'?'centre crop':mode==='circle'?'circular face crop':'face-aware crop')+' · real ImageKit transformation';
+     }catch(error){
+       study.querySelector('.avatar-load-status').textContent=error.message;
+     }
+     break;
+   }
+   case 'avatar-load':{
+     const study=preview.querySelector('.face-crop-study');
+     const input=study?.querySelector('[data-avatar-url]');
+     if(!input)break;
+     try{
+       const variants=imagekitAvatarVariants(input.value,224);
+       study.querySelector('.avatar-crop-before img').src=variants.original;
+       const selected=study.querySelector('[data-action="avatar-mode"][aria-pressed="true"]');
+       const mode=selected?.dataset.cropMode||'face';
+       study.querySelector('.face-crop-result').src=variants[mode];
+       study.querySelector('.face-crop-result').dataset.crop=mode;
+       study.querySelector('.avatar-load-status').textContent='Previewing the selected public ImageKit image URL';
+     }catch(error){
+       study.querySelector('.avatar-load-status').textContent=error.message;
+     }
+     break;
+   }
+   case 'ticket-tilt':{
+     const ticket=preview.querySelector('.holo-ticket');
+     if(!ticket)break;
+     const tilted=btn.getAttribute('aria-pressed')!=='true';
+     btn.setAttribute('aria-pressed',String(tilted));
+     ticket.dataset.tilted=String(tilted);
+     btn.textContent=tilted?'Return to front':'Tilt for the light ↗';
+     break;
+   }
+   case 'neon-toggle':{
+     const study=preview.querySelector('.neon-text-study');
+     const sign=study?.querySelector('.neon-sign');
+     if(!sign)break;
+     const lit=btn.getAttribute('aria-pressed')!=='true';
+     sign.dataset.lit=String(lit);
+     btn.setAttribute('aria-pressed',String(lit));
+     btn.setAttribute('aria-label',lit?'Turn neon sign off':'Turn neon sign on');
+     btn.innerHTML=lit?'Switch off <span aria-hidden="true">✦</span>':'Light the sign <span aria-hidden="true">✦</span>';
+     const status=study.querySelector('.neon-status');
+     if(status)status.textContent=lit?'Neon on · decorative effect':'Neon off · type remains readable';
+     sign.classList.remove('is-igniting');
+     if(lit&&!motionPreference.matches&&!document.documentElement.classList.contains('motion-off')){
+       void sign.offsetWidth;
+       sign.classList.add('is-igniting');
+     }
+     break;
+   }
+   case 'shine-play': replay(preview);break;
+   case 'ambient-toggle':{
+     const stage=preview.querySelector('.gemini-reveal');
+     if(!stage)break;
+     const paused=stage.classList.toggle('is-paused');
+     btn.setAttribute('aria-pressed',String(paused));
+     btn.setAttribute('aria-label',paused?'Resume ambient background movement':'Pause ambient background movement');
+     btn.textContent=paused?'Resume':'Pause';
+     break;
+   }
    case 'premium-button':{
      const selected=btn.getAttribute('aria-pressed')!=='true';
      btn.setAttribute('aria-pressed',String(selected));
@@ -577,6 +784,34 @@ document.addEventListener('pointerdown',event=>{
    if(wrapper && !wrapper.contains(event.target))closeSplitMenu(wrapper.closest('.preview'));
  }
 });
+cards.addEventListener('error',event=>{
+ const img=event.target;
+ if(!img.matches?.('.face-crop-study img'))return;
+ const status=img.closest('.face-crop-study')?.querySelector('.avatar-load-status');
+ if(status)status.textContent='The remote ImageKit image could not be loaded. Try a different public URL.';
+},true);
+cards.addEventListener('pointerdown',event=>{
+ const btn=event.target.closest?.('.gemini-activity');
+ if(!btn)return;
+ if(activeAmbientButton&&activeAmbientButton!==btn)releaseAmbient(true);
+ activeAmbientButton=btn;
+ setAmbientPressed(btn,true);
+});
+document.addEventListener('pointerup',()=>releaseAmbient());
+document.addEventListener('pointercancel',()=>releaseAmbient());
+cards.addEventListener('keydown',event=>{
+ const btn=event.target.closest?.('.gemini-activity');
+ if(!btn||![' ','Enter','Space'].includes(event.key)||event.repeat)return;
+ activeAmbientButton=btn;
+ setAmbientPressed(btn,true);
+});
+cards.addEventListener('keyup',event=>{
+ const btn=event.target.closest?.('.gemini-activity');
+ if(btn&&[' ','Enter','Space'].includes(event.key))releaseAmbient();
+});
+document.addEventListener('focusout',event=>{
+ if(event.target===activeAmbientButton)releaseAmbient(true);
+},true);
 cards.addEventListener('click',event=>{
  const btn=event.target.closest('button');
  if(!btn || !cards.contains(btn)) return;
@@ -652,7 +887,34 @@ cards.addEventListener('change',event=>{
  const text=input.closest('.squishy-toggle')?.querySelector('.switch-status');
  if(text)text.textContent=input.checked?'On':'Off';
 });
+function applySuperellipseFallback(tile,curve){
+ // CSS corner-shape is not universally supported; polygon approximates the
+ // same continuously curved boundary. Use 96 points for a smooth mobile edge.
+ if(!tile)return;
+ const native=typeof CSS!=='undefined' && CSS.supports?.('corner-shape','superellipse(2)');
+ if(native){tile.style.clipPath='';return;}
+ const exponent=2**curve,points=[];
+ for(let index=0;index<96;index++){
+   const angle=2*Math.PI*index/96;
+   const x=Math.cos(angle),y=Math.sin(angle);
+   const xx=50+50*Math.sign(x)*Math.abs(x)**(2/exponent);
+   const yy=50+50*Math.sign(y)*Math.abs(y)**(2/exponent);
+   points.push(xx.toFixed(2)+'% '+yy.toFixed(2)+'%');
+ }
+ tile.style.clipPath='polygon('+points.join(',')+')';
+}
 cards.addEventListener('input',event=>{
+ if(event.target.matches('[data-superellipse-range]')){
+  const study=event.target.closest('.superellipse-study');
+  const value=Math.max(1,Math.min(4,Number(event.target.value)||2));
+  const tile=study?.querySelector('[data-superellipse-tile]');
+  if(tile){
+   tile.style.setProperty('--icon-curvature',String(value));
+   applySuperellipseFallback(tile,value);
+  }
+  const output=study?.querySelector('[data-superellipse-value]');
+  if(output){output.value=value.toFixed(2);output.textContent=value.toFixed(2);}
+ }
  if(event.target.matches('[data-range]')){
   const slider=event.target.closest('.slider-wrap');
   const output=slider?.querySelector('output');
@@ -664,7 +926,10 @@ cards.addEventListener('input',event=>{
  }
 });
 motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
-document.addEventListener('visibilitychange',()=>{if(document.hidden) document.querySelectorAll('.preview').forEach(settleCount);});
+document.addEventListener('visibilitychange',()=>{
+ if(document.hidden){releaseAmbient(true);document.querySelectorAll('.preview').forEach(settleCount);}
+ document.querySelectorAll('.gemini-reveal.is-ambient').forEach(stage=>stage.classList.toggle('is-tab-hidden',document.hidden));
+});
 for(const control of [search,verdictFilter,familyFilter,mediaFilter,stageOnly,screenshotsOnly])
  control.addEventListener(control===search?'input':'change',render);
 for(const radio of document.querySelectorAll('[name="audience"]')){

@@ -37,8 +37,8 @@ def catalogue():
             raise ValueError(f"Broken source row {index}")
         title, verdict, priority, preview, family, stage, note = fields
         rows.append(dict(id=index, title=title, preview=preview, family=family))
-    if len(rows) != 77:
-        raise RuntimeError(f"Expected 77 catalogue rows, got {len(rows)}")
+    if len(rows) != 80:
+        raise RuntimeError(f"Expected 80 catalogue rows, got {len(rows)}")
     return rows
 
 
@@ -83,7 +83,13 @@ def act(preview, entry):
         preview.locator('input[type="checkbox"]').first.check(timeout=1200, force=True)
         preview.locator('input[type="checkbox"]').first.uncheck(timeout=1200, force=True)
     elif key == "shine":
-        preview.locator(".shine-card").hover(timeout=1200)
+        preview.locator('[data-action="shine-play"]').click(timeout=1200)
+    elif key == "neon-text":
+        preview.locator('[data-action="neon-toggle"]').click(timeout=1200)
+    elif key == "holo-ticket":
+        preview.locator('[data-action="ticket-tilt"]').click(timeout=1200)
+    elif key == "face-crop":
+        preview.locator('[data-action="avatar-mode"][data-crop-mode="center"]').click(timeout=1200)
     elif key == "button":
         preview.locator("button.demo-button").hover(timeout=1200)
     elif key == "button-looks":
@@ -125,6 +131,14 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
     preview.scroll_into_view_if_needed()
     # Give the browser a frame before taking the opening static composition.
     page.wait_for_timeout(75)
+    if entry["preview"] == "face-crop":
+        # The example must demonstrate a real remote ImageKit result, not a
+        # blank image or an invented local detection outcome.
+        page.wait_for_function("""() => {
+          const host=document.querySelector('.card[data-id="80"]');
+          const imgs=host ? Array.from(host.querySelectorAll('.avatar-crop-comparison img')) : [];
+          return imgs.length===2 && imgs.every(img=>img.complete && img.naturalWidth>0);
+        }""", timeout=20000)
     cmd = [
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
         "-f", "image2pipe", "-framerate", str(fps),
@@ -141,7 +155,30 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
             # Study 068: move the native range across several browser frames.
             # Study 069: hold the pointer down to capture thumb compression,
             # then release for each genuine checkbox state change.
-            if entry["preview"] == "slider":
+            if entry["preview"] == "moving-bg":
+                # Demonstrate gentle ambient movement, then a real press-and-hold
+                # speed change. The 2s return delay is tested separately.
+                if frame == 4:
+                    control = preview.locator(".gemini-activity")
+                    box = control.bounding_box()
+                    if not box:
+                        raise RuntimeError("Ambient speed-up button could not be located")
+                    page.mouse.move(box["x"] + box["width"]/2,
+                                    box["y"] + box["height"]/2)
+                    page.mouse.down()
+                if frame == 13:
+                    page.mouse.up()
+            elif entry["preview"] == "superellipse":
+                # Capture genuine continuous shape changes in the real app icon.
+                if 2 <= frame <= 20:
+                    curve=1.25 + 2.5 * (frame-2) / 18
+                    preview.locator('[data-superellipse-range]').evaluate(
+                        """(el, v) => {
+                          el.value = v.toFixed(2);
+                          el.dispatchEvent(new Event('input',{bubbles:true}));
+                        }""", curve
+                    )
+            elif entry["preview"] == "slider":
                 if 2 <= frame <= 20:
                     value = round(10 + 78 * (frame - 2) / 18) if frame <= 11 else round(88 - 62 * (frame - 11) / 9)
                     preview.locator('[data-range]').evaluate(
@@ -167,7 +204,7 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                     # A missing local action is not a reason to fabricate motion.
                     pass
             if frame == round(total_frames * .58):
-                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient"):
+                if entry["preview"] in ("pill", "carousel", "icons", "input", "header", "blur", "split", "chips", "image-glow", "button-looks", "gradient", "holo-ticket", "face-crop"):
                     try:
                         if entry["preview"] == "pill":
                             preview.locator('[data-index="2"]').click(timeout=800)
@@ -192,6 +229,10 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                             preview.locator('button.premium-action').click(timeout=800)
                         elif entry["preview"] == "gradient":
                             preview.locator('[data-action="grain"]').click(timeout=800)
+                        elif entry["preview"] == "holo-ticket":
+                            preview.locator('[data-action="ticket-tilt"]').click(timeout=800)
+                        elif entry["preview"] == "face-crop":
+                            preview.locator('[data-action="avatar-mode"][data-crop-mode="circle"]').click(timeout=800)
                         else:
                             preview.locator('[data-action="header"]').click(timeout=800)
                     except PlaywrightTimeout:

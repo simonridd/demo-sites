@@ -124,7 +124,7 @@ These are independent implementations prompted by user-supplied video screenshot
 
 | ID | Study | Treatment and reuse decision |
 | --- | --- | --- |
-| 066 | Gemini-inspired moving/blurred background | **Adapt for stage**: bounded, blurred colour fields rotate and settle over 2.1 seconds. The scene stays attractive afterward and does not loop. Use for a reveal/section break; do not use as a permanently moving backdrop under working controls. Actual Gemini source/branding is not copied. |
+| 066 | Gemini-inspired moving/blurred background | **Adapt for stage**: indefinite gentle motion (9-second drift) becomes more energetic while the activity control is held (2-second period), then returns to ambient pace after a 2-second delay. Includes Pause/Resume and static reduced-motion presentation. Best behind a one-off presentation title or AI sequence; do not imply actual processing or use constant background motion throughout an ordinary workflow. Original Gemini source/branding is not copied. |
 | 067 | Thinking-bar colour sweep | **Adapt**: multicolour bar animates for two short cycles only when explicitly played, with a truthful illustrative label. Never treat the animation as proof of background processing or completion. |
 | 068 | Expressive sliders | **Adopt selectively**: a native range input owns its value, keyboard controls and accessible label. The custom segmented track, narrow thumb, press feedback and live output are visual enhancements, with a static fallback. |
 | 069 | Squishy toggle | **Adopt selectively**: a real checkbox/role switch determines on/off; CSS :has and the sibling checked selector control thumb position, while :active briefly compresses its shape. Its off state must always be unambiguous. |
@@ -145,7 +145,7 @@ All original video links and case IDs are retained. The Android/Liquid compariso
 
 ## Screenshot-supplied filter and image glow (current review)
 
-The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, and 77**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
+The **Screenshots supplied** gallery filter is a separate evidence dimension, not an approval verdict. It currently highlights studies **36, 50, 52, 57, 60, 61, 65, 66, 67, 68, 69, 71, 72, 73, 74, 76, 77, 78, 79, and 80**. The user provided short-form video frames or visual references for these techniques. The underlying video files and the creator's original complete CSS are not claimed to be recovered. A screenshot marker is not proof of cross-browser compatibility or licence rights.
 
 Study 076 contains genuinely filtering horizontal category chips, with single selection, keyboard arrow navigation and mobile overflow. Study 077 uses an **original** transparent SVG illustration twice: one sharp visible asset and one blurred copy behind it to create a reversible colour halo. All still content remains visible with JavaScript disabled; neither example includes customer accounts or external media dependencies.
 
@@ -153,6 +153,55 @@ Study 057 now compares a smooth gradient against the identical gradient with an 
 
 ### Validated reference-batch acceptance
 
-The screenshot-backed review branch holds **77 studies**, including **15 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
+The screenshot-backed review branch holds **77 studies**, including **17 with user-provided screenshot evidence** and **64 browser-recorded MP4 clips**. The full repository test suite passed **80/80**, and Chromium/WebKit mobile checks covered screenshot filtering, visual controls and native slider/switch interaction. Eleven affected or new clips were re-recorded and validated; the other recordings remain intact.
 
 See the review pull request for the exact source revision and the final GitHub Pages deployment receipt. The original creator's full CSS was not recovered. Screenshots are evidence references, not proof that her exact implementation has been reproduced.
+
+### Study 066 correction — ambient, not one-shot (23 November 2026)
+
+The screenshot's continuous animation and registered `--fast` property indicate **ongoing** motion that accelerates with activity. The kit preserves that effect but uses pointer/keyboard event state and a two-second timer for the return to slow movement, because the CSS-only delayed return behaved inconsistently in Safari/WebKit. The first Motion Atlas interpretation incorrectly used a single 2.1-second scene reveal. Study 066 now demonstrates continuous ambient movement, a press-and-hold activity trigger, a pause toggle and a static reduced-motion fallback. Other screenshot-backed studies remain visually accepted in the kit and are intentionally unchanged; this does **not** promote them automatically into product design standards.
+
+The existing recorded Study 066 MP4 is invalidated by this correction; regenerate only `assets/066.mp4`, check the changing frames and preserve the other 63 recordings. Include a real mobile interaction test before publishing. 
+
+
+### Visual baseline and two additional references (23 November 2026)
+
+The other screenshot-backed effects were favourably reviewed and should remain unchanged in the kit. Approval applies to the appearance of these **kit studies**, not automatic adoption into every product, or proof of original creator-code fidelity.
+
+**Study 050 — premium card shine:** A revised dark-teal hero card uses a short directional light sweep and restrained surface depth. Hover/focus on desktop or a direct tap on the card can replay the glint. All text remains readable without animation. Use selectively in presentation cover or portfolio card, not every control.
+
+**Study 078 — neon text:** A new screenshot-supplied *optional prototype* with cyan/pink layered shadows and a brief "ignition" when the labelled button is selected. The unlit text remains readable and the on/off state is reversible. A plausible effect for an occasional stage headline or avatar introduction, not ordinary interface typography. The original creator's exact code has not been recovered.
+
+Re-record only the updated 036, 050 and 066 clips and the new 078 and 079 clips; verify that all 66 visual studies have matching MP4s. Preserve the other 62 recordings and all customer-demo integrations.
+
+
+### Study 079 — holographic conference-ticket concept
+
+A new screenshot-supplied **stage-first prototype**, implemented independently: a fictional event pass with static legible information, a colourful iridescent foil layer, controlled tilt/light-angle change and an explicit **NOT VALID FOR ENTRY** label. Intended for workshop openers, event landing pages or a one-off presentation reveal, not ticket sales or authentication. This is a visual concept, with no barcode, customer data, external asset or entry claim. Tap/click to tilt; reduced-motion shows a static ticket with the same content. The creator's original code and exact video frames were not recovered in this build.
+
+The user judged all *other* screenshot-backed effects positively. Preserve their current appearance as the kit baseline, not as an automatic instruction to ship them into unrelated products. Validate the new holographic ticket and the corrected Gemini activity behaviour independently before publishing.
+
+### Study 036 — original Apple-style superellipse icon geometry (23 November 2026)
+
+This screenshot-led refinement compares a standard CSS rounded icon with a continuously curved superellipse icon. Both use **original artwork**, not Apple's application assets. A native range input adjusts the curve; `corner-shape: superellipse()` is preferred where supported, and a generated high-resolution polygon approximates the shape in browsers where the experimental property is missing (including relevant WebKit builds). With JavaScript disabled a static fallback polygon remains visible. No client branding or app icon asset changes are made.
+
+Because `corner-shape` is not yet Baseline across major browser engines, keep this effect in the experimental kit. The screenshot is evidence of the technique, not proof that this CSS is the creator's original stylesheet or that Apple uses this exact implementation.
+
+Regenerate only Study 036's recorded MP4 alongside the current release acceptance; leave all unrelated screenshot-backed studies unchanged. The user has positively reviewed the other screenshot-backed kit examples.
+
+### Study 080 — ImageKit face-aware avatars (23 November 2026)
+
+**Screenshot-supplied exploratory integration.** Uses ImageKit's public documentation portrait and actual public URL transformations to compare an unmodified image, square face-aware crop, conventional centre crop, and a circular face-aware avatar. The buttons switch genuine transformed image URLs, not simulated face detection. An optional public-image URL input allows other eligible ImageKit-hosted portraits without uploading anything or storing credentials.
+
+Official public image examples:
+- Original: https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg
+- Face-aware: https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face
+- Circular: https://ik.imagekit.io/ikmedia/docs_images/examples/example_portrait_1.jpg?tr=w-224,h-224,fo-face:r-max
+
+The pure helper is `imagekit-avatar.mjs`. It accepts public HTTPS ImageKit image URLs only; it rejects URLs with embedded credentials and pre-existing transformations. **No private key, account code, email address, access token or customer portrait is bundled.** Face detection happens on ImageKit's delivery side. Image failures are reported instead of claiming success. Do not use customer/adviser portraits or connect an account without separate usage/privacy qualification.
+
+An optional, non-autoplay video element offers ImageKit's official public face-tracked video sample on demand. This demonstrates the documented `fo-face` transformation, but does not qualify performance, pricing, model accuracy or any private-avatar workflow. Official documentation: https://imagekit.io/docs/image-resize-and-crop and https://imagekit.io/docs/video-resize-and-crop.
+
+**Scope:** the working Motion Atlas kit is the deliverable. The rest of the user-approved screenshot studies remain unchanged, and portfolio-wide product/presentation instructions remain untouched until the gallery is reviewed. Add only Study 080's MP4 to the existing 66, yielding 67 visual/illustrative clips.
+
+**Safari qualification note:** The initial CSS-only two-second return occasionally remained in fast mode in WebKit. Continuous gradients now use pointer/keyboard events and an explicit two-second release timer to restore the slow pace while keeping the same visual treatment. Re-record Study 066 and revalidate the paired MP4 after this change.
