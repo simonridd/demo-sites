@@ -131,6 +131,14 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
     preview.scroll_into_view_if_needed()
     # Give the browser a frame before taking the opening static composition.
     page.wait_for_timeout(75)
+    if entry["preview"] == "face-crop":
+        # The example must demonstrate a real remote ImageKit result, not a
+        # blank image or an invented local detection outcome.
+        page.wait_for_function("""() => {
+          const host=document.querySelector('.card[data-id="80"]');
+          const imgs=host ? Array.from(host.querySelectorAll('.avatar-crop-comparison img')) : [];
+          return imgs.length===2 && imgs.every(img=>img.complete && img.naturalWidth>0);
+        }""", timeout=20000)
     cmd = [
         "ffmpeg", "-hide_banner", "-loglevel", "error", "-y",
         "-f", "image2pipe", "-framerate", str(fps),
