@@ -46,3 +46,13 @@ test('delivery fixtures keep the hero discoverable and defer only offscreen gall
  for(const tag of selected)assert.match(tag,/width="1200" height="800"/);
  for(const width of [600,1200])for(const ext of ['avif','webp','jpg'])assert.ok(fs.statSync(path.join(dir,'assets',`delivery-${width}.${ext}`)).size>0);
 });
+
+
+test('sprite sheet URL belongs to its inline declaration for gallery and exported examples',async()=>{
+ const {renderStudy}=await import('./kits/shorts-lab/effects/studies.mjs');
+ for(const assetBase of ['./effects/assets/','./assets/']){
+  const html=renderStudy('pixel','sprite',{assetBase});
+  assert.ok(html.includes('style="background-image:url(\''+assetBase+'wave-sprite.svg\')"'));
+  assert.ok(!html.includes('--ma-sheet:url('));
+ }
+});

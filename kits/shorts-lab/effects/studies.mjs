@@ -37,7 +37,7 @@ export function renderStudy(kind,id,{assetBase='./effects/assets/'}={}) {
  controls=select('index','Index source',[['native','Native CSS (with fallback)'],['fallback','Variable fallback'],['static','Static']])+select('variant','Variant',[['list','Sequential list'],['wave','Travelling wave']])+range('count','List items',3,12,4)+range('delay','Delay (ms)',50,150,80)+range('amplitude','Wave amplitude',.2,1,.8,.1)+duration()+select('direction','Direction',[['normal','Forward'],['reverse','Reverse']]);
  caption='Content order stays fixed. The coloured wave is decorative, not measured audio.';break;
  case 'pixel':
- visual=`<div class="ma-pixel">HELLO</div><div class="ma-sprite" role="img" aria-label="Original geometric mascot waving" style="--ma-sheet:url('${escape(assetBase)}wave-sprite.svg')"></div>`;
+ visual=`<div class="ma-pixel">HELLO</div><div class="ma-sprite" role="img" aria-label="Original geometric mascot waving" style="background-image:url('${escape(assetBase)}wave-sprite.svg')"></div>`;
  controls=select('variant','Variant',[['sprite','Eight-frame gesture'],['pixel','Original pixel bounce']])+mode()+range('duration','Duration (seconds)',.4,3,.8,.1)+range('size','Size',48,128,64)+select('art','Artwork',[['smooth','Smooth illustration'],['pixel','Pixel rendering']]);
  caption='Original eight-frame SVG sheet; a contextual gesture, never proof of activity.';break;
  case 'shimmer':

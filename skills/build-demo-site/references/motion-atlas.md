@@ -16,3 +16,5 @@ The library's CSS/JS is native and scoped under `.ma-effect`. No global auto-mou
 
 
 The second 23 November intake extends existing Atlas rows with image wipes, CSS/JS counters, bounded typewriter headings, five-dot metaballs, precise borders and practical layout/colour/focus/delivery studies. Keep these opt-in. The existing viewport and reduced-motion standards already apply; do not duplicate them or restyle a working customer component merely to show a new property. For derived tokens, retain the approved base and verify actual composite text contrast. For image delivery, inspect the actual LCP resource and cold request evidence before changing priority or lazy-loading behavior. The library includes controlled examples and records platform/device limits; lab observations are not performance gains for another app.
+
+Deployment acceptance must include failed same-origin asset responses as well as runtime errors and animation state. A relative CSS custom-property URL can resolve from the consuming stylesheet rather than the gallery document; keep the sprite source in its direct inline background declaration, and verify gallery plus exported paths.
