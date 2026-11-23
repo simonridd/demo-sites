@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-GB"><meta charset="utf-8"><meta name="robots" content="noindex"><title>Co-op demo session reset</title>
+<body><h1>Co-op demo session reset</h1><p>Reset the saved Messenger session for the completed demo before the fresh checklist test. Recorded conversations remain in Genesys.</p>
+<button id="start-chat" disabled>Load Co-op Messenger</button><p id="chat-status" role="status">Messenger has not loaded.</p>
+<button id="reset" disabled>Reset saved demo session</button><p id="reset-status" role="status">Waiting for Messenger.</p>
+<a href="./index.html?test=checklist-fresh-20261123#contact">Return to Co-op for the fresh conversation</a>
+<script src="./messenger-config.js?v=20261123-checklist-test"></script><script src="./messenger.js"></script>
+<script>
+document.getElementById('start-chat').addEventListener('click',()=>{
+ if(typeof window.Genesys!=='function')return;
+ window.Genesys('subscribe','Messenger.ready',()=>{
+  document.getElementById('reset').disabled=false;
+  document.getElementById('reset-status').textContent='Ready to reset the completed demo session.';
+ });
+ window.Genesys('subscribe','Messenger.cleared',()=>{
+  document.getElementById('reset').disabled=true;
+  document.getElementById('reset-status').textContent='Messenger confirmed the saved session was cleared. Return to Co-op to begin a fresh conversation.';
+ });
+});
+document.getElementById('reset').addEventListener('click',()=>{
+ document.getElementById('reset').disabled=true;
+ document.getElementById('reset-status').textContent='Reset requested; waiting for Messenger confirmation.';
+ window.Genesys('command','Messenger.clear');
+});
+</script></body></html>
