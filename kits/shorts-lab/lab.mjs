@@ -129,13 +129,17 @@ function previewFor(e) {
    <small class="footnote">Experimental stage transition · original CSS, not recovered creator source.</small>
  </div>`;
     case 'moving-bg': return `<div class="gemini-reveal-study">
- <div class="gemini-reveal" role="img" aria-label="Illustrative once-only blurred gradient reveal with soft rotation; original CSS study">
+ <div class="gemini-reveal is-ambient" role="group" aria-label="Continuous ambient blurred-gradient demonstration">
    <span class="gemini-aura gemini-aura-one" aria-hidden="true"></span>
    <span class="gemini-aura gemini-aura-two" aria-hidden="true"></span>
    <span class="gemini-aura gemini-aura-three" aria-hidden="true"></span>
-   <span class="gemini-reveal-content"><span class="gemini-kicker">A NEW MOMENT</span><strong>Something extraordinary.</strong><span class="gemini-accent">✳</span></span>
+   <span class="gemini-reveal-content"><span class="gemini-kicker">ALWAYS IN MOTION</span><strong>A living backdrop.</strong><span class="gemini-accent">✳</span></span>
+   <div class="gemini-motion-controls">
+     <button type="button" data-action="ambient-toggle" aria-pressed="false" aria-label="Pause ambient background movement">Pause</button>
+     <button type="button" class="gemini-activity" aria-describedby="gemini-hint-${e.id}">Hold to accelerate</button>
+   </div>
  </div>
- <small class="footnote">Play once to reveal. The background settles; it never loops.</small>
+ <small id="gemini-hint-${e.id}" class="footnote">Continuous 9-second drift. Hold to speed up to 2 seconds; release to return after a 2-second delay. Reduced motion stays static.</small>
 </div>`;
     case 'thinking': return `<div class="thinking-study">
   <div class="thinking-stage" role="img" aria-label="Illustrative thinking animation; no real system is processing">
@@ -390,7 +394,10 @@ function doAction(btn,preview){
    case 'pair':{
      replay(preview);
      // Pair real interaction with the actual MP4, not just decorative playback.
-     if(preview.dataset.effect==='gradient'){
+     if(preview.dataset.effect==='moving-bg'){
+       const stage=preview.querySelector('.gemini-reveal');
+       if(stage?.classList.contains('is-paused'))preview.querySelector('[data-action="ambient-toggle"]')?.click();
+     }else if(preview.dataset.effect==='gradient'){
        preview.querySelector('[data-action="grain"]')?.click();
      }else if(preview.dataset.effect==='image-glow'){
        preview.querySelector('[data-action="image-glow"]')?.click();
@@ -435,6 +442,15 @@ function doAction(btn,preview){
    case 'odometer':changeRoll(preview,'24,715');break;
    case 'fab':{const menu=preview.querySelector('.fab-options');menu.hidden=!menu.hidden;btn.setAttribute('aria-expanded',String(!menu.hidden));btn.textContent=menu.hidden?'＋':'×';break;}
    case 'fab-choice':{preview.querySelector('.fab-options').hidden=true;const main=preview.querySelector('.fab-main');main.setAttribute('aria-expanded','false');main.textContent='＋';break;}
+   case 'ambient-toggle':{
+     const stage=preview.querySelector('.gemini-reveal');
+     if(!stage)break;
+     const paused=stage.classList.toggle('is-paused');
+     btn.setAttribute('aria-pressed',String(paused));
+     btn.setAttribute('aria-label',paused?'Resume ambient background movement':'Pause ambient background movement');
+     btn.textContent=paused?'Resume':'Pause';
+     break;
+   }
    case 'premium-button':{
      const selected=btn.getAttribute('aria-pressed')!=='true';
      btn.setAttribute('aria-pressed',String(selected));
