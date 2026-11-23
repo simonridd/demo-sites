@@ -90,8 +90,8 @@ export const effects=cols.map((line,i)=>{
  const [title,verdict,priority,preview,family,stage,note]=line.split("|");
  if(!note||!preview) throw new Error("Malformed effect row "+(i+1));
  return {id:i+1,title,verdict,priority,preview,family,stage:stage==="yes",note,
- screenshotProvided:[22,23,24,25,26,27,32,34,36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82].includes(i+1),
- evidence:[22,23,24,25,26,27,32,34,36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
+ screenshotProvided:[6,8,9,11,14,15,17,18,19,20,21,22,23,24,25,26,27,32,34,36,47,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82].includes(i+1),
+ evidence:[6,8,9,11,14,15,17,18,19,20,21,22,23,24,25,26,27,32,34,36,47,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82].includes(i+1)?"user-supplied screenshot; independently authored implementation":(verdict==="Hold"?"unverified title":"catalogue/description"),
  source:i===74?"https://www.facebook.com/reel/2025089661358011":"https://www.youtube.com/@aniakubow/shorts",
  sourceType:i===74?"Facebook reel":"YouTube Shorts channel"};
 });

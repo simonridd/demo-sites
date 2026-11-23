@@ -41,7 +41,7 @@ with sync_playwright() as pw:
   page.on('pageerror',lambda error:errors.append(str(error)))
   page.goto(args.url+'/kits/shorts-lab/effects/');page.wait_for_selector('[data-atlas="comparison"][data-enhanced="true"]')
   effect=lambda name:page.locator(f'[data-atlas="{name}"]')
-  check(page.locator('[data-atlas]').count()==11,engine+': all eleven effects mount')
+  check(page.locator('[data-atlas]').count()==23,engine+': all twenty-three effects mount')
   # Every new component starts still (scroll timelines activate only by selection).
   check(page.locator('[data-atlas][data-running="true"]').count()==0,engine+': no automatic motion')
   comparison=effect('comparison');slider=comparison.locator('[data-comparison]')
@@ -186,7 +186,7 @@ with sync_playwright() as pw:
   page.goto(args.url+'/kits/shorts-lab/');page.wait_for_selector('.card[data-id="82"]')
   check(page.locator('.card').count()==82,engine+': gallery preserves original 80 plus two additions')
   page.locator('#search').fill('gliding pill');check(page.locator('.card').count()==1,engine+': original gallery search')
-  page.locator('#reset').click();page.locator('#screenshots-only').check();check(page.locator('.card').count()==30,engine+': screenshot filter reconciles latest intake')
+  page.locator('#reset').click();page.locator('#screenshots-only').check();check(page.locator('.card').count()==42,engine+': screenshot filter reconciles latest intake')
   page.goto(args.url+'/co-op/');page.wait_for_timeout(100)
   check(page.locator('main').count()>0 and page.locator('[data-atlas]').count()==0,engine+': Co-op remains independent')
   page.goto(args.url+'/kits/shorts-lab/');page.locator('#search').fill('before and after')

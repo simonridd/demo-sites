@@ -19,6 +19,8 @@ test('portable registry resolves to real original examples and shipped assets wi
   const html=renderStudy(item.key,'test-'+item.key);
   assert.ok(html.includes('data-atlas="'+item.key+'"'),item.key);
   assert.ok(!html.includes('undefined'));
+  const portable=renderStudy(item.key,'portable',{assetBase:'./assets/'});
+  assert.ok(portable.includes('href="./README.md#'+item.key+'"'),item.key+' portable guidance link');
   for(const file of [registry.entry,registry.stylesheet,registry.examples,registry.guide])assert.ok(fs.statSync(path.join(dir,file)).isFile());
  }
  const assets=['before.svg','after.svg','wave-sprite.svg'];
@@ -29,4 +31,18 @@ test('portable registry resolves to real original examples and shipped assets wi
 test('original Co-op customer implementation has no dependency on the Atlas effects',()=>{
  const files=['co-op/index.html','co-op/motion.js','co-op/motion.css','demos.json'];
  for(const file of files)assert.doesNotMatch(fs.readFileSync(path.join(__dirname,file),'utf8'),/shorts-lab\/effects|atlas\.mjs/);
+});
+
+test('delivery fixtures keep the hero discoverable and defer only offscreen gallery images',()=>{
+ const selective=fs.readFileSync(path.join(dir,'image-delivery.html'),'utf8');
+ const baseline=fs.readFileSync(path.join(dir,'image-delivery-eager.html'),'utf8');
+ const images=html=>[...html.matchAll(/<img\b[^>]*>/g)].map(x=>x[0]);
+ const selected=images(selective),eager=images(baseline);
+ assert.equal(selected.length,5);assert.equal(eager.length,5);
+ assert.match(selected[0],/loading="eager"/);assert.match(selected[0],/fetchpriority="high"/);
+ assert.ok(selected.slice(1).every(tag=>tag.includes('loading="lazy"')&&!tag.includes('fetchpriority="high"')));
+ assert.ok(eager.every(tag=>tag.includes('loading="eager"')&&!tag.includes('fetchpriority="high"')));
+ assert.deepEqual(selected.map(tag=>tag.match(/src="([^"]+)"/)[1]),eager.map(tag=>tag.match(/src="([^"]+)"/)[1]));
+ for(const tag of selected)assert.match(tag,/width="1200" height="800"/);
+ for(const width of [600,1200])for(const ext of ['avif','webp','jpg'])assert.ok(fs.statSync(path.join(dir,'assets',`delivery-${width}.${ext}`)).size>0);
 });

@@ -1,3 +1,4 @@
+@import url('./practical.css');
 /* Portable, opt-in selectors only. No body/global style changes or autoplay. */
 .ma-effect{--ma-duration:4s;--ma-delay:80ms;--ma-tile:32px;--ma-gap:24px;--ma-size:112px;--ma-level:.35;--ma-halo:14px;--ma-amplitude:.8;--ma-travel:28px;--ma-position:50%;--ma-bg:#11242d;--ma-fg:#edf8f4;--ma-accent:#b8f2cc;--ma-secondary:#ffab84;box-sizing:border-box;width:100%;min-width:0;color:var(--ma-fg);background:var(--ma-bg);padding:16px;border-radius:12px;font:400 1rem/1.5 system-ui,sans-serif;text-align:left}
 .ma-effect[data-theme=light]{--ma-bg:#f0f7f2;--ma-fg:#133c37;--ma-accent:#16664c;--ma-secondary:#9c3e1b}
@@ -77,8 +78,8 @@
 .ma-effect:not([data-enhanced=true]) .ma-compare figure,.ma-effect[data-side=true] .ma-compare figure{position:relative;inset:auto;aspect-ratio:8/5;min-width:0}
 .ma-effect:not([data-enhanced=true]) :is(.ma-divider,.ma-range-label),.ma-effect[data-side=true] :is(.ma-divider,.ma-range-label){display:none}
 .ma-effect[data-side=true][data-compare=dom] :is(.ma-dom-before,.ma-dom-after){position:relative;inset:auto;aspect-ratio:8/5;min-width:0}
-.ma-aurora-stage{background:#101a2b;min-height:160px;display:grid;place-items:center;width:100%;border-radius:8px;padding:16px}.ma-aurora{position:relative;font-size:clamp(1.8rem,5vw,3.5rem);line-height:1.2;font-weight:850;letter-spacing:-.05em;margin:0;color:#d3f6ff;text-align:center}
-.ma-aurora-glow{display:none;position:absolute;inset:0;filter:blur(12px);opacity:.5;pointer-events:none}.ma-effect[data-glow=true] .ma-aurora-glow{display:block}
+.ma-aurora-stage{background:#101a2b;min-height:160px;display:grid;place-items:center;width:100%;border-radius:8px;padding:16px}.ma-aurora{position:relative;font-size:clamp(1.8rem,calc(5vw * var(--ma-text-scale,1)),3.5rem);line-height:1.2;font-weight:850;letter-spacing:-.05em;margin:0;color:#d3f6ff;text-align:center}
+.ma-aurora-glow{display:none;position:absolute;inset:0;filter:blur(var(--ma-glow-radius,12px));opacity:var(--ma-glow-intensity,.5);pointer-events:none}.ma-effect[data-glow=true] .ma-aurora-glow{display:block}
 @supports(background-clip:text){.ma-aurora-ink,.ma-aurora-glow{background-image:linear-gradient(110deg,#b9ffe2,#b6daff,#f5bdff,#fff1cc,#b9ffe2);background-size:300% 100%;background-clip:text;-webkit-background-clip:text;color:transparent}}
 .ma-effect[data-palette=violet] :is(.ma-aurora-ink,.ma-aurora-glow){background-image:linear-gradient(110deg,#bedbff,#e9c0ff,#ffcae9,#bedbff)}
 .ma-effect[data-running=true] :is(.ma-aurora-ink,.ma-aurora-glow){animation:ma-aurora var(--ma-duration) ease-in-out 1}

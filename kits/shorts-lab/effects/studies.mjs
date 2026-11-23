@@ -1,3 +1,4 @@
+import {renderPracticalStudy} from './practical-studies.mjs';
 // Independent, portable examples. renderStudy returns null for untouched studies.
 const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const options = values => values.map(([value,label]) => `<option value="${value}">${label}</option>`).join('');
@@ -5,11 +6,13 @@ const select = (name,label,values) => `<label>${label}<select data-option="${nam
 const range = (name,label,min,max,value,step=1) => `<label>${label}<input data-option="${name}" type="range" min="${min}" max="${max}" value="${value}" step="${step}"></label>`;
 const action = (name,label,extra='') => `<button type="button" data-atlas-action="${name}" ${extra}>${label}</button>`;
 const playback = () => `<div class="ma-controls">${action('play','Play')}${action('pause','Pause','aria-pressed="false"')}${action('stop','Stop')}${action('theme','Light / dark','aria-pressed="false"')}</div>`;
-const wrap = (kind,id,visual,controls,caption) => `<div class="ma-effect" data-atlas="${kind}" data-instance="${id}" data-mode="${kind==='voice-orb'?'loop':'once'}" data-theme="dark"><div class="ma-stage">${visual}</div><div class="ma-options">${controls}</div>${["comparison","refraction","shimmer","reveal"].includes(kind)?`<div class="ma-controls">${action("theme","Light / dark",'aria-pressed="false"')}</div>`:playback()}<p class="ma-caption">${caption}</p><a class="ma-reuse" href="./effects/README.md#${kind}">Use this effect</a></div>`;
+const wrap = (kind,id,visual,controls,caption,linkBase) => `<div class="ma-effect" data-atlas="${kind}" data-instance="${id}" data-mode="${kind==='voice-orb'?'loop':'once'}" data-theme="dark"><div class="ma-stage">${visual}</div><div class="ma-options">${controls}</div>${["comparison","refraction","shimmer","reveal"].includes(kind)?`<div class="ma-controls">${action("theme","Light / dark",'aria-pressed="false"')}</div>`:playback()}<p class="ma-caption">${caption}</p><a class="ma-reuse" href="${escape(linkBase)}README.md#${kind}">Use this effect</a></div>`;
 const mode = () => select('mode','Playback',[['once','One pass'],['loop','Continuous'],['static','Static']]);
 const duration = () => range('duration','Duration (seconds)',1,12,4,.5);
 const curveArt = id => `<defs><pattern id="${id}-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#183a47" stroke-width="2"/></pattern><g id="${id}-art"><rect width="400" height="210" fill="#d4f5e7"/><rect width="400" height="210" fill="url(#${id}-grid)"/><circle cx="210" cy="100" r="66" fill="#e87842"/><path d="M-20 175 Q120 -60 270 120 T430 45" stroke="#185f70" stroke-width="16" fill="none"/><path d="M0 180 L400 20" stroke="#f7f8cf" stroke-width="8"/><text x="28" y="65" font-size="30" font-weight="800" fill="#183a47">OPTICS</text></g><filter id="${id}-bend" x="-25%" y="-40%" width="150%" height="180%" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency=".012 .024" numOctaves="1" seed="8" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="36" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="${id}-frost"><feGaussianBlur stdDeviation="5"/></filter><clipPath id="${id}-clip"><rect x="85" y="32" width="230" height="145" rx="26"/></clipPath></defs>`;
 export function renderStudy(kind,id,{assetBase='./effects/assets/'}={}) {
+ const practical=renderPracticalStudy(kind,id,{assetBase});
+ if(practical!==null)return practical;
  id=String(id).replace(/[^a-zA-Z0-9_-]/g,'-');
  let visual,controls,caption;
  switch(kind){
@@ -56,9 +59,9 @@ export function renderStudy(kind,id,{assetBase='./effects/assets/'}={}) {
  caption='Reuses the Co-op presentation’s native range and clipping recipe. White divider; no autoplay. DOM copies are inert.';break;
  case 'aurora-text':
  visual='<div class="ma-aurora-stage"><h4 class="ma-aurora"><span class="ma-aurora-glow" aria-hidden="true">Motion Atlas</span><span class="ma-aurora-ink">Motion Atlas</span></h4></div>';
- controls=mode()+duration()+action('glow','Glow','aria-pressed="false"')+select('palette','Palette',[['mint','Mint / coral'],['violet','Violet / blue']]);
+ controls=mode()+duration()+action('glow','Glow','aria-pressed="false"')+select('palette','Palette',[['mint','Mint / coral'],['violet','Violet / blue']])+range('glowRadius','Glow radius',0,24,12)+range('glowIntensity','Glow intensity',0,1,.5,.1)+range('textScale','Text scale',.7,1.4,1,.1);
  caption='Gradient inside glyphs, optional decorative glow. Short headings only; use plain text for forms, navigation and body copy.';break;
  default:return null;
  }
- return wrap(kind,id,visual,controls,caption);
+ return wrap(kind,id,visual,controls,caption,assetBase.replace(/assets\/$/,''));
 }

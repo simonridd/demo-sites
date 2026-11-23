@@ -563,7 +563,7 @@ function doAction(btn,preview){
        }
      }
      const player=preview.closest('.card')?.querySelector('video.clip-player');
-     if(player){player.currentTime=0;player.play()?.catch(()=>{});}
+     if(player){player.currentTime=0;if(!motionPreference.matches)player.play()?.catch(()=>{});}
      break;
    }
    case 'toggle-media':preview.querySelector('.media-reserve')?.classList.toggle('is-alt');break;
@@ -935,7 +935,10 @@ cards.addEventListener('input',event=>{
   if(output){output.value=input.value+'%';output.textContent=input.value+'%';}
  }
 });
-motionPreference.addEventListener?.('change',()=>{document.querySelectorAll('.preview').forEach(settleCount);});
+motionPreference.addEventListener?.('change',()=>{
+ document.querySelectorAll('.preview').forEach(settleCount);
+ if(motionPreference.matches){releaseAmbient(true);document.querySelectorAll('video').forEach(video=>video.pause());}
+});
 document.addEventListener('visibilitychange',()=>{
  if(document.hidden){releaseAmbient(true);document.querySelectorAll('.preview').forEach(settleCount);}
  document.querySelectorAll('.gemini-reveal.is-ambient').forEach(stage=>stage.classList.toggle('is-tab-hidden',document.hidden));

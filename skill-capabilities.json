@@ -104,7 +104,15 @@
         "motion-effects.test.cjs",
         "tools/verify-motion-effects.py",
         "tools/package-motion-effects.py",
-        "tools/serve-motion-preview.py"
+        "tools/serve-motion-preview.py",
+        "kits/shorts-lab/effects/practical.mjs",
+        "kits/shorts-lab/effects/practical.css",
+        "kits/shorts-lab/effects/practical-studies.mjs",
+        "kits/shorts-lab/effects/image-delivery.html",
+        "kits/shorts-lab/effects/viewport.html",
+        "tools/verify-practical-effects.py",
+        "tools/verify-motion-delivery.py",
+        "kits/shorts-lab/RECONCILIATION-REVIEW-2.md"
       ],
       "support": "opt-in reusable studies; target integration remains owner-controlled"
     }

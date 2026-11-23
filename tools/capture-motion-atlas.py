@@ -76,7 +76,22 @@ def act(preview, entry):
     portable = preview.locator('[data-atlas]').first
     if portable.count():
         kind = portable.get_attribute('data-atlas')
-        if kind in ('pulse', 'voice-orb'):
+        if kind == 'palette':
+            portable.locator('[data-option="space"]').select_option('oklch')
+        elif kind == 'focus-within':
+            portable.locator('.ma-focus-basic input').fill('hello@example.com')
+        elif kind == 'layout-shift-2':
+            portable.locator('[data-option="scrollbars"]').select_option('classic')
+            portable.locator('[data-atlas-action="overflow"]').click()
+        elif kind == 'progress':
+            portable.locator('[data-option="variant"]').select_option('scroll')
+        elif kind in ('formats', 'mobile'):
+            # These are real layout/delivery studies, not synthetic motion.
+            pass
+        elif kind == 'reduced-motion':
+            portable.locator('[data-option="mode"]').select_option('loop')
+            portable.locator('[data-atlas-action="play"]').click()
+        elif kind in ('pulse', 'voice-orb'):
             portable.locator('[data-option="state"]').select_option('active' if kind == 'pulse' else 'listening')
         elif kind == 'marquee':
             portable.locator('[data-option="mode"]').select_option('loop')
@@ -223,6 +238,10 @@ def record_one(page, entry, output, fps=FPS, seconds=SECONDS):
                 except PlaywrightTimeout:
                     # A missing local action is not a reason to fabricate motion.
                     pass
+            if entry["preview"] == 'progress' and frame > 2:
+                preview.locator('.ma-reading').evaluate('(el,r)=>el.scrollTop=(el.scrollHeight-el.clientHeight)*r', (frame-2)/(total_frames-3))
+            if entry["preview"] == 'reduced-motion' and frame == round(total_frames*.55):
+                preview.locator('[data-option="preference"]').select_option('reduce')
             if entry["preview"] == 'comparison' and frame > 2:
                 preview.locator('[data-comparison]').evaluate("(el, value) => {el.value=value; el.dispatchEvent(new Event('input',{bubbles:true}));}", round((frame-2)/(total_frames-3)*100))
             if entry["preview"] == 'reveal' and frame > 2:
@@ -354,7 +373,7 @@ def main():
     successes = []
     failures = []
     with local_site() as url, sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True)
+        browser = pw.chromium.launch(headless=True, ignore_default_args=["--hide-scrollbars"])
         context = browser.new_context(
             viewport={"width": 1440, "height": 960},
             device_scale_factor=1, reduced_motion="no-preference",

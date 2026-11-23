@@ -151,9 +151,179 @@
       "studyIds": [
         82
       ],
-      "issues": [],
+      "issues": [
+        82
+      ],
       "use": "Short hero/chapter headings",
       "config": "README.md#aurora-text",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "tv-intro",
+      "studyIds": [
+        21
+      ],
+      "issues": [
+        81
+      ],
+      "use": "One-image wipes and preserved typography intro",
+      "config": "README.md#tv-intro",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "count-up",
+      "studyIds": [
+        20
+      ],
+      "issues": [
+        83
+      ],
+      "use": "CSS integer / JS number comparison",
+      "config": "README.md#count-up",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "typewriter",
+      "studyIds": [
+        17
+      ],
+      "issues": [
+        84
+      ],
+      "use": "Short editorial headings; never actual demo output",
+      "config": "README.md#typewriter",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "border",
+      "studyIds": [
+        18
+      ],
+      "issues": [
+        86
+      ],
+      "use": "One premium focal border",
+      "config": "README.md#border",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "metaball",
+      "studyIds": [
+        19
+      ],
+      "issues": [
+        85
+      ],
+      "use": "Small five-dot merging illustration",
+      "config": "README.md#metaball",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "progress",
+      "studyIds": [
+        15
+      ],
+      "issues": [
+        87
+      ],
+      "use": "Reading position, never workflow completion",
+      "config": "README.md#progress",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "focus-within",
+      "studyIds": [
+        14
+      ],
+      "issues": [
+        88
+      ],
+      "use": "Native grouped field focus",
+      "config": "README.md#focus-within",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "palette",
+      "studyIds": [
+        11
+      ],
+      "issues": [
+        89
+      ],
+      "use": "Derived tokens with measured text contrast",
+      "config": "README.md#palette",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "layout-shift-2",
+      "studyIds": [
+        9
+      ],
+      "issues": [
+        90
+      ],
+      "use": "Measured native scrollbar stability",
+      "config": "README.md#layout-shift-2",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "mobile",
+      "studyIds": [
+        8
+      ],
+      "issues": [
+        91
+      ],
+      "use": "Real viewport units and safe-area layout",
+      "config": "README.md#mobile",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "reduced-motion",
+      "studyIds": [
+        6
+      ],
+      "issues": [
+        93
+      ],
+      "use": "Behavioural motion audit",
+      "config": "README.md#reduced-motion",
+      "staticFallback": true,
+      "reducedMotion": true,
+      "autoMount": false
+    },
+    {
+      "key": "formats",
+      "studyIds": [
+        47
+      ],
+      "issues": [
+        94
+      ],
+      "use": "Measured native image delivery",
+      "config": "README.md#formats",
       "staticFallback": true,
       "reducedMotion": true,
       "autoMount": false
@@ -174,5 +344,6 @@
       "targets": "Explicitly allowed local anchors",
       "integration": "Native media only; ImageKit SDK and commerce deferred"
     }
-  ]
+  ],
+  "additionalStylesheet": "practical.css"
 }

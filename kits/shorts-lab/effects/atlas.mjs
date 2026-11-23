@@ -1,9 +1,11 @@
+import {mountPracticalEffect,practicalKinds} from './practical.mjs';
 // No auto-mount, globals, framework or visitor dependencies. One controller owns
 // one component. Copy this directory; keep the MIT comparison notice alongside it.
 const kinds = new Set(['pattern','marquee','voice-orb','pulse','stagger','pixel','shimmer','reveal','refraction','comparison','aurora-text']);
 const clamp = (value,min,max,fallback) => Number.isFinite(Number(value)) ? Math.max(min,Math.min(max,Number(value))) : fallback;
 let instanceSequence=0;
 export function mountEffect(root,initial={}) {
+ if(root&&practicalKinds.includes(root.dataset.atlas))return mountPracticalEffect(root,initial);
  if(!root || !kinds.has(root.dataset.atlas)) throw new TypeError('Expected a supported [data-atlas] element');
  const win=root.ownerDocument.defaultView,doc=root.ownerDocument;
  const abort=new win.AbortController(),signal=abort.signal;
@@ -132,6 +134,9 @@ export function mountEffect(root,initial={}) {
    case 'state':setState(value);return;
    case 'mode':if(!['once','loop','static'].includes(value))return;stop();root.dataset.mode=value;return;
    case 'duration':duration=clamp(value,.4,30,4);root.style.setProperty('--ma-duration',duration+'s');if(desired)play();return;
+   case 'glowRadius':root.style.setProperty('--ma-glow-radius',clamp(value,0,24,12)+'px');return;
+   case 'glowIntensity':root.style.setProperty('--ma-glow-intensity',clamp(value,0,1,.5));return;
+   case 'textScale':root.style.setProperty('--ma-text-scale',clamp(value,.7,1.4,1));return;
    case 'tile':root.style.setProperty('--ma-tile',clamp(value,16,64,32)+'px');return;
    case 'size':root.style.setProperty('--ma-size',clamp(value,32,200,64)+'px');return;
    case 'gap':root.style.setProperty('--ma-gap',clamp(value,0,64,24)+'px');fillMarquee();return;
@@ -173,7 +178,7 @@ export function mountEffect(root,initial={}) {
  });
  on(root,'input',event=>{
   if(event.target.matches('[data-comparison]'))setComparison(event.target.value);
-  else if(event.target.matches('[data-option]'))update(event.target.dataset.option,event.target.value);
+  else if(event.target.matches('input[data-option]'))update(event.target.dataset.option,event.target.value);
  });
  on(root,'change',event=>{if(event.target.matches('select[data-option]'))update(event.target.dataset.option,event.target.value);});
  // Native range keyboard semantics + full-region horizontal touch/pointer drag.

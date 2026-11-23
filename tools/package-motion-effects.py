@@ -19,4 +19,6 @@ with zipfile.ZipFile(args.output,'w',compression=zipfile.ZIP_DEFLATED) as archiv
   archive.writestr('motion-atlas/effects/'+relative.as_posix(),data)
  archive.write(root/'kits/shorts-lab/assets/081.mp4','motion-atlas/effects/assets/comparison-demo.mp4')
  archive.write(root/'kits/shorts-lab/RECONCILIATION.md','motion-atlas/RECONCILIATION.md')
+ review=root/'kits/shorts-lab/RECONCILIATION-REVIEW-2.md'
+ if review.exists():archive.write(review,'motion-atlas/RECONCILIATION-REVIEW-2.md')
 print(f'Exported {args.output.name} ({args.output.stat().st_size:,} bytes)')

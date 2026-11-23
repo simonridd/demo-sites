@@ -209,9 +209,14 @@ An optional, non-autoplay video element offers ImageKit's official public face-t
 
 ## 23 November portable-effects update
 
-Current catalogue: **82 studies**, **69 visual studies**, **13 research-only rows**, **30 screenshot-intake rows**. All original 80 study IDs and titles remain fixed. See [reconciliation](./RECONCILIATION.md) for issues 70–80, previous captures, actual Co-op reuse, verification and deferred integration boundaries.
+Current catalogue: **82 studies**, **69 visual studies**, **13 research-only rows**, **42 screenshot-intake rows**. All original 80 study IDs and titles remain fixed. See [reconciliation](./RECONCILIATION.md) for issues 70–80, previous captures, actual Co-op reuse, verification and deferred integration boundaries.
 
 - [Working portable examples](./effects/), [machine-readable registry](./effects/registry.json) and [configuration/API guide](./effects/README.md).
 - Eleven native effect families and a separate [native image/video hotspot prototype](./effects/hotspots.html), linked from existing research rows 35/37.
 - New IDs only for **81 comparison** and **82 aurora text**. Existing patterned backgrounds, orb, marquee, pulse, scroll reveal, skeleton, sprite, stagger and optical studies are extended in place.
 - No automatic installation into customer websites, presentations, demo apps or readiness/call owners. No new visitor dependency. The completed PR remains source until reviewed and merged; Pages publication is a separate event.
+
+
+## Later 23 November intake
+
+Twelve further existing rows gain refined techniques and reliability comparisons, with no new catalogue IDs: image wipes, CSS counters, typewriter, rotating borders, five-dot metaballs, scroll progress, grouped focus, colour-mix tokens, scrollbar gutters, viewport sizing, reduced-motion behavior and image delivery. The reusable collection now has **23 families**. Aurora issue 82 is reconciled with the already implemented study 82 rather than duplicated. See [second-intake reconciliation](./RECONCILIATION-REVIEW-2.md), [all portable recipes](./effects/README.md#second-intake-existing-studies-extended) and their working examples.

@@ -344,7 +344,7 @@ test('pixel squeeze only animates a stage study on explicit replay',async()=>{
 test('screenshots supplied filter selects only user-provided screenshot references',async()=>{
  const {nodes,effects}=await start();
  assert.equal(effects.length,82);
- const screenshotIds=[22,23,24,25,26,27,32,34,36,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82];
+ const screenshotIds=[6,8,9,11,14,15,17,18,19,20,21,22,23,24,25,26,27,32,34,36,47,50,52,57,60,61,65,66,67,68,69,71,72,73,74,76,77,78,79,80,81,82];
  assert.deepEqual(effects.filter(e=>e.screenshotProvided).map(e=>e.id),screenshotIds);
  nodes['#screenshots-only'].checked=true;
  nodes['#screenshots-only'].handlers.change();
