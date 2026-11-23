@@ -1,4 +1,4 @@
-name: Motion Atlas ticket and ambient visual acceptance
+name: Motion Atlas ambient, ticket and superellipse acceptance
 on:
   push:
     branches:
@@ -41,9 +41,9 @@ jobs:
         run: node --test *.test.cjs quote/*.test.cjs
       - name: Check real mobile interactions in Chromium and WebKit
         run: python tools/verify-motion-atlas-stage-20261123.py
-      - name: Record only the four changed studies
-        run: python tools/capture-motion-atlas.py --force --ids 50 66 78 79
-      - name: Verify 66 visual MP4s and four changing clips
+      - name: Record only five changed studies
+        run: python tools/capture-motion-atlas.py --force --ids 36 50 66 78 79
+      - name: Verify 66 visual MP4s and five changing clips
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -53,7 +53,7 @@ jobs:
           assert len(vids)==66, len(vids)
           manifest=Path('kits/shorts-lab/clip-manifest.mjs').read_text()
           assert manifest.count('"kind": "browser-recorded"')==66
-          for idx in (50,66,78,79):
+          for idx in (36,50,66,78,79):
               file=directory/f'{idx:03d}.mp4'
               result=subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-i',str(file),'-f','framemd5','-'],
                 capture_output=True,text=True,check=True)
@@ -64,14 +64,14 @@ jobs:
           PY
       - name: Run all regressions against new manifest
         run: node --test *.test.cjs quote/*.test.cjs
-      - name: Commit only four validated recordings and manifest
+      - name: Commit only five validated recordings and manifest
         run: |
           set -euxo pipefail
           git config user.name "motion-atlas-capture[bot]"
           git config user.email "motion-atlas-capture[bot]@users.noreply.github.com"
-          git add kits/shorts-lab/assets/050.mp4 kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/078.mp4 kits/shorts-lab/assets/079.mp4 kits/shorts-lab/clip-manifest.mjs
+          git add kits/shorts-lab/assets/036.mp4 kits/shorts-lab/assets/050.mp4 kits/shorts-lab/assets/066.mp4 kits/shorts-lab/assets/078.mp4 kits/shorts-lab/assets/079.mp4 kits/shorts-lab/clip-manifest.mjs
           git diff --cached --check
-          git commit -m "Refresh two studies and record neon and holographic ticket"
+          git commit -m "Refresh superellipse, Gemini and premium shine plus neon/ticket"
           git fetch origin fix/motion-atlas-ambient-gemini-20261123
           git rebase origin/fix/motion-atlas-ambient-gemini-20261123
           git push origin HEAD:fix/motion-atlas-ambient-gemini-20261123
@@ -81,6 +81,7 @@ jobs:
         with:
           name: ticket-and-ambient-diagnostics
           path: |
+            kits/shorts-lab/assets/036.mp4
             kits/shorts-lab/assets/050.mp4
             kits/shorts-lab/assets/066.mp4
             kits/shorts-lab/assets/078.mp4
