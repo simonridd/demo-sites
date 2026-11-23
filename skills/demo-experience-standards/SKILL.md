@@ -15,7 +15,7 @@ When selecting the next visual technology, use the dated [technology candidates]
 
 ## Choosing motion and interaction
 
-When a brief would benefit from a visual treatment, use the [motion selection guide](references/motion-selection.md). Start with the audience benefit and still alternative, prefer the target's existing native pattern, and distinguish available Atlas components from review pilots and research. Choose still content for dense evidence and task-critical copy; never use animation to establish real activity or readiness. Carry the selected treatment or deliberate omission into the existing specialist handoff. This is selection guidance, not a request to apply effects everywhere or upgrade a renderer.
+When a brief would benefit from a visual treatment, use the [motion selection guide](references/motion-selection.md). Start with the audience benefit and still alternative. For refinement, prefer the target's useful native pattern; for an explicit redesign, preserve functional owners and contracts while reopening art direction and composition. Distinguish available Atlas components from review pilots and research. Choose still content for dense evidence and task-critical copy; never use animation to establish real activity or readiness. Carry the selected treatment or deliberate omission into the existing specialist handoff. This is selection guidance, not a request to apply effects everywhere or upgrade a renderer.
 
 ## Accepted presentation standard
 
@@ -43,7 +43,7 @@ Give repeated scenes different jobs, move optional exploration into backup when 
 
 When full demonstrations are part of the presentation, establish the people, friction and relevant help before handing over to the selected native players. Return to what the chosen example shows, then attributable results and a focused next decision. Make the entry, choice of another example and return to the story clear. Keep the player's media, audio, timing, native controls and download workflow intact; theme only its surrounding frame. A short illustrated moment can support the story but does not replace the full-demo workflow. Do not infer a completed transaction, transfer or audience viewing from opening a recording.
 
-Use subtle physical depth and press feedback selectively on prominent actions when it fits the brand. Keep navigation quiet, keyboard focus clear, disabled treatment flat and reduced motion still. The Holcim demo launch buttons are a bounded trial, not a portfolio-wide style change.
+Use subtle physical depth and press feedback selectively on prominent actions when it fits the brand. Keep navigation quiet, keyboard focus clear, disabled treatment flat and reduced motion still. The Holcim demo launch buttons are a bounded trial, not a portfolio-wide style change. Simon has explicitly chosen this treatment for Voice Demo Builder primary actions on mobile and desktop; retain its compact-on-scroll mobile identity header and task controls. See the dated decision record for scope.
 
 ## Apply the lessons
 

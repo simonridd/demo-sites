@@ -162,3 +162,27 @@ Simon found the scroll-driven object example too subtle to identify what animate
 ### 23 November 2026 · Discover effects through a shared selection guide
 
 Simon asked that presentation, website and other authoring skills know when to use and omit the growing Motion Atlas collection. Keep one shared audience/task decision guide, linked from the owners and coordinator, rather than repeating a catalogue in every skill. Distinguish available native effects, review-only pilots and research. The still alternative, actual functional state and existing renderer/lifecycle remain authoritative. The request approves this discovery/selection approach, not blanket adoption of every prototype.
+
+
+### 23 November 2026 · Voice Demo Builder identity and primary actions
+
+Simon asked for the mobile header to stay in reach while scrolling, compacting to a small IPI mark and “Voice Demo Builder” instead of losing the identity offscreen. Keep the full identity at the top and on desktop, preserve workspace access and keyboard focus, and reserve layout space so compaction does not jump the page. Use native scrolling and reduced-motion support.
+
+He explicitly requested the raised “fancy” button treatment for this product on mobile and desktop: a restrained brand gradient, inset highlight, lower edge and short press feedback. Apply it to prominent build, save/confirm, verified call and workspace primary actions. Keep ordinary navigation quiet, disabled states flat and focus clear; reduced motion retains the visual depth without movement. This accepts that treatment for Voice Demo Builder, not an indiscriminate redesign of every client site or an animation-library dependency. Button appearance never changes readiness, consent or submission/call authority. Source hosting, installed owner and actual call qualification remain separate.
+
+
+### 23 November 2026 · A redesign reopens composition
+
+Simon rejected the heavier dark-green Voice Demo Builder preview because it continued the old visual patterns despite a richer motion treatment. He asked for a fresh design that prioritises appropriate Motion Atlas components and a report explaining what was considered, omitted and why. Preserve the application's functional owners and evidence contracts, not its existing palette, panel layout or card architecture. Start with art direction and comparative selection; distinguish direct reuse, adaptations and research limits. Co-op demonstrates deliberate storytelling and visual choices, not a mandatory customer style. The new light/optical study is a proposal, not accepted production styling.
+
+
+### 23 November 2026 · Give icons a job and qualify light materials
+
+Simon rejected repeated diagonal arrows in the Voice Demo Builder study as generic and found the pale refractive object unsuccessful on the light canvas. Use labelled navigation or a meaningful icon; omit decorative arrows from cards and actions. Check material edges, optical contrast and text across the actual light composition, including access/workspace views, rather than assuming a dark treatment survives recolouring. He asked for a working test deployment over the existing service before considering a full production replacement. Preserve real-state and readiness owners; a visual prototype is not functional acceptance.
+
+He then found the original mobile app less AI-generated than the test. For this builder, prefer clear product typography and useful task density over the study’s oversized italic serif and oversized focal object. Premium is not a required font style or an effects quota; preserve purposeful loading and interaction feedback while matching the device and task.
+
+
+### 23 November 2026 · Make the first call yours
+
+Simon prefers this CTA and wants website learning turned into conversational, source-supported questions rather than generic category cards. Show what a caller could ask and the website evidence behind it, preserving conditions and making missing coverage clear. Test the projection with retained reviewed data and a read-only crawl, such as IPI, and iterate in a no-build example before creating native resources. Distinguish those question suggestions from observed AVA responses. He also missed the selected orb: product clarity should not erase the purposeful focal motion he values. Keep it visible, responsive and bounded, with a complete still state; do not impose a fixed object size or a blanket effects quota on other outputs.
