@@ -71,3 +71,5 @@ For a suitable visual or functional component, inspect `kits/shorts-lab/effects/
 
 
 For outstanding Motion Atlas ideas, use the delivery audit alongside the registry. Study 25 now includes an explicit scroll-scrubbed object; retain quiet content entrances and verify actual position-driven geometry before adopting it in another target. See the reuse reference for the current research and integration boundaries.
+
+Issue 96's three isolated practical trials remain review-only. Use the [trial contract](references/motion-atlas-trials.md) for source credit, APIs, checks and the owner acceptance/publication gate; library availability does not approve app adoption.

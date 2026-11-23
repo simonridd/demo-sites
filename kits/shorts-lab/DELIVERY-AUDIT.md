@@ -62,3 +62,8 @@ Chromium and WebKit are exercised locally. Firefox's installed engine currently 
 - **176 existing browser regression assertions** pass across those engines. Firefox remains unavailable as described above.
 - Start/midpoint/end and narrow screenshots were inspected. Study **025.mp4** alone was recaptured from the actual gallery and ffprobe-validated (2.5 s, 512×320); all 69 manifest references remain preserved. The self-contained export is checked after extraction for all 23 mounts, real scroll behavior, the audit and same-origin assets in both engines.
 - Shared source guidance and installed guidance carry the clearer-motion decision and audit boundaries, preserving unrelated installed content. No new visitor dependency or customer-route change is introduced. These checks establish this library revision; another target still needs its own lifecycle and release checks.
+
+
+## Issue 96 · isolated first trial
+
+The three permitted small components now have an independently authored, isolated [review route](./trials/jhey-practical/) and [source/API notes](./trials/jhey-practical/README.md): a bounded growing composer, a hover-intent navigation disclosure with diagonal safety grace, and a native FAQ with optional supported height motion. They remain on a review branch pending component-owner acceptance under issue 96. They are not deployed, registered as new Atlas IDs, installed in applications or promoted to shared design standards. The remaining drawer, blur, table and crossfade candidates stay research.
