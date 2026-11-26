@@ -1,5 +1,13 @@
 # Accepted experience decisions
 
+## 26 November 2026: explicit clarity and task flow checks
+
+**Decision:** Simon approved adding the practical design principles selected from his screenshot to the shared standards. Keep the main skill concise and link a focused [clarity and task flow reference](clarity-task-flow.md) with examples and review questions.
+
+**Application:** Make progressive disclosure, recognition over recall, visual grouping, cognitive load, selective emphasis, a clear resolution and genuine progress explicit when useful. Check task completion separately from visual appeal. Apply these to the relevant audience and surface rather than prescribing one screen structure or every effect.
+
+**Scope and evidence:** This accepts authoring and review guidance across the existing three surfaces. It does not establish measured usability gains or approve changes to existing products. Keep actual state, native controls, accessibility, complete reading/static content and specialist release ownership intact. Record validation and installed adoption separately from runtime or user acceptance.
+
 ## 21 November 2026: natural decorative motion
 
 **Decision:** Do not add replay or watch-again controls to decorative motion on new demo websites, presentations or Voice Demo Builder interfaces. Let short entrances play naturally and finish in a stable composition.

@@ -41,9 +41,10 @@
       "sources": [
         "skills/demo-experience-standards/SKILL.md",
         "skills/demo-experience-standards/references/decisions.md",
-        "skills/demo-experience-standards/references/motion-selection.md"
+        "skills/demo-experience-standards/references/motion-selection.md",
+        "skills/demo-experience-standards/references/clarity-task-flow.md"
       ],
-      "support": "shared task-based selection guidance; opt-in effects and review status remain owner-controlled"
+      "support": "shared visual selection and clarity/task-flow review guidance; runtime, opt-in effects and release ownership remain with existing specialists"
     },
     {
       "id": "site-coop-guided-help",
