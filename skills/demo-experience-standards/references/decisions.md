@@ -170,3 +170,8 @@ Simon found the scroll-driven object example too subtle to identify what animate
 ### 23 November 2026 · Discover effects through a shared selection guide
 
 Simon asked that presentation, website and other authoring skills know when to use and omit the growing Motion Atlas collection. Keep one shared audience/task decision guide, linked from the owners and coordinator, rather than repeating a catalogue in every skill. Distinguish available native effects, review-only pilots and research. The still alternative, actual functional state and existing renderer/lifecycle remain authoritative. The request approves this discovery/selection approach, not blanket adoption of every prototype.
+
+
+## 26 November 2026: Hometree portraits and cumulative checklist steps
+
+Simon approved Hometree’s overall direction, asked for photographic people in place of the character avatars and wanted the slide 8 boxes to tick as the explanation progresses. Retain that presentation’s palette, composition and home illustration. Tie each illustrated check to the native presenter step, keep earlier completed steps checked, and reverse completion when stepping back. Reading and static views retain the complete explanation. These choices refine this authored story; they do not establish real completed service checks or impose photography on every client. Preserve portrait provenance in private operator material and retain existing navigation and reduced-motion behaviour.
