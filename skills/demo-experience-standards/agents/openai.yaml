@@ -1,4 +1,4 @@
 interface:
   display_name: "Demo Experience Standards"
-  short_description: "Apply learned motion and visual decisions across demos"
+  short_description: "Apply visual, interaction and usability decisions across demos"
   default_prompt: "Apply $demo-experience-standards alongside the relevant authoring skill to this demo experience."

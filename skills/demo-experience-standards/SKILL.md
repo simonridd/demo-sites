@@ -13,6 +13,10 @@ For the core CSS/21st.dev/GSAP/Blender/Three.js stack, use the [implementation p
 
 When selecting the next visual technology, use the dated [technology candidates](references/technology-options.md) as a starting point and verify current source, licence and runtime fit. They are research candidates, not adopted dependencies.
 
+## Clarity and task flow
+
+Use the [clarity and task flow guide](references/clarity-task-flow.md) when composing screens, arranging a presentation journey or reviewing usability. Apply the relevant checks for visible context, grouping, progressive disclosure, emphasis, genuine progress and a clear ending. Review task completion separately from visual appeal, and carry material findings into the owning specialist's existing handoff.
+
 ## Choosing motion and interaction
 
 When a brief would benefit from a visual treatment, use the [motion selection guide](references/motion-selection.md). Start with the audience benefit and still alternative, prefer the target's existing native pattern, and distinguish available Atlas components from review pilots and research. Choose still content for dense evidence and task-critical copy; never use animation to establish real activity or readiness. Carry the selected treatment or deliberate omission into the existing specialist handoff. This is selection guidance, not a request to apply effects everywhere or upgrade a renderer.
