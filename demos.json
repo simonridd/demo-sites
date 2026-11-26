@@ -135,6 +135,19 @@
       ],
       "accent": "#00a1cc",
       "logo": "co-op/co-op-logo.svg"
+    },
+    {
+      "slug": "hometree",
+      "title": "Hometree",
+      "category": "Home services",
+      "description": "A clear start to home support. Explore repair help, prepare the details and find the right next step.",
+      "tags": [
+        "Home support",
+        "Repair help",
+        "Customer care"
+      ],
+      "accent": "#173d27",
+      "logo": "hometree/assets/hometree-logo.svg"
     }
   ]
 }
